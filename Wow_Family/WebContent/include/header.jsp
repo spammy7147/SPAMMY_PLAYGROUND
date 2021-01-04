@@ -3,17 +3,30 @@
 <!DOCTYPE html>
 <html lang="ko">
 <head>
-<link href="/Wow_Family/css/hoonie_wow.css" rel=stylesheet>
+
+<link href="/Wow_Family/css/wow.css" rel=stylesheet type="text/css">
+<script src="https://kit.fontawesome.com/f5b804981a.js" crossorigin="anonymous"></script>
+<script src="/Wow_Family/js/main.js"></script>
 <meta charset="UTF-8">
 <title></title>
 </head>
 <body>
+
 	<nav class="navbar">
- 		<header>
- 			<div class="bigdiv">우리들의 와우 이야기</div>
+ 		
+ 		<ul class="nav__menu">
+ 			<li><a href="">Home</a></li>
+ 			<li><a href="">Board</a></li>
+ 			<li><a href="">Calendar</a></li>
+ 			<li><a href="">Member</a></li>
+ 			<li><a href="">Login</a></li>
+ 			<li><a href="">Join</a></li>
+ 		</ul>
  		
  			
- 		</header>
+ 		<a href="#" class="nav__toogleBtn">
+ 			<i class="fas fa-bars"></i>
+ 		</a>
  	
  	</nav>
 </body>
