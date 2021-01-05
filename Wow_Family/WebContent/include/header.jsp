@@ -6,7 +6,7 @@
 
 <link href="/Wow_Family/css/wow.css" rel=stylesheet type="text/css">
 <script src="https://kit.fontawesome.com/f5b804981a.js" crossorigin="anonymous"></script>
-<script src="/Wow_Family/js/main.js"></script>
+
 <meta charset="UTF-8">
 <title></title>
 </head>
