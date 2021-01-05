@@ -1,4 +1,4 @@
-package kr.co.wow;
+package kr.co.wow.board.model;
 
 import java.sql.Timestamp;
 
@@ -12,22 +12,20 @@ public class BoardVO {
 	private String title;
 	private String content;
 	private Timestamp createAt;
-	
+	private int hit;
 	
 	public BoardVO() {
+		// TODO Auto-generated constructor stub
 	}
-	
-	public BoardVO(int boardId, String writer, String title, String content, Timestamp createAt) {
+	public BoardVO(int boardId, String writer, String title, String content, Timestamp createAt, int hit) {
 		super();
 		this.boardId = boardId;
 		this.writer = writer;
 		this.title = title;
 		this.content = content;
 		this.createAt = createAt;
+		this.hit = hit;
 	}
-	
-	
-	
 	public int getBoardId() {
 		return boardId;
 	}
@@ -58,13 +56,12 @@ public class BoardVO {
 	public void setCreateAt(Timestamp createAt) {
 		this.createAt = createAt;
 	}
-	
-	
-	
-	
-	
-	
-	
+	public int getHit() {
+		return hit;
+	}
+	public void setHit(int hit) {
+		this.hit = hit;
+	}
 	
 	
 	

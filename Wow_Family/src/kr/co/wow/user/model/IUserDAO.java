@@ -1,4 +1,4 @@
-package kr.co.wow;
+package kr.co.wow.user.model;
 
 public interface IUserDAO {
 
