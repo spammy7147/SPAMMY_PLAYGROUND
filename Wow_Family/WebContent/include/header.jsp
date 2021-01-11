@@ -4,8 +4,8 @@
 <html lang="ko">
 <head>
 
-<link href="/Wow_Family/css/wow.css" rel=stylesheet type="text/css">
-<script src="https://kit.fontawesome.com/f5b804981a.js" crossorigin="anonymous"></script>
+<link href="/Wow_Family/css/wow.css" rel=stylesheet>
+
 
 <meta charset="UTF-8">
 <title></title>
