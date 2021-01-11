@@ -4,10 +4,14 @@
 <html>
 <head>
 <meta charset="UTF-8">
+
 <title>와우 패밀리</title>
+<meta name="description" content="우리들의 와우 이야기">
+<link rel="stylesheet" href="css/wow.css">
 </head>
 <body>
 	<%@ include file="include/header.jsp" %>
+	
 	
 	
 	<%
