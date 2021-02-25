@@ -1,29 +1,19 @@
 package discordBot.audioplayer;
 
-import java.io.IOException;
+
 import java.util.HashMap;
-
 import java.util.Map;
-
-import org.json.JSONObject;
-
 import com.sedmelluq.discord.lavaplayer.player.AudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.player.DefaultAudioPlayerManager;
 import com.sedmelluq.discord.lavaplayer.source.AudioSourceManagers;
-
 import net.dv8tion.jda.api.entities.Guild;
-
 import net.dv8tion.jda.api.hooks.ListenerAdapter;
-
 import com.sedmelluq.discord.lavaplayer.player.AudioLoadResultHandler;
-
 import com.sedmelluq.discord.lavaplayer.tools.FriendlyException;
 import com.sedmelluq.discord.lavaplayer.track.AudioPlaylist;
 import com.sedmelluq.discord.lavaplayer.track.AudioTrack;
-
 import net.dv8tion.jda.api.entities.TextChannel;
 import net.dv8tion.jda.api.entities.VoiceChannel;
-
 import net.dv8tion.jda.api.managers.AudioManager;
 
 
@@ -69,7 +59,7 @@ public class MusicPlayer extends ListenerAdapter {
   }
 
 	public void setVoiceChannel(VoiceChannel vc) {
-		this.vc = vc;
+		MusicPlayer.vc = vc;
 	}
 
   public void loadAndPlay(final TextChannel channel, final String trackUrl) {
