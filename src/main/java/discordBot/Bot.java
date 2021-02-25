@@ -49,5 +49,4 @@ public class Bot {
 		jda.addEventListener(new GuildMessageReactionAdd()); // x 누르면 메세지 삭제 + 본인아니면 삭제 NO & 리엑션 제거
 		
 	}
-
 }
