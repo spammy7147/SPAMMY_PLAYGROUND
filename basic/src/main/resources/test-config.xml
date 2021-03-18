@@ -10,7 +10,7 @@ http://www.springframework.org/schema/beans/spring-beans.xsd">
 	<bean id="chef" class="com.spring.basic.ex01.Chef" />
 	
 	<bean id="res" class="com.spring.basic.ex01.Restaurant">
-		<constructor-arg ref="chef" />
+		<property name="chef" ref="chef"/>	
 	</bean>
 	
 	<bean id="hotel" class="com.spring.basic.ex01.Hotel">

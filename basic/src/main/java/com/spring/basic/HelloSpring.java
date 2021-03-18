@@ -6,7 +6,7 @@ public class HelloSpring {
 	
 	public static void main(String[] args) {
 		
-		//System.out.println("안녕 스프링~!~!");
+//		System.out.println("하위 스프링");
 		
 //		SpringTest st = new SpringTest();
 //		st.hello();
