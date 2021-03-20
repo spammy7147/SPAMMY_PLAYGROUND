@@ -10,7 +10,8 @@ http://www.springframework.org/schema/beans/spring-beans.xsd
 	<!--  자동 스캔 명령 추가 -->
 	<context:annotation-config />
 	
-	<bean id="paper" class="com.spring.basic.ex04.Paper"/>
+	<bean id="paper1" class="com.spring.basic.ex04.Paper"/>
+	<bean id="paper2" class="com.spring.basic.ex04.Paper"/>
 	
 	<bean id="printer" class="com.spring.basic.ex04.Printer"/>
 

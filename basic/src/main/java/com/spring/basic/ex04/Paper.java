@@ -9,4 +9,7 @@ public class Paper {
 			"Autowired는 개게의 타입을 검색하여 자동 주입"
 			
 	};
+	
+	
+	
 }
