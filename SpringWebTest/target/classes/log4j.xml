@@ -11,7 +11,7 @@
 	</appender>
 	
 	<!-- Application Loggers -->
-	<logger name="com.spring.web">
+	<logger name="com.spammy.hello">
 		<level value="info" />
 	</logger>
 	
