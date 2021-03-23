@@ -3,8 +3,11 @@ package com.spammy.hello.repository;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.stereotype.Repository;
+
 import com.spammy.hello.model.BoardVO;
 
+@Repository
 public class BoardDAO implements IBoardDAO {
 
 	//게시글을 저장할 리스트 : DB 대용
@@ -13,31 +16,30 @@ public class BoardDAO implements IBoardDAO {
 	
 	@Override
 	public List<BoardVO> getArticles() {
-		// TODO Auto-generated method stub
-		return null;
+
+		return articles;
 	}
 
 	@Override
 	public void insertArticle(BoardVO article) {
-		// TODO Auto-generated method stub
+		articles.add(article);
 
 	}
 
 	@Override
 	public void deleteArticle(int idx) {
-		// TODO Auto-generated method stub
+		articles.remove(idx);
 
 	}
 
 	@Override
 	public BoardVO getContent(int idx) {
-		// TODO Auto-generated method stub
-		return null;
+		return articles.get(idx);
 	}
 
 	@Override
 	public void modifyArticle(BoardVO article, int idx) {
-		// TODO Auto-generated method stub
+		articles.set(idx, article);
 
 	}
 

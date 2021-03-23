@@ -2,7 +2,10 @@ package com.spammy.hello.service;
 
 import java.util.List;
 
+import org.springframework.stereotype.Service;
+
 import com.spammy.hello.model.BoardVO;
+
 
 public interface IBoardService {
 
