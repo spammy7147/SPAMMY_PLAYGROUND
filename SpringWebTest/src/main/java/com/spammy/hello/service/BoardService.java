@@ -8,7 +8,7 @@ import org.springframework.stereotype.Service;
 import com.spammy.hello.model.BoardVO;
 import com.spammy.hello.repository.BoardDAO;
 
-@Service
+@Service("board")
 public class BoardService implements IBoardService {
 	
 	@Autowired
