@@ -3,6 +3,7 @@ package com.spring.wow.board.service;
 import java.util.List;
 
 import com.spring.wow.board.model.BoardVO;
+import com.spring.wow.commons.PageVO;
 
 public interface IBoardService {
 	
@@ -22,4 +23,6 @@ public interface IBoardService {
 	//게시글 삭제
 	void delete(Integer boardNo);
 
+	//게시글 페이징 목록 조회
+		List<BoardVO> getArticleListPaging(PageVO page);
 }

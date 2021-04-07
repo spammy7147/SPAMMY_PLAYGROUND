@@ -18,7 +18,8 @@
 
 	<insert id="insert">
 		INSERT INTO mvc_board
-		(board_no, title, content, writer)
+		(board_no, title, content,
+		writer)
 		VALUES (wow_board.nextval, #{title}, #{content}, #{writer})
 	</insert>
 
@@ -31,12 +32,14 @@
 	<select id="getArticle" resultMap="BoardMap">
 		SELECT *
 		FROM mvc_board
-		WHERE board_no=#{boardNo}
+		WHERE
+		board_no=#{boardNo}
 	</select>
 
 	<update id="update">
 		UPDATE mvc_board
-		SET writer=#{writer}, title=#{title}, content=#{content}
+		SET writer=#{writer}, title=#{title},
+		content=#{content}
 		WHERE board_no=#{boardNo}
 	</update>
 
@@ -44,4 +47,25 @@
 		DELETE FROM mvc_board
 		WHERE board_no=#{boardNo}
 	</delete>
+
+	
+	<select id="getArticleListPaging" resultMap="BoardMap">
+		SELECT *
+		FROM (
+		SELECT ROW_NUMBER() OVER (ORDER BY board_no DESC) NUM
+		, A.*
+		FROM mvc_board A
+		ORDER BY board_no DESC
+		)
+		WHERE NUM BETWEEN #{firstPage} AND #{lastPage}
+	</select>
+
+
+	<select id="countArticles" resultType="int">
+		SELECT COUNT(*)
+		FROM mvc_board
+	</select>
+
+
+
 </mapper>

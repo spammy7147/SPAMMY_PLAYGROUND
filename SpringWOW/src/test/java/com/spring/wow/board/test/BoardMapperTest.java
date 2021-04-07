@@ -1,7 +1,5 @@
 package com.spring.wow.board.test;
 
-import java.util.List;
-
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -10,6 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.spring.wow.board.model.BoardVO;
 import com.spring.wow.board.repository.IBoardMapper;
+import com.spring.wow.commons.PageVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations= {"file:src/main/webapp/WEB-INF/spring/mvc-config.xml"})
@@ -66,8 +65,14 @@ public class BoardMapperTest {
 			System.out.println(i + "번 번호 삭제");
 		}
 		
+		
 	}
-	
+	@Test
+	public void pageingTest() {
+		PageVO page = new PageVO();
+
+		mapper.getArticleListPaging(page).forEach(vo -> System.out.println(vo));
+	}
 
 
 

@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 
 import com.spring.wow.board.model.BoardVO;
 import com.spring.wow.board.repository.IBoardMapper;
+import com.spring.wow.commons.PageVO;
 
 @Service
 public class BoardService implements IBoardService {
@@ -44,4 +45,10 @@ public class BoardService implements IBoardService {
 
 	}
 
+	@Override
+	public List<BoardVO> getArticleListPaging(PageVO page) {
+		System.out.println(page.getFirstPage() +" : " +page.getLastPage());
+		return mapper.getArticleListPaging(page);
+	}
+	
 }
