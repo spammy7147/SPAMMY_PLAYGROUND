@@ -37,15 +37,21 @@ header.masthead {
 
 					<form id="formObj" role="form" action="<c:url value='/board/delete'/>"
 						method="post">
-
+	
 						<input type="hidden" name="boardNo" value="${article.boardNo}">
-
+						<input type="hidden" name="page" value="${p.page}">
+						<input type="hidden" name="countPerPage" value="${p.countPerPage}">
+						<input type="hidden" name="keyword" value="${p.keyword}">
+						<input type="hidden" name="condition" value="${p.condition}">
+					
+						
 						<input type="button" value="목록" class="btn"
-							onclick="location.href='/board/list'"
+							id="list-btn"
 							style="background-color: #ff52a0; margin-top: 0; height: 40px; color: white; border: 0px solid #388E3C; opacity: 0.8">&nbsp;&nbsp;
 
 						<input id="modBtn" type="button" value="수정" class="btn btn-warning"
-							style="color: white;">&nbsp;&nbsp; <input type="submit"
+							style="color: white;">&nbsp;&nbsp;
+						 <input type="submit"
 							value="삭제" class="btn btn-danger"
 							onclick="return confirm('정말로 삭제하시겠습니까?')">&nbsp;&nbsp;
 					</form>
@@ -73,6 +79,11 @@ $(function(){
 	//변수는 let
 	//상수는 const   로 선언 (ES2015 문법)
 	const formElement = $("#formObj");
+	
+	$("#list-btn").click(function(){
+		console.log("목록 버튼이 클릭됨!");
+		location.href='/board/list?page=${p.page}' + '&countPerPage=${p.countPerPage}'+ '&keyword=${param.keyword}' + '&condition=${param.condition}';
+	});
 	
 	
 	//수정버튼 클릭 이벤트 처리

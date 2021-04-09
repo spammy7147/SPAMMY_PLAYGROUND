@@ -16,19 +16,38 @@
 	</resultMap>
 
 
+	<!-- 중복되는 동적 sql 문에 대한 처리 -->
+	<sql id="search">
+		<if test="condition == 'title'">
+			WHERE title LIKE CONCAT('%',CONCAT('${keyword}','%'))
+		</if>
+		<if test="condition == 'writer'">
+			WHERE writer LIKE CONCAT('%',CONCAT('${keyword}','%'))
+		</if>
+		<if test="condition == 'content'">
+			WHERE content LIKE CONCAT('%',CONCAT('${keyword}','%'))
+		</if>
+		<if test="condition == 'titleContent'">
+			WHERE title LIKE CONCAT('%', CONCAT('${keyword}','%'))
+			OR content LIKE CONCAT('%',CONCAT('${keyword}','%'))
+
+		</if>
+	</sql>
+
+
 	<insert id="insert">
 		INSERT INTO mvc_board
 		(board_no, title, content,
 		writer)
 		VALUES (wow_board.nextval, #{title}, #{content}, #{writer})
 	</insert>
-
+<!-- 
 	<select id="getArticleList" resultMap="BoardMap">
 		SELECT *
 		FROM mvc_board
 		ORDER BY board_no DESC
 	</select>
-
+ -->
 	<select id="getArticle" resultMap="BoardMap">
 		SELECT *
 		FROM mvc_board
@@ -48,14 +67,34 @@
 		WHERE board_no=#{boardNo}
 	</delete>
 
-	
+
+	<select id="getArticleList" resultMap="BoardMap">
+		SELECT *
+		FROM (
+		SELECT ROW_NUMBER() OVER (ORDER BY board_no DESC) NUM
+		, A.*
+		FROM
+		mvc_board A
+		<include refid="search"/>
+		)
+		WHERE NUM BETWEEN #{firstPage} AND #{lastPage}
+	</select>
+
+	<select id="countArticles" resultType="int">
+		SELECT COUNT(*)
+		FROM
+		mvc_board
+		<include refid="search"/>
+	</select>
+
+<!--  
 	<select id="getArticleListPaging" resultMap="BoardMap">
 		SELECT *
 		FROM (
 		SELECT ROW_NUMBER() OVER (ORDER BY board_no DESC) NUM
 		, A.*
-		FROM mvc_board A
-		ORDER BY board_no DESC
+		FROM
+		mvc_board A
 		)
 		WHERE NUM BETWEEN #{firstPage} AND #{lastPage}
 	</select>
@@ -63,9 +102,87 @@
 
 	<select id="countArticles" resultType="int">
 		SELECT COUNT(*)
+		FROM
+		mvc_board
+	</select>
+
+	<select id="getArticleListByTitle" resultMap="BoardMap">
+		SELECT *
+		FROM (
+		SELECT ROW_NUMBER() OVER (ORDER BY board_no DESC) NUM
+		, A.*
+		FROM
+		mvc_board A
+		WHERE title LIKE CONCAT('%',CONCAT('${keyword}','%'))
+		)
+		WHERE NUM BETWEEN #{firstPage} AND #{lastPage}
+	</select>
+
+	<select id="countArticlesByTitle" resultType="int">
+		SELECT COUNT(*)
 		FROM mvc_board
+		WHERE title LIKE CONCAT('%', CONCAT('${keyword}','%'))
 	</select>
 
 
+	<select id="getArticleListByWriter" resultMap="BoardMap">
+		SELECT *
+		FROM (
+		SELECT ROW_NUMBER() OVER (ORDER BY board_no DESC) NUM
+		, A.*
+		FROM
+		mvc_board A
+		WHERE writer LIKE CONCAT('%',CONCAT('${keyword}','%'))
+		)
+		WHERE NUM BETWEEN #{firstPage} AND #{lastPage}
+	</select>
+
+	<select id="countArticlesByWriter" resultType="int">
+		SELECT COUNT(*)
+		FROM mvc_board
+		WHERE writer LIKE CONCAT('%', CONCAT('${keyword}','%'))
+	</select>
+
+
+	<select id="getArticleListByContent" resultMap="BoardMap">
+		SELECT *
+		FROM (
+		SELECT ROW_NUMBER() OVER (ORDER BY board_no DESC) NUM
+		, A.*
+		FROM
+		mvc_board A
+		WHERE content LIKE CONCAT('%',CONCAT('${keyword}','%'))
+		)
+		WHERE NUM BETWEEN #{firstPage} AND #{lastPage}
+	</select>
+
+	<select id="countArticlesByContent" resultType="int">
+		SELECT COUNT(*)
+		FROM mvc_board
+		WHERE content LIKE CONCAT('%', CONCAT('${keyword}','%'))
+	</select>
+
+
+		<select id="getArticleListByTitleOrContent" resultMap="BoardMap">
+		SELECT *
+		FROM (
+		SELECT ROW_NUMBER() OVER (ORDER BY board_no DESC) NUM
+		, A.*
+		FROM
+		mvc_board A
+		WHERE title LIKE CONCAT('%',CONCAT('${keyword}','%'))
+		OR content LIKE CONCAT('%',CONCAT('${keyword}','%'))
+		)
+		WHERE NUM BETWEEN #{firstPage} AND #{lastPage}
+	</select>
+
+	<select id="countArticlesByTitleOrContent" resultType="int">
+		SELECT COUNT(*)
+		FROM mvc_board
+		WHERE title LIKE CONCAT('%', CONCAT('${keyword}','%'))
+		OR content LIKE CONCAT('%',CONCAT('${keyword}','%'))
+	</select>
+	-->
+	
 
 </mapper>

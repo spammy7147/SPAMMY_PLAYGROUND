@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.spring.wow.board.model.BoardVO;
 import com.spring.wow.board.repository.IBoardMapper;
 import com.spring.wow.commons.PageVO;
+import com.spring.wow.commons.SearchVO;
 
 @Service
 public class BoardService implements IBoardService {
@@ -21,17 +22,7 @@ public class BoardService implements IBoardService {
 
 	}
 
-	@Override
-	public List<BoardVO> getArticleList() {
-		
-		return mapper.getArticleList();
-	}
 
-	@Override
-	public BoardVO getArticle(Integer boardNo) {
-	
-		return mapper.getArticle(boardNo);
-	}
 
 	@Override
 	public void update(BoardVO article) {
@@ -45,10 +36,28 @@ public class BoardService implements IBoardService {
 
 	}
 
+
+
 	@Override
-	public List<BoardVO> getArticleListPaging(PageVO page) {
-		System.out.println(page.getFirstPage() +" : " +page.getLastPage());
-		return mapper.getArticleListPaging(page);
+	public List<BoardVO> getArticleList(SearchVO search) {
+		return mapper.getArticleList(search);
 	}
-	
+
+
+
+	@Override
+	public Integer countArticles(SearchVO search) {
+		return mapper.countArticles(search);
+	}
+
+
+
+	@Override
+	public BoardVO getArticle(Integer boardNo) {
+		
+		return mapper.getArticle(boardNo);
+	}
+
+
+
 }

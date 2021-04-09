@@ -39,7 +39,7 @@ public class BoardMapperTest {
 //		for (BoardVO vo : list) {
 //			System.out.println(vo);
 		
-		mapper.getArticleList().forEach(vo -> System.out.println(vo));
+		//mapper.getArticleList().forEach(vo -> System.out.println(vo));
 		}
 	
 	//게시글 단일 목록 조회 테스트
@@ -71,7 +71,7 @@ public class BoardMapperTest {
 	public void pageingTest() {
 		PageVO page = new PageVO();
 
-		mapper.getArticleListPaging(page).forEach(vo -> System.out.println(vo));
+		//mapper.getArticleListPaging(page).forEach(vo -> System.out.println(vo));
 	}
 
 

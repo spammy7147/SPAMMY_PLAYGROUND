@@ -8,6 +8,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import com.spring.wow.board.repository.IBoardMapper;
 import com.spring.wow.commons.PageVO;
+import com.spring.wow.commons.SearchVO;
 
 @RunWith(SpringJUnit4ClassRunner.class)
 @ContextConfiguration(locations= {"file:src/main/webapp/WEB-INF/spring/mvc-config.xml"})
@@ -97,7 +98,7 @@ public class PagingAlgorithmTest {
 	@Test
 	public void pagingAlgorithmTest() {
 		System.out.println("=========");
-		System.out.println(mapper.countArticles());
+		//System.out.println(mapper.countArticles());
 		System.out.println("=========");
 		
 		//끝페이지 번호 계산 테스트
@@ -122,25 +123,39 @@ public class PagingAlgorithmTest {
 		
 		
 		//끝 페이지 보정
-		int temp = (int)Math.ceil(mapper.countArticles() / (double)paging.getCountPerPage());
+		//int temp = (int)Math.ceil(mapper.countArticles() / (double)paging.getCountPerPage());
 		
 		
 		//재보정 여부 판단하기 
-		if(endPage > temp) {
-			endPage = temp;
-		}
+		//if(endPage > temp) {
+		//	endPage = temp;
+		//}
 		System.out.println("보정 후 끝페이지 번호 : " + endPage);
 		
 		
 		
-		boolean isNext = (mapper.countArticles() <= (endPage * paging.getCountPerPage())) ? false : true;
-		System.out.println("다음 버튼 활성화 여부 : " + isNext);
+		//boolean isNext = (mapper.countArticles() <= (endPage * paging.getCountPerPage())) ? false : true;
+		//System.out.println("다음 버튼 활성화 여부 : " + isNext);
 		System.out.println("========================================================");
 		
 		
 		
 	}
 	
+	
+	@Test
+	public void searchTest() {
+		SearchVO search = new SearchVO();
+		search.setPage(1);
+		System.out.println(search.getCountPerPage());
+		search.setKeyword("4");
+		System.out.println(search.getFirstPage()+ " : firstPage");
+		System.out.println(search.getLastPage() + " : LastPage");
+		
+		System.out.println("===========================================");
+		//mapper.getArticleListByTitle(search).forEach(vo -> System.out.println(vo));
+		System.out.println("===========================================");
+	}
 	
 	
 	

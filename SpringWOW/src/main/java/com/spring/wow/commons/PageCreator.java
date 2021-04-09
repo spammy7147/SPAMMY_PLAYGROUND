@@ -1,5 +1,7 @@
 package com.spring.wow.commons;
 
+import org.springframework.web.util.UriComponentsBuilder;
+
 public class PageCreator {
 
 	//페이지번호와 한페이지당 들어갈 게시물 수를 가지고 있는 객체 
@@ -12,9 +14,21 @@ public class PageCreator {
 	
 	//한 화면에 보여질 페이지 수
 	private final Integer displayPageNum = 10;
+	
+	
+	//URI 파라미터를 쉽게 만들어주는 유틸 메서드 선언
+	public String makeURI(Integer page) {
+		return UriComponentsBuilder.newInstance()
+							.queryParam("page", page)
+							.queryParam("countPerPage", paging.getCountPerPage())
+							.queryParam("keyword", ((SearchVO)paging).getKeyword())
+							.queryParam("condition", ((SearchVO)paging).getCondition())
+							.build().toString();
+	}
+	
 
 	
-	//페이징 알고리즘을 수행할 메서드 선언
+	//페이징 알고리즘을 수행할 메서드 선언 => setArticleTotalCount() 메서드에서 호출 
 	private void calcDataOfPage() {
 		//보정 전 끝 페이지 구하기
 		endPage = (int) (Math.ceil(paging.getPage() / (double)displayPageNum ) * displayPageNum);
