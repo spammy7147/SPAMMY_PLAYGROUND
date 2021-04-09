@@ -69,9 +69,16 @@ header.masthead {
 							<td>${b.boardNo}</td>
 							<td>${b.writer}</td>
 
-							<td><a style="margin-top: 0; height: 40px; color: orange;"
+							<td>
+								<a style="margin-top: 0; height: 40px; color: orange;"
 								href="<c:url value='/board/content/${b.boardNo}${param.page==null ? pc.makeURI(1) : pc.makeURI(param.page) }'/>">
-									${b.title} </a></td>
+									 <c:if test="${b.newMark }">
+									&nbsp;
+									<span class="badge badge-pill badge-danger">new</span>
+								 </c:if>	${b.title}
+								 </a>
+							
+							</td>
 
 							<td><fmt:formatDate value="${b.regDate}"
 									pattern="yyyy년 MM월 dd일 a hh:mm" /></td>

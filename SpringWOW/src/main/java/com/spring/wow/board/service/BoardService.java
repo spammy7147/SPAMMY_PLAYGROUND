@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 
 import com.spring.wow.board.model.BoardVO;
 import com.spring.wow.board.repository.IBoardMapper;
-import com.spring.wow.commons.PageVO;
 import com.spring.wow.commons.SearchVO;
 
 @Service
@@ -40,7 +39,20 @@ public class BoardService implements IBoardService {
 
 	@Override
 	public List<BoardVO> getArticleList(SearchVO search) {
-		return mapper.getArticleList(search);
+		List<BoardVO> list = mapper.getArticleList(search);
+		
+		for(BoardVO article : list) {
+			//현재 시간 읽어오기
+			long now = System.currentTimeMillis(); //밀리초로 읽기
+			long regTime = article.getRegDate().getTime();
+			
+			if(now - regTime < 24*60*60*1000) {
+				article.setNewMark(true);
+			}
+			
+		}
+		
+		 return list;
 	}
 
 
@@ -54,7 +66,7 @@ public class BoardService implements IBoardService {
 
 	@Override
 	public BoardVO getArticle(Integer boardNo) {
-		
+		mapper.updateViewCnt(boardNo);
 		return mapper.getArticle(boardNo);
 	}
 
