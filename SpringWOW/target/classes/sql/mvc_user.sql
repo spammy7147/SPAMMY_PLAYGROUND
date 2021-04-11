@@ -1,0 +1,8 @@
+CREATE TABLE mvc_user(
+
+	account VARCHAR(100) PRIMARY KEY,
+	password VARCHAR(80) NOT NULL,
+	name VARCHAR(100) NOT NULL,
+	reg_date TIMESTAMP DEFAULT SYSDATE
+
+);
