@@ -30,6 +30,30 @@
 	
 	<context:component-scan base-package="com.spring.wow" />
 	
+	<!-- 인터셉터 빈 등록 -->
+	<beans:bean id="testInterceptor" class="com.spring.wow.commons.interceptor.TestInterceptor"/>
+	<beans:bean id="boardInterceptor" class="com.spring.wow.commons.interceptor.BoardInterceptor"/>
+	<beans:bean id="autoLoginInterceptor" class="com.spring.wow.commons.interceptor.AutoLoginInterceptor"/>
+	
+	<interceptors>
+		<interceptor>
+			<mapping path="/test1"/>
+			<mapping path="/test2"/>
+			<beans:ref bean="testInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/board/write"/>
+			<mapping path="/board/modify"/>
+			<mapping path="/board/delete"/>
+			<beans:ref bean="boardInterceptor"/>
+		</interceptor>
+		
+		<interceptor>
+			<mapping path="/"/>
+			<beans:ref bean="autoLoginInterceptor"/>
+		</interceptor>
+	</interceptors>
 	
 	
 </beans:beans>

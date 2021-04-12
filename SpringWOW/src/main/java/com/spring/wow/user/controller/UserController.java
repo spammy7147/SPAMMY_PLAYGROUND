@@ -1,6 +1,12 @@
 package com.spring.wow.user.controller;
 
+import java.util.Date;
 import java.util.List;
+
+import javax.servlet.http.Cookie;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -10,6 +16,8 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.util.WebUtils;
 
 import com.spring.wow.user.model.UserVO;
 import com.spring.wow.user.service.IUserService;
@@ -51,9 +59,18 @@ public class UserController {
 	
 	//로그인 요청 처리
 	@PostMapping("/loginCheck")
-	public String loginCheck(@RequestBody UserVO user) {
+	public String loginCheck(@RequestBody UserVO user, 
+						/*HttpServletRequest request*/
+						HttpSession session,
+						HttpServletResponse response) {
 		
-		System.out.println("/login : POST 요청 발생!");
+		
+		//서버에서 세션객체를 얻는 방법
+		//1. HttpServeletRequest객체 사용
+		//HttpSession session = request.getSession();
+		//2. HttpSession 객체 사용
+		
+		System.out.println("/loginCheck : POST 요청 발생!");
 		System.out.println("param : " + user);
 		
 		/*
@@ -65,9 +82,43 @@ public class UserController {
 		 
 		 */
 		
-		String result = service.login(user);
+		String result = service.login(user,session,response);
+
 		
 		return result;
+	}
+	
+	//로그아웃
+	@GetMapping("/logout")
+	public ModelAndView logout(HttpServletResponse response, HttpServletRequest request) {
+		
+		System.out.println("/user/logout 요청!");
+		
+		HttpSession session = request.getSession();
+		UserVO user = (UserVO)session.getAttribute("login");
+		
+		if(user != null) {
+			session.removeAttribute("login");
+			session.invalidate();
+			
+			//로그아웃시 자동로그인 쿠키 삭제 및 해당 회원 정보에서 session_id 제거
+			// 1. loginCookie가 존재하는지 여부 확인 
+			// 2. 쿠키가 존재한다면 쿠기의 수명을 0초로 다시 설정한 후 
+			// 3. 응답객체를 통해 로컬에 0초짜리 쿠키 재전송 -> 쿠키 삭제
+			// 4. service를 통해 keepLoin을 호출하여 DB 컬럼 레코드 재설정
+			//( session_id -> 'none', limit_time -> 현재시간으로 
+			
+			Cookie loginCookie = WebUtils.getCookie(request, "loginCookie");
+			if(loginCookie != null) {
+				loginCookie.setMaxAge(0);
+				response.addCookie(loginCookie);
+				user.setSessionId("none");
+				user.setLimitTime(new Date());
+				service.keepLogin(user);
+			}
+			
+		}
+		return new ModelAndView("redirect:/");
 	}
 	
 	

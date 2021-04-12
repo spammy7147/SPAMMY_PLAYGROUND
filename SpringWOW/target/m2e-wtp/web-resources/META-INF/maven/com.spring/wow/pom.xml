@@ -48,7 +48,14 @@
 		    <version>${org.springframework-version}</version>
 		    <scope>test</scope>
 		</dependency>
-		
+			
+				<!--spring-security-web -->
+		<dependency>
+		    <groupId>org.springframework.security</groupId>
+		    <artifactId>spring-security-web</artifactId>
+		    <version>${org.springframework-version}.RELEASE</version>
+		</dependency>
+			
 
 		<!--ojdbc8 -->
 		<dependency>

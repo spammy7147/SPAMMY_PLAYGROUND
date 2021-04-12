@@ -3,6 +3,7 @@ package com.spring.wow.board.test;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
@@ -36,4 +37,20 @@ public class UserMapperTest {
 		System.out.println("탈퇴 성공!");
 	}
 
+	@Test
+	public void loginTest() {
+		String inputId = "abc1234";
+		String inputPw = "qwer1234!";
+		
+		BCryptPasswordEncoder encoder = new BCryptPasswordEncoder();
+		
+		UserVO dbData = mapper.select(inputId);
+		String dbPw = dbData.getPassword();
+		System.out.println("입력된 비밀번호 : " + inputPw);
+		System.out.println("DB에 등록된 비밀번호 : " + dbPw);
+		
+		System.out.println("비밀번호 일치?? : " + inputPw.equals(dbPw));
+		System.out.println("비밀번호 일치?! : " + encoder.matches(inputPw, dbPw));
+	}
+	
 }
