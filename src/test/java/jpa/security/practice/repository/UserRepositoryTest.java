@@ -23,4 +23,20 @@ class UserRepositoryTest {
         userRepository.findAll().forEach(System.out::println);
 
     }
+
+    @Test
+    void exist(){
+        boolean exists = userRepository.existsById(1L);
+
+        System.out.println(exists);
+    }
+
+    @Test
+    void delete(){
+//        userRepository.delete(userRepository.findById(1L).orElseThrow(RuntimeException::new));
+        userRepository.deleteById(1L);
+
+    }
+
+
 }
