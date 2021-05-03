@@ -5,6 +5,7 @@ import lombok.*;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import java.time.LocalDateTime;
 
 @NoArgsConstructor
 @AllArgsConstructor
@@ -20,5 +21,7 @@ public class User {
 
     @NonNull
     private String name;
+
+    private LocalDateTime createAt;
 
 }

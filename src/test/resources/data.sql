@@ -16,3 +16,10 @@ insert into user(`id`,`name`) values (5, '김춘배');
 call next value for hibernate_sequence;
 insert into user(`id`,`name`) values (6, '갑수');
 
+call next value for hibernate_sequence;
+insert into user(`id`,`name`) values (7, '갑수');
+
+call next value for hibernate_sequence;
+insert into user(`id`,`name`) values (8, '갑수');
+
+

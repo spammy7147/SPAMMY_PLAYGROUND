@@ -75,6 +75,24 @@ class UserRepositoryTest {
 
 
         userRepository.findAll(example).forEach(System.out::println);
+
+    }
+
+    @Test
+    void select(){
+//        System.out.println(userRepository.findByName("갑수"));
+
+//        System.out.println("getByName : " + userRepository.getByName("덕배"));
+//        System.out.println("getByName : " + userRepository.readByName("덕배"));
+//        System.out.println("getByName : " + userRepository.queryByName("덕배"));
+//        System.out.println("getByName : " + userRepository.searchByName("덕배"));
+//        System.out.println("getByName : " + userRepository.streamByName("덕배"));
+//        System.out.println("getByName : " + userRepository.findUserByName("덕배"));
+
+//        System.out.println("findFirst2Name : " + userRepository.findFirst2ByName("갑수"));
+//        System.out.println("findTop3Name : " + userRepository.findTop3ByName("갑수"));
+        System.out.println("findByNameAndId : " + userRepository.findByNameAndId(6L,"갑수"));
+
     }
 
 }
