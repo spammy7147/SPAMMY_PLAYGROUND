@@ -10,6 +10,9 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.endsWith;
 
@@ -91,8 +94,30 @@ class UserRepositoryTest {
 
 //        System.out.println("findFirst2Name : " + userRepository.findFirst2ByName("갑수"));
 //        System.out.println("findTop3Name : " + userRepository.findTop3ByName("갑수"));
-        System.out.println("findByNameAndId : " + userRepository.findByNameAndId(6L,"갑수"));
+//        System.out.println("findByNameAndId : " + userRepository.findByNameAndId("갑수",6L));
+//        System.out.println("findByNameOrId : " + userRepository.findByNameOrId("갑수", 1L));
+//        System.out.println("findByCreatedAtAfter : " + userRepository.findByCreatedAtAfter(LocalDateTime.now().minusDays(1L)));
+//        System.out.println("findByIdAfter : " + userRepository.findByIdAfter(3L));
+//        System.out.println("findByCreatedAtGreaterThan : " + userRepository.findByCreatedAtGreaterThan(LocalDateTime.now().minusDays(1L)));
+//        System.out.println("findByCreatedAtGreaterThanEqual : " + userRepository.findByCreatedAtGreaterThanEqual(LocalDateTime.now().minusDays(1L)));
+//        System.out.println("findByCreatedAtGreaterThanEqual : " + userRepository.findByCreatedAtGreaterThanEqual(LocalDateTime.now()));
+
+//        System.out.println("findByCreatedAtBetween : " + userRepository.findByCreatedAtBetween(LocalDateTime.now().minusDays(1L), LocalDateTime.now().plusDays(3L)));
+//        System.out.println("findByIdBetween : " + userRepository.findByIdBetween(1L,5L));
+//        System.out.println("findByIdGreaterThanEqualAndIdLessThanEqual : " + userRepository.findByIdGreaterThanEqualAndIdLessThanEqual(1L,5L));
+
+//        System.out.println("findByIdIsNotNull : " + userRepository.findByIdIsNotNull());
+//        System.out.println("findByAddressIsNotEmpty : " + userRepository.findByAddressIsNotEmpty());
+
+//        System.out.println("findByNameIn : " + userRepository.findByNameIn(Lists.newArrayList("덕배", "갑수")));
+//        System.out.println("findByNameStartingWith : " + userRepository.findByNameStartingWith("덕"));
+//        System.out.println("findByNameEndingWith : " + userRepository.findByNameEndingWith("배"));
+//        System.out.println("findByNameContains : " + userRepository.findByNameContains("김"));
+        System.out.println("findByNameContains : " + userRepository.findByNameContains("rt"));
+        System.out.println("findByNameLike : " + userRepository.findByNameLike("%rt%"));
 
     }
+
+
 
 }
