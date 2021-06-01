@@ -212,6 +212,8 @@ const c = leakingAny({num: 0})
 // c.indexOf('0')
 ```
 
+---
+
 ## Unknown
 - 응용 프로그램을 작성할 때 모르는 변수의 타입을 묘사해야 할 수도 있습니다.
 - 이러한 값은 동적 콘텐츠(예: 사용자로부터, 또는 우리 API 의 모든 값을 의도적으로 수락하기를 원할 수 있습니다.)
@@ -275,3 +277,16 @@ if (typeof a !== 'string') {
 type Indexable<T> = T extends string ? T & {[index: string]: any} : never
 ```
 
+
+## void 
+- 다른언어에서 void 타입을 사용하기떄문에 명시적으로 적용?
+
+```ts
+function returnVoid(message: string) {
+    console.log(message)
+
+    return;
+}
+
+const r:void = returnVoid('리턴이 없다.') //r void
+```

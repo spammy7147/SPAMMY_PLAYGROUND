@@ -229,4 +229,17 @@ if (typeof a !== 'string') {
 }
 
 type Indexable<T> = T extends string ? T & {[index: string]: any} : never
-const b: Indexable<{}> = ' '
+
+
+//void 
+/*
+- 
+*/
+
+function returnVoid(message: string) {
+    console.log(message)
+
+    return;
+}
+
+const r:void = returnVoid('리턴이 없다.') //r void
