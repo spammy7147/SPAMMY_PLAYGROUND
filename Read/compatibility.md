@@ -58,4 +58,4 @@ type EatType = (food: string) => void
 - exclude
 - references
 - typeAcquisition
-- tsNode
+- tsNodee

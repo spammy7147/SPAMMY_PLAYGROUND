@@ -233,7 +233,7 @@ type Indexable<T> = T extends string ? T & {[index: string]: any} : never
 
 //void 
 /*
-- 
+- 다른언어에서 void 타입을 사용하기떄문에 명시적으로 적용?
 */
 
 function returnVoid(message: string) {
