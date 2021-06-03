@@ -41,21 +41,3 @@ type EatType = (food: string) => void
 ```
 ---
 
-# Compliation Context
-- compilation context is basically just a fancy term for grouping of the files that TypeScript will parse and analyze to determine what is valid and what is not
-- Along with the information about which files, the compilation context contains information about which compiler options are in use
-- A great way to define this logical grouping (we also like to use the term project) is using a tsconfig.json file
-
----
-
-# tsconfig shcema
-최상위 프로퍼티
-- compileOnSave
-- extends
-- complieOptions
-- files
-- include
-- exclude
-- references
-- typeAcquisition
-- tsNodee
