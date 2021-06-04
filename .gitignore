@@ -4,4 +4,7 @@
 target
 .settings
 .git
+.idea
+jong.iml
+
 
