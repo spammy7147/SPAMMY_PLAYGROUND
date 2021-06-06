@@ -167,7 +167,47 @@
 
 --- 
 
-### Interface 
+### strict 
+- noImplicitAny
+    - 명시적이지 않게 any 타입을 사용하여, 표현식과 선언에 사용하면, 에러를 발생
+    - suppressImplicitAnyIndexError 
+        - noImplicitAny 사용할떄, 객체에 인덱스 signature 가 없는경우 오류를 발생하는데 이를 예외처리 합니다.
+        - ```ts
+            let obj = {
+                bar: 10
+            }
+
+            obj['foo'] = 10
+            obj['bar'] = 10
+            obj.bar = 10
+            ```
+
+- noImplicitThis
+    - 명시적이지 않게 any 타입을 사용하여 this 표현식에 사용하면 에러를 발생
+    - this의 타입을 매개로 받고 타입을 지정하는것 
+
+- strictNullChecks
+    - in strict null checking mode, the null and undefined values are not in the domain of every type and are only assignable to themselves and any 
+    - the one exception being that undefined is also assignable to void
+
+- strictFunctionTypes
+    - Disable bivariant parament checking for funtion types
+        - 반환 타입은 공변적 (covariant)
+        - 인자 타입은 반공변적 (contravariant)
+        - 타입스크립트에서 인자 타입은 공변적이면서, 반공변적인게 문제
+- strictPropertyInitialization
+    - ensure non-undefined class properties are initialized in the constructor 
+- strictBindCallApply
+    - Enable stricter checking of the bind, call, and apply methods on funtions
+    - funtion 의 내장함수인 bind/ call / apply를 사용할 떄, 엄격하게 체크하도록 하는 옵션입니다.
+    - bind는 해당 함수안에서 사용할 this와 인자를 설정해주는 역활을 하고, call 과 apply는 this 와 인자를 설정한 후, 실행까지 합니다.
+    - call 과 apply는 인자를 설정하는 방식에서 차이점이 있습니다.
+        - call은 함수의 인자를 여러 인자의 나열로 넣어서 사용하고, apply는 모든 인자를 배열 하나로 넣어서 사용합니다.
+-alwaysStrict
+
+---
+
+# Interface 
 
 ```ts
 interface person {
@@ -186,3 +226,66 @@ const p1: person = {
 
 hello(p1)
 ```
+
+
+
+### optional property
+- 객체의 property가 있을수도 없을수도 있는 상황에서는 ? 를 붙여준다
+   
+    - ```ts
+        interface Person2 {
+            name: string
+            age?: number
+        }
+        funtion hello2(person: Person2): void {
+            console.log(`안녕하세요! ${person.name}입니다.`)
+        }
+
+        hello2({ name: "Mark" age: 39})
+        hello2({ name: "Anna" })
+        ``` 
+- indexable property 
+    - ```ts
+        interface Person3 {
+            name: string
+            age?: number
+            [index: string]: any
+        }
+        funtion hello3(person: Person3): void {
+            console.log(`안녕하세요 ${person.name} 입니다.`)
+        }
+
+        const p31: Person3 = {
+            name: "Mark",
+            age: 39,
+        }
+        const p32: Person3 = {
+            name: "Anna"
+            systers: ["sung", "Chan"],
+        }
+        const p33: Person3 = {
+            name: "bokdaengi"
+            fater: p31,
+            mother: p32,
+        }
+        ```
+- 클래스에서 인터페이스 implements 하기 
+    - ```ts
+        interface Iperson1 {
+            name: string
+            age?: number
+            hello(): void
+        }
+        class Person implements IPerson1 {
+            name: string
+            age?: number | undefined
+        }
+        constructor(name: string) {
+            this.name = name
+        }
+        hello(): void {
+            console.log(`안녕하세요 ${this.name} 입니다.`)
+        }
+        const person:IPerson1 = new Person("Mark")
+        person.hello()
+        ```
