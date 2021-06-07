@@ -205,7 +205,7 @@ class pet implements petType {} // error TS2422 => class can only implement an o
 
 - Decalrartion Merging - interface 
     - 이름이 같은 인터페이스 선언을 하면 호출할떄 자동 merging이 된다.
-
+    - type alias에서는 merging이 불가능하다 => 같은 이름으로 선언을하면 중복된이름으로 선언되었다는 오류가 난다.
     - ```ts 
         interface MergingInterface {
             a: string

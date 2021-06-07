@@ -20,3 +20,5 @@ getProp(person, 'age')
 function setProp<T, K extends keyof T>(obj: T, key: K, value: T[K]): void {
     obj[key] = value
 }
+
+setProp(person, "name", "Anna")

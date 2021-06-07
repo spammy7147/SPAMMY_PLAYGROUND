@@ -10,4 +10,4 @@ class PersonExtends<T extends string | number> {
 
 new PersonExtends("Spammy")
 new PersonExtends(39)
-new PersonExtends(true)
+// new PersonExtends(true) => error
