@@ -91,3 +91,85 @@ console.log(b)
 ---
 
 ## static Porperties & Methods
+```ts
+class Person {
+    public static CITY = 'seoul'
+    public static hello() {
+        console.log('안녕하세요', Person.CITY)
+    }
+}
+
+Person.CITY
+
+Person.hello()
+
+// 생성자 생성없이 class 이름으로 부른다
+```
+
+---
+
+## singletons
+```ts
+class ClassName {
+    private constructor() {}
+    private static instance = null
+    public static getInstance() {
+        //클래스 이름으로부터 만든 object가 있으면 리턴 없으면 만들어서 리턴
+        if (ClassName.instance === null) {
+            ClassName.instance = new ClassName()
+        }
+        return ClassName.instance
+    }
+}
+
+// const a = new ClassName()
+// const b = new ClassName() 
+const a = ClassName.getInstance()
+const b = ClassName.getInstance()
+
+console.log(a === b) //true
+```
+
+---
+
+## 상속 
+```ts
+class parent {
+    constructor(producted _name:strin, private _age: number) {}
+    public print(): void {
+        console.log(`이름은 ${.this._name} 이고, 나이는 ${this._age} 입니다.`)
+    }
+}
+
+const p = new Parent("Mark", 39)
+p.print()
+
+class Child extends Parent {
+    public _name = "Mark Jr."
+    public gender = "male"
+    constructor(age: number) {
+        super("Mark Jr",age)
+    }
+}
+const c = new Child(5)
+c.print()
+```
+
+---
+
+## abstract classes
+```ts
+abstract class AbstractPerson {
+    protected _name: string = 'Mark'
+    abstract setName(name: string): void 
+}
+
+class Person extends AbstractPerson {
+    setName(name: string): void {
+        this.name = name
+    }
+}
+
+const p = new Person()
+p.setName("Spammy")
+```
