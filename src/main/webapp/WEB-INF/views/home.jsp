@@ -6,7 +6,6 @@
 	<title>Home</title>
 </head>
 <body>
-<c:import url="header.jsp" />
 <h1>
 	프로잭트 시작합니다!
 </h1>
