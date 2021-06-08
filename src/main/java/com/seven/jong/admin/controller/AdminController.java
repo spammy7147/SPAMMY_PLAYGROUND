@@ -14,8 +14,8 @@ public class AdminController {
 	//admin 홈
 	@GetMapping("/home")
 	public String admin() {
-		//@RequestParam String id, HttpSession session
-		//session.setAttribute(Login, id);
+		//@RequestParam String id, HttpSession session 
+		//session.setAttribute(LOGIN, id);
 		return "admin/adminHome";
 	}
 	
