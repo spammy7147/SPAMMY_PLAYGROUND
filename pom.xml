@@ -32,19 +32,26 @@
 			<artifactId>spring-webmvc</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
+		<!-- spring-jdbc -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-jdbc</artifactId>
+			<version>${org.springframework-version}</version>
+		</dependency>
 		<!--spring-security-web -->
 		<dependency>
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-web</artifactId>
 			<version>${org.springframework-version}</version>
 		</dependency>
-		<!-- ojdbc6 -->
-		<dependency>
-			<groupId>com.oracle.database.jdbc</groupId>
-			<artifactId>ojdbc6</artifactId>
-			<version>11.2.0.4</version>
-		</dependency>
+<!--		&lt;!&ndash; ojdbc6 &ndash;&gt;-->
+<!--		<dependency>-->
+<!--			<groupId>com.oracle.databasef.jdbc</groupId>-->
+<!--			<artifactId>ojdbc6</artifactId>-->
+<!--			<version>11.2.0.4</version>-->
+<!--		</dependency>-->
 		<!--ojdbc8 -->
+
 		<dependency>
 			<groupId>com.oracle.database.jdbc</groupId>
 			<artifactId>ojdbc8</artifactId>
@@ -162,10 +169,19 @@
 		</dependency>
 
 		<!-- Test -->
+		<!-- https://mvnrepository.com/artifact/junit/junit -->
 		<dependency>
 			<groupId>junit</groupId>
 			<artifactId>junit</artifactId>
-			<version>4.7</version>
+			<version>4.12</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!--  spring test module -->
+		<dependency>
+			<groupId>org.springframework</groupId>
+			<artifactId>spring-test</artifactId>
+			<version>${org.springframework-version}</version>
 			<scope>test</scope>
 		</dependency>
 	</dependencies>

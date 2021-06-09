@@ -15,6 +15,7 @@
 
     <!-- 회원가입 -->
     <insert id="addUser">
-        INSERT INTO user (id,email,name,password)
+        INSERT INTO air_user (id,email,name,password)
         VALUES (user_seq.nextval,#{email}, #{name}, #{password})
     </insert>
+</mapper>
