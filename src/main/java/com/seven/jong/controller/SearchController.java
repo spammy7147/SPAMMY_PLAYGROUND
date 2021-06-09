@@ -1,4 +1,4 @@
-package com.seven.jong.search.controller;
+package com.seven.jong.controller;
 
 import org.springframework.stereotype.Controller;
 
