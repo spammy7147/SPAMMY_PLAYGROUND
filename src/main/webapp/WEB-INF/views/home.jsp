@@ -1,45 +1,25 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
 <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<c:set var="contextPath" value="${pageContext.request.contextPath }"/>
+<!DOCTYPE html>
 <html>
 <head>
-    <title>Title</title>
-    <script defer src="<c:url value='/bootstrap/js/bootstrap.bundle.js'/>"></script>
-    <link rel="stylesheet" href="<c:url value='/bootstrap/css/bootstrap.min.css'/>"/>
-    <script defer src="<c:url value='/js/nav.js'/>"></script>
-    <link rel="stylesheet" href="<c:url value='/css/nav.css'/>">
+<meta charset="UTF-8">
+<title>Insert title here</title>
 </head>
 <body>
-    <div class="container">
-        <div class="row">
-            <div class="col">
-                Column
-            </div>
-            <div class="col">
-                Column
-            </div>
-            <div class="col">
-                <nav class="navbar navbar-light">
-                    <div class="container-fluid col-auto">
-                        <button class="navbar-toggler" type="button" style="border-radius: 30px;">
-                            <span class="navbar-toggler-icon"></span>
-                            <img src="<c:url value='/img/account_default.png'/>" alt="">
-                        </button>
-                    </div>
-                </nav>
-                <div class="collapse" id="collapse">
-                    <div class="bg-white p-4">
-                        <ul class="list-group">
-                            <a href="/hello" class="list-group-item list-group-item-action">메시지</a>
-                            <a href="#" class="list-group-item list-group-item-action">알림</a>
-                            <a href="#" class="list-group-item list-group-item-action">여행</a>
-                            <a href="#" class="list-group-item list-group-item-action">위시리스트</a>
-                            <a href="#" class="list-group-item list-group-item-action" style="border-top: 1px; border-style: solid; border-color: rgba(0, 0, 0, 0.1);">계정</a>
-                            <a href="#" class="list-group-item list-group-item-action">로그아웃</a>
-                        </ul>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
+<c:import url="default/header.jsp" />
+<h3>메인 페이지 입니다</h3>
+<div>
+	<div>
+		<form action="#">
+			<input type="text" name="search" placeholder="숙소 검색">
+			<input type="submit" value="검색">
+		</form>
+	</div>
+	
+	
+</div>
 </body>
 </html>

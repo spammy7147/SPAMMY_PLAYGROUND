@@ -1,12 +1,12 @@
 CREATE TABLE member
 (
     member_id     INT             NOT NULL PRIMARY KEY,
-    pwd           VARCHAR2(20)    NOT NULL, 
+    email         VARCHAR2(20)    UNIQUE,
+    password      VARCHAR2(20)    NOT NULL,
     name          VARCHAR2(20)    NOT NULL, 
-    birth         DATE            NULL, 
-    email         VARCHAR2(20)    NULL, 
+    birth         DATE            NULL,
     phone         VARCHAR2(20)    NULL, 
-    regdate       DATE            NULL, 
+    regdate       DATE            NULL,
     hosting_id    NUMBER          NULL
     );
 
