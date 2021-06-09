@@ -6,5 +6,6 @@ target
 .git
 .idea
 jong.iml
+.bin
 
 
