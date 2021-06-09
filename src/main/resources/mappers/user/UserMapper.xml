@@ -3,7 +3,6 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-
 <mapper namespace="com.seven.jong.repository.IUserMapper">
 
     <resultMap id="UserMap" type="com.seven.jong.DTO.UserDTO" >
@@ -13,9 +12,11 @@
         <result property="password" column="password"/>
     </resultMap>
 
-    <!-- 회원가입 -->
+    <!-- 회원가입  -->
     <insert id="addUser">
         INSERT INTO air_user (id,email,name,password)
         VALUES (user_seq.nextval,#{email}, #{name}, #{password})
     </insert>
+
 </mapper>
+

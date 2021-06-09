@@ -1,4 +1,4 @@
-package com.seven.jong.admin.controller;
+package com.seven.jong.controller;
 
 import javax.servlet.http.HttpSession;
 
