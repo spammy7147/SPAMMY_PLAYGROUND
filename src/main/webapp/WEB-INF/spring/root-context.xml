@@ -12,18 +12,20 @@
 		<property name="password" value="1234"/>
 	</bean>
 
-	<!--  데이터 소스 객체 빈 등록 -->
+	<!--  데이터 소스 객체 빈 등록  -->
 	<bean id="ds" class="com.zaxxer.hikari.HikariDataSource">
 		<constructor-arg ref="hikariconfig" />
 	</bean>
 
-	<!-- mybatis 핵심객체 sqlSessionFactory 빈 등록 -->
+	<!-- mybatis 핵심객체 sqlSessionFactory 빈 등록 	
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="ds"/>
 		<property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml"/>
 	</bean>
+	-->
 
-	<!--  매퍼의 인터페이스를 스캔하는 설정 -->
+
+	<!--  매퍼의 인터페이스를 스캔하는 설정 
 	<mybatis-spring:scan base-package="com.seven.jong.repository"/>
-
+	-->
 </beans>
