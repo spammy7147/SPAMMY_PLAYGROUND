@@ -1,16 +1,17 @@
-package com.seven.jong.controller;
+package com.seven.jong;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
 @Controller
-public class LoginController {
+public class HomeController {
 
-    @GetMapping("/")
+	@GetMapping("/")
     public String home() {
-        System.out.println("home 진입");
-        return "home";
+        System.out.println("main 진입");
+        return "main";
     }
+
 
     @GetMapping("hello")
     public String hello() {
