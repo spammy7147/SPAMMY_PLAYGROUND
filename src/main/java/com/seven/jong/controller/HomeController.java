@@ -1,4 +1,4 @@
-package com.seven.jong;
+package com.seven.jong.controller;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
