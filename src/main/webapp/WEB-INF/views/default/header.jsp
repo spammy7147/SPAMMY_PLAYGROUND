@@ -27,8 +27,10 @@ nav ul {
 	<hr>
 		<nav>
 			<ul>
-				<li><a href="${contextPath}/">HOME</a></li>				
+				<li><a href="${contextPath}/">HOME</a></li>&nbsp;&nbsp;&nbsp;				
+				<li><a href="${contextPath}/member/register">LOGIN</a></li>		
 			</ul>
+			
 		</nav>
 	<hr>
 	</div>
