@@ -11,4 +11,11 @@ public class HomeController {
         System.out.println("main 진입");
         return "main";
     }
+
+
+    @GetMapping("hello")
+    public String hello() {
+        System.out.println("hello 진입");
+        return "hello";
+    }
 }
