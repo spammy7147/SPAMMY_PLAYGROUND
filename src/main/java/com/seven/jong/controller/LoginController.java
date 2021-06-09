@@ -11,4 +11,10 @@ public class LoginController {
         System.out.println("home 진입");
         return "home";
     }
+
+    @GetMapping("hello")
+    public String hello() {
+        System.out.println("hello 진입");
+        return "hello";
+    }
 }
