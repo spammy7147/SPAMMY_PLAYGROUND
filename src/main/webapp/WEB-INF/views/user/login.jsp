@@ -20,7 +20,7 @@
 				</tr>
 				<tr>
 					<td align="right">
-						<a href="..//member/register">회원가입</a>&nbsp;&nbsp;
+						<a href="..//user/register">회원가입</a>&nbsp;&nbsp;
 						<input type="submit" value="login">
 					</td>
 				</tr>				

@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.seven.jong.DTO.">
+	<resultMap id="house" type="com.seven.jong.DTO.HouseDTO" >
+		<id property="HouseId" column="house_id"/>
+		<result property="region" column="region"/>
+		<result property="name" column="name"/>
+		<result property="price" column="price"/>
+		<result property="content" column="content"/>
+		<result property="hit" column="hit"/>
+	</resultMap>
+	
+	
+</mapper>
