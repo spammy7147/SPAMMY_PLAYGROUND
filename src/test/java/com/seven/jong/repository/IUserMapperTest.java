@@ -15,6 +15,7 @@ public class IUserMapperTest {
     private IUserMapper mapper;
     @Test
     public void addUser() {
+    	/*
         UserRequestDTO user1 = UserRequestDTO.builder()
                 .email("spammy7147@gmail.com")
                 .name("조영훈")
@@ -23,5 +24,6 @@ public class IUserMapperTest {
                 .build();
         mapper.addUser(user1);
         System.out.println(user1);
+        */
     }
 }
