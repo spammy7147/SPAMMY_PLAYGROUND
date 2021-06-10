@@ -11,9 +11,9 @@
 <body>
 <h3>회원가입창 입니다.</h3>
 <div>
-	<form action="#" method="post">
-		<input type="text" name="id" placeholder="id(email)"><br>
-		<input type="password" name="pwd" placeholder="pwd"><br>
+	<form action="<c:url value='/user/register'/>" method="post">
+		<input type="text" name="email" placeholder="email"><br>
+		<input type="password" name="password" placeholder="password"><br>
 		<input type="text" name="name" placeholder="name"><br>
 		<input type="date" name="birth" placeholder="birth"><br>
 		<input type="text" name="phone" placeholder="phone"><br>
