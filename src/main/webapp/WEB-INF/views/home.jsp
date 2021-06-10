@@ -9,8 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:import url="default/header.jsp" />
-<h3>메인 페이지 입니다</h3>
+<jsp:include page="default/navBar.jsp" />
 <div>
 	<div>
 		<form action="#">
@@ -18,8 +17,6 @@
 			<input type="submit" value="검색">
 		</form>
 	</div>
-	
-	
 </div>
 </body>
 </html>
