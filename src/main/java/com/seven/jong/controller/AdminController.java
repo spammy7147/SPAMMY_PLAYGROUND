@@ -2,14 +2,19 @@ package com.seven.jong.controller;
 
 import javax.servlet.http.HttpSession;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.seven.jong.service.AdminUserService;
+
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
+	@Autowired AdminUserService aus;
 	
 	//admin 홈
 	@GetMapping("/home")
@@ -19,11 +24,21 @@ public class AdminController {
 		return "admin/adminHome";
 	}
 	
+	
 	//가입 유저 관리
 	@GetMapping("/usermanage")
-	public String userManage() {
-		return "admin/userManage";
+	public String userManage(Model model) {
+		aus.userInfo(model);
+		return "admin/user/userManage";
 	}
+	
+	@GetMapping("/user/userInfo")
+	public String userInfo(@RequestParam("member_id") int member_id, Model model) {
+		aus.info(member_id, model);
+		return "admin/user/userInfo";
+	}
+	
+	
 	
 	//등록된 숙소 관리
 	@GetMapping("/housemanage")
