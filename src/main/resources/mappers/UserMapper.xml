@@ -5,7 +5,7 @@
 
 <mapper namespace="com.seven.jong.repository.IUserMapper">
 
-    <resultMap id="UserMap" type="com.seven.jong.DTO.UserDTO" >
+    <resultMap id="UserMap" type="com.seven.jong.DTO.UserRequestDTO" >
         <id property="id" column="user_id"/>
         <result property="email" column="email"/>
         <result property="name" column="name"/>

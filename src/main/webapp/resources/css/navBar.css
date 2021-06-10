@@ -1,0 +1,16 @@
+
+.collapse {
+    width: 200px;
+    margin:auto;
+    position: absolute;
+}
+
+.container .row .col .collapse .bg-white .list-group .list-group-item {
+    text-align: center;
+    border: 0;
+}
+
+.container .row .col .collapse .bg-white .list-group {
+    box-shadow: 0 1px 12px rgba(0, 0, 0, 0.05);
+
+}
