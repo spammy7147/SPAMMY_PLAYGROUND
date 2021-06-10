@@ -16,6 +16,7 @@ public class UserController {
 		System.out.println("register연결");
 		return "user/register";
 	}
+	
 	@PostMapping("/register")
 	public String register(UserRequestDTO user) {
 		System.out.println(user);
