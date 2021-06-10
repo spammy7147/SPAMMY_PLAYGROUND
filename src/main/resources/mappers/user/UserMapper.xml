@@ -6,10 +6,13 @@
 <mapper namespace="com.seven.jong.repository.IUserMapper">
 
     <resultMap id="UserMap" type="com.seven.jong.DTO.UserRequestDTO" >
-        <id property="id" column="user_id"/>
+        <id property="member_id" column="member_id"/>
         <result property="email" column="email"/>
-        <result property="name" column="name"/>
         <result property="password" column="password"/>
+        <result property="name" column="name"/>
+        <result property="birth" column="birth"/>
+        <result property="phone" column="phone"/>
+        <result property="regdate" column="regdate"/>
     </resultMap>
 
     <!-- 회원가입  -->
@@ -17,6 +20,16 @@
         INSERT INTO air_user (id,email,name,password)
         VALUES (user_seq.nextval,#{email}, #{name}, #{password})
     </insert>
+    
+    <!-- 모든 유저 가져오기 -->
+    <select id="userInfo" resultMap="UserMap">
+    	select * from member
+    </select>
+    
+    <!-- 하나의 유저 정보 가져오기 -->
+    <select id="info" resultMap="UserMap">
+		select * from member where member_id=#{member_id}
+	</select>
 
 </mapper>
 
