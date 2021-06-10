@@ -1,8 +1,8 @@
 package com.seven.jong.repository;
 
-import com.seven.jong.DTO.UserDTO;
+import com.seven.jong.DTO.UserRequestDTO;
 
 
 public interface IUserMapper {
-    void addUser(UserDTO user);
+    void addUser(UserRequestDTO user);
 }
