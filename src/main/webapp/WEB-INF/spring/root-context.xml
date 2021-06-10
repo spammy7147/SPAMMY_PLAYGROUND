@@ -21,10 +21,11 @@
 	<!-- mybatis 핵심객체 sqlSessionFactory 빈 등록 -->
 	<bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="ds"/>
-		<property name="mapperLocations" value="classpath:/mappers/*Mapper.xml"/>
+		<property name="mapperLocations" value="classpath:/mappers/**/*Mapper.xml"/>
 	</bean>
 
-
+	<!-- 마이바티스 xml파일과 dao빈 연결  -->
+	<mybatis-spring:scan base-package="com.care.root.mybatis"/>
 
 	<!--  매퍼의 인터페이스를 스캔하는 설정 -->
 	<mybatis-spring:scan base-package="com.seven.jong.repository"/>
