@@ -1,6 +1,6 @@
-CREATE TABLE member
+CREATE TABLE air_user
 (
-    member_id     NUMBER             PRIMARY KEY,
+    user_id     NUMBER           PRIMARY KEY,
     email         VARCHAR2(50)    UNIQUE,
     password      VARCHAR2(50)    NOT NULL,
     name          VARCHAR2(20)    NOT NULL, 
@@ -9,7 +9,7 @@ CREATE TABLE member
     regdate       DATE            DEFAULT SYSDATE
     );
 
-CREATE SEQUENCE member_id_seq
+CREATE SEQUENCE air_user_seq
   START WITH 1
   INCREMENT by 1
   MAXVALUE 10000
