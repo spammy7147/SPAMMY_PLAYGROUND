@@ -1,5 +1,6 @@
 package com.seven.jong.VO;
 
+import lombok.Builder;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
@@ -8,8 +9,8 @@ import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter
-@Setter
 @ToString
+@Builder
 public class UserVO {
 
     private Integer member_id;

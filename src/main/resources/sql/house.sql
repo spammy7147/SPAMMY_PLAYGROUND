@@ -1,6 +1,6 @@
   CREATE TABLE house
 (
-    house_id    NUMBER          NULL PRIMARY KEY, 
+    house_id    NUMBER          PRIMARY KEY,
     region      VARCHAR2(20)    NULL, 
     name        VARCHAR2(20)    NULL, 
     price       NUMBER          NULL, 
