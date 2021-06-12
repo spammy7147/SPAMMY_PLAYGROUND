@@ -5,4 +5,5 @@ import com.seven.jong.DTO.UserRequestDTO;
 public interface IUserService {
 
     void addUser(UserRequestDTO user);
+
 }
