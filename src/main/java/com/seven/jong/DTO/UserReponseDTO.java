@@ -12,7 +12,7 @@ import java.time.LocalDateTime;
 @Setter
 @ToString
 public class UserReponseDTO {
-    private Integer member_id;
+    private Integer userId;
     private String email;
     private String password;
     private String name;
