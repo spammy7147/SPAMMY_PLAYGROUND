@@ -1,5 +1,7 @@
 package com.seven.jong.repository;
 
-public interface IBoardMapper {
+import com.seven.jong.DTO.BoardDTO;
 
+public interface IBoardMapper {
+	public int writeSave(BoardDTO dto);
 }

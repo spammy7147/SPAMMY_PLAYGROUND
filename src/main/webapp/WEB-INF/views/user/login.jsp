@@ -8,6 +8,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:import url="../include/header.jsp" />
 	<div>
 		<form action="#"> 
 			<table>
@@ -19,7 +20,7 @@
 				</tr>
 				<tr>
 					<td align="right">
-						<a href="..//user/register">회원가입</a>&nbsp;&nbsp;
+						<a href="../user/register">회원가입</a>&nbsp;&nbsp;
 						<input type="submit" value="login">
 					</td>
 				</tr>				

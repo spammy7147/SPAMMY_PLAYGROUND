@@ -9,7 +9,7 @@ import lombok.ToString;
 @ToString
 public class BoardDTO {
 	private int writeNo;
-	private String email;
+	private String writer;
 	private String title;
 	private String content;
 	private String saveDate;
