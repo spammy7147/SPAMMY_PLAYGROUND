@@ -11,5 +11,8 @@
 </head>
 <body>
 	<c:import url="../include/header.jsp" />
+	<form >
+		<a href="${contextPath }/board/writeForm">글작성</a>
+	</form>
 </body>
 </html>
