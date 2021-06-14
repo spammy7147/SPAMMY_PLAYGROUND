@@ -13,9 +13,9 @@
 <c:import url="../include/header.jsp" />
 <div>
 	<div>
-	<form action="#" method="post">
+	<form action="writeSave" method="post">
 		<b>작성자</b><br>
-			<input type="text" name="id" size="30" value="#" readonly><br>
+			<input type="text" name="writer" size="30" value="#" readonly><br>
 		<b>제목</b><br>
 			<input type="text" size="30" name="title" ><br>	
 		<b>내용</b><br>
