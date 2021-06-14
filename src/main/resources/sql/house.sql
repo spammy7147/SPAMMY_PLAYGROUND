@@ -8,7 +8,7 @@
     hit         NUMBER          NULL 
 );
 
-
+ 
 CREATE SEQUENCE house_SEQ
 START WITH 1
 INCREMENT BY 1;
