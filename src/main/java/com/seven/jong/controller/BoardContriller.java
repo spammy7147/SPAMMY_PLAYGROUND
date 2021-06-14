@@ -35,7 +35,7 @@ public class BoardContriller {
 	@PostMapping("/writeSave")
 	public String writeSave(BoardDTO dto, HttpServletRequest request) {
 		bs.writeSave(dto, request);
-		return "board/boardAllList";
+		return "redirect:/board/boardAllList";
 	}
 	//선택 게시물 보기
 	@GetMapping("contentView")

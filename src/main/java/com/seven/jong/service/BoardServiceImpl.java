@@ -32,7 +32,9 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void contentView(int writeNo, Model model) {
 		model.addAttribute("contentData",mapper.contentView(writeNo));
-		
+		upHit(writeNo);
 	}
-
+	private void upHit(int writeNo) {
+		mapper.upHit(writeNo);
+	}
 }
