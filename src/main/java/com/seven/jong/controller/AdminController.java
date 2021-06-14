@@ -27,15 +27,20 @@ public class AdminController {
 	
 	//가입 유저 관리
 	@GetMapping("/usermanage")
-	public String userManage(Model model) {
-		aus.userInfo(model);
+	public String userManage(@RequestParam(value="pageNum" , required=false, defaultValue="1") int pageNum, Model model) {
+		aus.pageUserInfo(pageNum, model);
 		return "admin/user/userManage";
 	}
-	
+	//특정 유저 정보 페이지
 	@GetMapping("/user/userInfo")
 	public String userInfo(@RequestParam("member_id") int member_id, Model model) {
 		aus.info(member_id, model);
 		return "admin/user/userInfo";
+	}
+	//유저검색
+	@GetMapping("/user/usersearch")
+	public String userSearch() {
+		return "admin/user/userSearch";
 	}
 	
 	
