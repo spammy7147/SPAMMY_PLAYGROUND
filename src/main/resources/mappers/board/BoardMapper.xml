@@ -18,4 +18,15 @@
     	values(air_board_seq.nextval,#{writer},#{title},#{content})
 	</insert>
 	
+	<select id="boardAllList" resultMap="board">
+		select * from air_board
+	</select>
+	
+	<select id="contentView" resultMap="board">
+		select * from air_board where write_no = #{writeNo}
+	</select>
+	
+	<update id="upHit">
+		update air_board set hit=hit+1 where write_no = #{writeNo}
+	</update>
 </mapper>     
