@@ -50,7 +50,7 @@
     
     <!-- 하나의 유저 정보 가져오기 -->
     <select id="info" resultMap="UserResponsetMap">
-		select * from air_user where userId=#{userId}
+		select * from air_user where user_id=#{userId}
 	</select>
 
 </mapper>

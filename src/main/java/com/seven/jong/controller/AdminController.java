@@ -33,8 +33,8 @@ public class AdminController {
 	}
 	//특정 유저 정보 페이지
 	@GetMapping("/user/userInfo")
-	public String userInfo(@RequestParam("member_id") int member_id, Model model) {
-		aus.info(member_id, model);
+	public String userInfo(@RequestParam("userId") int userId, Model model) {
+		aus.info(userId, model);
 		return "admin/user/userInfo";
 	}
 	//유저검색

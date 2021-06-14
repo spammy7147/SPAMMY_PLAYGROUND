@@ -34,8 +34,8 @@ public class AdminUserServiceImpl implements AdminUserService {
 		model.addAttribute("userList", list);
 	}
 	
-	public void info(int member_id, Model model) {
-		model.addAttribute("userInfo",mapper.info(member_id)) ;
+	public void info(int userId, Model model) {
+		model.addAttribute("userInfo",mapper.info(userId)) ;
 	}
 	
 }
