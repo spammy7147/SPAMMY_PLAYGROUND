@@ -5,8 +5,8 @@
 
 <mapper namespace="com.seven.jong.repository.IUserMapper">
 
-    <resultMap id="UserMap" type="com.seven.jong.DTO.UserRequestDTO" >
-        <id property="member_id" column="member_id"/>
+    <resultMap id="UserMap" type="com.seven.jong.VO.UserVO" >
+        <id property="userId" column="member_id"/>
         <result property="email" column="email"/>
         <result property="password" column="password"/>
         <result property="name" column="name"/>
@@ -17,8 +17,8 @@
 
     <!-- 회원가입  -->
     <insert id="addUser">
-        INSERT INTO air_user (id,email,name,password)
-        VALUES (user_seq.nextval,#{email}, #{name}, #{password})
+        INSERT INTO AIR_USER (user_id, email, password, name, birth, phone)
+        VALUES (AIR_USER_SEQ.nextval,#{email}, #{password}, #{name}, #{birth}, #{phone})
     </insert>
     
     <!-- 모든 유저 가져오기 -->
