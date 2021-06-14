@@ -22,4 +22,7 @@
 		select * from air_board
 	</select>
 	
+	<select id="contentView" resultMap="board">
+		select * from air_board where write_no = #{writeNo}
+	</select>
 </mapper>     
