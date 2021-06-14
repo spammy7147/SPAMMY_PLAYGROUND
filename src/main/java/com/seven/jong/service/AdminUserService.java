@@ -4,7 +4,7 @@ import org.springframework.ui.Model;
 
 public interface AdminUserService {
 	
-	public void userInfo(Model model);
+	public void pageUserInfo(int start, Model model);
 	
 	public void info(int member_id, Model model);
 	
