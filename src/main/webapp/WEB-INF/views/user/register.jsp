@@ -9,6 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
+<c:import url="../include/header.jsp" />
 <h3>회원가입창 입니다.</h3>
 <div>
 	<form action="<c:url value='/user/register'/>" method="post">
