@@ -29,8 +29,8 @@
 			<div class="nav-item dropdown">
 				<button class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false"></button>
 				<ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-					<li><a class="dropdown-item" href="#!">로그인</a></li>
-					<li><a class="dropdown-item" href="#!">회원가입</a></li>
+					<li><a class="dropdown-item" href="${contextPath }/user/login">로그인</a></li>
+					<li><a class="dropdown-item" href="${contextPath }/user/register">회원가입</a></li>
 					<li><hr class="dropdown-divider" /></li>
 					<li><a class="dropdown-item" href="#!">도움말</a></li>
 
