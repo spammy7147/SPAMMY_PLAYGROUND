@@ -9,7 +9,7 @@
 <title>Insert title here</title>
 </head>
 <body>
-<jsp:include page="default/navBar.jsp" />
+<jsp:include page="./include/header.jsp" />
 <div>
 	<div>
 		<form action="#">

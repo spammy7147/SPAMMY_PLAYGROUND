@@ -7,7 +7,8 @@ import com.seven.jong.VO.UserVO;
 
 
 public interface IUserMapper {
-    void addUser(UserRequestDTO user);
+
+    void addUser(UserVO user);
     
     ArrayList<UserVO> userInfo();
 
