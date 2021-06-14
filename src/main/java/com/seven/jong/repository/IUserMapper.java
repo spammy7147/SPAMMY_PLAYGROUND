@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import org.apache.ibatis.annotations.Param;
 
 import com.seven.jong.DTO.UserReponseDTO;
+import com.seven.jong.DTO.UserRequestDTO;
 import com.seven.jong.VO.UserVO;
 
 
@@ -23,6 +24,9 @@ public interface IUserMapper {
     
     //요청 유저 정보
     UserReponseDTO info(int userId);
+
+    //userId에 해당하는 유저 정보 update
+	void updateUserInfo(@Param("userId")int userId, @Param("name")String name, @Param("birth")String birth, @Param("phone")int phone );
 
 	
 }
