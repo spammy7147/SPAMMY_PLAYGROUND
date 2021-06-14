@@ -6,9 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.seven.jong.DTO.UserRequestDTO;
 import com.seven.jong.service.AdminUserService;
 
 @Controller
@@ -33,16 +35,23 @@ public class AdminController {
 	}
 	//특정 유저 정보 페이지
 	@GetMapping("/user/userInfo")
-	public String userInfo(@RequestParam("userId") int userId, Model model) {
+	public String userInfo01(@RequestParam("userId") int userId, Model model) {
 		aus.info(userId, model);
 		return "admin/user/userInfo";
 	}
+	
+	//유저정보 수정
+	@PostMapping("/user/modifyUserInfo")
+	public String modifyUserInfo(@RequestParam("userId") int userId, UserRequestDTO user, Model model) { ///유저아이디, 등등
+		aus.modifyUser(userId,user);
+		return "redirect:userInfo?userId="+userId;
+	}
+	
 	//유저검색
 	@GetMapping("/user/usersearch")
 	public String userSearch() {
 		return "admin/user/userSearch";
 	}
-	
 	
 	
 	//등록된 숙소 관리

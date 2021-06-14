@@ -37,5 +37,21 @@ public class AdminUserServiceImpl implements AdminUserService {
 	public void info(int userId, Model model) {
 		model.addAttribute("userInfo",mapper.info(userId)) ;
 	}
+
+	@Override
+	public void modifyUser(int userId, UserRequestDTO user) {
+		//요청한 userId에 해당하는 유저 정보를 user 객체의 정보로 update
+		String name= user.getName();
+		String birth= user.getBirth();
+		int phone= user.getPhone();
+		
+		//System.out.println(name);
+		//System.out.println(birth);
+		//System.out.println(phone);
+		
+		mapper.updateUserInfo(userId, name, birth, phone);
+		
+	}
+
 	
 }
