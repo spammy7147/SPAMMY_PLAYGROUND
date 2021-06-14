@@ -4,6 +4,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.ui.Model;
 
 import com.seven.jong.DTO.BoardDTO;
 import com.seven.jong.repository.IBoardMapper;
@@ -22,4 +23,18 @@ public class BoardServiceImpl implements BoardService{
 		mapper.writeSave(dto);
 	}
 
+	@Override
+	public void boardAllList(Model model) {
+		model.addAttribute("boardList",mapper.boardAllList());
+		
+	}
+
+	@Override
+	public void contentView(int writeNo, Model model) {
+		model.addAttribute("contentData",mapper.contentView(writeNo));
+		upHit(writeNo);
+	}
+	private void upHit(int writeNo) {
+		mapper.upHit(writeNo);
+	}
 }
