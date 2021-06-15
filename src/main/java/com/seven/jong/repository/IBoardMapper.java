@@ -12,4 +12,6 @@ public interface IBoardMapper {
 	public BoardDTO contentView(int writeNo);
 	
 	public void upHit(int writeNo);
+
+	public void modify(BoardDTO dto);
 }

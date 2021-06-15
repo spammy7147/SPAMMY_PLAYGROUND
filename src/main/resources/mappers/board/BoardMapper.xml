@@ -29,4 +29,8 @@
 	<update id="upHit">
 		update air_board set hit=hit+1 where write_no = #{writeNo}
 	</update>
+	
+	<update id="modify">
+		update air_board set title=#{title}, content=#{content} where write_no = #{writeNo} 
+	</update>
 </mapper>     
