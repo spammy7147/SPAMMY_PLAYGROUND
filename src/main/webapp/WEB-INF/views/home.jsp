@@ -11,12 +11,13 @@
 <body>
 <jsp:include page="./include/header.jsp" />
 <div>
-	<div>
+	<div align="center">
 		<form action="#">
 			<input type="text" name="search" placeholder="숙소 검색">
 			<input type="submit" value="검색">
 		</form>
 	</div>
 </div>
+
 </body>
 </html>
