@@ -11,4 +11,5 @@ public interface BoardService {
 	public void boardAllList(Model model);
 	public void contentView (int writeNo, Model model );
 	public void modify(BoardDTO dto, HttpServletRequest request);
+	public void delete(int writeNo);
 }

@@ -33,7 +33,8 @@ contentView
 		</tr>		
 	</table>
 		<a href="${contextPath }/board/boardAllList">목록보기</a>
-		<input type="button" onclick="location.href='${contextPath }/board/modifyForm?writeNo=${contentData.writeNo }'" value="수정">
+		<input value="수정" type="button" onclick="location.href='${contextPath }/board/modifyForm?writeNo=${contentData.writeNo }'">
+		<input value="삭제" type="button" onclick="location.href='${contextPath }/board/delete?writeNo=${contentData.writeNo }'">
 </div>
 
 </body>

@@ -48,4 +48,11 @@ public class BoardServiceImpl implements BoardService{
 		
 		mapper.modify(dto);
 	}
+
+	@Override
+	public void delete(int writeNo) {
+		mapper.delete(writeNo);
+		
+	}
+
 }
