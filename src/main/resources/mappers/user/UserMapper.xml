@@ -6,13 +6,13 @@
 <mapper namespace="com.seven.jong.repository.IUserMapper">
 
     <resultMap id="UserMap" type="com.seven.jong.VO.UserVO" >
-        <id property="userId" column="member_id"/>
+        <id property="userId" column="user_id"/>
         <result property="email" column="email"/>
         <result property="password" column="password"/>
         <result property="name" column="name"/>
         <result property="birth" column="birth"/>
         <result property="phone" column="phone"/>
-        <result property="regdate" column="regdate"/>
+        <result property="regDate" column="regdate"/>
     </resultMap>
 
     <!-- 회원가입  -->
@@ -22,13 +22,13 @@
     </insert>
     
     <!-- 모든 유저 가져오기 -->
-    <select id="userInfo" resultMap="UserMap">
-    	select * from member
+    <select id="getUsers" resultMap="UserMap">
+    	select * from AIR_USER
     </select>
     
     <!-- 하나의 유저 정보 가져오기 -->
-    <select id="info" resultMap="UserMap">
-		select * from member where member_id=#{member_id}
+    <select id="getUser" resultMap="UserMap">
+		select * from AIR_USER where user_id= #{user_id}
 	</select>
 
 </mapper>

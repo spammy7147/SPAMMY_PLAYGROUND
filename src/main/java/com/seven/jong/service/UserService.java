@@ -3,10 +3,10 @@ package com.seven.jong.service;
 import com.seven.jong.DTO.UserRequestDTO;
 import com.seven.jong.VO.UserVO;
 import com.seven.jong.repository.IUserMapper;
-import oracle.sql.DATE;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
+
 import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
@@ -39,7 +39,6 @@ public class UserService implements IUserService {
                     .phone(requestDTO.getPhone())
                     .birth(LocalDate.of(birth.get(0),birth.get(1),birth.get(2)))
                     .build();
-
         System.out.println(user);
         userMapper.addUser(user);
     }

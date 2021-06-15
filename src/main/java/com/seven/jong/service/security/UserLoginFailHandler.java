@@ -1,4 +1,4 @@
-package com.seven.jong.service.auth;
+package com.seven.jong.service.security;
 
 import org.springframework.security.authentication.*;
 import org.springframework.security.core.AuthenticationException;
@@ -12,7 +12,7 @@ import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
 @Service
-public class UserLoginFailHandler implements IUserLoginFailHandler, AuthenticationFailureHandler {
+public class UserLoginFailHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
 
