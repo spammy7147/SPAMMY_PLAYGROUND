@@ -13,6 +13,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import com.seven.jong.DTO.BoardDTO;
 import com.seven.jong.service.BoardService;
 
+import oracle.jdbc.proxy.annotation.Post;
+
 @Controller
 @RequestMapping("board")
 public class BoardContriller {
@@ -43,6 +45,26 @@ public class BoardContriller {
 		bs.contentView(writeNo, model);
 		System.out.println("contentView연결");
 		return "board/contentView";
+	}
+	//modifyForm 연결
+	@GetMapping("modifyForm")
+	public String modifyForm(@RequestParam int writeNo, Model model) {
+		bs.contentView(writeNo, model);
+		System.out.println("modifyForm 연결");
+		return "board/modifyForm";
+	}
+	//게시물 수정
+	@PostMapping("modify")
+	public String modify(BoardDTO dto, HttpServletRequest request) {
+		bs.modify(dto, request);
+		return "redirect:/board/boardAllList";
+	}
+	//게시물 삭제
+	@GetMapping("delete")
+	public String delete(@RequestParam int writeNo) {
+		System.out.println(writeNo);
+		bs.delete(writeNo);
+		return "redirect:/board/boardAllList";
 	}
 }
 

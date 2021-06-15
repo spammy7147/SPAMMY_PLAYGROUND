@@ -37,4 +37,22 @@ public class BoardServiceImpl implements BoardService{
 	private void upHit(int writeNo) {
 		mapper.upHit(writeNo);
 	}
+
+	@Override
+	public void modify(BoardDTO dto, HttpServletRequest request) {
+		
+		dto.setWriteNo(Integer.parseInt(request.getParameter("writeNo")));
+		
+		dto.setTitle(request.getParameter("title"));
+		dto.setContent(request.getParameter("content"));
+		
+		mapper.modify(dto);
+	}
+
+	@Override
+	public void delete(int writeNo) {
+		mapper.delete(writeNo);
+		
+	}
+
 }
