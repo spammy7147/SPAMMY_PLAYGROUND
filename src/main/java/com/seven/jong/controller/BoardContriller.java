@@ -59,6 +59,13 @@ public class BoardContriller {
 		bs.modify(dto, request);
 		return "redirect:/board/boardAllList";
 	}
+	//게시물 삭제
+	@GetMapping("delete")
+	public String delete(@RequestParam int writeNo) {
+		System.out.println(writeNo);
+		bs.delete(writeNo);
+		return "redirect:/board/boardAllList";
+	}
 }
 
 

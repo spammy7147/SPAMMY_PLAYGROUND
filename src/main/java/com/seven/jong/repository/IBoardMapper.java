@@ -14,4 +14,6 @@ public interface IBoardMapper {
 	public void upHit(int writeNo);
 
 	public void modify(BoardDTO dto);
+
+	public void delete(int writeNo);
 }
