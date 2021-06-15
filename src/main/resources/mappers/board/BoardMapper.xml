@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.seven.jong.repository.IBoardMapper">
+					
+	<resultMap type="com.seven.jong.DTO.BoardDTO" id="board">
+		<id property="writeNo" column="write_no"/>
+		<result property="writer" column="writer"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="saveDate" column="savedate"/>
+		<result property="hit" column="hit"/>
+	</resultMap>
+	
+	<insert id="writeSave">
+		insert into air_board(write_no,writer,title,content)
+    	values(air_board_seq.nextval,#{writer},#{title},#{content})
+	</insert>
+	
+	<select id="boardAllList" resultMap="board">
+		select * from air_board
+	</select>
+	
+	<select id="contentView" resultMap="board">
+		select * from air_board where write_no = #{writeNo}
+	</select>
+	
+	<update id="upHit">
+		update air_board set hit=hit+1 where write_no = #{writeNo}
+	</update>
+</mapper>     

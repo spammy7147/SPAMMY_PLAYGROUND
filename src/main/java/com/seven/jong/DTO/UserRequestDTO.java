@@ -20,4 +20,7 @@ public class UserRequestDTO {
     private String birth;
     private Integer phone;
 
+    
+    
+
 }

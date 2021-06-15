@@ -14,6 +14,9 @@
         <result property="phone" column="phone"/>
         <result property="regDate" column="regdate"/>
     </resultMap>
+    
+
+    
 
     <!-- 회원가입  -->
     <insert id="addUser">
@@ -21,7 +24,13 @@
         VALUES (AIR_USER_SEQ.nextval,#{email}, #{password}, #{name}, #{birth}, #{phone})
     </insert>
     
+    <!-- 총 유저 수 가져오기 -->
+    <select id="selectUserCount" resultType="Integer">
+		select count(*) from air_user
+	</select>
+    
     <!-- 모든 유저 가져오기 -->
+
     <select id="getUsers" resultMap="UserMap">
     	select * from AIR_USER
     </select>
@@ -29,7 +38,29 @@
     <!-- 하나의 유저 정보 가져오기 -->
     <select id="getUser" resultMap="UserMap">
 		select * from AIR_USER where user_id= #{user_id}
+    </select>
+
+    <select id="userInfo" resultMap="UserMap">
+    	select * from air_user
+    </select>
+    
+    
+    <!-- 요청 페이지 유저 가져오기 -->
+    <select id="pageUserInfo" resultMap="UserMap">
+    	select B.* from(select rownum rn, A.* from
+		(select * from air_user order by regdate desc)A)B where rn between #{s} and #{e}
+    </select>
+    
+    <!-- 하나의 유저 정보 가져오기 -->
+    <select id="info" resultMap="UserMap">
+		select * from air_user where user_id=#{userId}
+
 	</select>
+	
+	<!-- 유저정보 수정 -->
+	<update id="updateUserInfo">
+		UPDATE air_user SET NAME = #{name}, BIRTH = #{birth}, PHONE=#{phone} where USER_ID = #{userId}
+	</update>
 
 </mapper>
 
