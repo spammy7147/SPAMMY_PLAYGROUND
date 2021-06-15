@@ -14,12 +14,12 @@ public class AdminUserServiceImpl implements AdminUserService {
 	@Autowired IUserMapper mapper;
 	
 	public void userInfo(Model model) {
-		ArrayList<UserVO> list = mapper.userInfo();
+		ArrayList<UserVO> list = mapper.getUsers();
 		model.addAttribute("userList", list);
 	}
 	
 	public void info(int member_id, Model model) {
-		model.addAttribute("userInfo",mapper.info(member_id)) ;
+		model.addAttribute("userInfo",mapper.getUser(member_id)) ;
 	}
 	
 }

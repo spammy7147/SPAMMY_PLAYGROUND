@@ -9,8 +9,12 @@ import com.seven.jong.VO.UserVO;
 public interface IUserMapper {
 
     void addUser(UserVO user);
-    
-    ArrayList<UserVO> userInfo();
 
-	UserVO info(int member_id);
+    UserVO getUser(String email);
+
+    UserVO getUser(Integer user_id);
+
+    ArrayList<UserVO> getUsers();
+
+
 }

@@ -1,17 +1,17 @@
 package com.seven.jong.VO;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
-import oracle.sql.DATE;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.util.Date;
+
+
 
 @Getter
-@Setter
 @ToString
+@NoArgsConstructor
+@AllArgsConstructor
 @Builder
 public class UserVO {
 
@@ -21,6 +21,6 @@ public class UserVO {
     private String name;
     private LocalDate birth;
     private Integer phone;
-    private LocalDateTime regdate;
+    private LocalDateTime regDate;
 
 }

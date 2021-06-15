@@ -1,6 +1,7 @@
 package com.seven.jong.repository;
 
 //import com.seven.jong.DTO.UserRequestDTO;
+
 import com.seven.jong.VO.UserVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -8,9 +9,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
-import com.seven.jong.DTO.UserRequestDTO;
-
 import java.time.LocalDate;
+import java.util.Date;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -31,5 +31,11 @@ public class IUserMapperTest {
 
         System.out.println(user);
         userMapper.addUser(user);
+    }
+
+    @Test
+    public void getUser(){
+        UserVO user = userMapper.getUser(2);
+        System.out.println(user.toString());
     }
 }
