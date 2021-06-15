@@ -11,7 +11,7 @@ import java.time.LocalDateTime;
 @Getter
 @Setter
 @ToString
-public class UserReponseDTO {
+public class UserResponseDTO {
     private Integer userId;
     private String email;
     private String password;
