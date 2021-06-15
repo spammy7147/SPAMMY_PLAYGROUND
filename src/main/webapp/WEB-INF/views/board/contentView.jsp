@@ -14,7 +14,7 @@
 contentView
 
  
-<div class="wrap">
+<div>
 	<table border="1" class="table">
 		<tr>
 			<th>글 번호</th><th>${contentData.writeNo }</th>
@@ -33,6 +33,8 @@ contentView
 		</tr>		
 	</table>
 		<a href="${contextPath }/board/boardAllList">목록보기</a>
+		<input value="수정" type="button" onclick="location.href='${contextPath }/board/modifyForm?writeNo=${contentData.writeNo }'">
+		<input value="삭제" type="button" onclick="location.href='${contextPath }/board/delete?writeNo=${contentData.writeNo }'">
 </div>
 
 </body>
