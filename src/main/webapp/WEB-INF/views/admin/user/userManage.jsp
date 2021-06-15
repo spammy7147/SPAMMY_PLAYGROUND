@@ -11,20 +11,24 @@
 <body>
 
 	<jsp:include page="../adminHeader.jsp" />
-	<form action="${contextPath }/admin/user/usersearch">
-		<select name="choice">
-			<option value="1">아이디
-			<option value="2">이름
-		</select>
-		<input type="text" id="userSearch">
-		<input type="submit" value="검색">
-	</form>
+	
 		
 		<div>
 		<h1 style="text-align: center;">회 원 정 보</h1>
+		
+		
+		<form action="${contextPath }/admin/user/usersearch" method="post">
+			<select name="choice">
+				<option value="1">이메일
+				<option value="2">이름
+			</select>
+			<input type="text" name="userSearch">
+			<input type="submit" value="검색">
+		</form>
+		
 		<table border="1">
 			<tr>
-				<th>아이디</th> <th>이름</th> <th>가입날짜</th> 
+				<th>이메일</th> <th>이름</th> <th>가입날짜</th> 
 			</tr>
 			
 			<c:choose>
@@ -35,7 +39,7 @@
 								<a href="${contextPath }/admin/user/userInfo?userId=${dto.userId }">${dto.email }</a>
 							</td>
 							<td>${dto.name }</td>
-							<td>${dto.regdate }</td> 
+							<td>${dto.regDate }</td> 
 						</tr>
 					</c:forEach>
 				</c:when>

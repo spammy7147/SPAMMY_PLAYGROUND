@@ -20,7 +20,7 @@ public class UserResponseDTO {
     private Integer phone;
     private LocalDateTime regdate;
     
-    public UserReponseDTO() {}
+  
     
 	public Integer getUserId() {
 		return userId;
