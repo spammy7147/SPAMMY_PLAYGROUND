@@ -9,7 +9,7 @@ import java.time.LocalDateTime;
 
 @Getter
 @ToString
-@NoArgsConstructor
+//@NoArgsConstructor
 @AllArgsConstructor
 @Builder
 public class UserVO {
@@ -23,7 +23,7 @@ public class UserVO {
     private Integer phone;
     private LocalDateTime regDate;
 
-    
+    public UserVO() {}
     
 	public Integer getUserId() {
 		return userId;
@@ -61,12 +61,13 @@ public class UserVO {
 	public void setPhone(Integer phone) {
 		this.phone = phone;
 	}
-	public LocalDateTime getRegDate() {
-		return regDate;
-	}
+
 	public void setRegDate(LocalDateTime regDate) {
 		this.regDate = regDate;
 	}
+
+
+	
 	
     
 

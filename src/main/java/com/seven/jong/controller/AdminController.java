@@ -39,17 +39,23 @@ public class AdminController {
 		aus.info(userId, model);
 		return "admin/user/userInfo";
 	}
-	
 	//유저정보 수정
 	@PostMapping("/user/modifyUserInfo")
 	public String modifyUserInfo(@RequestParam("userId") int userId, UserRequestDTO user, Model model) { ///유저아이디, 등등
 		aus.modifyUser(userId,user);
 		return "redirect:userInfo?userId="+userId;
 	}
-	
 	//유저검색
-	@GetMapping("/user/usersearch")
-	public String userSearch() {
+	@PostMapping("/user/usersearch")
+	public String userSearch(@RequestParam(value="pageNum" , required=false, defaultValue="1") int pageNum, @RequestParam("choice")String choice, @RequestParam("userSearch")String search, Model model) {
+		String c = null;
+		if(choice.equals("1")) {
+			c = "email";
+		}else {
+			c = "name";
+		}
+		
+		aus.userSearch(pageNum, c,search,model);
 		return "admin/user/userSearch";
 	}
 	

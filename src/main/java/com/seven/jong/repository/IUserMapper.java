@@ -31,6 +31,12 @@ public interface IUserMapper {
     //userId에 해당하는 유저 정보 update
 	void updateUserInfo(@Param("userId")int userId, @Param("name")String name, @Param("birth")String birth, @Param("phone")int phone );
 
+	//유저검색
+	ArrayList<UserVO> userSearchList(@Param("s")int start, @Param("e") int end, @Param("c") String c, @Param("search") String search);
+	
+	//조건에 맞는 유저 수
+	int selectSearchUserCount(@Param("c") String c, @Param("search") String search);
+
 	
 
 }

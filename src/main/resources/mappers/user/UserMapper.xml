@@ -12,7 +12,7 @@
         <result property="name" column="name"/>
         <result property="birth" column="birth"/>
         <result property="phone" column="phone"/>
-        <result property="regDate" column="regdate"/>
+        <result property="regDate" column="regDate"/>
     </resultMap>
     
 
@@ -61,6 +61,30 @@
 	<update id="updateUserInfo">
 		UPDATE air_user SET NAME = #{name}, BIRTH = #{birth}, PHONE=#{phone} where USER_ID = #{userId}
 	</update>
+	
+	<!-- 유저 검색 -->
+	<select id="userSearchList" resultMap="UserMap">
+		<if test='c== "email"'>
+			select B.* from(select rownum rn, A.* from
+			(select * from AIR_USER where email like '%'||#{search}||'%' order by regdate desc)A)B where rn between #{s} and #{e}
+		</if>
+		<if test='c== "name"'>
+			select B.* from(select rownum rn, A.* from
+			(select * from AIR_USER where name like '%'||#{search}||'%' order by regdate desc)A)B where rn between #{s} and #{e}
+		</if>
+		
+	</select>
+	
+	<!-- 검색 조건에 맞는 유저 수 --> 
+	<select id="selectSearchUserCount" resultType="Integer">
+		<if test='c== "email"'>
+		select count(*) from air_user where email like '%'||#{search}||'%' order by regdate desc
+		</if>
+		<if test='c == "name"'>
+		select count(*) from air_user where name like '%'||#{search}||'%' order by regdate desc
+		</if>
+	</select>
 
+	
 </mapper>
 

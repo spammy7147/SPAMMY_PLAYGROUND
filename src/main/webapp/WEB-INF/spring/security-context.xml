@@ -12,6 +12,7 @@ xsi:schemaLocation="
 
 
     <security:http auto-config="true" use-expressions="false">
+   		<security:csrf disabled="true"/>
         <security:intercept-url pattern="/user/login" access="ROLE_USER"/>
         <security:intercept-url pattern="/address/**" access="ROLE_USER"/>
         <security:intercept-url pattern="/customer/noticeEdit.htm" access="ROLE_ADMIN"/>
