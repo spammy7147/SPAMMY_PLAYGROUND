@@ -28,7 +28,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void boardAllList(Model model,int num) {
-		int allCount = mapper.selectBoardCount();
+		int allCount = mapper.BoardCount();
 		int pageLetter = 10;
 		int repeat = allCount / pageLetter;
 		
@@ -79,7 +79,7 @@ public class BoardServiceImpl implements BoardService{
 			c = "writer";
 		}
 		
-		int allCount = mapper.selectBoardCount();
+		int allCount = mapper.BoardCount();
 		int pageLetter = 10;
 		int repeat = allCount / pageLetter;
 		
@@ -88,11 +88,9 @@ public class BoardServiceImpl implements BoardService{
 		}
 		int end = num * pageLetter;
 		int start = end + 1 - pageLetter;
-		
-		ArrayList<BoardDTO> boardSearchList = mapper.boardSearchList(start,end,c,search);
 	
 		model.addAttribute("repeat", repeat);	
-		model.addAttribute("searchList", boardSearchList);
+		model.addAttribute("searchList", mapper.boardSearchList(start,end,c,search));
 	}
 
 }
