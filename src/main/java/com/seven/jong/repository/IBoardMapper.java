@@ -1,5 +1,6 @@
 package com.seven.jong.repository;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
@@ -20,4 +21,6 @@ public interface IBoardMapper {
 	public void delete(int writeNo);
 
 	public int selectBoardCount();
+
+	public ArrayList<BoardDTO> boardSearchList(@Param("s")int start, @Param("e")int end, @Param("c")String c,@Param("search") String search);
 }

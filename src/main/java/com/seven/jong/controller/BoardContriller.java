@@ -65,6 +65,20 @@ public class BoardContriller {
 		bs.delete(writeNo);
 		return "redirect:/board/boardAllList";
 	}
+	//게시물 검색
+	@PostMapping("/boardSearch")
+	public String userSearch(@RequestParam(value="num" , required=false, defaultValue="1") int num, @RequestParam("choice")String choice, @RequestParam("boardSearch")String search, Model model) {
+		String c = null;
+		if(choice.equals("1")) {
+			c = "title";
+		}else {
+			c = "writer";
+		}
+		
+		bs.boardSearch(num, c,search,model);
+		
+		return "board/boardSearch";
+	}
 }
 
 

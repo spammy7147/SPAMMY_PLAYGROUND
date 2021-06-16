@@ -1,5 +1,7 @@
 package com.seven.jong.service;
 
+import java.util.ArrayList;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -7,6 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.seven.jong.DTO.BoardDTO;
+import com.seven.jong.VO.UserVO;
 import com.seven.jong.repository.IBoardMapper;
 
 @Service
@@ -28,10 +31,12 @@ public class BoardServiceImpl implements BoardService{
 		int allCount = mapper.selectBoardCount();
 		int pageLetter = 10;
 		int repeat = allCount / pageLetter;
+		
 		if(allCount % pageLetter != 0) {
 			repeat += 1;
 		}
-		int end =num * pageLetter;
+		
+		int end = num * pageLetter;
 		int start = end + 1 - pageLetter;
 		model.addAttribute("repeat", repeat);		
 		model.addAttribute("boardList",mapper.boardAllList(start,end));
@@ -62,6 +67,24 @@ public class BoardServiceImpl implements BoardService{
 	public void delete(int writeNo) {
 		mapper.delete(writeNo);
 		
+	}
+
+	@Override
+	public void boardSearch(int num, String c, String search, Model model) {
+		int allCount = mapper.selectBoardCount();
+		int pageLetter = 10;
+		int repeat = allCount / pageLetter;
+		
+		if(allCount % pageLetter != 0) {
+			repeat += 1;
+		}
+		int end = num * pageLetter;
+		int start = end + 1 - pageLetter;
+		
+		ArrayList<BoardDTO> boardSearchList = mapper.boardSearchList(start,end,c,search);
+	
+		model.addAttribute("repeat", repeat);	
+		model.addAttribute("searchList", boardSearchList);
 	}
 
 }
