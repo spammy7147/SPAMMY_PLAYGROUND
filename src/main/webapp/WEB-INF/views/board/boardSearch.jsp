@@ -15,7 +15,7 @@
 
 <div align="center">
 	
-	<form action="${contextPath }/board/boardSearch" method="post">
+	<form action="${contextPath }/board/boardsearch" method="post">
 		<select name="choice">
 			<option value="1">제목
 			<option value="2">작성자
@@ -32,12 +32,12 @@
 			<th>날짜</th>
 			<th>조회수</th>				
 		</tr>
-		<c:if test="${boardList.size() == 0 }">
+		<c:if test="${searchList.size() == 0 }">
 		<tr>
 	 		<th colspan="5">데이터 없음</th>
 		</tr>
 		</c:if>		
-		<c:forEach var="dto" items="${boardList }">
+		<c:forEach var="dto" items="${searchList }">
 		<tr>
 			<td>${dto.writeNo }</td>
 			<td>${dto.writer }</td>
