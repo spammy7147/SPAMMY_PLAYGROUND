@@ -19,7 +19,8 @@
 	</insert>
 	
 	<select id="boardAllList" resultMap="board">
-		select * from air_board
+		select B.* from(select rownum rn, A.* from
+		(select * from air_board order by write_no desc)A)B where rn between #{s} and #{e}
 	</select>
 	
 	<select id="contentView" resultMap="board">
@@ -37,4 +38,8 @@
 	<delete id="delete">
 		delete from air_board where write_no = #{writeNo}	
 	</delete>
+	
+	<select id="selectBoardCount" resultType="integer">
+		select count(*) from air_board
+	</select>
 </mapper>     

@@ -24,8 +24,17 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void boardAllList(Model model) {
-		model.addAttribute("boardList",mapper.boardAllList());
+	public void boardAllList(Model model,int num) {
+		int allCount = mapper.selectBoardCount();
+		int pageLetter = 10;
+		int repeat = allCount / pageLetter;
+		if(allCount % pageLetter != 0) {
+			repeat += 1;
+		}
+		int end =num * pageLetter;
+		int start = end + 1 - pageLetter;
+		model.addAttribute("repeat", repeat);		
+		model.addAttribute("boardList",mapper.boardAllList(start,end));
 		
 	}
 
