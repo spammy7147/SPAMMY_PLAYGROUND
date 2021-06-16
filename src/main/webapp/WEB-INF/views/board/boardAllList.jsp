@@ -37,6 +37,9 @@
 		</tr>
 		</c:forEach>
 	</table>
+	<c:forEach var="num" begin="1" end="${repeat }">
+		<a href="${contextPath }/board/boardAllList?num=${num}">${num } &nbsp;</a>
+	</c:forEach>
 	<a href="${contextPath }/board/writeForm">글작성</a>
 </div>
 </body>

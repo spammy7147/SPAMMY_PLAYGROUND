@@ -23,9 +23,9 @@ public class BoardContriller {
 	
 	//boardAllList.jsp연결
 	@GetMapping("/boardAllList")
-	public String boardAllList(Model model) {
+	public String boardAllList(Model model, @RequestParam(value="num", required = false, defaultValue = "1") int num) {
 		System.out.println("boardAllList연결");
-		bs.boardAllList(model);
+		bs.boardAllList(model,num);
 		return "board/boardAllList";
 	}
 	//writeForm.jsp 연결
@@ -62,7 +62,6 @@ public class BoardContriller {
 	//게시물 삭제
 	@GetMapping("delete")
 	public String delete(@RequestParam int writeNo) {
-		System.out.println(writeNo);
 		bs.delete(writeNo);
 		return "redirect:/board/boardAllList";
 	}

@@ -8,7 +8,7 @@ import com.seven.jong.DTO.BoardDTO;
 
 public interface BoardService {
 	public void writeSave(BoardDTO dto,HttpServletRequest request);
-	public void boardAllList(Model model);
+	public void boardAllList(Model model, int num);
 	public void contentView (int writeNo, Model model );
 	public void modify(BoardDTO dto, HttpServletRequest request);
 	public void delete(int writeNo);
