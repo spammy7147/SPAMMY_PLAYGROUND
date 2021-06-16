@@ -15,7 +15,7 @@
 
 <div align="center">
 	
-	<form action="${contextPath }/board/boardsearch" method="post">
+	<form action="${contextPath }/board/boardSearch" method="post">
 		<select name="choice">
 			<option value="1">제목
 			<option value="2">작성자
