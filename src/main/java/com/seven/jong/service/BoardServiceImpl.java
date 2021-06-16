@@ -70,7 +70,15 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void boardSearch(int num, String c, String search, Model model) {
+	public void boardSearch(int num, String choice, String search, Model model) {
+		
+		String c = null;
+		if(choice.equals("1")) {
+			c = "title";
+		}else {
+			c = "writer";
+		}
+		
 		int allCount = mapper.selectBoardCount();
 		int pageLetter = 10;
 		int repeat = allCount / pageLetter;

@@ -12,5 +12,5 @@ public interface BoardService {
 	public void contentView (int writeNo, Model model );
 	public void modify(BoardDTO dto, HttpServletRequest request);
 	public void delete(int writeNo);
-	public void boardSearch(int num, String c, String search, Model model);
+	public void boardSearch(int num, String choice, String search, Model model);
 }
