@@ -39,7 +39,7 @@
 		delete from air_board where write_no = #{writeNo}	
 	</delete>
 	
-	<select id="selectBoardCount" resultType="integer">
+	<select id="BoardCount" resultType="integer">
 		select count(*) from air_board
 	</select>
 	
@@ -53,4 +53,14 @@
 			(select * from air_board where writer like '%'||#{search}||'%' order by write_no desc)A)B where rn between #{s} and #{e}
 		</if>
 	</select>
+	
+	<select id="selectBoardCount" resultType="Integer">
+		<if test='c == "title"'>
+			select count(*) from air_board where title like '%'||#{search}||'%'		
+		</if>
+		<if test='c == "writer"'>
+			select count(*) from air_board where writer like '%'||#{search}||'%'
+		</if>
+	</select>
+	
 </mapper>     
