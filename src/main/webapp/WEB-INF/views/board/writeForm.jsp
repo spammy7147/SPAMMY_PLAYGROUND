@@ -14,6 +14,7 @@
 <div>
 	<div>
 	<form action="writeSave" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<b>작성자</b><br>
 			<input type="text" name="writer" size="30" value="#" readonly><br>
 		<b>제목</b><br>

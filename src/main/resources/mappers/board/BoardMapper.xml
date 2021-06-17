@@ -17,7 +17,7 @@
 		<id property="writer" column="writer"/>
 		<result property="content" column="content"/>
 		<result property="write_date" column="write_date"/>
-		<result property="write_group" column="write_date"/>
+		<result property="write_group" column="write_group"/>
 	</resultMap>
 	
 	<insert id="writeSave">
@@ -71,7 +71,11 @@
 	</select>
 	
 	<insert id="addReply">
-		insert into air_board_reply(writer,content,write_group) values(#{writer},#{content},#{write_group})
+		insert into air_board_reply(writer,content,write_group) values(#{writer},#{content},#{writeNo})
 	</insert>
+	
+	<select id="getReplyList" resultMap="reply">
+		select * from air_board_reply where write_group=#{write_group} order by write_date desc 
+	</select>
 	
 </mapper>     

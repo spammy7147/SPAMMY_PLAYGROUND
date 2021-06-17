@@ -16,6 +16,7 @@
 <div align="center">
 	
 	<form action="${contextPath }/board/boardSearch" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<select name="choice">
 			<option value="1">제목
 			<option value="2">작성자

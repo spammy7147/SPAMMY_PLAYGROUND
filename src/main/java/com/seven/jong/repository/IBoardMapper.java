@@ -37,5 +37,12 @@ public interface IBoardMapper {
 	public int selectBoardCount(@Param("search")String search, @Param("c")String c);
 	
 	//리플 저장
-	public void addReply(BoardReplyDTO rDto);
+	public void addReply(@Param("content")String content, @Param("writeNo")int wrieteNo, @Param("writer")String writer);	
+
+	//리플 불러오기
+	public List<BoardReplyDTO> getReplyList(int write_group);
+
+
+	
+	
 }
