@@ -71,8 +71,7 @@
 	</select>
 	
 	<insert id="addReply">
-		insert into air_board_reply(writer,content,write_group)
-			values(#{writer},#{content},#{write_group})
+		insert into air_board_reply(writer,content,write_group) values(#{writer},#{content},#{write_group})
 	</insert>
 	
 </mapper>     

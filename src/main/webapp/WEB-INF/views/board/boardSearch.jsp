@@ -56,8 +56,6 @@
 		
 		<a href="${contextPath }/board/writeForm">글작성</a>
 		<a href="${contextPath }/board/boardAllList">목록으로</a><br>
-		<b>Comment</b>
-	<hr>
 	
 </div>
 </body>

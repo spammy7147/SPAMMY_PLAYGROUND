@@ -34,7 +34,7 @@ public interface IBoardMapper {
 	public ArrayList<BoardDTO> boardSearchList(@Param("s")int start, @Param("e")int end, @Param("c")String c,@Param("search") String search);
 	
 	//검색 결과 수
-	public int selectBoardCount();
+	public int selectBoardCount(@Param("search")String search, @Param("c")String c);
 	
 	//리플 저장
 	public void addReply(BoardReplyDTO rDto);
