@@ -39,7 +39,7 @@ public class BoardContriller {
 		bs.writeSave(dto, request);
 		return "redirect:/board/boardAllList";
 	}
-	//선택 게시물 보기
+	//선택 게시물 보기 , 리플 가져오기
 	@GetMapping("contentView")
 	public String contentView (@RequestParam int writeNo, Model model ) {
 		bs.contentView(writeNo, model);
