@@ -73,6 +73,13 @@ public class BoardContriller {
 		bs.boardSearch(num, choice ,search,model);
 		return "board/boardSearch";
 	}
+	//댓글 추가
+	@PostMapping("addReply")
+	public String addReply(@RequestParam String content,@RequestParam int writeNo, @RequestParam String writer){//세션 추가해야함
+		bs.addReply(content,writeNo,writer);	
+		return "redirect:/board/contentView?writeNo="+writeNo;
+		
+	}
 }
 
 

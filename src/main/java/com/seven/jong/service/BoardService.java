@@ -16,6 +16,7 @@ public interface BoardService {
 	public void modify(BoardDTO dto, HttpServletRequest request);
 	public void delete(int writeNo);
 	public void boardSearch(int num, String choice, String search, Model model);
-	public void addReply(BoardReplyDTO rDto);
 	public List<BoardReplyDTO> getReplyList(int write_group);
+	public void addReply(String content, int writeNo, String writer);
+
 }
