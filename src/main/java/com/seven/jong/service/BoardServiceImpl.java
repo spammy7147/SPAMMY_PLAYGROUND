@@ -100,15 +100,17 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void addReply(BoardReplyDTO rDto) {
-		mapper.addReply(rDto);
-		
-	}
-
-	@Override
 	public List<BoardReplyDTO> getReplyList(int write_group) {
 		
 		return mapper.getReplyList(write_group);
 	}
+
+	@Override
+	public void addReply(String content, int writeNo,String writer) {
+		mapper.addReply(content, writeNo, writer);
+		
+	}
+
+	
 
 }

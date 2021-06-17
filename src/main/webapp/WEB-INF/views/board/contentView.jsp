@@ -6,28 +6,14 @@
 <!DOCTYPE html>
 <html>
 <head>
+ 
+<meta name="_csrf_header" th:content="${_csrf.headerName}">
+<meta name="_csrf" th:content="${_csrf.token}">
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
-	
-	function reply(){
-		let form={}; let arr = $("#replyForm").serializeArray();
-        for(i=0 ; i<arr.length ; i++){
-                form[arr[i].name] = arr[i].value
-        }
-        $.ajax({
-			url: "addReply", type: "POST",
-			data : JSON.stringify(form),
-			contentType: "application/json; charset=utf-8",
-			success: function(list){
-				alert("성공적으로 답글을 달았습니다."); slide_hide();
-				replyData();
-			}, error: function(){
-				alert("문제가 발생하였습니다.");
-			}
-		})
-	}
 	
 	function replyData(){
 		$.ajax({
@@ -45,7 +31,8 @@
 					html += "<b>내용</b> : "+data.content+"<hr></div>"
 				})
 				$("#replyList").html(html)
-			},error:function(){
+			},
+			error:function(){
 				alert('데이터를 가져올 수 없습니다')
 			}
 		})
@@ -84,11 +71,12 @@ contentView
 <div>
 <hr>
 <b>Comment</b>
-	<form id="replyForm">		
-		<input type="hidden" name="write_no" value="${contentData.writeNo }">
+	<form action="${contextPath }/board/addReply" method="post">			
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />S	
+		<input type="hidden" name="writeNo" value="${contentData.writeNo}">
 		<input type="hidden" name="writer" value="#">
 		<textarea rows="5" cols="100" id="content" name="content"></textarea>
-		<input type="button" value="등록" onclick="reply()">
+		<input type="submit" value="등록">
 	</form>
 	<div id="replyList"></div>
 	
