@@ -49,12 +49,16 @@
 		</tr>
 		</c:forEach>
 	</table>
-		<!-- 
+		
 		<c:forEach var="num" begin="1" end="${repeat }">
 			<a href="${contextPath }/board/boardSearch?num=${num}">${num } &nbsp;</a>
 		</c:forEach>
+		
 		<a href="${contextPath }/board/writeForm">글작성</a>
-		 -->
+		<a href="${contextPath }/board/boardAllList">목록으로</a><br>
+		<b>Comment</b>
+	<hr>
+	
 </div>
 </body>
 </html>

@@ -1,6 +1,6 @@
 package com.seven.jong.service;
 
-import java.util.ArrayList;
+import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,7 +9,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
 import com.seven.jong.DTO.BoardDTO;
-import com.seven.jong.VO.UserVO;
+import com.seven.jong.DTO.BoardReplyDTO;
 import com.seven.jong.repository.IBoardMapper;
 
 @Service
@@ -79,6 +79,11 @@ public class BoardServiceImpl implements BoardService{
 			c = "writer";
 		}
 		
+		System.out.println(num);
+		System.out.println(c);
+		System.out.println(search);
+
+		//int allCount = mapper.selectBoardCount();
 		int allCount = mapper.BoardCount();
 		int pageLetter = 10;
 		int repeat = allCount / pageLetter;
@@ -91,6 +96,12 @@ public class BoardServiceImpl implements BoardService{
 	
 		model.addAttribute("repeat", repeat);	
 		model.addAttribute("searchList", mapper.boardSearchList(start,end,c,search));
+	}
+
+	@Override
+	public void addReply(BoardReplyDTO rDto) {
+		mapper.addReply(rDto);
+		
 	}
 
 }

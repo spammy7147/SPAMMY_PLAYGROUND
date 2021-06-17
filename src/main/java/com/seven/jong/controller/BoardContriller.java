@@ -68,9 +68,9 @@ public class BoardContriller {
 	//게시물 검색
 	@PostMapping("/boardSearch")
 	public String userSearch(@RequestParam(value="num" , required=false, defaultValue="1") int num, @RequestParam("choice")String choice, @RequestParam("boardSearch")String search, Model model) {
-		
+		System.out.println("boardSearch연결");
+	
 		bs.boardSearch(num, choice ,search,model);
-		
 		return "board/boardSearch";
 	}
 }
