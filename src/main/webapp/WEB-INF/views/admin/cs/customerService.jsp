@@ -52,8 +52,8 @@
 					<c:when test="${faqList.size() != 0}">
 						<c:forEach var="dto" items="${faqList }">
 							<div class="accordion"> 
-								<input type="radio" name="accordion" id="answer01">
-								<label for="answer01">${dto.question }</label>
+								<input type="radio" name="accordion" id="answer0"+${dto.faqNum} }>
+								<label for="answer0"+${dto.faqNum}>${dto.question }</label>
 								<div><p>${dto.answer }</p></div>
 							</div>
 						</c:forEach>
