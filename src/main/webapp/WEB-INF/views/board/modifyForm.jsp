@@ -17,6 +17,7 @@
 <div>
 	<div>
 	<form action="${contextPath }/board/modify" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<input type="hidden" name="writeNo" value="${contentData.writeNo }">
 		<b>작성자</b><br>
 			<input type="text" name="writer" size="30" value="${contentData.writer }" readonly><br>

@@ -1,5 +1,7 @@
 package com.seven.jong.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -101,6 +103,12 @@ public class BoardServiceImpl implements BoardService{
 	public void addReply(BoardReplyDTO rDto) {
 		mapper.addReply(rDto);
 		
+	}
+
+	@Override
+	public List<BoardReplyDTO> getReplyList(int write_group) {
+		
+		return mapper.getReplyList(write_group);
 	}
 
 }
