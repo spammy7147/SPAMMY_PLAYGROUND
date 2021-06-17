@@ -59,9 +59,9 @@ contentView
 		<input value="삭제" type="button" onclick="location.href='${contextPath }/board/delete?writeNo=${contentData.writeNo }'">
 </div>
 <br>
+<div>
 <hr>
 <b>Comment</b>
-<div>
 	<form id="replyForm">		
 		<input type="hidden" name="write_no" value="${contentData.writeNo }">
 		<input type="hidden" name="writer" value="#">
