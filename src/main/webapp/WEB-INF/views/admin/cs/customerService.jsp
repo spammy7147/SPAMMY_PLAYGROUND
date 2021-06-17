@@ -13,6 +13,7 @@
 			display:none;
 		}
 		input[id*="answer"] + label{
+			width : 500px;
 			display: block;
 			padding :20px;
 			border :1px solid white;
@@ -50,10 +51,10 @@
 				
 				<c:choose>
 					<c:when test="${faqList.size() != 0}">
-						<c:forEach var="dto" items="${faqList }">
-							<div class="accordion"> 
-								<input type="radio" name="accordion" id="answer0"+${dto.faqNum} }>
-								<label for="answer0"+${dto.faqNum}>${dto.question }</label>
+						<c:forEach var="dto" items="${faqList }" varStatus="vs">
+							<div class="accordion">
+								<input type="radio" name="accordion" id="answer${vs.index}">
+								<label for="answer${vs.index}">${dto.question }</label>
 								<div><p>${dto.answer }</p></div>
 							</div>
 						</c:forEach>
@@ -63,7 +64,8 @@
 					</c:otherwise>
 				</c:choose>
 			
-		
+				<hr>
+				<input type="button" value="등록" onclick="#">
 				
 				
 			</div>
