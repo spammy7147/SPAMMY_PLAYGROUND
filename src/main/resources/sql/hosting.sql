@@ -1,11 +1,11 @@
-CREATE TABLE hosting_temp
+CREATE TABLE hosting
 (
     hosting_id    NUMBER          PRIMARY KEY,
-    user_id       NUMBER          NOT NULL,
+    user_id       NUMBER          NOT NULL, -- FK
     address       VARCHAR2(50)    NOT NULL,
     type          VARCHAR2(20)    NOT NULL,
     phone         NUMBER          NULL,
-    regdate       DATE            DEFAULT SYSDATE
+    reg_date       DATE            DEFAULT SYSDATE
 );
 
 CREATE SEQUENCE hosting_temp

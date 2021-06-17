@@ -13,6 +13,7 @@
 <h3>회원가입창 입니다.</h3>
 <div>
 	<form action="<c:url value='/user/register'/>" method="post">
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<input type="text" name="email" placeholder="email"><br>
 		<input type="password" name="password" placeholder="password"><br>
 		<input type="text" name="name" placeholder="name"><br>
