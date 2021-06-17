@@ -6,32 +6,41 @@
 <!DOCTYPE html>
 <html>
 <head>
+ 
+<meta name="_csrf_header" th:content="${_csrf.headerName}">
+<meta name="_csrf" th:content="${_csrf.token}">
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 	
-	function reply(){
-		let form={}; let arr = $("#replyForm").serializeArray();
-        for(i=0 ; i<arr.length ; i++){
-                form[arr[i].name] = arr[i].value
-        }
-        $.ajax({
-			url: "addReply", type: "POST",
-			data : JSON.stringify(form),
-			contentType: "application/json; charset=utf-8",
-			success: function(list){
-				alert("성공적으로 답글이 달렸습니다"); slide_hide();
-				replyData();
-			}, error: function(){
-				alert("문제 발생!!!");
+	function replyData(){
+		$.ajax({
+			url:"replyData/"+${contentData.writeNo}, type:"GET", 
+			dataType:"json",
+			success: function(rep){
+				let html = ""
+				rep.forEach(function(data){
+					let date = new Date(data.write_date)
+					let writeDate = date.getFullYear()+"-"+(date.getMonth()+1)+"-"
+					writeDate += date.getDate()+"-"+date.getHours()+"-"
+					writeDate += date.getMinutes()+"-"+date.getSeconds()+""
+					html += "<div align='left'><b>아이디 : </b>"+data.writer+"님 / ";
+					html += "<b>작성일</b> : "+writeDate+"<br>"
+					html += "<b>내용</b> : "+data.content+"<hr></div>"
+				})
+				$("#replyList").html(html)
+			},
+			error:function(){
+				alert('데이터를 가져올 수 없습니다')
 			}
 		})
 	}
 </script>
 
 </head>
-<body>
+<body onload="replyData()">
 <c:import url="../include/header.jsp" />
 contentView
 
@@ -62,12 +71,15 @@ contentView
 <div>
 <hr>
 <b>Comment</b>
-	<form id="replyForm">		
-		<input type="hidden" name="write_no" value="${contentData.writeNo }">
+	<form action="${contextPath }/board/addReply" method="post">			
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />S	
+		<input type="hidden" name="writeNo" value="${contentData.writeNo}">
 		<input type="hidden" name="writer" value="#">
 		<textarea rows="5" cols="100" id="content" name="content"></textarea>
-		<input type="button" value="등록" onclick="reply()">
+		<input type="submit" value="등록">
 	</form>
+	<div id="replyList"></div>
+	
 </div>	
 </body>
 </html>
