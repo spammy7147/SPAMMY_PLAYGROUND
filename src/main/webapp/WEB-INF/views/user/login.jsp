@@ -8,24 +8,16 @@
 <title>Insert title here</title>
 </head>
 <body>
-<c:import url="../include/header.jsp" />
+<jsp:include page="../include/header.jsp" />
 	<div>
-		<form action="#"> 
-			<table>
-				<tr>
-					<td>
-						<input type="text" name="id" placeholder="input id"><br>
-						<input type="password" name="pwd" placeholder="input pwd"><br>
-					</td>
-				</tr>
-				<tr>
-					<td align="right">
-						<a href="../user/register">회원가입</a>&nbsp;&nbsp;
-						<input type="submit" value="login">
-					</td>
-				</tr>				
-			</table>
+		<form action="#">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<input type="text" name="email" placeholder="input id"><br>
+			<input type="password" name="password" placeholder="input pwd"><br>
+			<input type="submit" value="login">
 		</form>
 	</div>
+	${requestScope.loginFailMsg}
+	<a href="../user/register">회원가입</a>&nbsp;&nbsp;
 </body>
 </html>

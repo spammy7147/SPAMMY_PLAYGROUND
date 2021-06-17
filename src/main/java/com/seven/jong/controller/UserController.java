@@ -34,4 +34,9 @@ public class UserController {
 		System.out.println("login연결");
 		return "user/login";
 	}
+
+	@PostMapping("/login")
+	public String login(UserRequestDTO dto) {
+		return "/home";
+	}
 }
