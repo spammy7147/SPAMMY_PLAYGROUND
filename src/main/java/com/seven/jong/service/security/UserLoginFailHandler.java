@@ -16,6 +16,8 @@ public class UserLoginFailHandler implements AuthenticationFailureHandler {
     @Override
     public void onAuthenticationFailure(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, AuthenticationException e) throws IOException, ServletException {
 
+        System.out.println("로그인 실패 - UsrLoginFailHandler 진입");
+        
         if (e instanceof AuthenticationServiceException) {
             httpServletRequest.setAttribute("loginFailMsg", "존재하지 않는 사용자입니다.");
 

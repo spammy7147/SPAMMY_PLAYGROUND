@@ -29,9 +29,11 @@ public class UserController {
 		return "user/register";
 	}
 
-	@GetMapping("/login")
+	@RequestMapping("/login")
 	public String login() {
-		System.out.println("login연결");
+		System.out.println("login => 요청");
 		return "user/login";
 	}
+
+
 }
