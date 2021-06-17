@@ -8,3 +8,14 @@ by
 (중략)
 ... to be continued
 
+## 개발환경
+분류|개발환경
+:---:|:---:
+언어|JAVA,Javascript, JSP, JQuery, Ajax
+개발도구 | Spring FrameWork 5.2.1 RELEASE
+데이터 베이스 | oracleDB
+WAS | Tomcat 9
+버전관리 | git, github
+라이브러리 | BootStrap
+오픈소스 | 카카오맵 API
+기타 | sql Developer
