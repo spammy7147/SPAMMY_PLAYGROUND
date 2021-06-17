@@ -27,4 +27,7 @@
 	<!--  매퍼의 인터페이스를 스캔하는 설정 -->
 	<mybatis-spring:scan base-package="com.seven.jong.repository"/>
 
+	<bean id="bCryptPasswordEncoder" class="org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder">
+	</bean>
+
 </beans>

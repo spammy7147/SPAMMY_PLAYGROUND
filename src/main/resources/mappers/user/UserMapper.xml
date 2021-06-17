@@ -12,16 +12,16 @@
         <result property="name" column="name"/>
         <result property="birth" column="birth"/>
         <result property="phone" column="phone"/>
-        <result property="regDate" column="regDate"/>
+        <result property="regDate" column="reg_date"/>
     </resultMap>
     
 
     
 
-    <!-- 회원가입  -->
+    <!-- 회원가입   false = 0 true = 1 -->
     <insert id="addUser">
-        INSERT INTO AIR_USER (user_id, email, password, name, birth, phone)
-        VALUES (AIR_USER_SEQ.nextval,#{email}, #{password}, #{name}, #{birth}, #{phone})
+        INSERT INTO AIR_USER (user_id, email, password, name, birth, phone, ISACCOUNTLOCKED)
+        VALUES (AIR_USER_SEQ.nextval,#{email}, #{password}, #{name}, #{birth}, #{phone}, #{isAccountLocked})
     </insert>
     
     <!-- 총 유저 수 가져오기 -->
@@ -36,8 +36,12 @@
     </select>
     
     <!-- 하나의 유저 정보 가져오기 -->
-    <select id="getUser" resultMap="UserMap">
+    <select id="getUserById" resultMap="UserMap">
 		select * from AIR_USER where user_id= #{user_id}
+    </select>
+
+	<select id="getUserByEmail" resultMap="UserMap">
+		select * from AIR_USER where EMAIL= #{email}
     </select>
 
     <select id="userInfo" resultMap="UserMap">
@@ -48,7 +52,7 @@
     <!-- 요청 페이지 유저 가져오기 -->
     <select id="pageUserInfo" resultMap="UserMap">
     	select B.* from(select rownum rn, A.* from
-		(select * from air_user order by regdate desc)A)B where rn between #{s} and #{e}
+		(select * from air_user order by reg_date desc)A)B where rn between #{s} and #{e}
     </select>
     
     <!-- 하나의 유저 정보 가져오기 -->
@@ -66,11 +70,11 @@
 	<select id="userSearchList" resultMap="UserMap">
 		<if test='c== "email"'>
 			select B.* from(select rownum rn, A.* from
-			(select * from AIR_USER where email like '%'||#{search}||'%' order by regdate desc)A)B where rn between #{s} and #{e}
+			(select * from AIR_USER where email like '%'||#{search}||'%' order by reg_date desc)A)B where rn between #{s} and #{e}
 		</if>
 		<if test='c== "name"'>
 			select B.* from(select rownum rn, A.* from
-			(select * from AIR_USER where name like '%'||#{search}||'%' order by regdate desc)A)B where rn between #{s} and #{e}
+			(select * from AIR_USER where name like '%'||#{search}||'%' order by reg_date desc)A)B where rn between #{s} and #{e}
 		</if>
 		
 	</select>
@@ -78,10 +82,10 @@
 	<!-- 검색 조건에 맞는 유저 수 --> 
 	<select id="selectSearchUserCount" resultType="Integer">
 		<if test='c== "email"'>
-		select count(*) from air_user where email like '%'||#{search}||'%' order by regdate desc
+		select count(*) from air_user where email like '%'||#{search}||'%' order by reg_date desc
 		</if>
 		<if test='c == "name"'>
-		select count(*) from air_user where name like '%'||#{search}||'%' order by regdate desc
+		select count(*) from air_user where name like '%'||#{search}||'%' order by reg_date desc
 		</if>
 	</select>
 

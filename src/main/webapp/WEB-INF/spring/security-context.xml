@@ -1,32 +1,58 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans
-xmlns="http://www.springframework.org/schema/beans"
-xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-xmlns:security="http://www.springframework.org/schema/security"
-xsi:schemaLocation="
-  http://www.springframework.org/schema/beans
-  http://www.springframework.org/schema/beans/spring-beans.xsd
-  http://www.springframework.org/schema/security
-  http://www.springframework.org/schema/security/spring-security-5.2.xsd">
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans"
+             xmlns:context="http://www.springframework.org/schema/context"
+             xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+                                 http://www.springframework.org/schema/beans/spring-beans.xsd
+                                 http://www.springframework.org/schema/security
+                                 http://www.springframework.org/schema/security/spring-security.xsd
+                                 http://www.springframework.org/schema/context
+                                 https://www.springframework.org/schema/context/spring-context.xsd">
 
 
+    <context:component-scan base-package="com.seven.jong"/>
 
-    <security:http auto-config="true" use-expressions="false">
-      	<security:csrf disabled="true"/>
-        <security:intercept-url pattern="/user/login" access="ROLE_USER"/>
-        <security:intercept-url pattern="/address/**" access="ROLE_USER"/>
-        <security:intercept-url pattern="/customer/noticeEdit.htm" access="ROLE_ADMIN"/>
-        <security:intercept-url pattern="/customer/noticeDelete.htm" access="ROLE_ADMIN"/>
-    </security:http>
+    <!--
+    hasRole('role'): 해당 권한이 있으면 요청한 페이지를, 없으면 로그인 페이지로 이동
+    hasAnyRole('role1,'role2'): 포함된 권한 중 하나라도 있으면 요청한 페이지를, 없으면 로그인 페이지로 이동
+    isAuthenticated():	로그인 인증을 받은 사용자는 권한에 관계 없이 허용, 익명 사용자는 로그인 페이지로 이동
+    isFullyAuthenticated():	자동 로그인하지 않고 로그인 인증을 한 사용자는 권한에 관계 없이 허용
+    isAnonymous():	권한이 없는 익명의 사용자만 접근을 허용함 (로그인되어 권한이 있으면 접근 불가)
+    isRememberMe():	자동 로그인 대상 사용자의 경우 접근을 허용
+    permitAll:	모두 접근 허용
+    denyAll:	모두 접근 불가
+     -->
 
-    <security:authentication-manager>
-        <security:authentication-provider>
-            <security:user-service>
-                <security:user name="newlec" authorities="ROLE_USER" password="1234"/>
-                <security:user name="admin" authorities="ROLE_ADMIN" password="qwer"/>
-            </security:user-service>
-        </security:authentication-provider>
-    </security:authentication-manager>
-</beans>
+    <http>
+        <intercept-url pattern="/address/**" access="hasRole('user')" />
+        <intercept-url pattern="/admin/**" access="hasRole('admin')" />
+        <intercept-url  pattern="/hosting/**" access="hasRole('user')" />
+
+        <form-login
+                username-parameter="email"
+                password-parameter="password"
+                login-processing-url="/user/login"
+                login-page="/user/login"
+                authentication-failure-handler-ref="userLoginFailHandler"
+                authentication-success-handler-ref="userLoginSuccessHandler"/>
+        <logout
+                logout-url="/user/logout"
+                logout-success-url="/"
+                invalidate-session="true"
+                delete-cookies="true" />
+
+    </http>
+
+
+    <authentication-manager>
+        <authentication-provider ref="userAuthProvider"/>
+    </authentication-manager>
+
+
+    <beans:bean id="userAuthProvider" class="com.seven.jong.service.security.UserLoginAuthenticationProvider"/>
+
+</beans:beans>
+
 
 

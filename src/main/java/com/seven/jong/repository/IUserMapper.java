@@ -8,12 +8,13 @@ import java.util.ArrayList;
 
 public interface IUserMapper {
 
+    //유저 추가
     void addUser(UserVO user);
-
-    UserVO getUser(String email);
-
-    UserVO getUser(Integer user_id);
-
+    //ID로 유저 검색
+    UserVO getUserById(Integer user_id);
+    //email(아이디)로 유저검색
+    UserVO getUserByEmail(String email);
+    //모든유저 가져오기
     ArrayList<UserVO> getUsers();
 
     //모든 유저 수
