@@ -64,25 +64,15 @@
 	
 	<!-- 유저 검색 -->
 	<select id="userSearchList" resultMap="UserMap">
-		<if test='c== "email"'>
-			select B.* from(select rownum rn, A.* from
-			(select * from AIR_USER where email like '%'||#{search}||'%' order by regdate desc)A)B where rn between #{s} and #{e}
-		</if>
-		<if test='c== "name"'>
-			select B.* from(select rownum rn, A.* from
-			(select * from AIR_USER where name like '%'||#{search}||'%' order by regdate desc)A)B where rn between #{s} and #{e}
-		</if>
+		select B.* from(select rownum rn, A.* from
+		(select * from AIR_USER where ${c} like '%'||#{search}||'%' order by regdate desc)A)B where rn between #{s} and #{e}
 		
 	</select>
 	
 	<!-- 검색 조건에 맞는 유저 수 --> 
 	<select id="selectSearchUserCount" resultType="Integer">
-		<if test='c== "email"'>
-		select count(*) from air_user where email like '%'||#{search}||'%' order by regdate desc
-		</if>
-		<if test='c == "name"'>
-		select count(*) from air_user where name like '%'||#{search}||'%' order by regdate desc
-		</if>
+		select count(*) from air_user where ${c} like '%'||#{search}||'%' order by regdate desc
+		 -->
 	</select>
 
 	
