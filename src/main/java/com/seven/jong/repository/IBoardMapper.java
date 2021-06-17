@@ -38,4 +38,7 @@ public interface IBoardMapper {
 	
 	//리플 저장
 	public void addReply(BoardReplyDTO rDto);
+	
+	//리플 불러오기
+	public List<BoardReplyDTO> getReplyList(int write_group);
 }

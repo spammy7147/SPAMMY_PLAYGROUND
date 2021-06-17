@@ -1,5 +1,7 @@
 package com.seven.jong.service;
 
+import java.util.List;
+
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
@@ -15,4 +17,5 @@ public interface BoardService {
 	public void delete(int writeNo);
 	public void boardSearch(int num, String choice, String search, Model model);
 	public void addReply(BoardReplyDTO rDto);
+	public List<BoardReplyDTO> getReplyList(int write_group);
 }

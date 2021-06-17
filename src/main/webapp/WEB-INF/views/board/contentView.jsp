@@ -21,17 +21,39 @@
 			data : JSON.stringify(form),
 			contentType: "application/json; charset=utf-8",
 			success: function(list){
-				alert("성공적으로 답글이 달렸습니다"); slide_hide();
+				alert("성공적으로 답글을 달았습니다."); slide_hide();
 				replyData();
 			}, error: function(){
-				alert("문제 발생!!!");
+				alert("문제가 발생하였습니다.");
+			}
+		})
+	}
+	
+	function replyData(){
+		$.ajax({
+			url:"replyData/"+${contentData.writeNo}, type:"GET", 
+			dataType:"json",
+			success: function(rep){
+				let html = ""
+				rep.forEach(function(data){
+					let date = new Date(data.write_date)
+					let writeDate = date.getFullYear()+"-"+(date.getMonth()+1)+"-"
+					writeDate += date.getDate()+"-"+date.getHours()+"-"
+					writeDate += date.getMinutes()+"-"+date.getSeconds()+""
+					html += "<div align='left'><b>아이디 : </b>"+data.writer+"님 / ";
+					html += "<b>작성일</b> : "+writeDate+"<br>"
+					html += "<b>내용</b> : "+data.content+"<hr></div>"
+				})
+				$("#replyList").html(html)
+			},error:function(){
+				alert('데이터를 가져올 수 없습니다')
 			}
 		})
 	}
 </script>
 
 </head>
-<body>
+<body onload="replyData()">
 <c:import url="../include/header.jsp" />
 contentView
 
@@ -68,6 +90,8 @@ contentView
 		<textarea rows="5" cols="100" id="content" name="content"></textarea>
 		<input type="button" value="등록" onclick="reply()">
 	</form>
+	<div id="replyList"></div>
+	
 </div>	
 </body>
 </html>
