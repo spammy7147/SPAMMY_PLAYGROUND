@@ -13,34 +13,10 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-<script type="text/javascript">
-	
-	function replyData(){
-		$.ajax({
-			url:"replyData/"+${contentData.writeNo}, type:"GET", 
-			dataType:"json",
-			success: function(rep){
-				let html = ""
-				rep.forEach(function(data){
-					let date = new Date(data.write_date)
-					let writeDate = date.getFullYear()+"-"+(date.getMonth()+1)+"-"
-					writeDate += date.getDate()+"-"+date.getHours()+"-"
-					writeDate += date.getMinutes()+"-"+date.getSeconds()+""
-					html += "<div align='left'><b>아이디 : </b>"+data.writer+"님 / ";
-					html += "<b>작성일</b> : "+writeDate+"<br>"
-					html += "<b>내용</b> : "+data.content+"<hr></div>"
-				})
-				$("#replyList").html(html)
-			},
-			error:function(){
-				alert('데이터를 가져올 수 없습니다')
-			}
-		})
-	}
-</script>
+
 
 </head>
-<body onload="replyData()">
+<body>
 <c:import url="../include/header.jsp" />
 contentView
 
@@ -68,19 +44,33 @@ contentView
 		<input value="삭제" type="button" onclick="location.href='${contextPath }/board/delete?writeNo=${contentData.writeNo }'">
 </div>
 <br>
-<div>
+
 <hr>
 <b>Comment</b>
 	<form action="${contextPath }/board/addReply" method="post">			
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />S	
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<input type="hidden" name="writeNo" value="${contentData.writeNo}">
 		<input type="hidden" name="writer" value="#">
 		<textarea rows="5" cols="100" id="content" name="content"></textarea>
 		<input type="submit" value="등록">
 	</form>
-	<div id="replyList"></div>
+	<div>
+		<c:forEach var="rep" items="${replyList }">
+			<table>
+				<tr>
+					<td>${rep.writer }</td> <td>${rep.write_date }</td>
+				</tr>
+				<tr>
+					<td colspan="2">${rep.content }</td>
+				</tr>
+				
+			</table>
+			<hr>
+		</c:forEach>
+		
+	</div>
 	
-</div>	
+
 </body>
 </html>
 
