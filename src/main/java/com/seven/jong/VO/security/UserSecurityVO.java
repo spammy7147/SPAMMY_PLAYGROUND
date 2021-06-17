@@ -9,9 +9,11 @@ import java.util.List;
 
 @Getter
 @Setter
+@ToString
 public class UserSecurityVO extends UserVO implements IUserSecurityVO  {
 
     private static final long serialVersionUID = 1L;
+    private UserVO user;
     private List<GrantedAuthority> authorities;
 
     @Override

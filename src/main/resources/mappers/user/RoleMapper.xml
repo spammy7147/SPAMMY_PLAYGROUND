@@ -15,7 +15,7 @@
         VALUES (#{userId},#{role})
     </insert>
 
-    <select id="getRole">
+    <select id="getRole" resultMap="RoleMap">
         SELECT * FROM AIR_ROLE
         WHERE USER_ID = #{userId}
     </select>
