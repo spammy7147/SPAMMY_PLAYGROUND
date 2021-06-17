@@ -12,11 +12,13 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.seven.jong.DTO.UserRequestDTO;
 import com.seven.jong.service.AdminUserService;
+import com.seven.jong.service.CsService;
 
 @Controller
 @RequestMapping("/admin")
 public class AdminController {
 	@Autowired AdminUserService aus;
+	@Autowired CsService cs;
 	
 	//admin 홈
 	@GetMapping("/home")
@@ -78,10 +80,17 @@ public class AdminController {
 		return "/board";
 	}
 	
-	//고객센터(고객으로부터 온 메세지 대응)
+	
+	//고객센터(자주하는 질문)
 	@GetMapping("/customerservice")
-	public String customerService() {
-		return "admin/customerService";
+	public String customerService(Model model) {
+		cs.faq(model);
+		return "admin/cs/customerService";
+	}
+	//고객센터(문의하기)
+	@GetMapping("/customerqna")
+	public String customerqna() {
+		return "admin/cs/customerQnA";
 	}
 	
 }

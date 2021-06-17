@@ -29,7 +29,7 @@
 	
 	
 	<form action="modifyUserInfo" method="post">
-	
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<input type="hidden" name="userId" value="${userInfo.userId }">
 		
 		<div style="width:300px; margin: 0 auto;">
