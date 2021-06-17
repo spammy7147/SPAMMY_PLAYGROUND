@@ -24,6 +24,8 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
     @Override
     public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
 
+        System.out.println("로그인 성공 - UserLoginSuccessHandler 진입");
+        
         // IP, 세션 ID
         WebAuthenticationDetails web = (WebAuthenticationDetails) authentication.getDetails();
         System.out.println("IP : " + web.getRemoteAddress());
@@ -58,9 +60,9 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
         while (list.hasMoreElements()) {
             System.out.println(list.nextElement());
         }
-
-        assert savedRequest != null;
-        httpServletResponse.sendRedirect(savedRequest.getRedirectUrl());
+        if(savedRequest != null) {
+            httpServletResponse.sendRedirect(savedRequest.getRedirectUrl());
+        }
     }
 
 

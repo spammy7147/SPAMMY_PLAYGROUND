@@ -20,8 +20,8 @@
 
     <!-- 회원가입   false = 0 true = 1 -->
     <insert id="addUser">
-        INSERT INTO AIR_USER (user_id, email, password, name, birth, phone)
-        VALUES (AIR_USER_SEQ.nextval,#{email}, #{password}, #{name}, #{birth}, #{phone})
+        INSERT INTO AIR_USER (user_id, email, password, name, birth, phone, ISACCOUNTLOCKED)
+        VALUES (AIR_USER_SEQ.nextval,#{email}, #{password}, #{name}, #{birth}, #{phone}, #{isAccountLocked})
     </insert>
     
     <!-- 총 유저 수 가져오기 -->

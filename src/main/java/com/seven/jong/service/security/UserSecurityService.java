@@ -12,6 +12,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -31,31 +32,17 @@ public class UserSecurityService implements IUserSecurityService {
 
     @Override
     public UserSecurityVO loadUserByEmail(String email) throws UsernameNotFoundException {
+        System.out.println("UserSecurityService 의 loadUserByEmail 호출");
 
         UserVO userVO = userMapper.getUserByEmail(email);
         List<RoleVO> roleVO = roleMapper.getRole(userVO.getUserId());
-        List<GrantedAuthority> authorities = null;
+        List<GrantedAuthority> authorities = new ArrayList<>();
         for (RoleVO role : roleVO){
-            try{
-                authorities.add(new SimpleGrantedAuthority(role.getRole()));
-            }catch (Exception e){
-                e.printStackTrace();
-                System.out.println("권한 없음");
-            }
+            authorities.add(new SimpleGrantedAuthority(role.getRole()));
         }
 
-        UserSecurityVO userSecurityVO =
-                (UserSecurityVO) UserSecurityVO.builder()
-                        .userId(userVO.getUserId())
-                        .email(userVO.getEmail())
-                        .password(userVO.getPassword())
-                        .name(userVO.getName())
-                        .birth(userVO.getBirth())
-                        .phone(userVO.getPhone())
-                        .isAccountLocked(userVO.getIsAccountLocked())
-                        .regDate(userVO.getRegDate())
-                        .build();
-
+        UserSecurityVO userSecurityVO = new UserSecurityVO();
+        userSecurityVO.setUser(userVO);
         userSecurityVO.setAuthorities(authorities);
 
         return userSecurityVO;

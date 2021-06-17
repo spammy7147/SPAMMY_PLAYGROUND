@@ -10,7 +10,7 @@
 <body>
 <jsp:include page="../include/header.jsp" />
 	<div>
-		<form action="#">
+		<form action="/user/login" method="post">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<input type="text" name="email" placeholder="input id"><br>
 			<input type="password" name="password" placeholder="input pwd"><br>

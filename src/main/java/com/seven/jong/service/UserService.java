@@ -6,8 +6,6 @@ import com.seven.jong.VO.UserVO;
 import com.seven.jong.repository.IRoleMapper;
 import com.seven.jong.repository.IUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
@@ -49,6 +47,7 @@ public class UserService implements IUserService {
                     .name(requestDTO.getName())
                     .phone(requestDTO.getPhone())
                     .birth(LocalDate.of(birth.get(0),birth.get(1),birth.get(2)))
+                    .isAccountLocked(false)
                     .build();
         System.out.println(user);
         userMapper.addUser(user); //사용자 추가
