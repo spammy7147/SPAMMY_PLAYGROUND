@@ -25,7 +25,7 @@
 </head>
 <body>
 
-	<jsp:include page="../adminHeader.jsp" />
+	<jsp:include page="../../include/header.jsp" />
 	
 	
 	<form action="modifyUserInfo" method="post">
@@ -61,5 +61,6 @@
 			<input type="button" onclick="location.href='${contextPath }/jong/admin/usermanage'" value="리스트로 돌아가기">
 	</form>
 
+	<jsp:include page="../../include/footer.jsp" />
 </body>
 </html>
