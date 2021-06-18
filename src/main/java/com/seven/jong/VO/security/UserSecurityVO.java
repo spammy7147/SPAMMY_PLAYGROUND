@@ -1,7 +1,9 @@
 package com.seven.jong.VO.security;
 
 import com.seven.jong.VO.UserVO;
-import lombok.*;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 import org.springframework.security.core.GrantedAuthority;
 
 import java.util.Collection;
@@ -20,5 +22,7 @@ public class UserSecurityVO extends UserVO implements IUserSecurityVO  {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }
+
+
 }
 
