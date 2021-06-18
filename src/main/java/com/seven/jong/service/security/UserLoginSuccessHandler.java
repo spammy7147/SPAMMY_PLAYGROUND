@@ -9,7 +9,6 @@ import org.springframework.security.web.savedrequest.RequestCache;
 import org.springframework.security.web.savedrequest.SavedRequest;
 import org.springframework.stereotype.Service;
 
-import javax.servlet.FilterChain;
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -22,47 +21,41 @@ public class UserLoginSuccessHandler implements AuthenticationSuccessHandler {
 
 
     @Override
-    public void onAuthenticationSuccess(HttpServletRequest httpServletRequest, HttpServletResponse httpServletResponse, Authentication authentication) throws IOException, ServletException {
+    public void onAuthenticationSuccess(HttpServletRequest request, HttpServletResponse response,
+                                        Authentication authentication) throws IOException, ServletException {
 
         System.out.println("로그인 성공 - UserLoginSuccessHandler 진입");
-        
-        // IP, 세션 ID
-        WebAuthenticationDetails web = (WebAuthenticationDetails) authentication.getDetails();
-        System.out.println("IP : " + web.getRemoteAddress());
-        System.out.println("Session ID : " + web.getSessionId());
 
-        // 인증 ID
-        System.out.println("name : " + authentication.getName());
+        // 방문자 카운트 증가
+        // 필요한 로직 작성
+        // ...
 
-        // 권한 리스트
-        List<GrantedAuthority> authList = (List<GrantedAuthority>) authentication.getAuthorities();
-        System.out.print("권한 : ");
-        for (GrantedAuthority grantedAuthority : authList) {
-            System.out.print(grantedAuthority.getAuthority() + " ");
-        }
 
-        // Security가 요청을 가로챈 경우 사용자가 원래 요청했던 URI 정보를 저장한 객체
+        // 디폴트 URI
+        String uri = "/";
+
+        /* 강제 인터셉트 당했을 경우의 데이터 get */
         RequestCache requestCache = new HttpSessionRequestCache();
-        SavedRequest savedRequest = requestCache.getRequest(httpServletRequest, httpServletResponse);
+        SavedRequest savedRequest = requestCache.getRequest(request, response);
 
-        // 있을 경우 URI 등 정보를 가져와서 사용
+        /* 로그인 버튼 눌러 접속했을 경우의 데이터 get */
+        String prevPage = (String) request.getSession().getAttribute("prevPage");
+
+        if (prevPage != null) {
+            request.getSession().removeAttribute("prevPage");
+        }
+
+        // null이 아니라면 강제 인터셉트 당했다는 것
         if (savedRequest != null) {
+            uri = savedRequest.getRedirectUrl();
 
-
-            // 세션에 저장된 객체를 다 사용한 뒤에는 지워줘서 메모리 누수 방지
-            requestCache.removeRequest(httpServletRequest, httpServletResponse);
-
-            System.out.println(savedRequest.getRedirectUrl());
+            // ""가 아니라면 직접 로그인 페이지로 접속한 것
+        } else if (prevPage != null && !prevPage.equals("")) {
+            uri = prevPage;
         }
 
-        // 세션 Attribute 확인
-        Enumeration<String> list = httpServletRequest.getSession().getAttributeNames();
-        while (list.hasMoreElements()) {
-            System.out.println(list.nextElement());
-        }
-        if(savedRequest != null) {
-            httpServletResponse.sendRedirect(savedRequest.getRedirectUrl());
-        }
+        // 세 가지 케이스에 따른 URI 주소로 리다이렉트
+        response.sendRedirect(uri);
     }
 
 

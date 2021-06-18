@@ -20,6 +20,7 @@ public class HomeController {
     public String test(Authentication authentication) {
         System.out.println("/test 요청 들어옴");
         UserSecurityVO userSecurityVO = (UserSecurityVO) authentication.getPrincipal();
+        System.out.println("권한:" + authentication.getAuthorities());
         UserVO userVO = userSecurityVO.getUser();
         System.out.println("UserSecurityVO : " + userSecurityVO);
         System.out.println("userVO : " + userVO);
