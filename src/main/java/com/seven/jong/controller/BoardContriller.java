@@ -80,6 +80,11 @@ public class BoardContriller {
 		return "redirect:/board/contentView?writeNo="+writeNo;
 		
 	}
+	@GetMapping("replydelete")
+	public String replyDelete(@RequestParam int writeNo, @RequestParam int reply_num) {
+		bs.replyDelete(reply_num);
+		return "redirect:/board/contentView?writeNo="+writeNo;
+	}
 }
 
 
