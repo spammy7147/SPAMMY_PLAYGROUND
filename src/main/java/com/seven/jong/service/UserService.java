@@ -49,7 +49,6 @@ public class UserService implements IUserService {
                     .birth(LocalDate.of(birth.get(0),birth.get(1),birth.get(2)))
                     .isAccountLocked(false)
                     .build();
-        System.out.println(user);
         userMapper.addUser(user); //사용자 추가
 
         roleMapper.addRole(RoleVO.builder()
