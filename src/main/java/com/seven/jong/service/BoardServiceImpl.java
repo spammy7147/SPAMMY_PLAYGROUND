@@ -112,6 +112,12 @@ public class BoardServiceImpl implements BoardService{
 		
 	}
 
+	@Override
+	public void replyDelete(int replyNum) {
+		mapper.replyDelete(replyNum);
+		
+	}
+
 	
 
 }

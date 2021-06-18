@@ -18,5 +18,6 @@ public interface BoardService {
 	public void boardSearch(int num, String choice, String search, Model model);
 	public List<BoardReplyDTO> getReplyList(int write_group);
 	public void addReply(String content, int writeNo, String writer);
+	public void replyDelete(int replyNum);
 
 }

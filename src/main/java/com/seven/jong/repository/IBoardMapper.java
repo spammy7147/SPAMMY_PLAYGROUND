@@ -41,6 +41,9 @@ public interface IBoardMapper {
 
 	//리플 불러오기
 	public List<BoardReplyDTO> getReplyList(int write_group);
+	
+	//리플 삭제
+	public void replyDelete(int replyNum);
 
 
 	

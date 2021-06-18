@@ -7,9 +7,6 @@
 <html>
 <head>
  
-<meta name="_csrf_header" th:content="${_csrf.headerName}">
-<meta name="_csrf" th:content="${_csrf.token}">
-
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
@@ -63,7 +60,12 @@ contentView
 				<tr>
 					<td colspan="2">${rep.content }</td>
 				</tr>
-				
+				<tr>
+					<td>
+						<input value="삭제" type="button" onclick="location.href='${contextPath }/board/replydelete?reply_num=${rep.reply_num }&writeNo=${contentData.writeNo }'">
+					</td>
+					
+				</tr>
 			</table>
 			<hr>
 		</c:forEach>
