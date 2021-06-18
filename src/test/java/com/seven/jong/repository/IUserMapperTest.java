@@ -2,19 +2,16 @@ package com.seven.jong.repository;
 
 //import com.seven.jong.DTO.UserRequestDTO;
 
+import com.seven.jong.VO.RoleVO;
 import com.seven.jong.VO.UserVO;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDate;
-import java.util.ArrayList;
-import java.util.Date;
-import java.util.List;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -22,25 +19,29 @@ import java.util.List;
 public class IUserMapperTest {
     @Autowired
     private IUserMapper userMapper;
-    
+    @Autowired
+    private BCryptPasswordEncoder bCryptPasswordEncoder;
+    @Autowired
+    private IRoleMapper roleMapper;
     @Test
     public void addUser() {
-        List<GrantedAuthority> authorities = new ArrayList<>();
-        authorities.add(new SimpleGrantedAuthority("admin"));
-        authorities.add(new SimpleGrantedAuthority("user"));
-
 
         UserVO user  =  UserVO.builder()
-                .email("test12@gmail.com")
-                .password("1234")
+                .email("test@gmail.com")
+                .password(bCryptPasswordEncoder.encode("1234"))
                 .name("홍길동")
                 .phone(12345)
                 .birth(LocalDate.now())
                 .isAccountLocked(false)
                 .build();
+        userMapper.addUser(user); //사용자 추가
+
+        roleMapper.addRole(RoleVO.builder()
+                .userId(userMapper.getUserByEmail("test@gmail.com").getUserId())
+                .role("ROLE_ADMIN")
+                .build());  // 사용자 권한(user) 추가
 
         System.out.println(user);
-        userMapper.addUser(user);
     }
 
     @Test
