@@ -54,7 +54,7 @@ public class UserService implements IUserService {
 
         roleMapper.addRole(RoleVO.builder()
                 .userId(userMapper.getUserByEmail(requestDTO.getEmail()).getUserId())
-                .role("user")
+                .role("ROLE_USER")
                 .build());  // 사용자 권한(user) 추가
     }
 }

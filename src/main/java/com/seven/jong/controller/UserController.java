@@ -4,17 +4,23 @@ import com.seven.jong.DTO.UserRequestDTO;
 import com.seven.jong.service.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+
+import javax.servlet.http.HttpServletRequest;
 
 @Controller
 @RequestMapping("user")
 public class UserController {
 
-	@Autowired
 	IUserService userService;
 
+	@Autowired
+	public void setUserService(IUserService userService) {
+		this.userService = userService;
+	}
 
 	@GetMapping("/register")
 	public String register() {
@@ -30,10 +36,20 @@ public class UserController {
 	}
 
 	@RequestMapping("/login")
-	public String login() {
+	public String login(HttpServletRequest request) {
 		System.out.println("login => 요청");
+
+		String uri = request.getHeader("Referer");
+		if(uri != null){
+			if (!uri.contains("/user/login")) {
+				request.getSession().setAttribute("prevPage", uri);
+			}
+		}
+		System.out.println("Referer : " + uri);
 		return "user/login";
 	}
 
-
+	@PostMapping("/logout")
+	public void logout(){
+	}
 }

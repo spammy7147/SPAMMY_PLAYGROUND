@@ -35,11 +35,11 @@
     	select * from AIR_USER
     </select>
     
-    <!-- 하나의 유저 정보 가져오기 -->
+    <!-- 하나의 유저 정보 가져오기 아이디로-->
     <select id="getUserById" resultMap="UserMap">
 		select * from AIR_USER where user_id= #{user_id}
     </select>
-
+	<!-- 하나의 유저 정보 가져오기 이메일로 -->
 	<select id="getUserByEmail" resultMap="UserMap">
 		select * from AIR_USER where EMAIL= #{email}
     </select>
