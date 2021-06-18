@@ -12,7 +12,16 @@
     </resultMap>
     
 
-    
+	<!-- 자주하는 질문 등록 -->
+	<insert id="addFaq">
+		insert into faq(faq_num,question,answer)
+			values(faq_seq.nextval,#{question},#{answer})
+	</insert>
+	
+	<!-- 자주하는 질문 삭제 -->
+	<delete id="delFaq">
+		DELETE FROM FAQ WHERE FAQ_NUM = #{faqNum}
+	</delete>
 
     <!-- 자주하는 질문 가져오기  -->
     <select id="faqList" resultMap="CsMap">
