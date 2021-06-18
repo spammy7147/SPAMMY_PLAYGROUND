@@ -38,7 +38,14 @@
 						<li><hr class="dropdown-divider" /></li>
 						<li><a class="dropdown-item" href="#!">도움말</a></li>
 					</s:authorize>
-
+					<s:authorize access="hasRole('ROLE_ADMIN')">
+						<li><a class="dropdown-item" href="${contextPath}/admin/usermanage">유저관리</a></li>
+						<li><a class="dropdown-item" href="housemanage">숙소관리</a></li>
+						<li><a class="dropdown-item" href="bookingmanage">예약관리</a></li>
+						<li><a class="dropdown-item" href="board">게시판</a></li>
+						<li><a class="dropdown-item" href="${contextPath}/admin/customerservice">고객센터</a></li>
+						<li><hr class="dropdown-divider" /></li>
+					</s:authorize>
 					<s:authorize access="isAuthenticated()">
 						<f:form action="${contextPath }/user/logout" method="POST">
 							<li><a class="dropdown-item" href="#!">여행</a></li>
