@@ -33,12 +33,12 @@
 			<th>날짜</th>
 			<th>조회수</th>				
 		</tr>
-		<c:if test="${boardList.size() == 0 }">
+		<c:if test="${searchList.size() == 0 }">
 		<tr>
 	 		<th colspan="5">데이터 없음</th>
 		</tr>
 		</c:if>		
-		<c:forEach var="dto" items="${boardList }">
+		<c:forEach var="dto" items="${searchList }">
 		<tr>
 			<td>${dto.writeNo }</td>
 			<td>${dto.writer }</td>
@@ -50,10 +50,14 @@
 		</tr>
 		</c:forEach>
 	</table>
+		
 		<c:forEach var="num" begin="1" end="${repeat }">
-			<a href="${contextPath }/board/boardAllList?num=${num}">${num } &nbsp;</a>
+			<a href="${contextPath }/board/boardSearch?num=${num}">${num } &nbsp;</a>
 		</c:forEach>
+		
 		<a href="${contextPath }/board/writeForm">글작성</a>
+		<a href="${contextPath }/board/boardAllList">목록으로</a><br>
+	
 </div>
 </body>
 </html>

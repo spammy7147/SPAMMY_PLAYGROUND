@@ -18,6 +18,7 @@
 		
 		
 		<form action="${contextPath }/admin/user/usersearch" method="post">
+			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<select name="choice">
 				<option value="1">이메일
 				<option value="2">이름

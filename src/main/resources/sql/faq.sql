@@ -1,0 +1,8 @@
+CREATE TABLE FAQ(
+  faq_num number(10) PRIMARY KEY,
+  question VARCHAR2(50),
+  answer VARCHAR2(100)
+);
+CREATE SEQUENCE faq_seq
+START WITH 1
+INCREMENT BY 1;

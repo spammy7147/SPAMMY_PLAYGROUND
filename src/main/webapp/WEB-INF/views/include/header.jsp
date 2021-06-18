@@ -12,6 +12,7 @@
 	<meta name="description" content="편안한 잠자리, 근사한 저녁" />
 	<meta name="author" content="종로 7조" />
 	<title>AirBnD</title>
+
 	<!-- Favicon-->
 	<link rel="icon" type="image/x-icon" href="${contextPath}/img/favicon.svg"/>
 	<!-- Bootstrap icons-->

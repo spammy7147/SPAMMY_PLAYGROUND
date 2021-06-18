@@ -13,13 +13,21 @@
 		<result property="hit" column="hit"/>
 	</resultMap>
 	
+	<resultMap type="com.seven.jong.DTO.BoardReplyDTO" id="reply">
+		<id property="writer" column="writer"/>
+		<result property="content" column="content"/>
+		<result property="write_date" column="write_date"/>
+		<result property="write_group" column="write_group"/>
+	</resultMap>
+	
 	<insert id="writeSave">
 		insert into air_board(write_no,writer,title,content)
     	values(air_board_seq.nextval,#{writer},#{title},#{content})
 	</insert>
 	
 	<select id="boardAllList" resultMap="board">
-		select * from air_board
+		select B.* from(select rownum rn, A.* from
+		(select * from air_board order by write_no desc)A)B where rn between #{s} and #{e}
 	</select>
 	
 	<select id="contentView" resultMap="board">
@@ -31,10 +39,43 @@
 	</update>
 	
 	<update id="modify">
-		update air_board set title=#{title}, content=#{content} where write_no = #{writeNo} 
+		update air_board set title=#{title}, content=#{content} where write_no = #{writeNo}
 	</update>
 	
 	<delete id="delete">
-		delete from air_board where write_no = #{writeNo}	
+		delete from air_board where write_no = #{writeNo}
 	</delete>
+	
+	<select id="BoardCount" resultType="integer">
+		select count(*) from air_board
+	</select>
+	
+	<select id="boardSearchList" resultMap="board">
+		<if test='c == "title"'>
+			select B.* from(select rownum rn, A.* from
+			(select * from air_board where title like '%'||#{search}||'%' order by write_no desc)A)B where rn between #{s} and #{e}
+		</if>
+		<if test='c == "writer"'>
+			select B.* from(select rownum rn, A.* from
+			(select * from air_board where writer like '%'||#{search}||'%' order by write_no desc)A)B where rn between #{s} and #{e}
+		</if>
+	</select>
+	
+	<select id="selectBoardCount" resultType="integer">
+		<if test='c == "title"'>
+			select count(*) from air_board where title like '%'||#{search}||'%'
+		</if>
+		<if test='c == "writer"'>
+			select count(*) from air_board where writer like '%'||#{search}||'%'
+		</if>
+	</select>
+	
+	<insert id="addReply">
+		insert into air_board_reply(writer,content,write_group) values(#{writer},#{content},#{writeNo})
+	</insert>
+	
+	<select id="getReplyList" resultMap="reply">
+		select * from air_board_reply where write_group=#{write_group} order by write_date desc 
+	</select>
+	
 </mapper>     
