@@ -10,4 +10,8 @@ public interface CsService {
 
 	ArrayList<FaqDTO> faq(Model model);
 
+	void addFaq(FaqDTO dto);
+
+	void delFaq(int faqNum);
+
 }

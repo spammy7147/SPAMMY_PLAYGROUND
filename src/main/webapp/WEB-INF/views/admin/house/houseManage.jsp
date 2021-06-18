@@ -7,6 +7,10 @@
 <title>Insert title here</title>
 </head>
 <body>
+<jsp:include page="../../include/header.jsp" />
+
+houseManage.jsp
+<jsp:include page="../../include/footer.jsp" />
 
 </body>
 </html>

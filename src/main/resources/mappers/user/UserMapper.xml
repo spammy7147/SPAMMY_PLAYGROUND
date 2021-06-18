@@ -69,12 +69,12 @@
 	<!-- 유저 검색 -->
 	<select id="userSearchList" resultMap="UserMap">
 		select B.* from(select rownum rn, A.* from
-		(select * from AIR_USER where ${c} like '%'||#{search}||'%' order by regdate desc)A)B where rn between #{s} and #{e}
+		(select * from AIR_USER where ${c} like '%'||#{search}||'%' order by reg_date desc)A)B where rn between #{s} and #{e}
 	</select>
 	
 	<!-- 검색 조건에 맞는 유저 수 --> 
 	<select id="selectSearchUserCount" resultType="Integer">
-		select count(*) from air_user where ${c} like '%'||#{search}||'%' order by regdate desc
+		select count(*) from air_user where ${c} like '%'||#{search}||'%' order by reg_date desc
 	</select>
 
 	
