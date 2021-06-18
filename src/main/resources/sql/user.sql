@@ -18,12 +18,12 @@ CREATE SEQUENCE air_user_seq
   NOCYCLE;
 
 
-ALTER TABLE air_user
-    ADD CONSTRAINT FK_air_user_air_role
-    FOREIGN KEY (user_id)
-    REFERENCES air_role (user_id);
+ALTER TABLE air_role
+    ADD CONSTRAINT FK_role
+        FOREIGN KEY (user_id)
+            REFERENCES air_user (user_id);
 
-ALTER TABLE air_user
-    ADD CONSTRAINT FK_air_user_hosting
-    FOREIGN KEY (user_id)
-    REFERENCES hosting (user_id);
+ALTER TABLE hosting
+    ADD CONSTRAINT FK_hosting
+        FOREIGN KEY (user_id)
+            REFERENCES air_user (user_id);
