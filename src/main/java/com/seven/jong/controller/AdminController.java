@@ -20,13 +20,13 @@ public class AdminController {
 	@Autowired AdminUserService aus;
 	@Autowired CsService cs;
 	
-	//admin 홈
-	@GetMapping("/home")
-	public String admin() {
-		//@RequestParam String id, HttpSession session 
-		//session.setAttribute(LOGIN, id);
-		return "admin/adminHome";
-	}
+//	//admin 홈
+//	@GetMapping("/home")
+//	public String admin() {
+//		//@RequestParam String id, HttpSession session 
+//		//session.setAttribute(LOGIN, id);
+//		return "admin/adminHome";
+//	}
 	
 	
 	//가입 유저 관리
@@ -65,19 +65,20 @@ public class AdminController {
 	//등록된 숙소 관리
 	@GetMapping("/housemanage")
 	public String houseManage() {
-		return "admin/houseManage";
+		return "admin/house/houseManage";
 	}
 	
 	//예약 관리
 	@GetMapping("/bookingmanage")
 	public String bookingManage() { 
-		return "admin/bookingManage";
+		return "admin/booking/bookingManage";
 	}
 	
 	@GetMapping("/board")
 	public String board() {
+		//ex : 관리자 권한 session생성후
 		//유저들이 사용하는 board로 연결
-		return "/board";
+		return "board/boardAllList";
 	}
 	
 	
