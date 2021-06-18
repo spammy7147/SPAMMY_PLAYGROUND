@@ -6,8 +6,15 @@
 <!DOCTYPE html>
 <html>
 <head>
+ 
+<meta name="_csrf_header" th:content="${_csrf.headerName}">
+<meta name="_csrf" th:content="${_csrf.token}">
+
 <meta charset="UTF-8">
 <title>Insert title here</title>
+<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+
+
 </head>
 <body>
 <c:import url="../include/header.jsp" />
@@ -36,6 +43,40 @@ contentView
 		<input value="수정" type="button" onclick="location.href='${contextPath }/board/modifyForm?writeNo=${contentData.writeNo }'">
 		<input value="삭제" type="button" onclick="location.href='${contextPath }/board/delete?writeNo=${contentData.writeNo }'">
 </div>
+<br>
+
+<hr>
+<b>Comment</b>
+	<form action="${contextPath }/board/addReply" method="post">			
+		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+		<input type="hidden" name="writeNo" value="${contentData.writeNo}">
+		<input type="hidden" name="writer" value="#">
+		<textarea rows="5" cols="100" id="content" name="content"></textarea>
+		<input type="submit" value="등록">
+	</form>
+	<div>
+		<c:forEach var="rep" items="${replyList }">
+			<table>
+				<tr>
+					<td>${rep.writer }</td> <td>${rep.write_date }</td>
+				</tr>
+				<tr>
+					<td colspan="2">${rep.content }</td>
+				</tr>
+				
+			</table>
+			<hr>
+		</c:forEach>
+		
+	</div>
+	
 
 </body>
 </html>
+
+
+
+
+
+
+

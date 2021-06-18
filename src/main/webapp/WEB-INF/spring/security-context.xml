@@ -25,6 +25,7 @@
      -->
 
     <http>
+
         <intercept-url  pattern="/hosting/**" access="hasRole('ROLE_USER')" />
 
 
