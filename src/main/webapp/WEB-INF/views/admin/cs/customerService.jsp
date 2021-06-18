@@ -67,7 +67,6 @@
 				<hr>
 				<input type="button" value="등록" onclick="#">
 				
-				
 			</div>
 			
 		</div>
