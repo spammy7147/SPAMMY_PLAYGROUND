@@ -10,7 +10,7 @@
 </head>
 <body>
 	
-	<jsp:include page="../../include/header.jsp" />
+	<jsp:include page="../include/header.jsp" />
 		
 		<div class="grid">
 			<jsp:include page="customerSubMenu.jsp" />
@@ -29,7 +29,7 @@
 			
 		</div>
 		
-	<jsp:include page="../../include/footer.jsp" />
+	<jsp:include page="../include/footer.jsp" />
 		
 </body>
 </html>
