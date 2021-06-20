@@ -21,6 +21,8 @@ public class HomeController {
     @GetMapping("/test")
     public String test(@Nullable Authentication authentication) {
         System.out.println("/test 요청 들어옴");
+        System.out.println(authentication);
+        assert authentication != null;
         UserSecurityVO userSecurityVO = (UserSecurityVO) authentication.getPrincipal();
         System.out.println("권한:" + authentication.getAuthorities());
         UserVO userVO = userSecurityVO.getUser();
