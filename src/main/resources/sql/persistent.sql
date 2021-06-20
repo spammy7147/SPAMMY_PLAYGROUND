@@ -4,3 +4,8 @@ create table persistent (
     token varchar(64) not null,
     last_used timestamp(6) not null
 );
+
+ALTER TABLE persistent
+    ADD CONSTRAINT FK_persistent
+        FOREIGN KEY (user_id)
+            REFERENCES air_user (user_id);
