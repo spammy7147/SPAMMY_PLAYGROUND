@@ -12,7 +12,7 @@ import java.util.List;
 @Getter
 @Setter
 @ToString
-public class UserSecurityVO extends UserVO implements IUserSecurityVO  {
+public class UserSecurityVO implements IUserSecurityVO  {
 
     private static final long serialVersionUID = 1L;
     private UserVO user;
@@ -22,6 +22,12 @@ public class UserSecurityVO extends UserVO implements IUserSecurityVO  {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return authorities;
     }
+
+
+    public String getPassword() {
+        return null;
+    }
+
 
 
 }

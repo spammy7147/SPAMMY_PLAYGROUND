@@ -1,7 +1,7 @@
 package com.seven.jong.repository;
 
 import com.seven.jong.VO.RoleVO;
-import com.seven.jong.VO.UserVO;
+import org.springframework.security.core.GrantedAuthority;
 
 import java.util.List;
 

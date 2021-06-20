@@ -6,7 +6,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 import java.io.Serializable;
 import java.util.Collection;
 
-public interface IUserSecurityVO extends Serializable {
+public interface IUserSecurityVO extends Serializable{
 
     Collection<? extends GrantedAuthority> getAuthorities();
 
