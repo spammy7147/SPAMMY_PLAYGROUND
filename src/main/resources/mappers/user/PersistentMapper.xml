@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.seven.jong.repository.IPersistentMapper">
+
+    <resultMap id="persistentMap" type="com.seven.jong.VO.security.PersistentTokenVO" >
+        <id property="userId" column="user_id"/>
+        <result property="key" column="key"/>
+        <result property="token" column="token"/>
+        <result property="lastUsed" column="last_used"/>
+    </resultMap>
+
+    <insert id="createNewToken">
+        insert into persistent (user_id, key, token, last_used)
+        values(#{userId},#{key},#{token},#{lastUsed})
+    </insert>
+
+    <update id="updateToken">
+        update persistent
+        set key=#{key}, TOKEN=#{token}, LAST_USED=#{lastUsed}
+        WHERE USER_ID=#{userId}
+    </update>
+
+
+    <select id="getTokenForKey" resultMap="persistentMap">
+        SELECT * FROM PERSISTENT
+        WHERE key = #{key}
+    </select>
+
+    <select id="getTokenByUserId" resultMap="persistentMap">
+        SELECT * FROM PERSISTENT
+        WHERE USER_ID = #{userId}
+    </select>
+    
+    <delete id="removeUserTokens">
+        DELETE FROM PERSISTENT
+        WHERE user_id = #{userId}
+    </delete>
+</mapper>
