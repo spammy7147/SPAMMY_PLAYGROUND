@@ -46,6 +46,7 @@ public interface IBoardMapper {
 	public void replyDelete(int replyNum);
 	
 
+
 	
 	
 	
