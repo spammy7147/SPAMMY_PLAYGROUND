@@ -26,14 +26,12 @@
 
     <http>
 
-        <intercept-url  pattern="/hosting/**" access="hasRole('ROLE_USER')" />
+        <intercept-url  pattern="/hosting/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
         <intercept-url  pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
 
 
-        <remember-me
-            services-ref="rememberMeAuthenticationProvider"
-            authentication-success-handler-ref="userLoginSuccessHandler"
-           key="remember-me"
+        <remember-me key="auto-login"
+            services-ref="rememberMeService"
         />
 
         <form-login
@@ -59,9 +57,9 @@
     </authentication-manager>
 
     <!-- Persistent Remember Me Service -->
-    <beans:bean id="rememberMeAuthenticationProvider"
-                class="com.seven.jong.service.security.test">
-        <beans:constructor-arg value="remember-me" />
+    <beans:bean id="rememberMeService"
+                class="com.seven.jong.service.security.autologin.RememberMeService">
+        <beans:constructor-arg value="auto-login" />
         <beans:constructor-arg ref="userSecurityService" />
     </beans:bean>
 
