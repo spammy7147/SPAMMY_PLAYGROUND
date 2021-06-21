@@ -83,13 +83,16 @@ public class RememberMeService extends AbstractCustomRememberMeServices {
 
 
     protected void onLoginSuccess(HttpServletRequest request, HttpServletResponse response, Authentication successfulAuthentication) {
-
+        Integer userId =((UserSecurityVO)successfulAuthentication.getPrincipal()).getUser().getUserId();
+        System.out.println("Creating new persistent login for user " + userId);
+        PersistentTokenVO newToken = new PersistentTokenVO(userId, this.generateSeriesData(), this.generateTokenData(), LocalDateTime.now());
+        System.out.println("onLoginSuccess 메서드 작동");
         try {
-            Integer userId =((UserSecurityVO)successfulAuthentication.getPrincipal()).getUser().getUserId();
-            System.out.println("Creating new persistent login for user " + userId);
-            PersistentTokenVO newToken = new PersistentTokenVO(userId, this.generateSeriesData(), this.generateTokenData(), LocalDateTime.now());
-
-            persistentMapper.createNewToken(newToken);
+            if (persistentMapper.getTokenByUserId(userId)!= null){
+                persistentMapper.updateToken(newToken);
+            }else{
+                persistentMapper.createNewToken(newToken);
+            }
             this.addCookie(newToken, request, response);
         } catch (Exception var7) {
             System.out.println("Failed to save persistent token ");
