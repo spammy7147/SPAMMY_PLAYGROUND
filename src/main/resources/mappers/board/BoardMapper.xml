@@ -82,4 +82,6 @@
 	<delete id="replyDelete">
 		delete from air_board_reply where reply_num = #{reply_num}
 	</delete>
+	
+	
 </mapper>     
