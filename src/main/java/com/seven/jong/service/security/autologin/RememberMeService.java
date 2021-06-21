@@ -1,9 +1,10 @@
-package com.seven.jong.service.security;
+package com.seven.jong.service.security.autologin;
 
 
 import com.seven.jong.VO.security.PersistentTokenVO;
 import com.seven.jong.VO.security.UserSecurityVO;
 import com.seven.jong.repository.IPersistentMapper;
+import com.seven.jong.service.security.IUserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.rememberme.CookieTheftException;
@@ -22,23 +23,24 @@ import java.util.Base64;
 import java.util.Date;
 
 
-public class test extends CustomRememberMeServices {
+public class RememberMeService extends AbstractCustomRememberMeServices {
 
-    private PersistentTokenRepository tokenRepository;
+
     private SecureRandom random = new SecureRandom();
     public static final int DEFAULT_SERIES_LENGTH = 16;
     public static final int DEFAULT_TOKEN_LENGTH = 16;
     private int seriesLength = 16;
     private int tokenLength = 16;
-    IPersistentMapper persistentMapper;
+    private IPersistentMapper persistentMapper;
 
     @Autowired
     public void setPersistentMapper(IPersistentMapper persistentMapper) {
         this.persistentMapper = persistentMapper;
     }
 
-    public test(String key, IUserSecurityService userSecurityService) {
+    public RememberMeService(String key, IUserSecurityService userSecurityService) {
         super(key, userSecurityService);
+        System.out.println("sUper에게 건내준 key 값" + key);
     }
 
 

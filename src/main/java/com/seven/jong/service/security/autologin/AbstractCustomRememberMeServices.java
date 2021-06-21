@@ -1,17 +1,16 @@
-package com.seven.jong.service.security;
+package com.seven.jong.service.security.autologin;
 
 import com.seven.jong.VO.security.UserSecurityVO;
+import com.seven.jong.service.security.IUserSecurityService;
 import org.apache.commons.logging.Log;
 import org.apache.commons.logging.LogFactory;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.context.support.MessageSourceAccessor;
 import org.springframework.security.authentication.AccountStatusException;
-import org.springframework.security.authentication.AccountStatusUserDetailsChecker;
 import org.springframework.security.authentication.AuthenticationDetailsSource;
 import org.springframework.security.authentication.RememberMeAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.SpringSecurityMessageSource;
-import org.springframework.security.core.userdetails.UserDetailsChecker;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.web.authentication.RememberMeServices;
 import org.springframework.security.web.authentication.WebAuthenticationDetailsSource;
@@ -31,26 +30,26 @@ import java.net.URLEncoder;
 import java.nio.charset.StandardCharsets;
 import java.util.Base64;
 
-public abstract class CustomRememberMeServices implements RememberMeServices, InitializingBean, LogoutHandler {
-        public static final String SPRING_SECURITY_REMEMBER_ME_COOKIE_KEY = "remember-me";
+public abstract class AbstractCustomRememberMeServices implements RememberMeServices, InitializingBean, LogoutHandler {
+        public static final String SPRING_SECURITY_REMEMBER_ME_COOKIE_KEY = "auto-login";
         public static final String DEFAULT_PARAMETER = "remember-me";
         public static final int TWO_WEEKS_S = 1209600;
         private static final String DELIMITER = ":";
         protected final Log logger = LogFactory.getLog(this.getClass());
         protected final MessageSourceAccessor messages = SpringSecurityMessageSource.getAccessor();
         private IUserSecurityService userSecurityService;
-        private UserDetailsChecker userDetailsChecker = new AccountStatusUserDetailsChecker();
+        private UserStatusChecker userStatusChecker = new UserStatusChecker();
         private AuthenticationDetailsSource<HttpServletRequest, ?> authenticationDetailsSource = new WebAuthenticationDetailsSource();
-        private String cookieName = "remember-me";
+        private String cookieName = "AirBnD";
         private String cookieDomain;
-        private String parameter = "remember-me";
+        private String parameter = "auto-login";
         private boolean alwaysRemember;
-        private String key;
+        private final String key;
         private int tokenValiditySeconds = 1209600;
         private Boolean useSecureCookie = null;
 
 
-        protected CustomRememberMeServices(String key, IUserSecurityService userSecurityService) {
+        protected AbstractCustomRememberMeServices(String key, IUserSecurityService userSecurityService) {
             Assert.hasLength(key, "key cannot be empty or null");
             Assert.notNull(userSecurityService, "UserDetailsService cannot be null");
             this.key = key;
@@ -78,9 +77,7 @@ public abstract class CustomRememberMeServices implements RememberMeServices, In
                     try {
                         String[] cookieTokens = this.decodeCookie(rememberMeCookie);
                         user = this.processAutoLoginCookie(cookieTokens, request, response);
-//                        this.userDetailsChecker.check(user);
-                        this.logger.debug("Remember-me cookie accepted");
-                        System.out.println("Remember-me cookie accepted" + user);
+                        userStatusChecker.check(user);
                         return this.createSuccessfulAuthentication(request, user);
                     } catch (CookieTheftException var6) {
                         this.cancelCookie(request, response);
@@ -90,7 +87,7 @@ public abstract class CustomRememberMeServices implements RememberMeServices, In
                     } catch (InvalidCookieException var8) {
                         this.logger.debug("Invalid remember-me cookie: " + var8.getMessage());
                     } catch (AccountStatusException var9) {
-                        this.logger.debug("Invalid UserDetails: " + var9.getMessage());
+                        this.logger.debug("Invalid UserStatus: " + var9.getMessage());
                     } catch (RememberMeAuthenticationException var10) {
                         this.logger.debug(var10.getMessage());
                     }
