@@ -11,6 +11,16 @@
         <result property="answer" column="answer"/>
     </resultMap>
     
+    <resultMap id="QnaMap" type="com.seven.jong.DTO.QnaDTO" >
+        <id property="qnaNo" column="qna_no"/>
+        <result property="email" column="email"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="saveDate" column="save_date"/>
+        <result property="hit" column="hit"/>
+        <result property="imageFileName" column="image_file_name"/>
+    </resultMap>
+    
 
 	<!-- 자주하는 질문 등록 -->
 	<insert id="addFaq">
@@ -28,6 +38,37 @@
 		select * from FAQ   
     </select>
     
- 
+    <!-- 총 QnA 갯수 가져오기 -->
+    <select id="selectQnaCount" resultType="Integer">
+    	select count(*) from QNA
+    </select>
+    
+    <!-- 요청 페이지 QnA 정보 가져오기 -->
+    <select id="pageQnaInfo" resultMap="QnaMap">
+    	select B.* from(select rownum rn, A.* from
+		(select * from QNA order by qna_no desc)A)B where rn between #{s} and #{e}
+    </select>
+    
+    <!-- QnA 저장하기 -->
+    <insert id="qnaSave">
+    	insert into QNA(qna_no,email,title,content)
+    	values(qna_seq.nextval,#{email},#{title},#{content})
+    	<!-- 
+    	insert into QNA(qna_no,email,title,content,image_file_name)
+    	values(qna_seq.nextval,#{email},#{title},#{content},#{imageFileName})
+    	 -->
+    </insert>
+    
+    <!-- 선택 QNA 가져오기 -->
+	<select id="qnaContentView" resultMap="QnaMap">
+		select * from QNA where qna_no = #{qnaNo}
+	</select> 
+	
+	<!-- 조회수 올리기 -->
+	<update id="upHit">
+		update QNA set hit=hit+1 where qna_no = #{qnaNo}
+	</update>
+	
+	
 </mapper>
 
