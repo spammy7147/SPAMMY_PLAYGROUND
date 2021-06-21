@@ -11,6 +11,29 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+<script type="text/javascript">
+
+function modifyReply(){
+	$("#modifyReply").show();
+	
+}
+function hide(){
+	$("#modifyReply").hide();
+}
+</script>
+
+<style type="text/css">
+
+	#modifyReply{
+		display:none;
+		position: fixed; z-index: 9;
+		margin: 0 auto; top:0; left: 0; right: 0;
+		width: 100%; height: 100%;
+		background-color: rgba(0, 0, 0, 0.4);
+	}
+	
+
+</style>
 
 </head>
 <body>
@@ -55,23 +78,34 @@ contentView
 	<c:forEach var="rep" items="${replyList }">
 		<table>
 			<tr>
-				<td>${rep.writer }</td> <td>${rep.write_date }</td>
+				<td>${rep.writer }</td> <td>${rep.write_date }</td> 
+				<td><input value="삭제" type="button" onclick="location.href='${contextPath }/board/replydelete?reply_num=${rep.reply_num }&writeNo=${contentData.writeNo }'"></td>
+				<td><input value="수정" type="button" onclick="modifyReply()"></td>				
 			</tr>
 			<tr>
-				<td colspan="2">${rep.content }</td>
+				<td id="repContent" colspan="3">${rep.content }</td>
 			</tr>
-			<tr>
-				<td>
-					<input value="삭제" type="button" onclick="location.href='${contextPath }/board/replydelete?reply_num=${rep.reply_num }&writeNo=${contentData.writeNo }'">
-				</td>
-				
-			</tr>
+			
 		</table>
 		<hr>
 	</c:forEach>
 	
 </div>
 	
+${rep.content }${rep.content }${rep.content }
+<div id="modifyReply">
+	<div style="margin: 0 auto; padding-top: 300px;">
+		<form action="#">
+			<input type="hidden" name="replyNum" value="${rep.reply_num }">
+			<hr>
+			<b>내용</b><br> 
+			<textarea rows="5" cols="100" name="content"></textarea>
+			<hr>
+			<button type="submit">수정</button>
+			<button type="button" onclick="hide()">취소</button>
+		</form>
+	</div>
+</div>
 
 
 </body>
