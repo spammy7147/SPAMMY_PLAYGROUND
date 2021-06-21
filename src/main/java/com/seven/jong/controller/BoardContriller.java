@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.seven.jong.DTO.BoardDTO;
+import com.seven.jong.DTO.BoardReplyDTO;
 import com.seven.jong.service.BoardService;
 
 import oracle.jdbc.proxy.annotation.Post;
@@ -41,7 +42,7 @@ public class BoardContriller {
 	}
 	//선택 게시물 보기 , 리플 가져오기
 	@GetMapping("contentView")
-	public String contentView (@RequestParam int writeNo, Model model ) {
+	public String contentView (@RequestParam int writeNo, Model model) {
 		bs.contentView(writeNo, model);
 		System.out.println("contentView연결");
 		return "board/contentView";
@@ -80,6 +81,14 @@ public class BoardContriller {
 		return "redirect:/board/contentView?writeNo="+writeNo;
 		
 	}
+	//댓글 삭제
+	@GetMapping("replydelete")
+	public String replyDelete(@RequestParam int writeNo, @RequestParam int reply_num) {
+		bs.replyDelete(reply_num);
+		return "redirect:/board/contentView?writeNo="+writeNo;
+	}
+	
+	
 }
 
 

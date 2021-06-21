@@ -3,6 +3,7 @@ package com.seven.jong.DTO;
 import java.sql.Timestamp;
 
 public class BoardReplyDTO {
+	private String reply_num;
 	private String writer;
 	private String content;
 	private int write_group;
@@ -30,6 +31,12 @@ public class BoardReplyDTO {
 	}
 	public void setWrite_date(Timestamp write_date) {
 		this.write_date = write_date;
+	}
+	public String getReply_num() {
+		return reply_num;
+	}
+	public void setReply_num(String reply_num) {
+		this.reply_num = reply_num;
 	}
 
 	
