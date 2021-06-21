@@ -4,10 +4,11 @@
 
 <c:import url="../include/header.jsp" />
 <div>
-	<form action="/user/login" method="post">
+	<form action="${contextPath}/user/login" method="post">
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<input type="text" name="email" placeholder="input id"><br>
 		<input type="password" name="password" placeholder="input pwd"><br>
+		자동 로그인 : <input type="checkbox" name="remember-me"/>
 		<input type="submit" value="login">
 	</form>
 </div>

@@ -8,5 +8,9 @@
 </head>
 <body>
 
+<jsp:include page="../../include/header.jsp" />
+bookingManage.jsp
+<jsp:include page="../../include/footer.jsp" />
+
 </body>
 </html>

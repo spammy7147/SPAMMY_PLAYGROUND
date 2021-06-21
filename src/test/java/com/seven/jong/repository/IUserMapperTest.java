@@ -12,6 +12,8 @@ import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.util.Date;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -46,7 +48,16 @@ public class IUserMapperTest {
 
     @Test
     public void getUser(){
-        UserVO user = userMapper.getUserByEmail("test12@gmail.com");
+        UserVO user = userMapper.getUserByEmail("test@gmail.com");
         System.out.println(user.toString());
+    }
+
+    @Test
+    public void test() {
+
+        System.out.println(new Date().getTime());
+        System.out.println(LocalDateTime.now());
+
+
     }
 }
