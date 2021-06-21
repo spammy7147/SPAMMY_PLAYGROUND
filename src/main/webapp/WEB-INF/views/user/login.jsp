@@ -8,7 +8,7 @@
 		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 		<input type="text" name="email" placeholder="input id"><br>
 		<input type="password" name="password" placeholder="input pwd"><br>
-		자동 로그인 : <input type="checkbox" name="remember-me"/>
+		자동 로그인 : <input type="checkbox" name="auto-login"/>
 		<input type="submit" value="login">
 	</form>
 </div>
