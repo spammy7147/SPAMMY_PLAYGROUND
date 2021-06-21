@@ -45,7 +45,7 @@ public abstract class AbstractCustomRememberMeServices implements RememberMeServ
         private String parameter = "auto-login";
         private boolean alwaysRemember;
         private final String key;
-        private int tokenValiditySeconds = 1209600;
+        private int tokenValiditySeconds = 86400;
         private Boolean useSecureCookie = null;
 
 
