@@ -20,5 +20,6 @@ public interface BoardService {
 	public void addReply(String content, int writeNo, String writer);
 	public void replyDelete(int replyNum);
 	
+	
 
 }

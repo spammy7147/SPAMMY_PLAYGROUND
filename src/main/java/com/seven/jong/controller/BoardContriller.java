@@ -11,6 +11,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
 import com.seven.jong.DTO.BoardDTO;
+import com.seven.jong.DTO.BoardReplyDTO;
 import com.seven.jong.service.BoardService;
 
 import oracle.jdbc.proxy.annotation.Post;
@@ -86,6 +87,7 @@ public class BoardContriller {
 		bs.replyDelete(reply_num);
 		return "redirect:/board/contentView?writeNo="+writeNo;
 	}
+	
 	
 }
 

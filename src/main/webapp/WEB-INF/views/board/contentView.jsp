@@ -20,6 +20,7 @@ function modifyReply(){
 function hide(){
 	$("#modifyReply").hide();
 }
+
 </script>
 
 <style type="text/css">
@@ -83,27 +84,24 @@ contentView
 				<td><input value="수정" type="button" onclick="modifyReply()"></td>				
 			</tr>
 			<tr>
-				<td id="repContent" colspan="3">${rep.content }</td>
+				<td colspan="4">${rep.content }</td>
 			</tr>
 			
 		</table>
 		<hr>
+	
 	</c:forEach>
 	
 </div>
-	
-${rep.content }${rep.content }${rep.content }
+
 <div id="modifyReply">
-	<div style="margin: 0 auto; padding-top: 300px;">
-		<form action="#">
-			<input type="hidden" name="replyNum" value="${rep.reply_num }">
-			<hr>
-			<b>내용</b><br> 
-			<textarea rows="5" cols="100" name="content"></textarea>
-			<hr>
-			<button type="submit">수정</button>
-			<button type="button" onclick="hide()">취소</button>
-		</form>
+	<div style="margin: 0 auto; padding-top: 300px;">			
+		<hr>
+		<b>내용</b><br> 								   
+		<textarea rows="5" cols="100" name="content"></textarea>
+		<hr>
+		<input value="수정" type="button" onclick="">
+		<button type="button" onclick="hide()">취소</button>
 	</div>
 </div>
 
