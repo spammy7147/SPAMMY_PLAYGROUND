@@ -44,6 +44,11 @@ public interface IBoardMapper {
 	
 	//리플 삭제
 	public void replyDelete(int replyNum);
+	
+
+	
+	
+	
 
 
 	

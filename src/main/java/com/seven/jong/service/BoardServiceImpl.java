@@ -45,6 +45,7 @@ public class BoardServiceImpl implements BoardService{
 
 	@Override
 	public void contentView(int writeNo, Model model) {
+		
 		model.addAttribute("contentData",mapper.contentView(writeNo));
 		model.addAttribute("replyList",mapper.getReplyList(writeNo));
 		upHit(writeNo);
@@ -85,7 +86,6 @@ public class BoardServiceImpl implements BoardService{
 		System.out.println(search);
 				
 		int allCount = mapper.selectBoardCount(search,c);
-		//int allCount = mapper.BoardCount();
 		int pageLetter = 10;
 		int repeat = allCount / pageLetter;
 		
@@ -117,6 +117,8 @@ public class BoardServiceImpl implements BoardService{
 		mapper.replyDelete(replyNum);
 		
 	}
+
+	
 
 	
 
