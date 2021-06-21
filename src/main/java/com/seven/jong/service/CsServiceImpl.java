@@ -21,4 +21,15 @@ public class CsServiceImpl implements CsService{
 		return null;
 	}
 
+	@Override
+	public void addFaq(FaqDTO dto) {
+		mapper.addFaq(dto);
+		
+	}
+
+	@Override
+	public void delFaq(int faqNum) {
+		mapper.delFaq(faqNum);
+	}
+
 }
