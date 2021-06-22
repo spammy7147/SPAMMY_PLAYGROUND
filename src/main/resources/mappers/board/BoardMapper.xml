@@ -41,7 +41,7 @@
 	</update>
 	
 	<update id="modify">
-		update air_board set title=#{title}, content=#{content} where write_no = #{writeNo}
+		update air_board set title=#{title}, content=#{content}, file_name=#{fileName} where write_no = #{writeNo}
 	</update>
 	
 	<delete id="delete">

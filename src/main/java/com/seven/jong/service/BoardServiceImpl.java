@@ -98,14 +98,36 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void modify(BoardDTO dto, HttpServletRequest request) {
+	public void modify(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mul) {
 		
 		dto.setWriteNo(Integer.parseInt(request.getParameter("writeNo")));
 		
 		dto.setTitle(request.getParameter("title"));
 		dto.setContent(request.getParameter("content"));
 		
-		mapper.modify(dto);
+		MultipartFile mf = mul.getFile("newFileName");
+
+        //경로 지정
+        String path = "C:\\upload\\";
+
+        String originFileName = mf.getOriginalFilename(); 
+
+        String safeFile = path + System.currentTimeMillis() + originFileName;
+        String fileName = System.currentTimeMillis() + originFileName;
+       
+        dto.setFileName(fileName);
+        
+        File file = new File(safeFile);
+        if (!file.exists()){
+             file.mkdir();
+        }
+        try {
+            mf.transferTo(file);
+        } catch (IllegalStateException | IOException e) {
+            e.printStackTrace();
+        }
+        
+        mapper.modify(dto);
 	}
 
 	@Override

@@ -81,8 +81,8 @@ public class BoardContriller {
 	}
 	//게시물 수정
 	@PostMapping("modify")
-	public String modify(BoardDTO dto, HttpServletRequest request) {
-		bs.modify(dto, request);
+	public String modify(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mul) {
+		bs.modify(dto, request, mul);
 		return "redirect:/board/boardAllList";
 	}
 	//게시물 삭제
