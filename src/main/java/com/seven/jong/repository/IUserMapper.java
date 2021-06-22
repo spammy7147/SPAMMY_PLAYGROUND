@@ -16,6 +16,8 @@ public interface IUserMapper {
     UserVO getUserByEmail(String email);
     //모든유저 가져오기
     ArrayList<UserVO> getUsers();
+    // 유저 삭제
+    void deleteUser(Integer UserId);
 
     //모든 유저 수
     int selectUserCount();

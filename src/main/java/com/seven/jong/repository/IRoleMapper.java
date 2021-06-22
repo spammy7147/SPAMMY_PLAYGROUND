@@ -9,4 +9,5 @@ public interface IRoleMapper {
 
     void addRole(RoleVO role);
     List<RoleVO> getRole(Integer userId);
+    void deleteRole(Integer UserId);
 }
