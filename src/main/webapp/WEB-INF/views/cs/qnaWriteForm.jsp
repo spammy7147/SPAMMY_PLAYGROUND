@@ -30,10 +30,10 @@
 		
 		<div class="grid-item qna">
 		
-		<form action="${contextPath }/cs/qnasave" method="post">
+		<form action="${contextPath }/cs/qnasave?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
 		<!-- enctype="multipart/form-data" -->
 			 
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+			<!-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> -->
 			<b>작성자</b><br>
 			<input type="text" name="email" size="50" value="${loginUser }" readonly>
 			<hr>
@@ -42,12 +42,12 @@
 			<b>내용</b><br>
 			<textarea rows="10" cols="50" name="content"></textarea>
 			<hr>
-			<!-- 
+			
 			<b>이미지파일 첨부</b><br>
 			<input type="file" name="imageFileName" onchange="readURL(this)">
 			<img id="preview" src="#" width="100" height="100" alt="선택 이미지 없음">
 			<hr>
-			  -->
+			
 			<input type="submit" value="글쓰기">
 			<input type="button" value="목록이동"
 				onclick="location.href='${contextPath}/cs/customerqna'">
