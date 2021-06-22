@@ -21,9 +21,17 @@ CREATE SEQUENCE air_user_seq
 ALTER TABLE air_role
     ADD CONSTRAINT FK_role
         FOREIGN KEY (user_id)
-            REFERENCES air_user (user_id);
+            REFERENCES air_user (user_id)
+                ON DELETE CASCADE;
 
 ALTER TABLE hosting
     ADD CONSTRAINT FK_hosting
         FOREIGN KEY (user_id)
-            REFERENCES air_user (user_id);
+            REFERENCES air_user (user_id)
+                ON DELETE CASCADE;
+
+ALTER TABLE persistent
+    ADD CONSTRAINT FK_persistent
+        FOREIGN KEY (user_id)
+            REFERENCES air_user (user_id)
+                ON DELETE CASCADE;

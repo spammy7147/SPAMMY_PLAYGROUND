@@ -43,7 +43,11 @@
 	<select id="getUserByEmail" resultMap="UserMap">
 		select * from AIR_USER where EMAIL= #{email}
     </select>
-
+    <!-- 유저 삭제 -->
+    <delete id="deleteUser">
+        DELETE FROM AIR_USER
+        WHERE USER_ID =#{userId}
+    </delete>
     <select id="userInfo" resultMap="UserMap">
     	select * from air_user
     </select>
