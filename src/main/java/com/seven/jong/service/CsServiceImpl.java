@@ -1,6 +1,7 @@
 package com.seven.jong.service;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -12,7 +13,9 @@ import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.seven.jong.DTO.FaqDTO;
+import com.seven.jong.DTO.MessageDTO;
 import com.seven.jong.DTO.QnaDTO;
+import com.seven.jong.DTO.QnaRepDTO;
 import com.seven.jong.VO.UserVO;
 import com.seven.jong.repository.ICsMapper;
 
@@ -59,6 +62,25 @@ public class CsServiceImpl implements CsService{
 		return null;
 	}
 
+	//QnA 저장
+	@Override
+	public void qnaSave(QnaDTO dto, MultipartHttpServletRequest mul, HttpServletRequest request) {
+		//MultipartHttpServletRequest mul, 
+		
+		MultipartFile file = mul.getFile("imageFileName");
+		
+		QnaFileService qfs = new QnaFileServiceImpl();
+		
+		if( file.isEmpty() ) { // 파일이 비워있으면 true
+			dto.setImageFileName("nan");
+		}else { //파일이 존재하는 경우
+			dto.setImageFileName( qfs.saveFile(file) );
+		}
+		
+		mapper.qnaSave(dto);
+		
+	}
+	
 	//QnA 컨텐츠 보기
 	@Override
 	public void qnaContentView(int qnaNo, Model model) {
@@ -69,23 +91,67 @@ public class CsServiceImpl implements CsService{
 		mapper.upHit(qnaNo);
 	}
 
-	//QnA 저장
+	//QnA 삭제하기
 	@Override
-	public void qnaSave(QnaDTO dto, HttpServletRequest request) {
-		//MultipartHttpServletRequest mul, 
+	public String qnaDelete(int qnaNo, String imageFileName, HttpServletRequest request) {
+		QnaFileService qfs = new QnaFileServiceImpl();
+		int result = mapper.qnaDelete(qnaNo);
 		
-//		MultipartFile file = mul.getFile("imageFileName");
-//		
-//		QnaFileService qfs = new QnaFileServiceImpl();
-//		
-//		if( file.isEmpty() ) { // 파일이 비워있으면 true
-//			dto.setImageFileName("nan");
-//		}else { //파일이 존재하는 경우
-//			dto.setImageFileName( qfs.saveFile(file) );
-//		}
+		MessageDTO dto = new MessageDTO();
 		
-		mapper.qnaSave(dto);
+		if(result == 1) {//DB삭제 성공
+			qfs.deleteImage(imageFileName);
+		}
+		dto.setRequest(request);
+		dto.setResult(result);
+		dto.setSuccessMessage("성공적으로 삭제 되었습니다");
+		dto.setSuccessURL("/cs/customerqna");
+		dto.setFailMessage("삭제 중 문제가 발생하였습니다");
+		dto.setFailURL("/cs/qnaView");
 		
+		return qfs.getMessage(dto);
+	}
+
+	//QnA 수정
+	@Override
+	public String modify(MultipartHttpServletRequest mul, HttpServletRequest request) {
+		QnaDTO dto = new QnaDTO();
+		dto.setQnaNo(Integer.parseInt(mul.getParameter("qnaNo")));
+		dto.setTitle(mul.getParameter("title"));
+		dto.setContent(mul.getParameter("content"));
+		
+		MultipartFile file = mul.getFile("imageFileName");
+		QnaFileService bfs = new QnaFileServiceImpl();
+		
+		if( file.isEmpty() ) { // 이미지 변경 되지 않았음
+			dto.setImageFileName(mul.getParameter("originFileName"));
+		}else { // 이미지 변경 되었음.
+			dto.setImageFileName(bfs.saveFile(file));
+			bfs.deleteImage(mul.getParameter("originFileName"));
+		}
+		int result = mapper.modify(dto);
+		
+		MessageDTO mDto = new MessageDTO();
+		mDto.setResult(result);
+		mDto.setRequest(request);
+		mDto.setSuccessMessage("성공적으로 수정되었습니다");
+		mDto.setSuccessURL("/cs/customerqna");
+		mDto.setFailMessage("수정 중 문제 발생!!!");
+		mDto.setFailURL("/cs/qnaView");
+		
+		return bfs.getMessage(mDto);
+	}
+
+	//QnA리플 추가
+	@Override
+	public void addReply(QnaRepDTO dto) {
+		mapper.addReply(dto);
+	}
+
+	//qna 리플 가져오기
+	@Override
+	public List<QnaRepDTO> getRepList(int write_group) {
+		return mapper.getRepList(write_group);
 	}
 
 }
