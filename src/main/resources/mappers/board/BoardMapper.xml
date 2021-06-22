@@ -10,6 +10,7 @@
 		<result property="title" column="title"/>
 		<result property="content" column="content"/>
 		<result property="saveDate" column="savedate"/>
+		<result property="fileName" column="file_name"/>
 		<result property="hit" column="hit"/>
 	</resultMap>
 	
@@ -22,8 +23,8 @@
 	</resultMap>
 	
 	<insert id="writeSave">
-		insert into air_board(write_no,writer,title,content)
-    	values(air_board_seq.nextval,#{writer},#{title},#{content})
+		insert into air_board(write_no,writer,title,content,file_name)
+    	values(air_board_seq.nextval,#{writer},#{title},#{content},#{fileName})
 	</insert>
 	
 	<select id="boardAllList" resultMap="board">
