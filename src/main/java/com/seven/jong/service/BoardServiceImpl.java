@@ -178,8 +178,22 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void replyDelete(int replyNum) {
-		mapper.replyDelete(replyNum);
+	public void replyDelete(int reply_num) {
+		mapper.replyDelete(reply_num);
+		
+	}
+
+
+	@Override
+	public void selectReply(Model model, int reply_num, int writeNo) {
+		model.addAttribute("replyData",mapper.selectReply(reply_num));
+		model.addAttribute("writeNo",writeNo);
+	}
+
+	@Override
+	public void modifyReply(String content, int reply_num) {
+
+		mapper.modifyReply(content,reply_num);
 		
 	}
 
