@@ -19,4 +19,9 @@
         SELECT * FROM AIR_ROLE
         WHERE USER_ID = #{userId}
     </select>
+
+    <delete id="deleteRole">
+        DELETE FROM AIR_ROLE
+        WHERE USER_ID =#{userId}
+    </delete>
 </mapper>

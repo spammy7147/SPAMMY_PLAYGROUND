@@ -10,6 +10,7 @@
 
 <div class="test">
     <form action="<c:url value='/hosting/address'/>" method="post">
+        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
         <input type="text" name="country" placeholder="국가"><br>
         <input type="text" name="city" placeholder="시/도"><br>
         <input type="text" name="district" placeholder="시/군"><br>
