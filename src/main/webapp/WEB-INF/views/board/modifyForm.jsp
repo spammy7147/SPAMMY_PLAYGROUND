@@ -7,7 +7,7 @@
 <c:import url="../include/header.jsp" />
 <div>
 	<div>
-	<form action="${contextPath }/board/modify" method="post">
+		<form name="form" method="post" action="/board/modify?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<input type="hidden" name="writeNo" value="${contentData.writeNo }">
 		<b>작성자</b><br>
@@ -17,6 +17,8 @@
 		<b>내용</b><br>
 			<textarea rows="10" cols="50" name="content" >${contentData.content }</textarea>
 		<hr>
+			<input type="file" name="newFileName">
+			<hr>
 			<input type="button" value="목록이동" onclick="location.href='${contextPath}/board/boardAllList'">
 			<input type="submit" value="수정">
 	</form>

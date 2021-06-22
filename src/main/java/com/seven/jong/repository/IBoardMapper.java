@@ -21,7 +21,7 @@ public interface IBoardMapper {
 	//게시글 보기
 	public BoardDTO contentView(int writeNo);
 	
-	//조회수
+	//조회 수
 	public void upHit(int writeNo);
 
 	//게시글 수정
@@ -36,14 +36,20 @@ public interface IBoardMapper {
 	//검색 결과 수
 	public int selectBoardCount(@Param("search")String search, @Param("c")String c);
 	
-	//리플 저장
+	//댓글 저장
 	public void addReply(@Param("content")String content, @Param("writeNo")int wrieteNo, @Param("writer")String writer);	
 
-	//리플 불러오기
+	//댓글 불러오기
 	public List<BoardReplyDTO> getReplyList(int write_group);
 	
-	//리플 삭제
+	//댓글 삭제
 	public void replyDelete(int replyNum);
+	
+	//수정 댓글 가져오기
+	public BoardReplyDTO selectReply(int reply_num);
+	
+	//댓글 수정
+	public void modifyReply(@Param("content")String content, @Param("reply_num")int reply_num);
 	
 
 
