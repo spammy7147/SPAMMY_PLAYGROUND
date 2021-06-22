@@ -21,6 +21,14 @@
         <result property="imageFileName" column="image_file_name"/>
     </resultMap>
     
+    <resultMap id="QnaRepMap" type="com.seven.jong.DTO.QnaRepDTO" >
+        <id property="email" column="email"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="write_group" column="write_group"/>
+        <result property="write_date" column="write_date"/>
+    </resultMap>
+    
 
 	<!-- 자주하는 질문 등록 -->
 	<insert id="addFaq">
@@ -51,12 +59,9 @@
     
     <!-- QnA 저장하기 -->
     <insert id="qnaSave">
-    	insert into QNA(qna_no,email,title,content)
-    	values(qna_seq.nextval,#{email},#{title},#{content})
-    	<!-- 
     	insert into QNA(qna_no,email,title,content,image_file_name)
     	values(qna_seq.nextval,#{email},#{title},#{content},#{imageFileName})
-    	 -->
+    	
     </insert>
     
     <!-- 선택 QNA 가져오기 -->
@@ -69,6 +74,28 @@
 		update QNA set hit=hit+1 where qna_no = #{qnaNo}
 	</update>
 	
+	<!-- QnA삭제 -->
+	<delete id="qnaDelete">
+		DELETE FROM QNA WHERE QNA_NO = #{qnaNo}
+	</delete>
+	
+	<!-- QnA 수정 -->
+	<update id="modify">
+		update QNA set title=#{title}, content=#{content}, 
+			image_file_name=#{imageFileName} where qna_no = #{qnaNo}
+	</update>
+	
+	<!-- 리플 등록 -->
+	<insert id="addReply">
+		insert into QNAREPLY(email,title,content,write_group)
+			values(#{email},#{title},#{content},#{write_group})
+	</insert>
+	
+	<!-- 해당 QnA 리플 가져오기 -->
+	<select id="getRepList" resultMap="QnaRepMap">
+		select * from QNAREPLY where write_group=#{write_group}
+										order by write_date desc
+	</select>
 	
 </mapper>
 
