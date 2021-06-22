@@ -7,6 +7,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.seven.jong.DTO.BoardDTO;
 import com.seven.jong.DTO.BoardReplyDTO;
@@ -18,7 +19,7 @@ public class BoardServiceImpl implements BoardService{
 	IBoardMapper mapper;
 	
 	@Override
-	public void writeSave(BoardDTO dto, HttpServletRequest request) {
+	public void writeSave(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mul) {
 		dto.setTitle(request.getParameter("title"));
 		dto.setWriter(request.getParameter("writer"));
 		dto.setContent(request.getParameter("content"));

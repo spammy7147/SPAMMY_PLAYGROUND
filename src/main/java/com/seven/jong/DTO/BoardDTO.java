@@ -12,6 +12,7 @@ public class BoardDTO {
 	private String content;
 	private String saveDate;
 	private int hit;
+	private String filename;
 	
 	public int getWriteNo() {
 		return writeNo;
@@ -48,6 +49,12 @@ public class BoardDTO {
 	}
 	public void setHit(int hit) {
 		this.hit = hit;
+	}
+	public String getFilename() {
+		return filename;
+	}
+	public void setFilename(String filename) {
+		this.filename = filename;
 	}
 	
 }
