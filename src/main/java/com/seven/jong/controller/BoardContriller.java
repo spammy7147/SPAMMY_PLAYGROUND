@@ -44,39 +44,7 @@ public class BoardContriller {
 	@PostMapping("/writeSave")
 	public String writeSave(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mtfRequest, HttpServletResponse response) throws IOException {
 		bs.writeSave(dto, request, mtfRequest);
-		 String src = mtfRequest.getParameter("src");
-	        System.out.println("src value : " + src);
-	        MultipartFile mf = mtfRequest.getFile("file_name");
-
-	        //경로 지정
-	        String path = request.getSession().getServletContext().getRealPath("/upload/");
-
-
-	        String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-	        long fileSize = mf.getSize(); // 파일 사이즈
-
-	        String safeFile = path + System.currentTimeMillis() + originFileName;
-	        System.out.println("path : " + path);
-	        System.out.println("originFileName : " + originFileName);
-	        System.out.println("fileSize : " + fileSize);
-	        System.out.println("safeFile : " + safeFile);
-
-	        File file = new File(safeFile);
-	        //경로에 디렉토리가 없으면 만들기
-	        if (!file.exists()){
-	             file.mkdir();
-	        }
-	        try {
-	            mf.transferTo(file);
-	        } catch (IllegalStateException | IOException e) {
-	            e.printStackTrace();
-	        }
-
-	        String url = "/";
-	        String referer= request.getHeader("Referer");
-	        if(referer != null){
-	            url = referer;
-	        }
+		
 	   
 		return "redirect:/board/boardAllList";
 	}
