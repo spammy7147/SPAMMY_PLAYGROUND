@@ -1,6 +1,6 @@
 CREATE TABLE QNA(
   qna_no number(10) PRIMARY KEY,
-  id VARCHAR2(20),
+  email VARCHAR2(20),
   title VARCHAR2(100),
   content VARCHAR2(300),
   save_date date default sysdate,
