@@ -20,6 +20,8 @@ public interface BoardService {
 	public List<BoardReplyDTO> getReplyList(int write_group);
 	public void addReply(String content, int writeNo, String writer);
 	public void replyDelete(int replyNum);
+	public void selectReply(Model model, int reply_num, int writeNo);
+	public void modifyReply(String content, int reply_num);
 	
 	
 
