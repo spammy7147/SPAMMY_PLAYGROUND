@@ -13,6 +13,8 @@
 <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 <script type="text/javascript">
 
+
+
 function modifyReply(){
 	$("#modifyReply").show();
 	
@@ -41,7 +43,8 @@ function hide(){
 <c:import url="../include/header.jsp" />
 contentView
 
- 
+
+
 <div>
 	<table border="1" class="table">
 		<tr>
