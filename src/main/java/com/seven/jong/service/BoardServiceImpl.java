@@ -98,14 +98,36 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void modify(BoardDTO dto, HttpServletRequest request) {
+	public void modify(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mul) {
 		
 		dto.setWriteNo(Integer.parseInt(request.getParameter("writeNo")));
 		
 		dto.setTitle(request.getParameter("title"));
 		dto.setContent(request.getParameter("content"));
 		
-		mapper.modify(dto);
+		MultipartFile mf = mul.getFile("newFileName");
+
+        //경로 지정
+        String path = "C:\\upload\\";
+
+        String originFileName = mf.getOriginalFilename(); 
+
+        String safeFile = path + System.currentTimeMillis() + originFileName;
+        String fileName = System.currentTimeMillis() + originFileName;
+       
+        dto.setFileName(fileName);
+        
+        File file = new File(safeFile);
+        if (!file.exists()){
+             file.mkdir();
+        }
+        try {
+            mf.transferTo(file);
+        } catch (IllegalStateException | IOException e) {
+            e.printStackTrace();
+        }
+        
+        mapper.modify(dto);
 	}
 
 	@Override
@@ -156,8 +178,22 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void replyDelete(int replyNum) {
-		mapper.replyDelete(replyNum);
+	public void replyDelete(int reply_num) {
+		mapper.replyDelete(reply_num);
+		
+	}
+
+
+	@Override
+	public void selectReply(Model model, int reply_num, int writeNo) {
+		model.addAttribute("replyData",mapper.selectReply(reply_num));
+		model.addAttribute("writeNo",writeNo);
+	}
+
+	@Override
+	public void modifyReply(String content, int reply_num) {
+
+		mapper.modifyReply(content,reply_num);
 		
 	}
 

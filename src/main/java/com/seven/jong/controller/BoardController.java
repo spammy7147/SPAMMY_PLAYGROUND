@@ -15,7 +15,6 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.seven.jong.DTO.BoardDTO;
@@ -26,7 +25,7 @@ import com.seven.jong.service.BoardService;
 
 @Controller
 @RequestMapping("board")
-public class BoardContriller {
+public class BoardController {
 	@Autowired 
 	BoardService bs;
 	
@@ -81,8 +80,8 @@ public class BoardContriller {
 	}
 	//게시물 수정
 	@PostMapping("modify")
-	public String modify(BoardDTO dto, HttpServletRequest request) {
-		bs.modify(dto, request);
+	public String modify(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mul) {
+		bs.modify(dto, request, mul);
 		return "redirect:/board/boardAllList";
 	}
 	//게시물 삭제
@@ -104,16 +103,27 @@ public class BoardContriller {
 	public String addReply(@RequestParam String content,@RequestParam int writeNo, @RequestParam String writer){//세션 추가해야함
 		bs.addReply(content,writeNo,writer);	
 		return "redirect:/board/contentView?writeNo="+writeNo;
-		
 	}
 	//댓글 삭제
 	@GetMapping("replydelete")
-	public String replyDelete(@RequestParam int writeNo, @RequestParam int reply_num) {
-		bs.replyDelete(reply_num);
+	public String replyDelete(@RequestParam int writeNo, @RequestParam int replyNum) {
+		bs.replyDelete(replyNum);
 		return "redirect:/board/contentView?writeNo="+writeNo;
 	}
-	
-	
+	//댓글 수정창 이동
+	@GetMapping("modifyReplyForm")
+	public String modifyReplyForm(@RequestParam int reply_num, @RequestParam int writeNo ,Model model) {
+		bs.selectReply(model, reply_num, writeNo);
+		return "board/modifyReplyForm";
+	}
+	//댓글 수정
+	@PostMapping("modifyReply")
+	public String modifyReply(@RequestParam int writeNo,@RequestParam String content,@RequestParam int reply_num) {
+		bs.modifyReply(content,reply_num);
+		System.out.println(content);
+		return "redirect:/board/contentView?writeNo="+writeNo;
+	}
+
 }
 
 
