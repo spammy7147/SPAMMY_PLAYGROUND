@@ -10,6 +10,7 @@
 		<result property="title" column="title"/>
 		<result property="content" column="content"/>
 		<result property="saveDate" column="savedate"/>
+		<result property="fileName" column="file_name"/>
 		<result property="hit" column="hit"/>
 	</resultMap>
 	
