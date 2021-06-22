@@ -32,7 +32,7 @@ public class BoardServiceImpl implements BoardService{
         MultipartFile mf = mtfRequest.getFile("file_name");
 
         //경로 지정
-        String path = request.getSession().getServletContext().getRealPath("/upload/");
+        String path = "C:\\upload\\";
 
         String originFileName = mf.getOriginalFilename(); // 원본 파일 명
         long fileSize = mf.getSize(); // 파일 사이즈

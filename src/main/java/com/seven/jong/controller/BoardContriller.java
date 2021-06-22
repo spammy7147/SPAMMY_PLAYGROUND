@@ -1,6 +1,7 @@
 package com.seven.jong.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
 import java.io.IOException;
 
 import javax.servlet.http.HttpServletRequest;
@@ -9,6 +10,7 @@ import javax.servlet.http.HttpServletResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.util.FileCopyUtils;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,6 +57,21 @@ public class BoardContriller {
 		System.out.println("contentView연결");
 		return "board/contentView";
 	}
+	//이미지 불러오기
+	@GetMapping("download")
+	public void downLoad(@RequestParam String fileName,
+						HttpServletResponse response) throws Exception{
+		response.addHeader("Content-disposition",
+				"attachment;fileName"+fileName);
+		File file = new File("C:\\upload\\"+fileName);
+		FileInputStream in = new FileInputStream(file);
+		
+		System.out.println(file);
+		
+		FileCopyUtils.copy(in, response.getOutputStream());
+		in.close();
+	}
+	
 	//modifyForm 연결
 	@GetMapping("modifyForm")
 	public String modifyForm(@RequestParam int writeNo, Model model) {

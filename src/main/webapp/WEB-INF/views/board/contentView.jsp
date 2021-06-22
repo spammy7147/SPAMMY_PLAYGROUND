@@ -48,19 +48,28 @@ contentView
 <div>
 	<table border="1" class="table">
 		<tr>
-			<th>글 번호</th><th>${contentData.writeNo }</th>
+			<th>글 번호</th><td>${contentData.writeNo }</td>
 		</tr>
 		<tr>
-			<th>작성자</th><th>${contentData.writer }</th>
+			<th>작성자</th><td>${contentData.writer }</td>
 		</tr>
 		<tr>
-			<th>제 목</th><th>${contentData.title }</th>
+			<th>제 목</th><td>${contentData.title }</td>
 		</tr>
 		<tr>
-			<th>작성일</th><th>${contentData.saveDate }</th>
+			<th>작성일</th><td>${contentData.saveDate }</td>
 		</tr>	
 		<tr>
-			<th>내 용</th><th>${contentData.content }</th>
+			<th>img</th>
+			<c:if test="${contentData.fileName != null }">
+				<td>
+					<img width="500px" height="500px" 
+					src="${contextPath }/board/download?fileName=${contentData.fileName}">
+				</td>
+			</c:if>
+		</tr>		
+		<tr>
+			<th>내 용</th><td>${contentData.content }</td>
 		</tr>		
 	</table>
 		<a href="${contextPath }/board/boardAllList">목록보기</a>	
