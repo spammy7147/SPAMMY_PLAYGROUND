@@ -82,7 +82,7 @@
 				<c:choose>
 					<c:when test="${faqList.size() != 0}">
 						<c:forEach var="dto" items="${faqList }" varStatus="vs">
-						<form action="${contextPath }/delFaq" method="post">
+						<form action="${contextPath }/cs/delFaq" method="post">
 							<div class="accordion">
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 									<input type="hidden" name="faqNum" value="${dto.faqNum} ">
@@ -114,7 +114,7 @@
 				<div id="modal_wrap">
 				<div id="first">
 					<div style="width:250px; margin: 0 auto; padding-top: 20px;">
-						<form id="frm" action="${contextPath }/addFaq" method="post">
+						<form id="frm" action="${contextPath }/cs/addFaq" method="post">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<b>자주하는 질문 추가 페이지</b><hr>
 							<b>제목</b> <br> <input type="text" id="title" size="25" name="title"><hr>
