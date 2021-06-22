@@ -61,10 +61,12 @@ contentView
 		</tr>	
 		<tr>
 			<th>img</th>
+			<c:if test="${contentData.fileName == null }">
+				<b>이미지가 없습니다</b>
+			</c:if>
 			<c:if test="${contentData.fileName != null }">
 				<td>
-					<img width="500px" height="500px" 
-					src="${contextPath }/board/download?fileName=${contentData.fileName}">
+					<img width="500px" height="500px" src="${contextPath }/board/download?fileName=${contentData.fileName}">
 				</td>
 			</c:if>
 		</tr>		
