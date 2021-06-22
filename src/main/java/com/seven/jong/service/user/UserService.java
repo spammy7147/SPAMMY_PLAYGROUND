@@ -1,8 +1,9 @@
-package com.seven.jong.service;
+package com.seven.jong.service.user;
 
 import com.seven.jong.DTO.UserRequestDTO;
 import com.seven.jong.VO.RoleVO;
 import com.seven.jong.VO.UserVO;
+import com.seven.jong.VO.security.UserSecurityVO;
 import com.seven.jong.repository.IRoleMapper;
 import com.seven.jong.repository.IUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -55,5 +56,12 @@ public class UserService implements IUserService {
                 .userId(userMapper.getUserByEmail(requestDTO.getEmail()).getUserId())
                 .role("ROLE_USER")
                 .build());  // 사용자 권한(user) 추가
+    }
+
+    @Override
+    public void deleteUser(UserSecurityVO userSecurityVO) {
+        Integer userId = userSecurityVO.getUser().getUserId();
+        roleMapper.deleteRole(userId);
+        userMapper.deleteUser(userId);
     }
 }

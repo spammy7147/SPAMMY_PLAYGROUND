@@ -1,10 +1,12 @@
 package com.seven.jong.controller;
 
 import com.seven.jong.DTO.UserRequestDTO;
-import com.seven.jong.service.IUserService;
+import com.seven.jong.VO.security.UserSecurityVO;
+import com.seven.jong.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.Assert;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -56,5 +58,15 @@ public class UserController {
 
 	@PostMapping("/logout")
 	public void logout(){
+	}
+
+	@PostMapping("/delete")
+	public String delete(@Nullable Authentication authentication){
+
+
+		assert authentication != null;
+		userService.deleteUser((UserSecurityVO)authentication.getPrincipal());
+
+		return "home";
 	}
 }
