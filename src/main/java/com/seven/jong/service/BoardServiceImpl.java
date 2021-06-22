@@ -1,5 +1,7 @@
 package com.seven.jong.service;
 
+import java.io.File;
+import java.io.IOException;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -7,6 +9,8 @@ import javax.servlet.http.HttpServletRequest;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.seven.jong.DTO.BoardDTO;
 import com.seven.jong.DTO.BoardReplyDTO;
@@ -18,10 +22,49 @@ public class BoardServiceImpl implements BoardService{
 	IBoardMapper mapper;
 	
 	@Override
-	public void writeSave(BoardDTO dto, HttpServletRequest request) {
+	public void writeSave(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mtfRequest) {
 		dto.setTitle(request.getParameter("title"));
 		dto.setWriter(request.getParameter("writer"));
 		dto.setContent(request.getParameter("content"));
+		
+		String src = mtfRequest.getParameter("src");
+        System.out.println("src value : " + src);
+        MultipartFile mf = mtfRequest.getFile("file_name");
+
+        //경로 지정
+        String path = request.getSession().getServletContext().getRealPath("/upload/");
+
+        String originFileName = mf.getOriginalFilename(); // 원본 파일 명
+        long fileSize = mf.getSize(); // 파일 사이즈
+
+        String safeFile = path + System.currentTimeMillis() + originFileName;
+        System.out.println("path : " + path);
+        System.out.println("originFileName : " + originFileName);
+        System.out.println("fileSize : " + fileSize);
+        System.out.println("safeFile : " + safeFile);
+        System.out.println("--------------------------");
+        
+        //디비에 저장될 파일 이름
+        String fileName = System.currentTimeMillis() + originFileName;
+        
+        dto.setFileName(fileName);
+        
+        File file = new File(safeFile);
+        //경로에 디렉토리가 없으면 만들기
+        if (!file.exists()){
+             file.mkdir();
+        }
+        try {
+            mf.transferTo(file);
+        } catch (IllegalStateException | IOException e) {
+            e.printStackTrace();
+        }
+
+        String url = "/";
+        String referer= request.getHeader("Referer");
+        if(referer != null){
+            url = referer;
+        }
 		
 		mapper.writeSave(dto);
 	}
@@ -117,6 +160,8 @@ public class BoardServiceImpl implements BoardService{
 		mapper.replyDelete(replyNum);
 		
 	}
+
+	
 
 
 	

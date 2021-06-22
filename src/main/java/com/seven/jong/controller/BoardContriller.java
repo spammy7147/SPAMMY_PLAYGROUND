@@ -1,6 +1,10 @@
 package com.seven.jong.controller;
 
+import java.io.File;
+import java.io.IOException;
+
 import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -9,12 +13,14 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.seven.jong.DTO.BoardDTO;
-import com.seven.jong.DTO.BoardReplyDTO;
+
 import com.seven.jong.service.BoardService;
 
-import oracle.jdbc.proxy.annotation.Post;
+
 
 @Controller
 @RequestMapping("board")
@@ -36,8 +42,10 @@ public class BoardContriller {
 	}
 	//게시물 저장
 	@PostMapping("/writeSave")
-	public String writeSave(BoardDTO dto, HttpServletRequest request) {
-		bs.writeSave(dto, request);
+	public String writeSave(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mtfRequest, HttpServletResponse response) throws IOException {
+		bs.writeSave(dto, request, mtfRequest);
+		
+	   
 		return "redirect:/board/boardAllList";
 	}
 	//선택 게시물 보기 , 리플 가져오기

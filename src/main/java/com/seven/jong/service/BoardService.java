@@ -5,12 +5,13 @@ import java.util.List;
 import javax.servlet.http.HttpServletRequest;
 
 import org.springframework.ui.Model;
+import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.seven.jong.DTO.BoardDTO;
 import com.seven.jong.DTO.BoardReplyDTO;
 
 public interface BoardService {
-	public void writeSave(BoardDTO dto,HttpServletRequest request);
+	public void writeSave(BoardDTO dto,HttpServletRequest request, MultipartHttpServletRequest mul);
 	public void boardAllList(Model model, int num);
 	public void contentView (int writeNo, Model model);
 	public void modify(BoardDTO dto, HttpServletRequest request);
