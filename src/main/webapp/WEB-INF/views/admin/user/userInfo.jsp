@@ -58,7 +58,7 @@
 		</div>
 			<input type="button" id = "modButton" value="수정" onclick="inputActive()">
 			<input type="submit" disabled="disabled" id="saveButton" value="저장">
-			<input type="button" onclick="location.href='${contextPath }/jong/admin/usermanage'" value="리스트로 돌아가기">
+			<input type="button" onclick="location.href='${contextPath }/admin/usermanage'" value="리스트로 돌아가기">
 	</form>
 
 	<jsp:include page="../../include/footer.jsp" />
