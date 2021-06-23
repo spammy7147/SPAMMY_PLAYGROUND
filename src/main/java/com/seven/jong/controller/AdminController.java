@@ -26,15 +26,6 @@ public class AdminController {
 	@Autowired AdminUserService aus;
 	@Autowired CsService cs;
 	
-//	//admin 홈
-//	@GetMapping("/home")
-//	public String admin() {
-//		//@RequestParam String id, HttpSession session 
-//		//session.setAttribute(LOGIN, id);
-//		return "admin/adminHome";
-//	}
-	
-	
 	//가입 유저 관리
 	@GetMapping("/usermanage")
 	public String userManage(@RequestParam(value="pageNum" , required=false, defaultValue="1") int pageNum, Model model) {
@@ -74,6 +65,17 @@ public class AdminController {
 	public String houseManage() {
 		return "admin/house/houseManage";
 	}
+	// 숙소 검색
+	@PostMapping("/house/housesearch")
+	public String houseSearch() {
+		
+		return "admin/house/houseSearch";
+	}
+	
+	
+	
+	
+	
 	
 	//예약 관리
 	@GetMapping("/bookingmanage")
@@ -83,39 +85,9 @@ public class AdminController {
 	
 	@GetMapping("/board")
 	public String board() {
-		//ex : 관리자 권한 session생성후
-		//유저들이 사용하는 board로 연결
 		return "board/boardAllList";
 	}
 	
-//	
-//	//고객센터(자주하는 질문)
-//	@GetMapping("/customerservice")
-//	public String customerService01(Model model) {
-//		cs.faq(model);
-//		return "cs/customerService";
-//	}	
-//	//FAQ(자주하는 질문)추가하기
-//	@PostMapping(value="/addFaq")
-//	public String addFaq(@RequestParam(value="title") String title, @RequestParam(value="content") String content) {
-//		FaqDTO dto = new FaqDTO();
-//		dto.setQuestion(title);
-//		dto.setAnswer(content);
-//		
-//		cs.addFaq(dto);
-//		return "redirect:customerservice";
-//	}
-//	//FAQ 질문 삭제
-//	@PostMapping(value="/delFaq")
-//	public String selFaq(@RequestParam(value="faqNum") int faqNum) {
-//		
-//		cs.delFaq(faqNum);
-//		return "redirect:customerservice";
-//	}
-//	//고객센터(문의하기)
-//	@GetMapping("/customerqna")
-//	public String customerqna() {
-//		return "cs/customerQnA";
-//	}
+
 	
 }
