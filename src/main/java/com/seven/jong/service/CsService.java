@@ -38,7 +38,7 @@ public interface CsService {
 	void addReply(QnaRepDTO dto);
 
 	//qna 리플 가져오기
-	List<QnaRepDTO> getRepList(int write_group);
+	ArrayList<QnaRepDTO> getRepList(int write_group);
 
 
 }

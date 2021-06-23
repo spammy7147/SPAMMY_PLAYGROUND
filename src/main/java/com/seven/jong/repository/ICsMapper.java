@@ -46,7 +46,7 @@ public interface ICsMapper {
 	public void addReply(QnaRepDTO dto);
 
 	//QnA 선택 content의 리플 가져오기
-	public List<QnaRepDTO> getRepList(int write_group);
+	public ArrayList<QnaRepDTO> getRepList(int write_group);
 	
 
 }

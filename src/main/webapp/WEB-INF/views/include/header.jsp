@@ -40,8 +40,8 @@
 					</s:authorize>
 					<s:authorize access="hasRole('ROLE_ADMIN')">
 						<li><a class="dropdown-item" href="${contextPath}/admin/usermanage">유저관리</a></li>
-						<li><a class="dropdown-item" href="housemanage">숙소관리</a></li>
-						<li><a class="dropdown-item" href="bookingmanage">예약관리</a></li>
+						<li><a class="dropdown-item" href="${contextPath}/admin/housemanage">숙소관리</a></li>
+						<li><a class="dropdown-item" href="${contextPath}/admin/bookingmanage">예약관리</a></li>
 						<li><a class="dropdown-item" href="${contextPath }/board/boardAllList">게시판</a></li>
 						<li><hr class="dropdown-divider" /></li>
 					</s:authorize>

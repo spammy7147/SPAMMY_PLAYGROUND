@@ -3,7 +3,7 @@ package com.seven.jong.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.PrintWriter;
-import java.util.List;
+import java.util.ArrayList;
 import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
@@ -21,6 +21,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.seven.jong.DTO.FaqDTO;
@@ -150,24 +151,34 @@ public class CsController {
 		out.print(message);
 	}
 	
-	
+	@ResponseBody
 	@PostMapping(value="addReply", produces = "application/json; charset=utf-8")
 	public void addReply(@RequestBody Map<String, Object> map, @Nullable Authentication authentication) {
-		
+//		System.out.println("ajax연결!");
 		UserSecurityVO userSecurityVO = (UserSecurityVO) authentication.getPrincipal();
 		UserVO userVO = userSecurityVO.getUser();
 		
 		QnaRepDTO dto = new QnaRepDTO();
 		dto.setEmail(userVO.getEmail());
 		dto.setWrite_group( Integer.parseInt((String)map.get("qna_no")) );
-		dto.setTitle((String)map.get("title"));
 		dto.setContent((String)map.get("content"));
+		
+//		System.out.println(userVO.getEmail());
+//		System.out.println(Integer.parseInt((String)map.get("qna_no")));
+//		System.out.println((String)map.get("content"));
 		
 		cs.addReply(dto);
 	}
 	
-	@GetMapping(value="replyData/{write_group}",produces = "application/json; charset=utf-8")
-	public List<QnaRepDTO> replyData(@PathVariable int write_group){
+	@ResponseBody
+	@PostMapping(value="replyData/{write_group}",produces = "application/json; charset=utf-8")
+	public ArrayList<QnaRepDTO> replyData(@PathVariable int write_group){
+		ArrayList<QnaRepDTO> list = cs.getRepList(write_group);
+		for(QnaRepDTO dto : list) {
+			System.out.println(dto.getEmail());
+			System.out.println(dto.getWrite_date());
+			System.out.println(dto.getContent());
+		}
 		return cs.getRepList(write_group);
 	}
 	
