@@ -23,7 +23,6 @@
     
     <resultMap id="QnaRepMap" type="com.seven.jong.DTO.QnaRepDTO" >
         <id property="email" column="email"/>
-        <result property="title" column="title"/>
         <result property="content" column="content"/>
         <result property="write_group" column="write_group"/>
         <result property="write_date" column="write_date"/>
@@ -87,8 +86,8 @@
 	
 	<!-- 리플 등록 -->
 	<insert id="addReply">
-		insert into QNAREPLY(email,title,content,write_group)
-			values(#{email},#{title},#{content},#{write_group})
+		insert into QNAREPLY(email,content,write_group)
+			values(#{email},#{content},#{write_group})
 	</insert>
 	
 	<!-- 해당 QnA 리플 가져오기 -->
