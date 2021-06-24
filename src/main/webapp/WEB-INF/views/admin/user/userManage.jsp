@@ -29,7 +29,7 @@
 		<h1 style="text-align: center;">회 원 정 보</h1>
 		
 		
-		<form action="${contextPath }/admin/user/usersearch" method="post">
+		<form action="${contextPath }/admin/user/usersearch">
 			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 			<select name="choice">
 				<option value="1">이메일
