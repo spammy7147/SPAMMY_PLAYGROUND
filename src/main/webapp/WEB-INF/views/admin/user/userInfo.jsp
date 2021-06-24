@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
 <c:set var="contextPath" value="${pageContext.request.contextPath }"/>
 <!DOCTYPE html>
 <html>
@@ -23,44 +24,53 @@
 	</script>
 
 </head>
-<body>
+<body id="page-top">
 
-	<jsp:include page="../../include/header.jsp" />
-	
-	
-	<form action="modifyUserInfo" method="post">
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		<input type="hidden" name="userId" value="${userInfo.userId }">
+    <jsp:include page="../adminNav.jsp"/>
+
+		<!-- Begin Page Content -->
+		<div class="container-fluid">
 		
-		<div style="width:300px; margin: 0 auto;">
-			<table border="1" style="width:300px;">
-				<tr>
-					<th>email</th>
-					<td><input readonly type="text" name="email" value="${userInfo.email }"></td>
-				</tr>
-				<tr>
-					<th>비밀번호</th>
-					<td><input readonly type="text" name="password" value="${userInfo.password }"></td>
-				</tr>
-				<tr>
-					<th>이   름</th>
-					<td><input id = "infoInput1" disabled="disabled" type="text" name="name" value="${userInfo.name }"></td>
-				</tr>
-				<tr>
-					<th>생   일</th>
-					<td><input id = "infoInput2" disabled="disabled" type="date" name="birth" value="${userInfo.birth }"></td>
-				</tr>
-				<tr>
-					<th>핸드폰</th>
-					<td><input id = "infoInput3" disabled="disabled" type="text" name="phone" value="${userInfo.phone }"></td>
-				</tr>
-			</table>	
+		
+		
+			<form action="modifyUserInfo" method="post">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				<input type="hidden" name="userId" value="${userInfo.userId }">
+				
+				<div style="width:300px; margin: 0 auto;">
+					<table border="1" style="width:300px;">
+						<tr>
+							<th>email</th>
+							<td><input readonly type="text" name="email" value="${userInfo.email }"></td>
+						</tr>
+						<tr>
+							<th>비밀번호</th>
+							<td><input readonly type="text" name="password" value="${userInfo.password }"></td>
+						</tr>
+						<tr>
+							<th>이   름</th>
+							<td><input id = "infoInput1" disabled="disabled" type="text" name="name" value="${userInfo.name }"></td>
+						</tr>
+						<tr>
+							<th>생   일</th>
+							<td><input id = "infoInput2" disabled="disabled" type="date" name="birth" value="${userInfo.birth }"></td>
+						</tr>
+						<tr>
+							<th>핸드폰</th>
+							<td><input id = "infoInput3" disabled="disabled" type="text" name="phone" value="${userInfo.phone }"></td>
+						</tr>
+					</table>	
+				</div>
+				<input type="button" id = "modButton" value="수정" onclick="inputActive()">
+				<input type="submit" disabled="disabled" id="saveButton" value="저장">
+				<input type="button" onclick="location.href='${contextPath }/admin/usermanage'" value="리스트로 돌아가기">
+			</form>
+		
+		
+		
 		</div>
-			<input type="button" id = "modButton" value="수정" onclick="inputActive()">
-			<input type="submit" disabled="disabled" id="saveButton" value="저장">
-			<input type="button" onclick="location.href='${contextPath }/admin/usermanage'" value="리스트로 돌아가기">
-	</form>
+		<!-- /.container-fluid -->
 
-	<jsp:include page="../../include/footer.jsp" />
+	<jsp:include page="../adminFooter.jsp"/>
 </body>
 </html>

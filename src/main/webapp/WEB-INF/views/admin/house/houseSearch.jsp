@@ -6,11 +6,26 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
-<jsp:include page="../../include/header.jsp" />
+<body id="page-top">
 
-housesearch.jsp
-<jsp:include page="../../include/footer.jsp" />
 
+    <jsp:include page="../adminNav.jsp"/>
+
+		<!-- Begin Page Content -->
+		<div class="container-fluid">
+		
+		
+		<h1 style="text-align: center;">숙 소 검 색</h1>
+		
+		houseSearch.jsp
+
+		
+		</div>
+		<!-- /.container-fluid -->
+
+	<jsp:include page="../adminFooter.jsp"/>
+	
+	
 </body>
+
 </html>
