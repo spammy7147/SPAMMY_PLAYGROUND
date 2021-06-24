@@ -11,11 +11,11 @@
 <div class="test">
     <form action="<c:url value='/hosting/address'/>" method="post">
         <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-        <input type="text" name="country" placeholder="국가"><br>
-        <input type="text" name="city" placeholder="시/도"><br>
-        <input type="text" name="district" placeholder="시/군"><br>
-        <input type="text" name="road" placeholder="상세주소"><br>
-        <input type="text" name="room" placeholder="동/호수"><br>
+        <input type="text" id="country" name="country" placeholder="국가"><br>
+        <input type="text" id="city" name="city" placeholder="시/도"><br>
+        <input type="text" id="district" name="district" placeholder="시/군"><br>
+        <input type="text" id="road" name="road" placeholder="상세주소"><br>
+        <input type="text" id="room" name="room" placeholder="동/호수"><br>
         <div id="map" style="width:500px;height:400px;"></div>
         <input type="submit" value="다음">
     </form>
