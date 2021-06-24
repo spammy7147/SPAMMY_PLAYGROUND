@@ -8,11 +8,14 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
 
-		<jsp:include page="../../include/header.jsp" />
-	
-		
+
+<body id="page-top">
+
+
+    <jsp:include page="../adminNav.jsp"/>
+
+		<!-- Begin Page Content -->
 		<div>
 		<h1 style="text-align: center;">검 색 결 과</h1>
 		
@@ -66,7 +69,10 @@
 			
 		</table>
 		</div>
-		
-		<jsp:include page="../../include/footer.jsp" />
+		<!-- /.container-fluid -->
+
+	<jsp:include page="../adminFooter.jsp"/>
+	
+	
 </body>
 </html>
