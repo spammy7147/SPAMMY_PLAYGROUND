@@ -21,7 +21,8 @@
 	const token = $("meta[name='_csrf']").attr('content');
 	
 	function rep(){
-		let form={}; let arr = $("#frm").serializeArray();
+		let form={};
+		let arr = $("#frm").serializeArray();
 		for(i=0 ; i<arr.length ; i++){ form[arr[i].name] = arr[i].value }
 		
 		$.ajax({
