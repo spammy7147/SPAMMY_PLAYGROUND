@@ -6,11 +6,16 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
 
-	<jsp:include page="../../include/header.jsp" />
+<body id="page-top">
+
+
+    <jsp:include page="../adminNav.jsp"/>
+
+		<!-- Begin Page Content -->
+		<div class="container-fluid">
 		
-		<div>
+		
 		<h1 style="text-align: center;">숙 소 정 보</h1>
 		
 		
@@ -63,9 +68,15 @@
 			
 			
 		</table>
-		</div>
 		
-	 <jsp:include page="../../include/footer.jsp" />
+		
+		</div>
+		<!-- /.container-fluid -->
 
+	<jsp:include page="../adminFooter.jsp"/>
+	
+	
 </body>
+
+
 </html>

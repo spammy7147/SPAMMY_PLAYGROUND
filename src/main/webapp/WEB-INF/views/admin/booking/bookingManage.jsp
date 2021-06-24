@@ -6,11 +6,26 @@
 <meta charset="UTF-8">
 <title>Insert title here</title>
 </head>
-<body>
+<body id="page-top">
 
-<jsp:include page="../../include/header.jsp" />
-bookingManage.jsp
-<jsp:include page="../../include/footer.jsp" />
 
+    <jsp:include page="../adminNav.jsp"/>
+
+		<!-- Begin Page Content -->
+		<div class="container-fluid">
+		
+		
+		
+			
+		bookingManage.jsp
+		
+		
+		
+		</div>
+		<!-- /.container-fluid -->
+
+	<jsp:include page="../adminFooter.jsp"/>
+	
+	
 </body>
 </html>
