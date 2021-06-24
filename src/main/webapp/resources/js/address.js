@@ -1,8 +1,10 @@
+
 let container = document.getElementById('map');
 let options = {
     center: new kakao.maps.LatLng(33.450701, 126.570667),
     level: 3
 };
+
 
 let map = new kakao.maps.Map(container, options);
 
@@ -10,7 +12,7 @@ let map = new kakao.maps.Map(container, options);
 let geocoder = new kakao.maps.services.Geocoder();
 
 // 주소로 좌표를 검색합니다
-geocoder.addressSearch('단성사', function(result, status) {
+geocoder.addressSearch(address, function(result, status) {
 
     // 정상적으로 검색이 완료됐으면
     if (status === kakao.maps.services.Status.OK) {
