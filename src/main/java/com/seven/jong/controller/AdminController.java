@@ -68,7 +68,7 @@ public class AdminController {
 		return "redirect:userInfo?userId="+userId;
 	}
 	//유저검색
-	@PostMapping("/user/usersearch")
+	@GetMapping("/user/usersearch")
 	public String userSearch(@RequestParam(value="pageNum" , required=false, defaultValue="1") int pageNum, @RequestParam("choice")String choice, @RequestParam("userSearch")String search, Model model) {
 		String c = null;
 		if(choice.equals("1")) {
@@ -77,6 +77,8 @@ public class AdminController {
 			c = "name";
 		}
 		
+		model.addAttribute("choice", choice);
+		model.addAttribute("userSearch", search);
 		aus.userSearch(pageNum, c,search,model);
 		return "admin/user/userSearch";
 	}
