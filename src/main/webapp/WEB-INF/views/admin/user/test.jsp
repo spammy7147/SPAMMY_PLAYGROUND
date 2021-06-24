@@ -6,13 +6,6 @@
 <html>
 <head>
 <meta charset="UTF-8">
-
-<script type="text/javascript">
-	function formSubmit(){
-		document.getElementById('frm').submit();
-	}
-</script>
-
 </head>
 <body id="page-top">
 
@@ -58,11 +51,9 @@
  						</thead>
  						<tfoot>
  							<tr>
-								<th colspan="3">
-									<c:forEach var="pageNum" begin="1" end="${allPage }">
-										<a href="${contextPath }/admin/usermanage?pageNum=${pageNum}">${pageNum } </a>
-									</c:forEach>
-								</th>
+								<th>Email</th>
+								<th>Name</th>
+								<th>Register Date</th>
 							</tr>
 						</tfoot>
 						<tbody>
@@ -85,27 +76,39 @@
 									<tr>
 								</c:otherwise>
 							</c:choose>
-								
+ 							
 						</tbody>
 					</table>
 				</div>
 			</div>
                     
                     
+                    
+                    
+                    
 			
 			
 			
+			
+			<tr>
+				<td colspan="3">
+				
+					<c:forEach var="pageNum" begin="1" end="${allPage }">
+					<a href="${contextPath }/admin/usermanage?pageNum=${pageNum}">${pageNum } &nbsp;</a>
+					</c:forEach>
+					<a href="${contextPath }/user/register">유저등록</a>
+				
+				
+				</td>
+			</tr>
+			
+			
+			
+		
 		
 		</div>
 		<!-- /.container-fluid -->
-		
-		<form action="${contextPath }/user/register" id="frm">
-			<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-			<a class="btn btn-primary" onclick="formSubmit()">유저추가</a>
-		</form>
- 		
-                    
-			
+
 	<jsp:include page="../adminFooter.jsp"/>
 	
 	
