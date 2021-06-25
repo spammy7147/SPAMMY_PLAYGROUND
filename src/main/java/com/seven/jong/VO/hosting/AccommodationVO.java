@@ -1,27 +1,27 @@
 package com.seven.jong.VO.hosting;
 
-import lombok.Builder;
-import lombok.Getter;
-import lombok.Setter;
-import lombok.ToString;
+import lombok.*;
 
 @Getter
 @ToString
 @Builder
+@NoArgsConstructor
+@AllArgsConstructor
 public class AccommodationVO {
 
-    private Integer hostingId;
+    private Integer accommodationId;
     private Integer userId;
     private String name;
     private String address;
     private String type;
-    private Integer minimumNumberOfGuest;
     private Integer maximumNumberOfGuest;
-    private Integer numberOfBed;
     private Integer numberOfBedroom;
+    private Integer numberOfBed;
+    private String typeOfBed;
     private Integer numberOfBathroom;
     private Integer contactNumber;
     private Integer price;
+    private String description;
 
 
 }

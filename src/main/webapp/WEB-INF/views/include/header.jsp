@@ -17,12 +17,26 @@
 	<link rel="icon" type="image/x-icon" href="${contextPath}/img/favicon.svg"/>
 	<!-- Bootstrap icons-->
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.5.0/font/bootstrap-icons.css" rel="stylesheet" />
-
-	<link href="${contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet">
-	<script src="${contextPath}/bootstrap/js/bootstrap.bundle.js"></script>
-
+	<!-- Custom fonts for this template-->
+	<link href="${contextPath}/css/all.css" rel="stylesheet" type="text/css">
+	<link
+			href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
+			rel="stylesheet">
 	<!-- Core theme CSS (includes Bootstrap)-->
-	<link href="${contextPath}/css/header.css" rel="stylesheet"/>
+	<link href="${contextPath}/bootstrap/css/bootstrap.css" rel="stylesheet"/>
+	<link href="${contextPath}/resources/css/global.css" rel="stylesheet"/>
+
+	<!-- Bootstrap core JavaScript-->
+	<script defer src="${contextPath}/bootstrap/js/bootstrap.bundle.min.js"></script>
+	<script defer src="${contextPath}/bootstrap/jquery/jquery.min.js"></script>
+
+	<!-- Core plugin JavaScript-->
+	<script defer src="${contextPath}/bootstrap/jquery-easing/jquery.min.js"></script>
+
+	<!-- Custom scripts for all pages-->
+	<script defer src="${contextPath}/js/sb-admin-2.min.js"></script>
+
+
 </head>
 <body>
 	<!-- Navigation-->

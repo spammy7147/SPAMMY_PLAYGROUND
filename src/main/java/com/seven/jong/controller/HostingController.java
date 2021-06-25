@@ -20,14 +20,18 @@ public class HostingController {
 
     @GetMapping("/address")
     public String address() {
-
         return "hosting/address";
     }
 
     @PostMapping("/address")
     public String address(HostingDTO hostingDTO) {
         System.out.println(hostingDTO);
-        return "hosting/type";
+        return "redirect:/hosting/house";
+    }
+
+    @GetMapping("/house")
+    public String house() {
+        return "hosting/house";
     }
 
     @GetMapping("/file")
