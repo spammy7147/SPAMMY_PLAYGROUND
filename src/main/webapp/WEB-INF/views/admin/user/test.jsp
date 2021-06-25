@@ -101,10 +101,7 @@
 				
 				</td>
 			</tr>
-			
-			
-			
-		
+
 		
 		</div>
 		<!-- /.container-fluid -->
