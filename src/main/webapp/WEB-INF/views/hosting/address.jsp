@@ -1,6 +1,7 @@
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
 
+<title>AirBnD - 주소 </title>
 <c:import url="../include/header.jsp"/>
 
 
@@ -8,15 +9,23 @@
 <script defer src="${contextPath}/js/address.js"></script>
 
 
-<div class="test">
-    <form action="<c:url value='/hosting/address'/>" method="post">
-        <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-        <input type="text" id="country" name="country" placeholder="국가"><br>
-        <input type="text" id="city" name="city" placeholder="시/도"><br>
-        <input type="text" id="district" name="district" placeholder="시/군"><br>
-        <input type="text" id="road" name="road" placeholder="상세주소"><br>
-        <input type="text" id="room" name="room" placeholder="동/호수"><br>
-        <div id="map" style="width:500px;height:400px;"></div>
-        <input type="submit" value="다음">
-    </form>
+<div class="container p-5 m-auto">
+    <div class="row justify-content-center">
+        <div class="col-xl-4 m-auto">
+            <div class="card-body">
+                <form action="#" method="post">
+                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                    <input type="text" class="form-control mb-3" id="country" name="country" placeholder="국가">
+                    <input type="text" class="form-control mb-3" id="city" name="city" placeholder="시/도">
+                    <input type="text" class="form-control mb-3" id="district" name="district" placeholder="시/군">
+                    <input type="text" class="form-control mb-3" id="road" name="road" placeholder="상세주소">
+                    <input type="text" class="form-control mb-3" id="room" name="room" placeholder="동/호수">
+                    <input type="submit" value="다음">
+                </form>
+            </div>
+        </div>
+        <div class="col-lg-8">
+            <div class="m-auto" id="map" style="width:600px;height:600px;"></div>
+        </div>
+    </div>
 </div>

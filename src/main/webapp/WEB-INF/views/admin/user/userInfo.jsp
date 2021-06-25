@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath }"/>
-<!DOCTYPE html>
+<%@ include file="../../include/taglib.jsp"%>
+
 <html>
 <head>
-<meta charset="UTF-8">
+	<title></title>
+	<c:import url="../../include/header.jsp" />
 	<script type="text/javascript">
 		function inputActive(){
 			const target1 = document.getElementById("infoInput1");
@@ -24,7 +24,8 @@
 </head>
 <body id="page-top">
 
-    <jsp:include page="../adminNav.jsp"/>
+<c:import url="../sidebar.jsp" />
+<c:import url="../../include/navbar.jsp" />
 
 		<!-- Begin Page Content -->
 		<div class="container-fluid">
@@ -69,6 +70,6 @@
 		</div>
 		<!-- /.container-fluid -->
 
-	<jsp:include page="../adminFooter.jsp"/>
+<c:import url="../../include/navbar.jsp" />
 </body>
 </html>

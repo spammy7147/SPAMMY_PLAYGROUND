@@ -25,6 +25,11 @@
      -->
 
     <http>
+        <intercept-url pattern="/resources/**" access="permitAll()"/>
+        <intercept-url pattern="/img/**" access="permitAll()"/>
+        <intercept-url pattern="/js/**" access="permitAll()"/>
+        <intercept-url pattern="/css/**" access="permitAll()"/>
+        <intercept-url pattern="/bootstrap/**" access="permitAll()"/>
 
         <intercept-url  pattern="/hosting/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
         <intercept-url  pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
