@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>Title</title>
+    <title>AirBnD - 관리자 페이지</title>
     <c:import url="../include/header.jsp" />
 
 </head>
@@ -194,7 +194,7 @@
 </a>
 
 <!-- Page level custom scripts -->
-<script defer src="${contextPath}/js/demo/chart-area-demo.js"></script>
-<script defer src="${contextPath}/js/demo/chart-pie-demo.js"></script>
+<script src="${contextPath}/js/demo/chart-area-demo.js"></script>
+<script src="${contextPath}/js/demo/chart-pie-demo.js"></script>
 </body>
 </html>
