@@ -14,6 +14,13 @@ CREATE TABLE accommodation (
     reg_date TIMESTAMP DEFAULT SYSDATE
 );
 
+CREATE SEQUENCE accommodation_seq
+    START WITH 1
+    INCREMENT by 1
+    MAXVALUE 10000
+    MINVALUE 1
+    NOCYCLE;
+
 ALTER TABLE accommodation
     ADD CONSTRAINT FK_accommodation
         FOREIGN KEY (user_id)

@@ -7,6 +7,13 @@ CREATE TABLE reservation (
    check_out TIMESTAMP NOT NULL,
    reg_date TIMESTAMP DEFAULT SYSDATE
 );
+CREATE SEQUENCE reservation_seq
+    START WITH 1
+    INCREMENT by 1
+    MAXVALUE 10000
+    MINVALUE 1
+    NOCYCLE;
+
 ALTER TABLE reservation
     ADD CONSTRAINT FK_reservation_user
         FOREIGN KEY (user_id)
