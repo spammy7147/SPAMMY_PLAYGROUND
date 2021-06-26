@@ -1,12 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-    <c:set var="contextPath" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../../include/taglib.jsp"%>
+
 <html>
 <head>
-<meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<title>AirBnD - 관리자 고객센터 수정</title>
+	<c:import url="../../include/header.jsp" />
+
 <script type="text/javascript">
 	function readURL(input){
 		var file = input.files[0]
@@ -24,48 +23,51 @@
 </head>
 
 <body id="page-top">
+<!-- Page Wrapper -->
+<div id="wrapper">
+	<c:import url="../sidebar.jsp" />
 
+	<!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column">
 
-    <jsp:include page="../adminNav.jsp"/>
+		<!-- Main Content -->
+		<div id="content">
 
-		<!-- Begin Page Content -->
-		<div class="container-fluid">
-		
-		
-		
-			
-		<div style="width:300px; margin: 0 auto;">
-			<form action="${contextPath }/admin/modify?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data" method="post">
-				<input type="hidden" name="qnaNo" value="${qnaData.qnaNo }">
-				<input type="hidden" name="originFileName" value="${qnaData.imageFileName }">
-				제목 <input type="text" size="30" name="title" value="${qnaData.title}"><hr>
-				내용 <textarea rows="5" cols="30" name="content">${qnaData.content}</textarea>
-				<hr>
-				<c:if test="${qnaData.imageFileName != 'nan' }">
-					<img width="100px" height="100px" id="preview"
-						src="${contextPath }/admin/download?imageFileName=${qnaData.imageFileName}">
-				</c:if>
-				<input type="file" name="imageFileName" onchange="readURL(this)"><hr>
-				<input type="submit" value="수정">
-				<input type="button" onclick="history.back()" value="돌아가기">
-			</form>	
+			<c:import url="../../include/navbar.jsp" />
+
+			<!-- Begin Page Content -->
+			<div class="container-fluid">
+				<div style="width:300px; margin: 0 auto;">
+					<form action="${contextPath }/admin/modify?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data" method="post">
+						<input type="hidden" name="qnaNo" value="${qnaData.qnaNo }">
+						<input type="hidden" name="originFileName" value="${qnaData.imageFileName }">
+						제목 <input type="text" size="30" name="title" value="${qnaData.title}"><hr>
+						내용 <textarea rows="5" cols="30" name="content">${qnaData.content}</textarea>
+						<hr>
+						<c:if test="${qnaData.imageFileName != 'nan' }">
+							<img width="100px" height="100px" id="preview"
+								 src="${contextPath }/admin/download?imageFileName=${qnaData.imageFileName}">
+						</c:if>
+						<input type="file" name="imageFileName" onchange="readURL(this)"><hr>
+						<input type="submit" value="수정">
+						<input type="button" onclick="history.back()" value="돌아가기">
+					</form>
+				</div>
+			</div>
+			<!-- /.container-fluid -->
 		</div>
-		
-		
-		
-		</div>
-		<!-- /.container-fluid -->
+		<!-- End of Main Content -->
+		<c:import url="../../include/footer.jsp"/>
+		<!-- End of Footer -->
+	</div>
+	<!-- End of Content Wrapper -->
+</div>
+<!-- End of Page Wrapper -->
 
-	<jsp:include page="../adminFooter.jsp"/>
-	
-	
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+	<i class="fas fa-angle-up"></i>
+</a>
+
 </body>
-
 </html>
-
-
-
-
-
-
-

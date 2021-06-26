@@ -4,7 +4,7 @@
 
 <html>
 <head>
-    <title>AirBnD - 관리자 페이지</title>
+    <title>AirBnD - 관리자 홈</title>
     <c:import url="../include/header.jsp" />
 
 </head>

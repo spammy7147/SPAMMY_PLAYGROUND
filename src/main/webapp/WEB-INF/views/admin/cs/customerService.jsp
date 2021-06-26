@@ -1,13 +1,12 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../../include/taglib.jsp"%>
 <%@ taglib prefix="s" uri="http://www.springframework.org/security/tags" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath }"/>
-<!DOCTYPE html>
+
+
 <html>
 <head>
-<meta charset="UTF-8">
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<title>AirBnD - 관리자 숙소 검색</title>
+	<c:import url="../../include/header.jsp" />
 <!-- 고객센터 / 자주하는 질문 -->
 	<style type="text/css">
 		input[id*="answer"]{
@@ -68,75 +67,90 @@
 	
 	</script>
 </head>
+
+
 <body id="page-top">
 
+<!-- Page Wrapper -->
+<div id="wrapper">
+	<c:import url="../sidebar.jsp" />
 
-    <jsp:include page="../adminNav.jsp"/>
 
-		<!-- Begin Page Content -->
-		<div class="container-fluid">
-		
-		
-		
-			
-		<h3> 자주하는 질문 </h3>
-				
+	<!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column">
+
+		<!-- Main Content -->
+		<div id="content">
+
+			<c:import url="../../include/navbar.jsp" />
+
+			<!-- Begin Page Content -->
+			<div class="container-fluid">
+				<h3> 자주하는 질문 </h3>
 				<c:choose>
 					<c:when test="${faqList.size() != 0}">
 						<c:forEach var="dto" items="${faqList }" varStatus="vs">
-						<form action="${contextPath }/admin/delFaq" method="post">
-							<div class="accordion">
+							<form action="${contextPath }/admin/delFaq" method="post">
+								<div class="accordion">
 									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 									<input type="hidden" name="faqNum" value="${dto.faqNum} ">
-									
+
 									<input type="radio" name="accordion" id="answer${vs.index}">
 									<label for="answer${vs.index}">
-										${dto.question }
+											${dto.question }
 										<s:authorize access="hasRole('ROLE_ADMIN')">
 											<button type="submit">삭제</button>
 										</s:authorize>
 									</label>
 									<div><p>${dto.answer }</p></div>
-							</div>
-						</form>
+								</div>
+							</form>
 						</c:forEach>
 					</c:when>
 					<c:otherwise>
 						<h1>등록된 질문이 없습니다.</h1>
 					</c:otherwise>
 				</c:choose>
-			
+
 				<hr>
-				
+
 				<s:authorize access="hasRole('ROLE_ADMIN')">
 					<button type="button" onclick="slideClick()">등록</button>
 				</s:authorize>
-				
-				
+
+
 				<div id="modal_wrap">
-				<div id="first">
-					<div style="width:250px; margin: 0 auto; padding-top: 20px;">
-						<form id="frm" action="${contextPath }/admin/addFaq" method="post">
-							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-							<b>자주하는 질문 추가 페이지</b><hr>
-							<b>제목</b> <br> <input type="text" id="title" size="25" name="title"><hr>
-							<b>내용</b> <br> <textarea rows="5" cols="30" id="content" name="content"></textarea>
-							<hr>
-							<button type="button" onclick="submit()" class="btn btn-outline-secondary">등록</button>
-							<button type="button" onclick="slide_hide()" class="btn btn-outline-success">취소</button>
-						</form>
+					<div id="first">
+						<div style="width:250px; margin: 0 auto; padding-top: 20px;">
+							<form id="frm" action="${contextPath }/admin/addFaq" method="post">
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+								<b>자주하는 질문 추가 페이지</b><hr>
+								<b>제목</b> <br> <input type="text" id="title" size="25" name="title"><hr>
+								<b>내용</b> <br> <textarea rows="5" cols="30" id="content" name="content"></textarea>
+								<hr>
+								<button type="button" onclick="submit()" class="btn btn-outline-secondary">등록</button>
+								<button type="button" onclick="slide_hide()" class="btn btn-outline-success">취소</button>
+							</form>
+						</div>
 					</div>
 				</div>
-				</div>
-		
-		
-		
+			</div>
+			<!-- /.container-fluid -->
 		</div>
-		<!-- /.container-fluid -->
+		<!-- End of Main Content -->
 
-	<jsp:include page="../adminFooter.jsp"/>
-	
-	
+		<c:import url="../../include/footer.jsp"/>
+		<!-- End of Footer -->
+	</div>
+	<!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+	<i class="fas fa-angle-up"></i>
+</a>
+
 </body>
-
 </html>
