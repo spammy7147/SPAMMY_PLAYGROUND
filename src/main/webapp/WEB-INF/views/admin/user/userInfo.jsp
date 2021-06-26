@@ -1,10 +1,9 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../../include/taglib.jsp"%>
 
 <html>
 <head>
-	<title></title>
+	<title>AirBnD - 관리자 사용자 정보</title>
 	<c:import url="../../include/header.jsp" />
 	<script type="text/javascript">
 		function inputActive(){
@@ -22,54 +21,76 @@
 	</script>
 
 </head>
+
 <body id="page-top">
 
-<c:import url="../sidebar.jsp" />
-<c:import url="../../include/navbar.jsp" />
+<!-- Page Wrapper -->
+<div id="wrapper">
+	<c:import url="../sidebar.jsp" />
 
-		<!-- Begin Page Content -->
-		<div class="container-fluid">
-		
-		
-		
-			<form action="modifyUserInfo" method="post">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-				<input type="hidden" name="userId" value="${userInfo.userId }">
-				
-				<div style="width:300px; margin: 0 auto;">
-					<table border="1" style="width:300px;">
-						<tr>
-							<th>email</th>
-							<td><input readonly type="text" name="email" value="${userInfo.email }"></td>
-						</tr>
-						<tr>
-							<th>비밀번호</th>
-							<td><input readonly type="text" name="password" value="${userInfo.password }"></td>
-						</tr>
-						<tr>
-							<th>이   름</th>
-							<td><input id = "infoInput1" disabled="disabled" type="text" name="name" value="${userInfo.name }"></td>
-						</tr>
-						<tr>
-							<th>생   일</th>
-							<td><input id = "infoInput2" disabled="disabled" type="date" name="birth" value="${userInfo.birth }"></td>
-						</tr>
-						<tr>
-							<th>핸드폰</th>
-							<td><input id = "infoInput3" disabled="disabled" type="text" name="phone" value="${userInfo.phone }"></td>
-						</tr>
-					</table>	
-				</div>
-				<input type="button" id = "modButton" value="수정" onclick="inputActive()">
-				<input type="submit" disabled="disabled" id="saveButton" value="저장">
-				<input type="button" onclick="location.href='${contextPath }/admin/usermanage'" value="리스트로 돌아가기">
-			</form>
-		
-		
-		
+
+	<!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column">
+
+		<!-- Main Content -->
+		<div id="content">
+
+			<c:import url="../../include/navbar.jsp" />
+
+			<!-- Begin Page Content -->
+			<div class="container-fluid">
+
+
+
+				<form action="modifyUserInfo" method="post">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					<input type="hidden" name="userId" value="${userInfo.userId }">
+
+					<div style="width:300px; margin: 0 auto;">
+						<table border="1" style="width:300px;">
+							<tr>
+								<th>email</th>
+								<td><input readonly type="text" name="email" value="${userInfo.email }"></td>
+							</tr>
+							<tr>
+								<th>비밀번호</th>
+								<td><input readonly type="text" name="password" value="${userInfo.password }"></td>
+							</tr>
+							<tr>
+								<th>이   름</th>
+								<td><input id = "infoInput1" disabled="disabled" type="text" name="name" value="${userInfo.name }"></td>
+							</tr>
+							<tr>
+								<th>생   일</th>
+								<td><input id = "infoInput2" disabled="disabled" type="date" name="birth" value="${userInfo.birth }"></td>
+							</tr>
+							<tr>
+								<th>핸드폰</th>
+								<td><input id = "infoInput3" disabled="disabled" type="text" name="phone" value="${userInfo.phone }"></td>
+							</tr>
+						</table>
+					</div>
+					<input type="button" id = "modButton" value="수정" onclick="inputActive()">
+					<input type="submit" disabled="disabled" id="saveButton" value="저장">
+					<input type="button" onclick="location.href='${contextPath }/admin/usermanage'" value="리스트로 돌아가기">
+				</form>
+			</div>
+			<!-- /.container-fluid -->
 		</div>
-		<!-- /.container-fluid -->
+		<!-- End of Main Content -->
 
-<c:import url="../../include/navbar.jsp" />
+		<c:import url="../../include/footer.jsp"/>
+		<!-- End of Footer -->
+	</div>
+	<!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+	<i class="fas fa-angle-up"></i>
+</a>
+
 </body>
 </html>
