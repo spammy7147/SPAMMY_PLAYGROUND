@@ -1,0 +1,5 @@
+CREATE TABLE air_user_photo(
+    user_id NUMBER PRIMARY KEY,
+    photo_URL VARCHAR2(1000) NOT NULL,
+    reg_date TIMESTAMP DEFAULT SYSDATE
+);

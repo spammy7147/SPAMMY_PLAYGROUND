@@ -5,3 +5,8 @@ create table persistent (
     last_used timestamp(6) not null
 );
 
+ALTER TABLE persistent
+    ADD CONSTRAINT FK_persistent
+        FOREIGN KEY (user_id)
+            REFERENCES air_user (user_id)
+                ON DELETE CASCADE;
