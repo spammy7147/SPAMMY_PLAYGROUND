@@ -125,7 +125,7 @@ public class AdminController {
 	public String writeSave(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mtfRequest, HttpServletResponse response) throws IOException {
 		bs.writeSave(dto, request, mtfRequest);
 			
-		return "redirect:admin/boardAllList";
+		return "redirect:boardalllist";
 	}
 	
 	
