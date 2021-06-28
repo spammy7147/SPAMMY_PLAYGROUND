@@ -24,12 +24,12 @@
     </update>
 
 
-    <select id="getTokenForKey" resultMap="accommodationMap">
+    <select id="getTokenForKey" resultMap="persistentMap">
         SELECT * FROM PERSISTENT
         WHERE KEY = #{key}
     </select>
 
-    <select id="getTokenByUserId" resultMap="accommodationMap">
+    <select id="getTokenByUserId" resultMap="persistentMap">
         SELECT * FROM PERSISTENT
         WHERE USER_ID = #{userId}
     </select>
