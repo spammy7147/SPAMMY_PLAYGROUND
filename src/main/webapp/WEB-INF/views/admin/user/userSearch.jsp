@@ -18,7 +18,7 @@
 <body id="page-top">
 
 
-    <jsp:include page="../adminNav.jsp"/>
+    <jsp:include page="../sidebar.jsp"/>
 
 		<!-- Begin Page Content -->
 		<div class="container-fluid">
@@ -107,7 +107,7 @@
 			<a class="btn btn-primary" onclick="formSubmit()">목록으로</a>
 		</form>
 
-	<jsp:include page="../adminFooter.jsp"/>
+	<jsp:include page="../../include/footer.jsp"/>
 	
 	
 </body>

@@ -71,7 +71,7 @@
 <body id="page-top" onload="replyData()">
 
 
-    <jsp:include page="../adminNav.jsp"/>
+    <jsp:include page="../sidebar.jsp"/>
 
 		<!-- Begin Page Content -->
 		<div class="container-fluid">
@@ -133,7 +133,7 @@
 		</div>
 		<!-- /.container-fluid -->
 
-	<jsp:include page="../adminFooter.jsp"/>
+	<jsp:include page="../../include/footer.jsp"/>
 	
 	
 </body>
