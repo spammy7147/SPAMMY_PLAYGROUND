@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.seven.jong.repository.user.IPersistentMapper">
+<mapper namespace="com.seven.jong.repository.hosting.IAccommodationPhotoMapper">
 
     <resultMap id="accommodationPhotoMap" type="com.seven.jong.VO.hosting.AccommodationPhotoVO" >
         <id property="accommodationId" column="accommodation_id"/>
