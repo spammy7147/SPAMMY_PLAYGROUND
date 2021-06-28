@@ -1,4 +1,4 @@
-package com.seven.jong.repository;
+package com.seven.jong.repository.user;
 
 import com.seven.jong.VO.security.PersistentTokenVO;
 

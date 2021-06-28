@@ -1,75 +1,129 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../../include/taglib.jsp"%>
+
 
 <html>
 <head>
-	<title></title>
+	<title>AirBnD - 사용자 관리</title>
 	<c:import url="../../include/header.jsp" />
-	<script type="text/javascript">
-		function inputActive(){
-			const target1 = document.getElementById("infoInput1");
-			const target2 = document.getElementById("infoInput2");
-			const target3 = document.getElementById("infoInput3");
-			const target4 = document.getElementById("modButton");
-			const target5 = document.getElementById("saveButton");
-			target1.disabled = false;
-			target2.disabled = false;
-			target3.disabled = false;
-			target4.disabled = true;
-			target5.disabled = false;
-		}
-	</script>
+
+<script type="text/javascript">
+	function formSubmit(){
+		document.getElementById('frm').submit();
+	}
+</script>
 
 </head>
+
 <body id="page-top">
 
-<c:import url="../sidebar.jsp" />
-<c:import url="../../include/navbar.jsp" />
+<!-- Page Wrapper -->
+<div id="wrapper">
+	<c:import url="../sidebar.jsp" />
 
-		<!-- Begin Page Content -->
-		<div class="container-fluid">
-		
-		
-		
-			<form action="modifyUserInfo" method="post">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-				<input type="hidden" name="userId" value="${userInfo.userId }">
-				
-				<div style="width:300px; margin: 0 auto;">
-					<table border="1" style="width:300px;">
-						<tr>
-							<th>email</th>
-							<td><input readonly type="text" name="email" value="${userInfo.email }"></td>
-						</tr>
-						<tr>
-							<th>비밀번호</th>
-							<td><input readonly type="text" name="password" value="${userInfo.password }"></td>
-						</tr>
-						<tr>
-							<th>이   름</th>
-							<td><input id = "infoInput1" disabled="disabled" type="text" name="name" value="${userInfo.name }"></td>
-						</tr>
-						<tr>
-							<th>생   일</th>
-							<td><input id = "infoInput2" disabled="disabled" type="date" name="birth" value="${userInfo.birth }"></td>
-						</tr>
-						<tr>
-							<th>핸드폰</th>
-							<td><input id = "infoInput3" disabled="disabled" type="text" name="phone" value="${userInfo.phone }"></td>
-						</tr>
-					</table>	
+
+	<!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column">
+
+		<!-- Main Content -->
+		<div id="content">
+
+			<c:import url="../../include/navbar.jsp" />
+
+			<!-- Begin Page Content -->
+			<div class="container-fluid">
+
+
+
+
+
+				<h1 style="text-align: center;">회 원 정 보</h1>
+
+
+				<form action="${contextPath }/admin/user/usersearch">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					<select name="choice">
+						<option value="1">이메일
+						<option value="2">이름
+					</select>
+					<input type="text" name="userSearch">
+					<input type="submit" value="검색">
+				</form>
+
+
+				<!-- DataTales Example -->
+				<div class="card shadow mb-4">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">User DataTable</h6>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+
+							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+								<thead>
+								<tr>
+									<th>Email</th>
+									<th>Name</th>
+									<th>Register Date</th>
+								</tr>
+								</thead>
+								<tfoot>
+								<tr>
+									<th colspan="3">
+										<c:forEach var="pageNum" begin="1" end="${allPage }">
+											<a href="${contextPath }/admin/usermanage?pageNum=${pageNum}">${pageNum } </a>
+										</c:forEach>
+									</th>
+								</tr>
+								</tfoot>
+								<tbody>
+
+								<c:choose>
+								<c:when test="${userList.size() != 0 }">
+									<c:forEach var="dto" items="${userList }">
+										<tr>
+											<td>
+												<a href="${contextPath }/admin/user/userInfo?userId=${dto.userId }">${dto.email }</a>
+											</td>
+											<td>${dto.name }</td>
+											<td>${dto.regDate }</td>
+										</tr>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+								<tr>
+									<th colspan="3"> 등록된 유저가 없습니다.</th>
+								<tr>
+									</c:otherwise>
+									</c:choose>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
 				</div>
-				<input type="button" id = "modButton" value="수정" onclick="inputActive()">
-				<input type="submit" disabled="disabled" id="saveButton" value="저장">
-				<input type="button" onclick="location.href='${contextPath }/admin/usermanage'" value="리스트로 돌아가기">
-			</form>
-		
-		
-		
-		</div>
-		<!-- /.container-fluid -->
+				<!-- /.container-fluid -->
 
-<c:import url="../../include/navbar.jsp" />
+				<form action="${contextPath }/user/register" id="frm">
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					<a class="btn btn-primary" onclick="formSubmit()">유저추가</a>
+				</form>
+
+
+			</div>
+		<!-- End of Main Content -->
+
+		<c:import url="../../include/footer.jsp"/>
+		<!-- End of Footer -->
+	</div>
+	<!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+	<i class="fas fa-angle-up"></i>
+</a>
 </body>
 </html>

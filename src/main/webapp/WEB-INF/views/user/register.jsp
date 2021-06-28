@@ -7,7 +7,6 @@
 	<c:import url="../include/header.jsp" />
 </head>
 <body>
-
 <c:import url="../include/navbar.jsp" />
 
 <div>

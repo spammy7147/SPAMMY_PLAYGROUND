@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+                "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.seven.jong.repository.hosting.IReservationMapper">
+
+    <resultMap id="reservationMap" type="com.seven.jong.VO.hosting.ReservationVO" >
+        <id property="reservationId" column="reservation_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="hostingId" column="hosting_id"/>
+        <result property="numberOfGuest" column="number_of_guest"/>
+        <result property="start" column="start"/>
+        <result property="end" column="end"/>
+    </resultMap>
+
+
+</mapper>

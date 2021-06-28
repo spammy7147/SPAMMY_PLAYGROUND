@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.seven.jong.repository.hosting.IAccommodationMapper">
+
+
+    <resultMap id="accommodationMap" type="com.seven.jong.VO.hosting.AccommodationVO" >
+
+        <id property="accommodationId" column="accommodation_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="address" column="address"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="maxNumberOfGuest" column="max_number_guest"/>
+        <result property="numberOfBedroom" column="number_bedroom"/>
+        <result property="numberOfBed" column="number_bed"/>
+        <result property="typeOfBed" column="type_bed"/>
+        <result property="numberOfBathroom" column="number_bathroom"/>
+        <result property="contactNumber" column="contact_number"/>
+        <result property="price" column="price"/>
+        <result property="description" column="description"/>
+        <result property="regDate" column="reg_date"/>
+    </resultMap>
+
+    <insert id="addAccommodation">
+        INSERT INTO ACCOMMODATION (ACCOMMODATION_ID, USER_ID, NAME, ADDRESS, TYPE, MAX_NUMBER_GUEST,
+                                   NUMBER_BEDROOM, NUMBER_BED, TYPE_BED, NUMBER_BATHROOM, CONTACT_NUMBER, PRICE, DESCRIPTION) VALUES
+        (ACCOMMODATION_SEQ.nextval, #{userId}, #{name}, #{address}, #{type}, #{maxNumberOfGuest},
+         #{numberOfBedroom}, #{numberOfBed}, #{typeOfBed}, #{numberOfBathroom}, #{contactNumber}, #{price}, #{description})
+    </insert>
+
+</mapper>

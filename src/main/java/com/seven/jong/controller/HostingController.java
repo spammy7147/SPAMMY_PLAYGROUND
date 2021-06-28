@@ -1,6 +1,6 @@
 package com.seven.jong.controller;
 
-import com.seven.jong.DTO.HostingDTO;
+import com.seven.jong.DTO.hosting.AccommodationDTO;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,7 +24,7 @@ public class HostingController {
     }
 
     @PostMapping("/address")
-    public String address(HostingDTO hostingDTO) {
+    public String address(AccommodationDTO hostingDTO) {
         System.out.println(hostingDTO);
         return "redirect:/hosting/house";
     }
