@@ -12,7 +12,7 @@ import java.util.List;
 public class AccommodationPhotoVO {
 
     private Integer accommodationId;
-    private List<String> photoURL;
+    private String photoURL;
 
 
 }

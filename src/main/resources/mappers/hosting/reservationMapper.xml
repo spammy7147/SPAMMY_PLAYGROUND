@@ -1,9 +1,9 @@
-        <?xml version="1.0" encoding="UTF-8"?>
-        <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
                 "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.seven.jong.repository.IPersistentMapper">
+<mapper namespace="com.seven.jong.repository.hosting.IReservationMapper">
 
     <resultMap id="reservationMap" type="com.seven.jong.VO.hosting.ReservationVO" >
         <id property="reservationId" column="reservation_id"/>
@@ -14,21 +14,5 @@
         <result property="end" column="end"/>
     </resultMap>
 
-    <insert id="addReservation">
 
-    </insert>
-
-    <update id="updateReservation">
-
-    </update>
-
-
-    <select id="getReservationById" resultMap="reservationMap">
-
-    </select>
-
-
-    <delete id="deleteReservation">
-
-    </delete>
 </mapper>
