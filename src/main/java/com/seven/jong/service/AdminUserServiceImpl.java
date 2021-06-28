@@ -1,5 +1,7 @@
 package com.seven.jong.service;
 
+import com.seven.jong.DTO.BoardDTO;
+import com.seven.jong.DTO.QnaDTO;
 import com.seven.jong.DTO.user.UserRequestDTO;
 import com.seven.jong.VO.UserVO;
 import com.seven.jong.repository.user.IUserMapper;
@@ -76,6 +78,8 @@ public class AdminUserServiceImpl implements AdminUserService {
 		model.addAttribute("allPage", totalPage);
 		model.addAttribute("userSearchList", userSearchList);
 	}
+
+	
 
 	
 }
