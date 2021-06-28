@@ -48,7 +48,7 @@ function readURL(input){
 				<div>
 					<div>
 					<form name="form" method="post" action="/admin/writeSave?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data">
-						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						<!-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />  -->
 						<b>작성자</b><br>
 							<input type="text" name="writer" size="30" value="${user.user.email }" readonly><br>
 						<b>제목</b><br>
@@ -57,8 +57,8 @@ function readURL(input){
 							<textarea rows="10" cols="50" name="content"></textarea>
 						<hr>
 						<b>이미지파일 첨부</b><br>
-							<input type="file" name="imageFileName" onchange="readURL(this)"><br>
 							<img id="preview" src="#" width="100" height="100" alt="선택 이미지 없음">
+							<input type="file" name="imageFileName" onchange="readURL(this)"><br>
 							<hr>
 							
 							<input type="submit" value="글쓰기">

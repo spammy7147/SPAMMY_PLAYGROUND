@@ -53,8 +53,9 @@
 					<hr>
 
 					<b>이미지파일 첨부</b><br>
-					<input type="file" name="imageFileName" onchange="readURL(this)">
 					<img id="preview" src="#" width="100" height="100" alt="선택 이미지 없음">
+					<input type="file" name="imageFileName" onchange="readURL(this)">
+					
 					<hr>
 
 					<input type="submit" value="글쓰기">

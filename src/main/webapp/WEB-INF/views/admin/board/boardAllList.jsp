@@ -70,11 +70,11 @@
 										<tr>
 											<td>${dto.writeNo }</td> <td>${dto.writer }</td>
 											<td>
-												<a href="${contextPath }/admin/board/contentView?writeNo=${dto.writeNo }">${dto.title }</a>
+												<a href="${contextPath }/admin/contentView?writeNo=${dto.writeNo }">${dto.title }</a>
 											</td>
 											<td>${dto.saveDate }</td>
 											<td>${dto.hit }</td>
-											<td>${dto.imageFileName }</td>
+											<td>${dto.fileName }</td>
 				
 										</tr>
 									</c:forEach>
