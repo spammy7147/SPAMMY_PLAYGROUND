@@ -2,7 +2,7 @@ package com.seven.jong.service;
 
 import org.springframework.ui.Model;
 
-import com.seven.jong.DTO.UserRequestDTO;
+import com.seven.jong.DTO.user.UserRequestDTO;
 
 public interface AdminUserService {
 	

@@ -1,6 +1,6 @@
 CREATE TABLE reservation (
     reservation_id NUMBER PRIMARY KEY,
-   hosting_id NUMBER NOT NULL,
+   accommodation_id NUMBER NOT NULL,
    user_id NUMBER NOT NULL,
    number_guest NUMBER NOT NULL,
    check_in TIMESTAMP NOT NULL,
@@ -22,6 +22,6 @@ ALTER TABLE reservation
 
 ALTER TABLE reservation
     ADD CONSTRAINT FK_reservation_accommodation
-        FOREIGN KEY (user_id)
+        FOREIGN KEY (accommodation_id)
             REFERENCES accommodation (accommodation_id)
                 ON DELETE CASCADE;

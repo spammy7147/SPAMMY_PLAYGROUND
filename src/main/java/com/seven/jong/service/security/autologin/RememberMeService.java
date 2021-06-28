@@ -3,13 +3,12 @@ package com.seven.jong.service.security.autologin;
 
 import com.seven.jong.VO.security.PersistentTokenVO;
 import com.seven.jong.VO.security.UserSecurityVO;
-import com.seven.jong.repository.IPersistentMapper;
+import com.seven.jong.repository.user.IPersistentMapper;
 import com.seven.jong.service.security.IUserSecurityService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.web.authentication.rememberme.CookieTheftException;
 import org.springframework.security.web.authentication.rememberme.InvalidCookieException;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenRepository;
 import org.springframework.security.web.authentication.rememberme.RememberMeAuthenticationException;
 import org.springframework.util.Assert;
 

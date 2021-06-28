@@ -1,6 +1,6 @@
-package com.seven.jong.repository;
+package com.seven.jong.repository.user;
 
-//import com.seven.jong.DTO.UserRequestDTO;
+//import com.seven.jong.DTO.user.UserRequestDTO;
 
 import com.seven.jong.VO.RoleVO;
 import com.seven.jong.VO.UserVO;

@@ -1,6 +1,6 @@
 package com.seven.jong.controller;
 
-import com.seven.jong.DTO.UserRequestDTO;
+import com.seven.jong.DTO.user.UserRequestDTO;
 import com.seven.jong.VO.security.UserSecurityVO;
 import com.seven.jong.service.user.IUserService;
 import org.springframework.beans.factory.annotation.Autowired;

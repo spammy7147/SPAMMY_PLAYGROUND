@@ -1,4 +1,4 @@
-package com.seven.jong.DTO;
+package com.seven.jong.DTO.user;
 
 import lombok.Getter;
 import lombok.Setter;
