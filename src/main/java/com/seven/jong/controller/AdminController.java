@@ -8,6 +8,7 @@ import com.seven.jong.DTO.user.UserRequestDTO;
 import com.seven.jong.VO.UserVO;
 import com.seven.jong.VO.security.UserSecurityVO;
 import com.seven.jong.service.AdminUserService;
+import com.seven.jong.service.BoardFileService;
 import com.seven.jong.service.BoardService;
 import com.seven.jong.service.CsService;
 import com.seven.jong.service.QnaFileService;
@@ -126,6 +127,26 @@ public class AdminController {
 		bs.writeSave(dto, request, mtfRequest);
 			
 		return "redirect:boardalllist";
+	}
+	//선택 게시물 보기 , 리플 가져오기
+	@GetMapping("contentview")
+	public String contentView (@RequestParam int writeNo, Model model) {
+		bs.contentView(writeNo, model);
+		System.out.println("contentView연결");
+		return "admin/board/contentView";
+	}
+	//이미지 불러오기
+	@GetMapping("boarddownload")
+	public void boarddownLoad(@RequestParam String fileName,
+						HttpServletResponse response) throws Exception{
+		response.addHeader("Content-disposition","attachment;fileName"+fileName);
+		File file = new File(BoardFileService.Board_IMAGE_REPO+"/"+fileName);
+		FileInputStream in = new FileInputStream(file);
+			
+		System.out.println(file);
+			
+		FileCopyUtils.copy(in, response.getOutputStream());
+		in.close();
 	}
 	
 	
