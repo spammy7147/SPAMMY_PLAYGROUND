@@ -1,8 +1,8 @@
 package com.seven.jong.service;
 
-import com.seven.jong.DTO.UserRequestDTO;
+import com.seven.jong.DTO.user.UserRequestDTO;
 import com.seven.jong.VO.UserVO;
-import com.seven.jong.repository.IUserMapper;
+import com.seven.jong.repository.user.IUserMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;

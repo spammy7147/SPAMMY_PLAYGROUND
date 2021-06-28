@@ -3,44 +3,39 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.seven.jong.repository.IAccommodationMapper">
+<mapper namespace="com.seven.jong.repository.user.IPersistentMapper">
 
-    <resultMap id="accommodationMap" type="com.seven.jong.VO.hosting.AccommodationVO" >
-        <id property="accommodationId" column="accommodation_id"/>
-        <result property="userId" column="user_id"/>
-        <result property="name" column="name"/>
-        <result property="address" column="address"/>
-        <result property="type" column="address"/>
-        <result property="maxNumberGuest" column="max_number_guest"/>
-        <result property="numberBedroom" column="number_bedroom"/>
-        <result property="numberBed" column="number_bed"/>
-        <result property="contactNumber" column="contact_number"/>
-        <result property="price" column="price"/>
-        <result property="description" column="description"/>
-        <result property="regDate" column="reg_date"/>
+    <resultMap id="persistentMap" type="com.seven.jong.VO.security.PersistentTokenVO" >
+        <id property="userId" column="user_id"/>
+        <result property="key" column="key"/>
+        <result property="token" column="token"/>
+        <result property="lastUsed" column="lastUsed"/>
     </resultMap>
 
-    <insert id="addAccommodation">
-
+    <insert id="createNewToken">
+        INSERT INTO PERSISTENT (USER_ID, KEY, TOKEN, LAST_USED)
+        VALUES (#{userId},#{key},#{token},#{lastUsed})
     </insert>
 
-    <update id="updateAccommodation">
-
+    <update id="updateToken">
+        UPDATE PERSISTENT
+        SET KEY=#{key}, TOKEN=#{token}, LAST_USED=#{lastUsed}
+        WHERE USER_ID =#{userId}
     </update>
 
 
-    <select id="getAccommodationById" resultMap="accommodationMap">
-        SELECT * FROM accommodation
-        WHERE accommodation_id = #{accommodationId}
+    <select id="getTokenForKey" resultMap="accommodationMap">
+        SELECT * FROM PERSISTENT
+        WHERE KEY = #{key}
     </select>
 
-    <select id="getAccommodationByName" resultMap="accommodationMap">
-        SELECT * FROM accommodation
-        WHERE name = #{name}
+    <select id="getTokenByUserId" resultMap="accommodationMap">
+        SELECT * FROM PERSISTENT
+        WHERE USER_ID = #{userId}
     </select>
 
-    <delete id="deleteAccommodation">
-        DELETE FROM accommodation
-        WHERE accommodation_id = #{accommodationId}
+    <delete id="removeUserTokens">
+        DELETE FROM PERSISTENT
+        WHERE USER_ID = #{userId}
     </delete>
 </mapper>
