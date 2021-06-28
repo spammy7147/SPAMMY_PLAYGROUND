@@ -1,4 +1,4 @@
-package com.seven.jong.repository;
+package com.seven.jong.repository.user;
 
 import com.seven.jong.VO.UserVO;
 import org.apache.ibatis.annotations.Param;

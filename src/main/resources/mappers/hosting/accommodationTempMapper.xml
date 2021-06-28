@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.seven.jong.repository.hosting.IAccommodationTempMapper">
+
+    <resultMap id="accommodationTempMap" type="com.seven.jong.VO.hosting.AccommodationTempVO" >
+        <id property="accommodationId" column="accommodation_id"/>
+        <result property="userId" column="user_id"/>
+        <result property="name" column="name"/>
+        <result property="type" column="type"/>
+        <result property="maxNumberOfGuest" column="max_number_of_guest"/>
+        <result property="numberOfBedroom" column="number_of_bedroom"/>
+        <result property="typeOfBed" column="type_of_bed"/>
+        <result property="numberOfBathroom" column="numberOfBathroom"/>
+        <result property="contactNumber" column="contactNumber"/>
+        <result property="price" column="price"/>
+        <result property="description" column="description"/>
+    </resultMap>
+
+
+
+</mapper>

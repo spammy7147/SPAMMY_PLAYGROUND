@@ -3,7 +3,7 @@
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
 
-<mapper namespace="com.seven.jong.repository.IUserMapper">
+<mapper namespace="com.seven.jong.repository.user.IUserMapper">
 
     <resultMap id="UserMap" type="com.seven.jong.VO.UserVO" >
         <id property="userId" column="user_id"/>
