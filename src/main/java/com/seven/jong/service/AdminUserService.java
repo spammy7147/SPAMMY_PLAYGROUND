@@ -1,7 +1,10 @@
 package com.seven.jong.service;
 
+import java.util.ArrayList;
+
 import org.springframework.ui.Model;
 
+import com.seven.jong.DTO.BoardDTO;
 import com.seven.jong.DTO.user.UserRequestDTO;
 
 public interface AdminUserService {

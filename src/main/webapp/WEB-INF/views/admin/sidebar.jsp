@@ -49,7 +49,7 @@
 
     <!-- Nav Item - Tables -->
     <li class="nav-item">
-        <a class="nav-link" href="${contextPath }/board/boardAllList">
+        <a class="nav-link" href="${contextPath }/admin/boardalllist">
             <i class="fas fa-fw fa-table"></i>
             <span>게시판</span></a>
     </li>

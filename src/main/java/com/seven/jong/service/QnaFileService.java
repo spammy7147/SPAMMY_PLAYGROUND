@@ -7,7 +7,7 @@ import org.springframework.web.multipart.MultipartFile;
 import com.seven.jong.DTO.MessageDTO;
 
 public interface QnaFileService {
-	public static final String IMAGE_REPO = "c:/spring/image_repo";
+	public static final String IMAGE_REPO = "c:/spring/qna_image_repo";
 	
 	String saveFile(MultipartFile file);
 	//QnA 이미지 삭제
