@@ -81,6 +81,7 @@ public abstract class AbstractCustomRememberMeServices implements RememberMeServ
                         return this.createSuccessfulAuthentication(request, user);
                     } catch (CookieTheftException var6) {
                         this.cancelCookie(request, response);
+                        System.out.println("자동 로그인 실패!");
                         throw var6;
                     } catch (UsernameNotFoundException var7) {
                         this.logger.debug("Remember-me login was valid but corresponding user not found.", var7);
