@@ -18,7 +18,7 @@ public class IPersistentMapperTest {
 
     @Test
     public void getToken(){
-        PersistentTokenVO token = persistentMapper.getTokenByUserId(162);
+        PersistentTokenVO token = persistentMapper.getTokenByUserId(1);
         System.out.println(token);
     }
     @Test

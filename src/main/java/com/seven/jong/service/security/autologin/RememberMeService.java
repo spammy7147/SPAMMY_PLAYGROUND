@@ -52,6 +52,7 @@ public class RememberMeService extends AbstractCustomRememberMeServices {
             String presentedToken = cookieTokens[1];
             PersistentTokenVO token = persistentMapper.getTokenForKey(presentedKey);
             if (token == null) {
+                System.out.println("DB에서 가져온 토큰 없음!");
                 throw new RememberMeAuthenticationException("No persistent token found for series id: " + presentedKey);
             } else if (!presentedToken.equals(token.getToken())) {
                 persistentMapper.removeUserTokens(token.getUserId());
