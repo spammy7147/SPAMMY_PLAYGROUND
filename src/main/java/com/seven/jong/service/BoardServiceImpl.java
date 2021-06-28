@@ -33,6 +33,15 @@ public class BoardServiceImpl implements BoardService{
 			dto.setFileName( bfs.saveFile(file) );
 		}
 		
+		System.out.println(dto.getWriteNo());
+		System.out.println(dto.getContent());
+		System.out.println(dto.getFileName());
+		System.out.println(dto.getTitle());
+		System.out.println(dto.getWriter());
+		
+		
+		
+		
 		mapper.writeSave(dto);
 	}
 
