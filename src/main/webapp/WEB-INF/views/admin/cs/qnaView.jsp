@@ -5,6 +5,8 @@
 <head>
 	<title>AirBnD - 관리자 QNA 보기</title>
 	<c:import url="../../include/header.jsp" />
+	
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
 <!-- default header name is X-CSRF-TOKEN -->
@@ -31,6 +33,7 @@
 				alert("문제 발생!!!");
 			}
 		})
+		
 	}
 	
 	function replyData(){
@@ -90,17 +93,19 @@
 						<th>작성일</th><td>${qnaData.saveDate }</td>
 					</tr>
 
-					<tr>
-						<th>내 용</th><td  colspan="3">${qnaData.content }</td>
-					</tr>
 					<c:if test="${qnaData.imageFileName != 'nan' }">
 						<tr>
-							<th colspan="4">
+							<th>파일</th>
+							<th colspan="3">
 								<img width="100px" height="100px"
 									 src="${contextPath }/admin/download?imageFileName=${qnaData.imageFileName}">
 							</th>
 						</tr>
 					</c:if>
+					
+					<tr>
+						<th>내 용</th><td  colspan="3">${qnaData.content }</td>
+					</tr>
 					<tr>
 						<td colspan="4" align="center">
 
@@ -112,12 +117,14 @@
 										"location.href='${contextPath }/admin/deleteqna?qnaNo=${qnaData.qnaNo }&imageFileName=${qnaData.imageFileName }'" value="삭제하기">
 
 								<form id="frm">
+									<div align="left">
 									<hr>
 									<input type="hidden" id="qna_no" name="qna_no" value="${qnaData.qnaNo }">
 									<b>작성자 : ${loginUser }</b><br>
-									<textarea rows="5" cols="30" id="content" name="content"></textarea>
+									<textarea  style="width:90%;" rows="5" id="content" name="content"></textarea>
 									<button type="button" onclick="rep()" class="btn btn-outline-secondary">답글</button>
 									<hr>
+									</div>
 								</form>
 							</s:authorize>
 
