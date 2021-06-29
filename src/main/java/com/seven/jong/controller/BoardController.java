@@ -87,7 +87,7 @@ public class BoardController {
 	//게시물 삭제
 	@GetMapping("delete")
 	public String delete(@RequestParam int writeNo) {
-		bs.delete(writeNo);
+		//bs.delete(writeNo);
 		return "redirect:/board/boardAllList";
 	}
 	//게시물 검색
