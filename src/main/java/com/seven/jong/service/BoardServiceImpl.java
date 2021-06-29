@@ -14,6 +14,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.seven.jong.DTO.BoardDTO;
 import com.seven.jong.DTO.BoardReplyDTO;
+import com.seven.jong.DTO.MessageDTO;
 import com.seven.jong.repository.IBoardMapper;
 
 @Service
@@ -32,15 +33,6 @@ public class BoardServiceImpl implements BoardService{
 		}else { //파일이 존재하는 경우
 			dto.setFileName( bfs.saveFile(file) );
 		}
-		
-		System.out.println(dto.getWriteNo());
-		System.out.println(dto.getContent());
-		System.out.println(dto.getFileName());
-		System.out.println(dto.getTitle());
-		System.out.println(dto.getWriter());
-		
-		
-		
 		
 		mapper.writeSave(dto);
 	}
@@ -74,42 +66,48 @@ public class BoardServiceImpl implements BoardService{
 	}
 
 	@Override
-	public void modify(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mul) {
+	public String modify(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mul) {
 		
-		dto.setWriteNo(Integer.parseInt(request.getParameter("writeNo")));
+		MultipartFile file = mul.getFile("newFileName");
+		BoardFileService bfs = new BoardFileServiceImpl();
 		
-		dto.setTitle(request.getParameter("title"));
-		dto.setContent(request.getParameter("content"));
+		if(file.isEmpty() ) { // 이미지 변경 되지 않았음
+			dto.setFileName(mul.getParameter("originFileName"));
+		}else { // 이미지 변경 되었음.
+			dto.setFileName(bfs.saveFile(file));
+			bfs.deleteImage(mul.getParameter("originFileName"));
+		}
+		int result = mapper.modify(dto);
 		
-		MultipartFile mf = mul.getFile("newFileName");
-
-        //경로 지정
-        String path = "C:\\upload\\";
-
-        String originFileName = mf.getOriginalFilename(); 
-
-        String safeFile = path + System.currentTimeMillis() + originFileName;
-        String fileName = System.currentTimeMillis() + originFileName;
-       
-        dto.setFileName(fileName);
-        
-        File file = new File(safeFile);
-        if (!file.exists()){
-             file.mkdir();
-        }
-        try {
-            mf.transferTo(file);
-        } catch (IllegalStateException | IOException e) {
-            e.printStackTrace();
-        }
-        
-        mapper.modify(dto);
+		MessageDTO mDto = new MessageDTO();
+		mDto.setResult(result);
+		mDto.setRequest(request);
+		mDto.setSuccessMessage("성공적으로 수정되었습니다");
+		mDto.setSuccessURL("/admin/boardalllist");
+		mDto.setFailMessage("수정 중 문제 발생!!!");
+		mDto.setFailURL("/admin/contentview");
+		
+		return bfs.getMessage(mDto);
 	}
 
 	@Override
-	public void delete(int writeNo) {
-		mapper.delete(writeNo);
+	public String delete(int writeNo, String fileName, HttpServletRequest request) {
+		BoardFileService bfs = new BoardFileServiceImpl();
+		int result = mapper.delete(writeNo);
 		
+		MessageDTO dto = new MessageDTO();
+		
+		if(result == 1) {//DB삭제 성공
+			bfs.deleteImage(fileName);
+		}
+		dto.setRequest(request);
+		dto.setResult(result);
+		dto.setSuccessMessage("성공적으로 삭제 되었습니다");
+		dto.setSuccessURL("/admin/boardalllist");
+		dto.setFailMessage("삭제 중 문제가 발생하였습니다");
+		dto.setFailURL("/admin/contentView");
+		
+		return bfs.getMessage(dto);
 	}
 
 	@Override

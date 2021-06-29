@@ -149,6 +149,33 @@ public class AdminController {
 		FileCopyUtils.copy(in, response.getOutputStream());
 		in.close();
 	}
+	//게시물 수정 양식
+	@GetMapping("boardmodifyform")
+	public String modifyForm(@RequestParam int writeNo, Model model) {
+		bs.contentView(writeNo, model);
+		return "admin/board/modifyForm";
+	}
+	//게시물 수정
+	@PostMapping("boardmodify")
+	public void modify(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mul, HttpServletResponse response) throws IOException {
+		
+		String message = bs.modify(dto, request, mul);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(message);
+		//return "redirect:boardalllist";
+	}
+	//게시물 삭제
+	@GetMapping("boarddelete")
+	public void delete(@RequestParam int writeNo, @RequestParam String fileName,
+			HttpServletResponse response, HttpServletRequest request) throws IOException {
+		
+		String message = bs.delete(writeNo,fileName,request);
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(message);
+	}
 	
 	
 	
