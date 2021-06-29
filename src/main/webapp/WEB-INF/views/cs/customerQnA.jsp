@@ -64,7 +64,7 @@
 										<tr>
 											<td>${dto.qnaNo }</td> <td>${dto.email }</td>
 											<td>
-												<a href="${contextPath }/admin/qnaview?qnaNo=${dto.qnaNo }">${dto.title }</a>
+												<a href="${contextPath }/cs/qnaview?qnaNo=${dto.qnaNo }">${dto.title }</a>
 											</td>
 											<td>${dto.saveDate }</td> <td>${dto.hit }</td> <td>${dto.imageFileName }</td>
 				
@@ -85,9 +85,11 @@
 				</div>
 				<!-- /.container-fluid -->
 
-				<form action="${contextPath }/admin/qnawriteform">
+				<form action="${contextPath }/cs/qnawriteform">
+					<div align="right">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<input type="submit" class="btn btn-primary" value="글작성">
+					</div>
 				</form>
 				
 				

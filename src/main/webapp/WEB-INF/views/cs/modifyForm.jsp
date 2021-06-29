@@ -43,7 +43,7 @@
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
 				<div style="width:300px; margin: 0 auto;">
-					<form action="${contextPath }/admin/modify?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data" method="post">
+					<form action="${contextPath }/cs/modify?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data" method="post">
 						<input type="hidden" name="qnaNo" value="${qnaData.qnaNo }">
 						<input type="hidden" name="originFileName" value="${qnaData.imageFileName }">
 						제목 <input type="text" size="30" name="title" value="${qnaData.title}"><hr>
@@ -51,7 +51,7 @@
 						<hr>
 						<c:if test="${qnaData.imageFileName != 'nan' }">
 							<img width="100px" height="100px" id="preview"
-								 src="${contextPath }/admin/download?imageFileName=${qnaData.imageFileName}">
+								 src="${contextPath }/cs/download?imageFileName=${qnaData.imageFileName}">
 						</c:if>
 						<input type="file" name="imageFileName" onchange="readURL(this)"><hr>
 						<input type="submit" value="수정">
