@@ -41,7 +41,7 @@
 			<div class="container-fluid">
 			
 			
-				<form action="${contextPath }/admin/qnasave?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+				<form action="${contextPath }/cs/qnasave?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
 					<!-- enctype="multipart/form-data" -->
 
 					<!-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> -->
@@ -62,7 +62,7 @@
 
 					<input type="submit" value="글쓰기">
 					<input type="button" value="목록이동"
-						   onclick="location.href='${contextPath}/admin/customerqna'">
+						   onclick="location.href='${contextPath}/cs/customerqna'">
 				</form>
 			</div>
 			<!-- /.container-fluid -->

@@ -126,7 +126,7 @@ public class CsController {
 			@RequestParam String imageFileName,
 			HttpServletResponse response,
 			HttpServletRequest request) throws Exception {
-		String message = cs.qnaDelete(qnaNo,imageFileName,request);
+		String message = cs.qnaDeleteCS(qnaNo,imageFileName,request);
 		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -145,7 +145,7 @@ public class CsController {
 	public void modify(MultipartHttpServletRequest mul,
 						HttpServletResponse response,
 						HttpServletRequest request )throws Exception {
-		String message = cs.modify(mul, request);
+		String message = cs.modifyCs(mul, request);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(message);

@@ -88,11 +88,11 @@
 				<div align="right">
 				<!-- class="btn btn-outline-info" class="btn btn-outline-danger"-->
 				<input type="button" class="btn btn-primary" onclick=
-					"location.href='${contextPath }/admin/modifyqna?qnaNo=${qnaData.qnaNo }'" value="수정하기">
+					"location.href='${contextPath }/cs/modifyqna?qnaNo=${qnaData.qnaNo }'" value="수정하기">
 
 				<input type="button" class="btn btn-primary" onclick=
-					"location.href='${contextPath }/admin/deleteqna?qnaNo=${qnaData.qnaNo }&imageFileName=${qnaData.imageFileName }'" value="삭제하기">
-				<input type="button" class="btn btn-secondary" onclick="location.href='${contextPath }/admin/customerqna'" value="목록보기">
+					"location.href='${contextPath }/cs/deleteqna?qnaNo=${qnaData.qnaNo }&imageFileName=${qnaData.imageFileName }'" value="삭제하기">
+				<input type="button" class="btn btn-secondary" onclick="location.href='${contextPath }/cs/customerqna'" value="목록보기">
 				<hr>
 				</div>
 				
@@ -110,8 +110,7 @@
 						<tr>
 							<th>파일</th>
 							<th colspan="3">
-								<img width="100px" height="100px"
-									 src="${contextPath }/admin/download?imageFileName=${qnaData.imageFileName}">
+								<img src="${contextPath }/cs/download?imageFileName=${qnaData.imageFileName}">
 							</th>
 						</tr>
 					</c:if>
