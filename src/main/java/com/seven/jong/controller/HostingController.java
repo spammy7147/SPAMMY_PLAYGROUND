@@ -2,10 +2,7 @@ package com.seven.jong.controller;
 
 import com.seven.jong.DTO.hosting.AccommodationDTO;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.CrossOrigin;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
@@ -62,6 +59,12 @@ public class HostingController {
            System.out.println(mf.getOriginalFilename());
        }
         return "hosting/photo";
+    }
+    @GetMapping("/accommodation/{accommodationId}")
+    public String accommodation(@PathVariable Integer accommodationId) {
+        System.out.println("/hosting/accommodation => GET 요청");
+        System.out.println(accommodationId);
+        return "hosting/accommodation";
     }
 
 //    @GetMapping("/file")

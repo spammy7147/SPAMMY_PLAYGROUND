@@ -19,7 +19,7 @@
 
                     <tbody>
                         <tr>
-                            <td><a href="" class="text-decoration-none">이거슨숙소이름이랑께</a></td>
+                            <td><a href="${contextPath}/hosting/accommodation/1" class="text-decoration-none">이거슨숙소이름이랑께</a></td>
                         </tr>
                     </tbody>
 
