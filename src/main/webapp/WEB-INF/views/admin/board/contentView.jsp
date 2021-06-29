@@ -69,7 +69,7 @@
 				
 				<hr>
 				<b>Comment</b>
-				<form action="${contextPath }/board/addReply" method="post">			
+				<form action="${contextPath }/admin/addreply" method="post">			
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<input type="hidden" name="writeNo" value="${contentData.writeNo}">
 					<input type="hidden" name="writer" value="${user.user.email }">
@@ -83,8 +83,8 @@
 						<table>
 							<tr>
 								<td>${rep.writer }</td> <td>${rep.write_date }</td> 
-								<td><input class="btn btn-info btn-circle btn-sm" value="수정" type="button" onclick="location.href='${contextPath }/board/modifyReplyForm?reply_num=${rep.reply_num }&writeNo=${contentData.writeNo }'"></td>
-								<td><input class="btn btn-danger btn-circle btn-sm" value="삭제" type="button" onclick="location.href='${contextPath }/board/replydelete?reply_num=${rep.reply_num }&writeNo=${contentData.writeNo }'"></td>
+								<td><input class="btn btn-info btn-circle btn-sm" value="수정" type="button" onclick="location.href='${contextPath }/admin/boardmodifyreplyform?reply_num=${rep.reply_num }&writeNo=${contentData.writeNo }'"></td>
+								<td><input class="btn btn-danger btn-circle btn-sm" value="삭제" type="button" onclick="location.href='${contextPath }/admin/replydelete?reply_num=${rep.reply_num }&writeNo=${contentData.writeNo }'"></td>
 												
 							</tr>
 							<tr>

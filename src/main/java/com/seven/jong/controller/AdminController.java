@@ -176,7 +176,30 @@ public class AdminController {
 		PrintWriter out = response.getWriter();
 		out.print(message);
 	}
-	
+	//게시물 리플 추가
+	@PostMapping("addreply")
+	public String addReply(@RequestParam String content,@RequestParam int writeNo, @RequestParam String writer){//세션 추가해야함
+		bs.addReply(content,writeNo,writer);	
+		return "redirect:contentview?writeNo="+writeNo;
+	}
+	//댓글 삭제
+	@GetMapping("replydelete")
+	public String replyDelete(@RequestParam int writeNo, @RequestParam int reply_num) {
+		bs.replyDelete(reply_num);
+		return "redirect:contentview?writeNo="+writeNo;
+	}
+	//댓글 수정창 이동
+	@GetMapping("boardmodifyreplyform")
+	public String modifyReplyForm(@RequestParam int reply_num, @RequestParam int writeNo ,Model model) {
+		bs.selectReply(model, reply_num, writeNo);
+		return "admin/board/modifyReplyForm";
+	}
+	//댓글 수정
+	@PostMapping("boardmodifyreply")
+	public String modifyReply(@RequestParam int writeNo,@RequestParam String content,@RequestParam int reply_num) {
+		bs.modifyReply(content,reply_num);
+		return "redirect:contentview?writeNo="+writeNo;
+	}
 	
 	
 	
