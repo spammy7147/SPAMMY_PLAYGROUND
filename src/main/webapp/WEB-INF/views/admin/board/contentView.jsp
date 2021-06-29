@@ -49,7 +49,7 @@
 							<th>작성일</th><td>${contentData.saveDate }</td>
 						</tr>	
 						<tr>
-							<th>img</th>
+							<th>파일</th>
 							<c:if test="${contentData.fileName == null }">
 								<b>이미지가 없습니다</b>
 							</c:if>
@@ -73,7 +73,7 @@
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<input type="hidden" name="writeNo" value="${contentData.writeNo}">
 					<input type="hidden" name="writer" value="${user.user.email }">
-					<textarea rows="5" cols="100" id="content" name="content"></textarea>
+					<textarea rows="5" style="width:90%;" id="content" name="content"></textarea>
 					<input  class="btn btn-primary" type="submit" value="등록">
 				</form>
 				
