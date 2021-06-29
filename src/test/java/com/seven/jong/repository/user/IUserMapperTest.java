@@ -14,6 +14,7 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.Date;
+import java.util.List;
 
 
 @RunWith(SpringJUnit4ClassRunner.class)
@@ -59,5 +60,11 @@ public class IUserMapperTest {
         System.out.println(LocalDateTime.now());
 
 
+    }
+    @Test
+    public void deleteUser(){
+        userMapper.deleteUser(2);
+        List<UserVO> users = userMapper.getUsers();
+        System.out.println(users);
     }
 }

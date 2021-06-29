@@ -1,12 +1,19 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
-
-<title>AirBnD - 주소 </title>
-<c:import url="../include/header.jsp"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../include/taglib.jsp"%>
 
 
-<script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=72674637f140df9a7167e5cf81c5912b&libraries=services"></script>
-<script defer src="${contextPath}/js/address.js"></script>
+<html>
+<head>
+    <title>AirBnD - 주소 </title>
+    <c:import url="../include/header.jsp" />
+
+
+    <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=72674637f140df9a7167e5cf81c5912b&libraries=services"></script>
+
+
+</head>
+<body>
+<c:import url="../include/navbar.jsp"/>
 
 
 <div class="container p-5 m-auto">
@@ -26,6 +33,9 @@
         </div>
         <div class="col-lg-8">
             <div class="m-auto" id="map" style="width:600px;height:600px;"></div>
+            <script src="${contextPath}/js/address.js"></script>
         </div>
     </div>
 </div>
+</body>
+</html>

@@ -40,6 +40,7 @@ public class AdminController {
 	//관리자 홈
 	@GetMapping("/home")
 	public String adminHome() {
+		System.out.println("/admin/home => GET요청 ");
 		return "admin/adminHome";
 	}
 	
