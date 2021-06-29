@@ -105,9 +105,9 @@ public class CsServiceImpl implements CsService{
 		dto.setRequest(request);
 		dto.setResult(result);
 		dto.setSuccessMessage("성공적으로 삭제 되었습니다");
-		dto.setSuccessURL("/cs/customerqna");
+		dto.setSuccessURL("/admin/customerqna");
 		dto.setFailMessage("삭제 중 문제가 발생하였습니다");
-		dto.setFailURL("/cs/qnaView");
+		dto.setFailURL("/admin/qnaView");
 		
 		return qfs.getMessage(dto);
 	}
@@ -135,9 +135,9 @@ public class CsServiceImpl implements CsService{
 		mDto.setResult(result);
 		mDto.setRequest(request);
 		mDto.setSuccessMessage("성공적으로 수정되었습니다");
-		mDto.setSuccessURL("/cs/customerqna");
+		mDto.setSuccessURL("/admin/customerqna");
 		mDto.setFailMessage("수정 중 문제 발생!!!");
-		mDto.setFailURL("/cs/qnaView");
+		mDto.setFailURL("/admin/qnaView");
 		
 		return bfs.getMessage(mDto);
 	}
