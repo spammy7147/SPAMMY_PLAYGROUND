@@ -35,33 +35,55 @@ public class UserService implements IUserService {
     }
 
     @Override
-    public void addUser(UserRequestDTO requestDTO) {
+    public void addUser(UserRequestDTO userRequestDTO) {
 
         List<Integer> birth = new ArrayList<>();
-        for (String date:requestDTO.getBirth().split("-")) {
+        for (String date:userRequestDTO.getBirth().split("-")) {
             birth.add(Integer.parseInt(date));
         }
 
         UserVO user  =  UserVO.builder()
-                    .email(requestDTO.getEmail())
-                    .password(bCryptPasswordEncoder.encode(requestDTO.getPassword()))
-                    .name(requestDTO.getName())
-                    .phone(requestDTO.getPhone())
+                    .email(userRequestDTO.getEmail())
+                    .password(bCryptPasswordEncoder.encode(userRequestDTO.getPassword()))
+                    .name(userRequestDTO.getName())
+                    .phone(userRequestDTO.getPhone())
                     .birth(LocalDate.of(birth.get(0),birth.get(1),birth.get(2)))
                     .isAccountLocked(false)
                     .build();
         userMapper.addUser(user); //사용자 추가
 
         roleMapper.addRole(RoleVO.builder()
-                .userId(userMapper.getUserByEmail(requestDTO.getEmail()).getUserId())
+                .userId(userMapper.getUserByEmail(userRequestDTO.getEmail()).getUserId())
                 .role("ROLE_USER")
                 .build());  // 사용자 권한(user) 추가
     }
 
     @Override
-    public void deleteUser(UserSecurityVO userSecurityVO) {
-        Integer userId = userSecurityVO.getUser().getUserId();
-        roleMapper.deleteRole(userId);
+    public void deleteUser(UserVO userVO) {
+        Integer userId = userVO.getUserId();
         userMapper.deleteUser(userId);
+    }
+
+    @Override
+    public void updateUser(UserVO userVO) {
+        UserVO updateUser =
+                UserVO.builder()
+                .userId(userVO.getUserId())
+                .email(userVO.getEmail())
+                .name(userVO.getName())
+                .phone(userVO.getPhone())
+                .isAccountLocked(false)
+                .build();
+        userMapper.updateUser(updateUser);
+    }
+
+    @Override
+    public UserVO getUserById(Integer userId) {
+        return userMapper.getUserById(userId);
+    }
+
+    @Override
+    public List<UserVO> getUsers() {
+        return userMapper.getUsers();
     }
 }
