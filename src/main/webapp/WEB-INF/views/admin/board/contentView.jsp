@@ -27,8 +27,8 @@
 				
 				<div align="right">
 					
-					<input class="btn btn-primary" value="수정" type="button" onclick="location.href='${contextPath }/admin/boardmodifyForm?writeNo=${contentData.writeNo }'">
-					<input class="btn btn-primary" value="삭제" type="button" onclick="location.href='${contextPath }/admin/boarddelete?writeNo=${contentData.writeNo }'">
+					<input class="btn btn-primary" value="수정" type="button" onclick="location.href='${contextPath }/admin/boardmodifyform?writeNo=${contentData.writeNo }'">
+					<input class="btn btn-primary" value="삭제" type="button" onclick="location.href='${contextPath }/admin/boarddelete?writeNo=${contentData.writeNo }&fileName=${contentData.fileName }'">
 					<a class="btn btn-secondary" href="${contextPath}/admin/boardalllist">목록보기</a>	<hr>
 					
 				</div>

@@ -5,6 +5,22 @@
 <head>
 	<title>AirBnD - 관리자 예약관리</title>
 	<c:import url="../../include/header.jsp" />
+	
+	<script type="text/javascript">
+	function readURL(input){
+		var file = input.files[0]
+		console.log(file)
+		if(file != ''){
+			var reader = new FileReader();
+			reader.readAsDataURL(file)
+			reader.onload = function(e){
+				console.log(e.target.result)
+				$("#preview").attr("src",e.target.result)
+			}
+		}
+	}
+	</script>
+	
 
 </head>
 <body id="page-top">
@@ -24,8 +40,30 @@
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
 				
-				modifyForm
 				
+				<form method="post" action="/admin/boardmodify?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data">
+					<input type="hidden" name="writeNo" value="${contentData.writeNo }">
+					<input type="hidden" name="originFileName" value="${contentData.fileName}">
+				<b>작성자</b><br>
+					<input type="text" name="writer" size="30" value="${contentData.writer }" readonly><br>
+				<b>제목</b><br>
+					<input type="text" size="30" name="title" value="${contentData.title }"><br>	
+				<b>내용</b><br>
+					<textarea rows="10" cols="50" name="content" >${contentData.content }</textarea>
+				<hr>
+				<b>이미지파일 첨부 : ${contentData.fileName}</b><br>
+					<c:if test="${contentData.fileName != 'nan' }">
+						<img width="100px" height="100px" id="preview"
+							 src="${contextPath }/admin/boarddownload?fileName=${contentData.fileName}">
+					</c:if>
+					<input type="file" name="newFileName" onchange="readURL(this)"><br>
+					<hr>
+					<input type="submit" class="btn btn-primary" value="수정">
+					<input type="button" class="btn btn-secondary" value="목록이동" onclick="location.href='${contextPath}/admin/boardalllist'">
+					
+				</form>
+
+
 				
 				
 				
