@@ -4,11 +4,8 @@ import com.seven.jong.VO.UserVO;
 import com.seven.jong.VO.security.UserSecurityVO;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.authority.SimpleGrantedAuthority;
-import org.springframework.security.core.userdetails.User;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RestController;
 
 @Controller
 public class HomeController {

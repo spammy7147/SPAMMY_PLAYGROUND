@@ -28,8 +28,9 @@
         <intercept-url pattern="/user/register" access="permitAll()"/>
         <intercept-url pattern="/user/login" access="isAnonymous()"/>
         <intercept-url pattern="/user/**" access="isAuthenticated()"/>
-        <intercept-url  pattern="/hosting/**" access="hasAnyRole('ROLE_ADMIN','ROLE_USER')" />
+        <intercept-url  pattern="/hosting/**" access="isAuthenticated()" />
         <intercept-url  pattern="/admin/**" access="hasRole('ROLE_ADMIN')" />
+        <intercept-url pattern="/" access="permitAll()"/>
 
 
         <remember-me key="auto-login"
