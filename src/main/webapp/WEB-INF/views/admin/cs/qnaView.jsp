@@ -5,6 +5,8 @@
 <head>
 	<title>AirBnD - 관리자 QNA 보기</title>
 	<c:import url="../../include/header.jsp" />
+	
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
 
 <meta id="_csrf" name="_csrf" content="${_csrf.token}"/>
 <!-- default header name is X-CSRF-TOKEN -->
@@ -31,6 +33,7 @@
 				alert("문제 발생!!!");
 			}
 		})
+		
 	}
 	
 	function replyData(){
@@ -50,7 +53,7 @@
 					writeDate += date.getMinutes()+"분"+date.getSeconds()+"초"
 					html += "<div align='left'><b>아이디 : </b>"+data.email+"님 / ";
 					html += "<b>작성일</b> : "+writeDate+"<br>"
-					html += "<b>내용</b> : "+data.content+"<hr></div>"
+					html += data.content+"<hr></div>"
 				})
 				$("#reply").html(html)
 			},error:function(){
@@ -80,6 +83,18 @@
 
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
+			
+				<div align="right">
+				<!-- class="btn btn-outline-info" class="btn btn-outline-danger"-->
+				<input type="button" class="btn btn-primary" onclick=
+					"location.href='${contextPath }/admin/modifyqna?qnaNo=${qnaData.qnaNo }'" value="수정하기">
+
+				<input type="button" class="btn btn-primary" onclick=
+					"location.href='${contextPath }/admin/deleteqna?qnaNo=${qnaData.qnaNo }&imageFileName=${qnaData.imageFileName }'" value="삭제하기">
+				<input type="button" class="btn btn-secondary" onclick="location.href='${contextPath }/admin/customerqna'" value="목록보기">
+				<hr>
+				</div>
+				
 				<table class="table table-bordered">
 					<tr>
 						<th>글 번호</th><td>${qnaData.qnaNo }</td>
@@ -90,41 +105,40 @@
 						<th>작성일</th><td>${qnaData.saveDate }</td>
 					</tr>
 
-					<tr>
-						<th>내 용</th><td  colspan="3">${qnaData.content }</td>
-					</tr>
 					<c:if test="${qnaData.imageFileName != 'nan' }">
 						<tr>
-							<th colspan="4">
+							<th>파일</th>
+							<th colspan="3">
 								<img width="100px" height="100px"
 									 src="${contextPath }/admin/download?imageFileName=${qnaData.imageFileName}">
 							</th>
 						</tr>
 					</c:if>
+					
+					<tr>
+						<th>내 용</th><td  colspan="3">${qnaData.content }</td>
+					</tr>
 					<tr>
 						<td colspan="4" align="center">
 
 							<s:authorize access="hasRole('ROLE_ADMIN')">
-								<input type="button" class="btn btn-outline-info" onclick=
-										"location.href='${contextPath }/admin/modifyqna?qnaNo=${qnaData.qnaNo }'" value="수정하기">
-
-								<input type="button" class="btn btn-outline-danger" onclick=
-										"location.href='${contextPath }/admin/deleteqna?qnaNo=${qnaData.qnaNo }&imageFileName=${qnaData.imageFileName }'" value="삭제하기">
-
+								
 								<form id="frm">
-									<hr>
+									<div align="left">
 									<input type="hidden" id="qna_no" name="qna_no" value="${qnaData.qnaNo }">
+									<b>Comment</b><br>
 									<b>작성자 : ${loginUser }</b><br>
-									<textarea rows="5" cols="30" id="content" name="content"></textarea>
+									<textarea style="width:90%;" rows="5" id="content" name="content"></textarea>
 									<button type="button" onclick="rep()" class="btn btn-outline-secondary">답글</button>
 									<hr>
+									</div>
 								</form>
 							</s:authorize>
 
 
 							<div id="reply"></div>
 
-							<input type="button" class="btn btn-outline-success" onclick="location.href='${contextPath }/admin/customerqna'" value="리스트로 돌아가기">
+							
 						</td>
 					</tr>
 				</table>

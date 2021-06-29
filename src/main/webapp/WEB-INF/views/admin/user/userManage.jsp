@@ -37,6 +37,8 @@
 
 
 
+
+
 				<h1 style="text-align: center;">회 원 정 보</h1>
 
 
@@ -110,6 +112,11 @@
 				</form>
 
 
+
+
+
+
+
 			</div>
 		<!-- End of Main Content -->
 
@@ -120,6 +127,7 @@
 
 </div>
 <!-- End of Page Wrapper -->
+</div>
 
 <!-- Scroll to Top Button-->
 <a class="scroll-to-top rounded" href="#page-top">
