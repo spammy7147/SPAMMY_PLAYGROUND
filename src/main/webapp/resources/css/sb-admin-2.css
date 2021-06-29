@@ -7581,6 +7581,12 @@ button.bg-dark:focus {
   box-shadow: none !important;
 }
 
+.wh-300 {
+  display: block;
+  height: 300px; !important;
+  width: 300px; !important;
+}
+
 .w-25 {
   width: 25% !important;
 }
