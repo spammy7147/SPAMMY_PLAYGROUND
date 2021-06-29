@@ -121,13 +121,13 @@ public class CsServiceImpl implements CsService{
 		dto.setContent(mul.getParameter("content"));
 		
 		MultipartFile file = mul.getFile("imageFileName");
-		QnaFileService bfs = new QnaFileServiceImpl();
+		QnaFileService qfs = new QnaFileServiceImpl();
 		
 		if( file.isEmpty() ) { // 이미지 변경 되지 않았음
 			dto.setImageFileName(mul.getParameter("originFileName"));
 		}else { // 이미지 변경 되었음.
-			dto.setImageFileName(bfs.saveFile(file));
-			bfs.deleteImage(mul.getParameter("originFileName"));
+			dto.setImageFileName(qfs.saveFile(file));
+			qfs.deleteImage(mul.getParameter("originFileName"));
 		}
 		int result = mapper.modify(dto);
 		
@@ -139,7 +139,7 @@ public class CsServiceImpl implements CsService{
 		mDto.setFailMessage("수정 중 문제 발생!!!");
 		mDto.setFailURL("/admin/qnaView");
 		
-		return bfs.getMessage(mDto);
+		return qfs.getMessage(mDto);
 	}
 
 	//QnA리플 추가

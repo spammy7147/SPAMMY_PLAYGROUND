@@ -149,7 +149,57 @@ public class AdminController {
 		FileCopyUtils.copy(in, response.getOutputStream());
 		in.close();
 	}
-	
+	//게시물 수정 양식
+	@GetMapping("boardmodifyform")
+	public String modifyForm(@RequestParam int writeNo, Model model) {
+		bs.contentView(writeNo, model);
+		return "admin/board/modifyForm";
+	}
+	//게시물 수정
+	@PostMapping("boardmodify")
+	public void modify(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mul, HttpServletResponse response) throws IOException {
+		
+		String message = bs.modify(dto, request, mul);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(message);
+		//return "redirect:boardalllist";
+	}
+	//게시물 삭제
+	@GetMapping("boarddelete")
+	public void delete(@RequestParam int writeNo, @RequestParam String fileName,
+			HttpServletResponse response, HttpServletRequest request) throws IOException {
+		
+		String message = bs.delete(writeNo,fileName,request);
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(message);
+	}
+	//게시물 리플 추가
+	@PostMapping("addreply")
+	public String addReply(@RequestParam String content,@RequestParam int writeNo, @RequestParam String writer){//세션 추가해야함
+		bs.addReply(content,writeNo,writer);	
+		return "redirect:contentview?writeNo="+writeNo;
+	}
+	//댓글 삭제
+	@GetMapping("replydelete")
+	public String replyDelete(@RequestParam int writeNo, @RequestParam int reply_num) {
+		bs.replyDelete(reply_num);
+		return "redirect:contentview?writeNo="+writeNo;
+	}
+	//댓글 수정창 이동
+	@GetMapping("boardmodifyreplyform")
+	public String modifyReplyForm(@RequestParam int reply_num, @RequestParam int writeNo ,Model model) {
+		bs.selectReply(model, reply_num, writeNo);
+		return "admin/board/modifyReplyForm";
+	}
+	//댓글 수정
+	@PostMapping("boardmodifyreply")
+	public String modifyReply(@RequestParam int writeNo,@RequestParam String content,@RequestParam int reply_num) {
+		bs.modifyReply(content,reply_num);
+		return "redirect:contentview?writeNo="+writeNo;
+	}
 	
 	
 	

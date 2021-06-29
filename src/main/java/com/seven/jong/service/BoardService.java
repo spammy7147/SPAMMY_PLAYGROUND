@@ -14,8 +14,8 @@ public interface BoardService {
 	public void writeSave(BoardDTO dto,HttpServletRequest request, MultipartHttpServletRequest mul);
 	public void boardAllList(Model model, int num);
 	public void contentView (int writeNo, Model model);
-	public void modify(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mul);
-	public void delete(int writeNo);
+	public String modify(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mul);
+	public String delete(int writeNo, String fileName, HttpServletRequest request);
 	public void boardSearch(int num, String choice, String search, Model model);
 	public List<BoardReplyDTO> getReplyList(int write_group);
 	public void addReply(String content, int writeNo, String writer);

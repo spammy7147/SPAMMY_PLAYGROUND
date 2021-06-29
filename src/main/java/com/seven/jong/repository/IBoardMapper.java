@@ -25,10 +25,10 @@ public interface IBoardMapper {
 	public void upHit(int writeNo);
 
 	//게시글 수정
-	public void modify(BoardDTO dto);
+	public int modify(BoardDTO dto);
 
 	//게시글 삭제
-	public void delete(int writeNo);
+	public int delete(int writeNo);
 
 	//게시글 검색 목록
 	public ArrayList<BoardDTO> boardSearchList(@Param("s")int start, @Param("e")int end, @Param("c")String c,@Param("search") String search);
