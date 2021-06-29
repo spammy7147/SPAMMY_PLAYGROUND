@@ -53,7 +53,7 @@
 					writeDate += date.getMinutes()+"분"+date.getSeconds()+"초"
 					html += "<div align='left'><b>아이디 : </b>"+data.email+"님 / ";
 					html += "<b>작성일</b> : "+writeDate+"<br>"
-					html += "<b>내용</b> : "+data.content+"<hr></div>"
+					html += data.content+"<hr></div>"
 				})
 				$("#reply").html(html)
 			},error:function(){
@@ -83,6 +83,18 @@
 
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
+			
+				<div align="right">
+				<!-- class="btn btn-outline-info" class="btn btn-outline-danger"-->
+				<input type="button" class="btn btn-primary" onclick=
+					"location.href='${contextPath }/admin/modifyqna?qnaNo=${qnaData.qnaNo }'" value="수정하기">
+
+				<input type="button" class="btn btn-primary" onclick=
+					"location.href='${contextPath }/admin/deleteqna?qnaNo=${qnaData.qnaNo }&imageFileName=${qnaData.imageFileName }'" value="삭제하기">
+				<input type="button" class="btn btn-secondary" onclick="location.href='${contextPath }/admin/customerqna'" value="목록보기">
+				<hr>
+				</div>
+				
 				<table class="table table-bordered">
 					<tr>
 						<th>글 번호</th><td>${qnaData.qnaNo }</td>
@@ -110,18 +122,13 @@
 						<td colspan="4" align="center">
 
 							<s:authorize access="hasRole('ROLE_ADMIN')">
-								<input type="button" class="btn btn-outline-info" onclick=
-										"location.href='${contextPath }/admin/modifyqna?qnaNo=${qnaData.qnaNo }'" value="수정하기">
-
-								<input type="button" class="btn btn-outline-danger" onclick=
-										"location.href='${contextPath }/admin/deleteqna?qnaNo=${qnaData.qnaNo }&imageFileName=${qnaData.imageFileName }'" value="삭제하기">
-
+								
 								<form id="frm">
 									<div align="left">
-									<hr>
 									<input type="hidden" id="qna_no" name="qna_no" value="${qnaData.qnaNo }">
+									<b>Comment</b><br>
 									<b>작성자 : ${loginUser }</b><br>
-									<textarea  style="width:90%;" rows="5" id="content" name="content"></textarea>
+									<textarea style="width:90%;" rows="5" id="content" name="content"></textarea>
 									<button type="button" onclick="rep()" class="btn btn-outline-secondary">답글</button>
 									<hr>
 									</div>
@@ -131,7 +138,7 @@
 
 							<div id="reply"></div>
 
-							<input type="button" class="btn btn-outline-success" onclick="location.href='${contextPath }/admin/customerqna'" value="리스트로 돌아가기">
+							
 						</td>
 					</tr>
 				</table>
