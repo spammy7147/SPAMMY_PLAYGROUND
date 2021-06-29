@@ -1,13 +1,11 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-    <%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath }" />
-<!DOCTYPE html>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../include/taglib.jsp"%>
+
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
-<script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+	<title>AirBnD - 관리자 QNA 폼</title>
+	<c:import url="../include/header.jsp" />
+
 <script type="text/javascript">
 	function readURL(input){
 		var file = input.files[0]
@@ -23,43 +21,66 @@
 	}
 </script>
 </head>
-<body>
-	<jsp:include page="../include/header.jsp" />
-	<div class="grid">
-		<jsp:include page="customerSubMenu.jsp" />
-		
-		<div class="grid-item qna">
-		
-		<form action="${contextPath }/cs/qnasave?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
-		<!-- enctype="multipart/form-data" -->
-			 
-			<!-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> -->
-			<b>작성자</b><br>
-			<input type="text" name="email" size="50" value="${loginUser }" readonly>
-			<hr>
-			<b>제목</b><br>
-			<input type="text" size="50" name="title" ><hr>
-			<b>내용</b><br>
-			<textarea rows="10" cols="50" name="content"></textarea>
-			<hr>
+<body id="page-top" onload="replyData()">
+<c:import url="../include/navbar.jsp" />
+<c:import url="customerSubMenu.jsp" />
+
+<!-- Page Wrapper -->
+<div id="wrapper">
+	
+
+
+	<!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column">
+
+		<!-- Main Content -->
+		<div id="content">
+
+
+			<!-- Begin Page Content -->
+			<div class="container-fluid">
 			
-			<b>이미지파일 첨부</b><br>
-			<input type="file" name="imageFileName" onchange="readURL(this)">
-			<img id="preview" src="#" width="100" height="100" alt="선택 이미지 없음">
-			<hr>
 			
-			<input type="submit" value="글쓰기">
-			<input type="button" value="목록이동"
-				onclick="location.href='${contextPath}/cs/customerqna'">
-		</form>
-		
-		</div>	
+				<form action="${contextPath }/admin/qnasave?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
+					<!-- enctype="multipart/form-data" -->
+
+					<!-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" /> -->
+					<b>작성자</b><br>
+					<input type="text" name="email" size="50" value="${loginUser }" readonly>
+					<hr>
+					<b>제목</b><br>
+					<input type="text" size="50" name="title" ><hr>
+					<b>내용</b><br>
+					<textarea rows="10" cols="50" name="content"></textarea>
+					<hr>
+
+					<b>이미지파일 첨부</b><br>
+					<img id="preview" src="#" width="100" height="100" alt="선택 이미지 없음">
+					<input type="file" name="imageFileName" onchange="readURL(this)">
+					
+					<hr>
+
+					<input type="submit" value="글쓰기">
+					<input type="button" value="목록이동"
+						   onclick="location.href='${contextPath}/admin/customerqna'">
+				</form>
+			</div>
+			<!-- /.container-fluid -->
+		</div>
+		<!-- End of Main Content -->
+
+		<c:import url="../include/footer.jsp"/>
+		<!-- End of Footer -->
 	</div>
-	<jsp:include page="../include/footer.jsp" />
+	<!-- End of Content Wrapper -->
+
+</div>
+<!-- End of Page Wrapper -->
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+	<i class="fas fa-angle-up"></i>
+</a>
+
 </body>
 </html>
-
-
-
-
-
