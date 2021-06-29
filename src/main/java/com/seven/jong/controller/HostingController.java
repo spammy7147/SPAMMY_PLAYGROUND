@@ -17,6 +17,13 @@ import java.util.List;
 @RequestMapping("/hosting")
 public class HostingController {
 
+
+    @GetMapping("/home")
+    public String home() {
+        System.out.println("/hosting/home => GET 요청");
+        return "/hosting/hostHome";
+    }
+
     @GetMapping("/address")
     @CrossOrigin
     public String address() {
