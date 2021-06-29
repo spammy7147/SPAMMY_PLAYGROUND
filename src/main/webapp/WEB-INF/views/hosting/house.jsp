@@ -1,7 +1,16 @@
-<%@ page contentType="text/html;charset=UTF-8" language="java" %>
-<%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core" %>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../include/taglib.jsp"%>
 
-<c:import url="../include/header.jsp"/>
+
+<html>
+<head>
+    <title>AirBnD - 숙소 정보 </title>
+    <c:import url="../include/header.jsp" />
+
+
+</head>
+<body>
+<c:import url="../include/navbar.jsp"/>
 
 
 
@@ -12,7 +21,7 @@
                 <form action="#" method="post">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     숙소의 건물 유형을 선택해주세요. <br>
-                    <select class="form-select mb-3" name="houseType">
+                    <select class="form-control mb-3" name="houseType">
                         <option value="apt">아파트</option>
                         <option value="house">주택</option>
                         <option value="company">전문 숙박</option>
@@ -24,7 +33,7 @@
                     게스트가 사용할 수 있는 침대는 몇 개인가요?
                     <input type="text" class="form-control mb-3" id="district" name="numberOfBed" placeholder="침대 갯수">
                     게스트가 사용할 수 있는 침대 종류는 무엇인가요?
-                    <select class="form-select mb-3" name="bedType">
+                    <select class="form-control mb-3" name="bedType">
                         <option value="king">킹</option>
                         <option value="queen">퀸</option>
                         <option value="double">더블</option>
@@ -38,3 +47,5 @@
         </div>
     </div>
 </div>
+</body>
+</html>

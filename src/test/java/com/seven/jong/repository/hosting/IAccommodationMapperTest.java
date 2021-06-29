@@ -18,7 +18,7 @@ public class IAccommodationMapperTest {
     public void addAccommodationTest(){
         AccommodationVO accommodationVO =
                 AccommodationVO.builder()
-                        .userId(123)
+                        .userId(1)
                         .address("서울어딘가")
                         .name("소맥킹")
                         .type("아파트")
