@@ -24,7 +24,7 @@
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
 				
-				bookingManage.jsp
+				modifyReplyForm
 				
 				
 				

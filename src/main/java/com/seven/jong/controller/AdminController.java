@@ -1,5 +1,6 @@
 package com.seven.jong.controller;
 
+import com.seven.jong.DTO.BoardDTO;
 import com.seven.jong.DTO.FaqDTO;
 import com.seven.jong.DTO.QnaDTO;
 import com.seven.jong.DTO.QnaRepDTO;
@@ -7,6 +8,8 @@ import com.seven.jong.DTO.user.UserRequestDTO;
 import com.seven.jong.VO.UserVO;
 import com.seven.jong.VO.security.UserSecurityVO;
 import com.seven.jong.service.AdminUserService;
+import com.seven.jong.service.BoardFileService;
+import com.seven.jong.service.BoardService;
 import com.seven.jong.service.CsService;
 import com.seven.jong.service.QnaFileService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +25,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.Map;
@@ -31,6 +35,7 @@ import java.util.Map;
 public class AdminController {
 	@Autowired AdminUserService aus;
 	@Autowired CsService cs;
+	@Autowired BoardService bs;
 	
 	//관리자 홈
 	@GetMapping("/home")
@@ -100,11 +105,50 @@ public class AdminController {
 	
 	@GetMapping("/board")
 	public String board() {
-		return "board/boardAllList";
+		return "admin/board/boardAllList";
 	}
 	
 	
 	
+	
+	//관리자모드 게시판 연결
+	@GetMapping("/boardalllist")
+	public String boardalllist(Model model, @RequestParam(value="pageNum", required = false, defaultValue = "1") int pageNum) {
+		bs.boardAllList(model,pageNum);
+		return "admin/board/boardAllList";
+	}
+	//관리자모드 게시글 작성
+	@GetMapping("/writeform")
+	public String writeForm() {
+		return "admin/board/writeForm";
+	}
+	//게시물 저장
+	@PostMapping("/writeSave")
+	public String writeSave(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mtfRequest, HttpServletResponse response) throws IOException {
+		bs.writeSave(dto, request, mtfRequest);
+			
+		return "redirect:boardalllist";
+	}
+	//선택 게시물 보기 , 리플 가져오기
+	@GetMapping("contentview")
+	public String contentView (@RequestParam int writeNo, Model model) {
+		bs.contentView(writeNo, model);
+		System.out.println("contentView연결");
+		return "admin/board/contentView";
+	}
+	//이미지 불러오기
+	@GetMapping("boarddownload")
+	public void boarddownLoad(@RequestParam String fileName,
+						HttpServletResponse response) throws Exception{
+		response.addHeader("Content-disposition","attachment;fileName"+fileName);
+		File file = new File(BoardFileService.Board_IMAGE_REPO+"/"+fileName);
+		FileInputStream in = new FileInputStream(file);
+			
+		System.out.println(file);
+			
+		FileCopyUtils.copy(in, response.getOutputStream());
+		in.close();
+	}
 	
 	
 	

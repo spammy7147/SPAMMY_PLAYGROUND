@@ -4,6 +4,7 @@ create table air_board(
 	Title varchar2(100),
 	Content varchar2(500),
 	Savedate date default sysdate,
+  file_name VARCHAR2(50),
 	Hit number(10) default 0
 );
 create sequence air_board_seq

@@ -23,48 +23,24 @@ public class BoardServiceImpl implements BoardService{
 	
 	@Override
 	public void writeSave(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mtfRequest) {
-		dto.setTitle(request.getParameter("title"));
-		dto.setWriter(request.getParameter("writer"));
-		dto.setContent(request.getParameter("content"));
+		MultipartFile file = mtfRequest.getFile("imageFileName");
 		
-		String src = mtfRequest.getParameter("src");
-        System.out.println("src value : " + src);
-        MultipartFile mf = mtfRequest.getFile("file_name");
-
-        //경로 지정
-        String path = "C:\\upload\\";
-
-        String originFileName = mf.getOriginalFilename(); // 원본 파일 명
-        long fileSize = mf.getSize(); // 파일 사이즈
-
-        String safeFile = path + System.currentTimeMillis() + originFileName;
-        System.out.println("path : " + path);
-        System.out.println("originFileName : " + originFileName);
-        System.out.println("fileSize : " + fileSize);
-        System.out.println("safeFile : " + safeFile);
-        System.out.println("--------------------------");
-        
-        //디비에 저장될 파일 이름
-        String fileName = System.currentTimeMillis() + originFileName;
-        
-        dto.setFileName(fileName);
-        
-        File file = new File(safeFile);
-        //경로에 디렉토리가 없으면 만들기
-        if (!file.exists()){
-             file.mkdir();
-        }
-        try {
-            mf.transferTo(file);
-        } catch (IllegalStateException | IOException e) {
-            e.printStackTrace();
-        }
-
-        String url = "/";
-        String referer= request.getHeader("Referer");
-        if(referer != null){
-            url = referer;
-        }
+		BoardFileService bfs = new BoardFileServiceImpl();
+		
+		if( file.isEmpty() ) { // 파일이 비워있으면 true
+			dto.setFileName("nan");
+		}else { //파일이 존재하는 경우
+			dto.setFileName( bfs.saveFile(file) );
+		}
+		
+		System.out.println(dto.getWriteNo());
+		System.out.println(dto.getContent());
+		System.out.println(dto.getFileName());
+		System.out.println(dto.getTitle());
+		System.out.println(dto.getWriter());
+		
+		
+		
 		
 		mapper.writeSave(dto);
 	}

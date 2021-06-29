@@ -3,15 +3,23 @@
 
 <html>
 <head>
-	<title>AirBnD - 사용자 test</title>
+	<title>AirBnD - 관리자 예약관리</title>
 	<c:import url="../../include/header.jsp" />
-</head>
 
+
+<script type="text/javascript">
+	function formSubmit(){
+		document.getElementById('frm').submit();
+	}
+</script>
+
+
+</head>
 <body id="page-top">
+
 <!-- Page Wrapper -->
 <div id="wrapper">
 	<c:import url="../sidebar.jsp" />
-
 
 	<!-- Content Wrapper -->
 	<div id="content-wrapper" class="d-flex flex-column">
@@ -23,22 +31,17 @@
 
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
-				<h1 style="text-align: center;">회 원 정 보</h1>
-				<form action="${contextPath }/admin/user/usersearch" method="post">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-					<select name="choice">
-						<option value="1">이메일
-						<option value="2">이름
-					</select>
-					<input type="text" name="userSearch">
-					<input type="submit" value="검색">
-				</form>
-
-
+				
+				
+				
+				<h1 style="text-align: center;">게시판</h1>
+				
+				
+				
 				<!-- DataTales Example -->
 				<div class="card shadow mb-4">
 					<div class="card-header py-3">
-						<h6 class="m-0 font-weight-bold text-primary">User DataTable</h6>
+						<h6 class="m-0 font-weight-bold text-primary">Board DataTable</h6>
 					</div>
 					<div class="card-body">
 						<div class="table-responsive">
@@ -46,35 +49,39 @@
 							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 								<tr>
-									<th>Email</th>
-									<th>Name</th>
-									<th>Register Date</th>
+									<th>Number</th><th>작성자</th><th>Title</th>
+									<th>Date</th><th>Hit</th><th>Image file</th>
 								</tr>
 								</thead>
 								<tfoot>
 								<tr>
-									<th>Email</th>
-									<th>Name</th>
-									<th>Register Date</th>
+									<td colspan="6">
+										<c:forEach var="pageNum" begin="1" end="${repeat }">
+											<a href="${contextPath }/admin/board/boardAllList?pageNum=${repeat}">${pageNum } &nbsp;</a>
+										</c:forEach>
+									</td>
 								</tr>
 								</tfoot>
 								<tbody>
 
 								<c:choose>
-								<c:when test="${userList.size() != 0 }">
-									<c:forEach var="dto" items="${userList }">
+								<c:when test="${boardList.size() != 0 }">
+									<c:forEach var="dto" items="${boardList }">
 										<tr>
+											<td>${dto.writeNo }</td> <td>${dto.writer }</td>
 											<td>
-												<a href="${contextPath }/admin/user/userInfo?userId=${dto.userId }">${dto.email }</a>
+												<a href="${contextPath }/admin/contentview?writeNo=${dto.writeNo }">${dto.title }</a>
 											</td>
-											<td>${dto.name }</td>
-											<td>${dto.regDate }</td>
+											<td>${dto.saveDate }</td>
+											<td>${dto.hit }</td>
+											<td>${dto.fileName }</td>
+				
 										</tr>
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
 								<tr>
-									<th colspan="3"> 등록된 유저가 없습니다.</th>
+									<th colspan="6">저장 데이터 없음</th>
 								<tr>
 									</c:otherwise>
 									</c:choose>
@@ -83,23 +90,26 @@
 							</table>
 						</div>
 					</div>
-					<tr>
-						<td colspan="3">
-
-							<c:forEach var="pageNum" begin="1" end="${allPage }">
-								<a href="${contextPath }/admin/usermanage?pageNum=${pageNum}">${pageNum } &nbsp;</a>
-							</c:forEach>
-							<a href="${contextPath }/user/register">유저등록</a>
-						</td>
-					</tr>
-				</div>
-				<!-- /.container-fluid -->
+				
+				
+				
+			</div>
+			<!-- /.container-fluid -->
+			
+			<form action="${contextPath }/admin/boardwriteform" id="frm">
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				<a class="btn btn-primary" href="${contextPath }/admin/writeform">게시글 작성</a>
+			</form>
+			
+			
 		</div>
 		<!-- End of Main Content -->
+
 		<c:import url="../../include/footer.jsp"/>
 		<!-- End of Footer -->
 	</div>
 	<!-- End of Content Wrapper -->
+
 </div>
 <!-- End of Page Wrapper -->
 
@@ -107,5 +117,6 @@
 <a class="scroll-to-top rounded" href="#page-top">
 	<i class="fas fa-angle-up"></i>
 </a>
+
 </body>
 </html>
