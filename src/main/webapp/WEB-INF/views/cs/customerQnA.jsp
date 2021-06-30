@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
 <%@ include file="../include/taglib.jsp"%>
-
+<%@ taglib prefix="s" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
 	<title>AirBnD - 관리자 고객센터 문의하기</title>
@@ -64,7 +64,10 @@
 										<tr>
 											<td>${dto.qnaNo }</td> <td>${dto.email }</td>
 											<td>
-												<a href="${contextPath }/cs/qnaview?qnaNo=${dto.qnaNo }">${dto.title }</a>
+												<s:authorize access="isAuthenticated()">
+													<a href="${contextPath }/cs/qnaview?qnaNo=${dto.qnaNo }">${dto.title }</a>
+												</s:authorize>
+												<a href="void(0);" onclick="alert('로그인이 필요합니다.');return false;">${dto.title }</a>
 											</td>
 											<td>${dto.saveDate }</td> <td>${dto.hit }</td> <td>${dto.imageFileName }</td>
 				
@@ -84,13 +87,14 @@
 					</div>
 				</div>
 				<!-- /.container-fluid -->
-
+				<s:authorize access="isAuthenticated()">
 				<form action="${contextPath }/cs/qnawriteform">
 					<div align="right">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<input type="submit" class="btn btn-primary" value="글작성">
 					</div>
 				</form>
+				</s:authorize>
 				
 				
 				
