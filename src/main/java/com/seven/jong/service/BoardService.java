@@ -22,6 +22,7 @@ public interface BoardService {
 	public void replyDelete(int replyNum);
 	public void selectReply(Model model, int reply_num, int writeNo);
 	public void modifyReply(String content, int reply_num);
+	String boardDelete(int writeNo, String fileName, HttpServletRequest request);
 	
 	
 

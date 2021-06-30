@@ -105,7 +105,27 @@ public class BoardServiceImpl implements BoardService{
 		dto.setSuccessMessage("성공적으로 삭제 되었습니다");
 		dto.setSuccessURL("/admin/boardalllist");
 		dto.setFailMessage("삭제 중 문제가 발생하였습니다");
-		dto.setFailURL("/admin/contentView");
+		dto.setFailURL("/admin/contentview");
+		
+		return bfs.getMessage(dto);
+	}
+	
+	@Override
+	public String boardDelete(int writeNo, String fileName, HttpServletRequest request) {
+		BoardFileService bfs = new BoardFileServiceImpl();
+		int result = mapper.delete(writeNo);
+		
+		MessageDTO dto = new MessageDTO();
+		
+		if(result == 1) {//DB삭제 성공
+			bfs.deleteImage(fileName);
+		}
+		dto.setRequest(request);
+		dto.setResult(result);
+		dto.setSuccessMessage("성공적으로 삭제 되었습니다");
+		dto.setSuccessURL("/board/boardalllist");
+		dto.setFailMessage("삭제 중 문제가 발생하였습니다");
+		dto.setFailURL("/board/contentView");
 		
 		return bfs.getMessage(dto);
 	}

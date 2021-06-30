@@ -3,6 +3,7 @@ package com.seven.jong.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -91,10 +92,14 @@ public class BoardController {
 		return "redirect:/board/boardAllList";
 	}
 	//게시물 삭제
-	@GetMapping("delete")
-	public String delete(@RequestParam int writeNo) {
-		//bs.delete(writeNo);
-		return "redirect:/board/boardAllList";
+	@GetMapping("boarddelete")
+	public void delete(@RequestParam int writeNo, @RequestParam String fileName,
+			HttpServletResponse response, HttpServletRequest request) throws IOException {
+		String message = bs.boardDelete(writeNo,fileName,request);
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(message);
 	}
 	//게시물 검색
 	@PostMapping("/boardSearch")
