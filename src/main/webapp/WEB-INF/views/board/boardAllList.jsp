@@ -1,59 +1,133 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
-<%@ taglib uri="http://java.sun.com/jsp/jstl/core" prefix="c" %>
-<c:set var="contextPath" value="${pageContext.request.contextPath }"/>
+<%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
+<%@ include file="../include/taglib.jsp"%>
 
-<!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Insert title here</title>
+	<title>AirBnD - 고객 게시판</title>
+	<c:import url="../include/header.jsp" />
+
+
+
 </head>
-<body>
-<c:import url="../include/header.jsp" />
+<body id="page-top">
+<c:import url="../include/navbar.jsp" />
+<!-- Page Wrapper -->
+<div id="wrapper">
+	
 
 
-<div align="center">
-	
-	<form action="${contextPath }/board/boardSearch" method="post">
-		<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-		<select name="choice">
-			<option value="1">제목
-			<option value="2">작성자
-		</select>
-		<input type="text" name="boardSearch">
-		<input type="submit" value="검색">
-	</form>
-	
-	<table>
-		<tr>
-			<th>번호</th>
-			<th>작성자</th>
-			<th>제목</th>
-			<th>날짜</th>
-			<th>조회수</th>				
-		</tr>
-		<c:if test="${boardList.size() == 0 }">
-		<tr>
-	 		<th colspan="5">데이터 없음</th>
-		</tr>
-		</c:if>		
-		<c:forEach var="dto" items="${boardList }">
-		<tr>
-			<td>${dto.writeNo }</td>
-			<td>${dto.writer }</td>
-			<td>
-				<a href="${contextPath }/board/contentView?writeNo=${dto.writeNo }">${dto.title }</a>
-			</td>
-			<td>${dto.saveDate }</td>
-			<td>${dto.hit }</td>
-		</tr>
-		</c:forEach>
-	</table>
-		<c:forEach var="num" begin="1" end="${repeat }">
-			<a href="${contextPath }/board/boardAllList?num=${num}">${num } &nbsp;</a>
-		</c:forEach>
-		<a href="${contextPath }/board/writeForm">글작성</a>
+	<!-- Content Wrapper -->
+	<div id="content-wrapper" class="d-flex flex-column">
+
+		<!-- Main Content -->
+		<div id="content">
+
+			
+
+			<!-- Begin Page Content -->
+			<div class="container-fluid">
+			
+			
+			
+			
+			<!-- Main Content -->
+			<div id="content">
+
+			<!-- Begin Page Content -->
+			<div class="container-fluid">
+				
+				
+				
+				<h1 style="text-align: center;">게시판</h1>
+				
+				
+				
+				<!-- DataTales Example -->
+				<div class="card shadow mb-4">
+					<div class="card-header py-3">
+						<h6 class="m-0 font-weight-bold text-primary">Board DataTable</h6>
+					</div>
+					<div class="card-body">
+						<div class="table-responsive">
+
+							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+								<thead>
+								<tr>
+									<th>Number</th><th>작성자</th><th>Title</th>
+									<th>Date</th><th>Hit</th><th>Image file</th>
+								</tr>
+								</thead>
+								<tfoot>
+								<tr>
+									<td colspan="6">
+										<c:forEach var="pageNum" begin="1" end="${repeat }">
+											<a href="${contextPath }/board/boardalllist?pageNum=${pageNum }">${pageNum } &nbsp;</a>
+										</c:forEach>
+									</td>
+								</tr>
+								</tfoot>
+								<tbody>
+
+								<c:choose>
+								<c:when test="${boardList.size() != 0 }">
+									<c:forEach var="dto" items="${boardList }">
+										<tr>
+											<td>${dto.writeNo }</td> <td>${dto.writer }</td>
+											<td>
+												<a href="${contextPath }/board/contentview?writeNo=${dto.writeNo }">${dto.title }</a>
+											</td>
+											<td>${dto.saveDate }</td>
+											<td>${dto.hit }</td>
+											<td>${dto.fileName }</td>
+				
+										</tr>
+									</c:forEach>
+								</c:when>
+								<c:otherwise>
+								<tr>
+									<th colspan="6">저장 데이터 없음</th>
+								<tr>
+									</c:otherwise>
+									</c:choose>
+
+								</tbody>
+							</table>
+						</div>
+					</div>
+				
+				
+				
+			</div>
+			<!-- /.container-fluid -->
+			<div align="right">
+			<form>
+				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+				<a class="btn btn-primary" href="${contextPath }/board/writeform">게시글 작성</a>
+			</form>
+			</div>
+			
+			
+			
+				
+				
+				
+				
+				
+				
+				
+			</div>
+		<!-- End of Main Content -->
+
+		<c:import url="../include/footer.jsp"/>
+		<!-- End of Footer -->
+	</div>
+	<!-- End of Content Wrapper -->
+
 </div>
-</body>
-</html>
+<!-- End of Page Wrapper -->
+</div>
+
+<!-- Scroll to Top Button-->
+<a class="scroll-to-top rounded" href="#page-top">
+	<i class="fas fa-angle-up"></i>
+</a>
