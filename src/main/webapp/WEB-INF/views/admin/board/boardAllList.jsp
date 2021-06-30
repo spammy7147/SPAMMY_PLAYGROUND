@@ -3,15 +3,8 @@
 
 <html>
 <head>
-	<title>AirBnD - 관리자 예약관리</title>
+	<title>AirBnD - 관리자 게시판관리</title>
 	<c:import url="../../include/header.jsp" />
-
-
-<script type="text/javascript">
-	function formSubmit(){
-		document.getElementById('frm').submit();
-	}
-</script>
 
 
 </head>
@@ -57,7 +50,7 @@
 								<tr>
 									<td colspan="6">
 										<c:forEach var="pageNum" begin="1" end="${repeat }">
-											<a href="${contextPath }/admin/board/boardAllList?pageNum=${repeat}">${pageNum } &nbsp;</a>
+											<a href="${contextPath }/admin/boardalllist?pageNum=${pageNum }">${pageNum } &nbsp;</a>
 										</c:forEach>
 									</td>
 								</tr>
@@ -96,11 +89,12 @@
 			</div>
 			<!-- /.container-fluid -->
 			
-			<form action="${contextPath }/admin/boardwriteform" id="frm">
+			<div align="right">
+			<form>
 				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 				<a class="btn btn-primary" href="${contextPath }/admin/writeform">게시글 작성</a>
 			</form>
-			
+			</div>
 			
 		</div>
 		<!-- End of Main Content -->

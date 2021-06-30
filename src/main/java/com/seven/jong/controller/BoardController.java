@@ -30,10 +30,10 @@ public class BoardController {
 	BoardService bs;
 	
 	//boardAllList.jsp연결
-	@GetMapping("/boardAllList")
-	public String boardAllList(Model model, @RequestParam(value="num", required = false, defaultValue = "1") int num) {
+	@GetMapping("/boardalllist")
+	public String boardAllList(Model model, @RequestParam(value="pageNum", required = false, defaultValue = "1") int pageNum) {
 		System.out.println("boardAllList연결");
-		bs.boardAllList(model,num);
+		bs.boardAllList(model,pageNum);
 		return "board/boardAllList";
 	}
 	//writeForm.jsp 연결
@@ -50,7 +50,7 @@ public class BoardController {
 		return "redirect:/board/boardAllList";
 	}
 	//선택 게시물 보기 , 리플 가져오기
-	@GetMapping("contentView")
+	@GetMapping("contentview")
 	public String contentView (@RequestParam int writeNo, Model model) {
 		bs.contentView(writeNo, model);
 		System.out.println("contentView연결");
