@@ -127,14 +127,8 @@
 					
 					</th>
 					<th align="right">
-						
-						<div align="right">
-						<form>
-							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-							<a class="btn btn-primary" href="${contextPath }/board/boardalllist">목록으로</a>
-						</form>
-						</div> 
-			
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						<a class="btn btn-primary" href="${contextPath }/board/boardalllist">목록으로</a>
 					</th>
 				</tr>
 			</table>

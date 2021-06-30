@@ -1,17 +1,20 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../../include/taglib.jsp"%>
-
+<%@ include file="../include/taglib.jsp"%>
+<%@ taglib prefix="s" uri="http://www.springframework.org/security/tags" %>
 <html>
 <head>
 	<title>AirBnD - 관리자 고객센터 문의하기</title>
-	<c:import url="../../include/header.jsp" />
+	<c:import url="../include/header.jsp" />
+
+
 
 </head>
 <body id="page-top">
-
+<c:import url="../include/navbar.jsp" />
+<c:import url="customerSubMenu.jsp" />
 <!-- Page Wrapper -->
 <div id="wrapper">
-	<c:import url="../sidebar.jsp" />
+	
 
 
 	<!-- Content Wrapper -->
@@ -20,7 +23,7 @@
 		<!-- Main Content -->
 		<div id="content">
 
-			<c:import url="../../include/navbar.jsp" />
+			
 
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
@@ -40,14 +43,14 @@
 							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 								<tr>
-									<th>번호</th><th>id</th><th width="40%" style="color:#4e73df;">제목</th><th>날짜</th>
+									<th>번호</th><th>작성자</th><th width="40%" style="color:#4e73df;">제목</th><th>날짜</th>
 									<th>조회수</th><th>Image File</th>
 								</tr>
 								</thead>
 								<tfoot>
 								<tr>								
 									<th colspan="6">
-										<c:forEach var="pageNum" begin="1" end="${allPage }">
+										<c:forEach var="pageNum" begin="1" end="${repeat }">
 											<a href="${contextPath }/admin/customerqna?pageNum=${pageNum}">${pageNum } &nbsp;</a>
 										</c:forEach>
 									</th>
@@ -56,12 +59,17 @@
 								<tbody>
 
 								<c:choose>
-								<c:when test="${userList.size() != 0 }">
-									<c:forEach var="dto" items="${qnaList }">
+								<c:when test="${searchList.size() != 0 }">
+									<c:forEach var="dto" items="${searchList }">
 										<tr>
 											<td>${dto.qnaNo }</td> <td>${dto.email }</td>
 											<td>
-												<a href="${contextPath }/admin/qnaview?qnaNo=${dto.qnaNo }">${dto.title }</a>
+												<s:authorize access="isAuthenticated()">
+													<a href="${contextPath }/cs/qnaview?qnaNo=${dto.qnaNo }">${dto.title }</a>
+												</s:authorize>
+												<s:authorize access="isAnonymous()">
+												<a href="void(0);" onclick="alert('로그인이 필요합니다.');return false;">${dto.title }</a>
+												</s:authorize>
 											</td>
 											<td>${dto.saveDate }</td> <td>${dto.hit }</td> <td>${dto.imageFileName }</td>
 				
@@ -81,13 +89,45 @@
 					</div>
 				</div>
 				<!-- /.container-fluid -->
-
-				<div align="right">
-					<form action="${contextPath }/admin/qnawriteform">
+				
+				
+				<table width="100%">
+				<tr>
+					<th>
+					
+					<form action="${contextPath }/cs/qnaSearch" method="post">
 						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-						<input type="submit" class="btn btn-primary" value="글작성">
+						<div class="form-row align-items-center">
+						    <div class="col-auto my-1">
+								<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">검색옵션</label>
+								<select class="custom-select mr-sm-2" id="inlineFormCustomSelect"  name="choice">
+									<option value="1">제목
+									<option value="2">작성자
+						      	</select>
+						      	
+						    </div>
+						    <div class="col-auto my-1">
+							    <div class="custom-control custom-checkbox mr-sm-2">
+							        <input class="form-control" type="text" name="boardSearch">
+							    </div>
+						    </div>
+						    <div class="col-auto my-1">
+						      	<button type="submit" class="btn btn-primary">검색</button>
+						    </div>
+						    
+						    
+						    
+						</div>
 					</form>
-				</div>
+					
+					</th>
+					<th align="right">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						<a class="btn btn-primary" href="${contextPath }/cs/customerqna">목록으로</a>
+					</th>
+				</tr>
+			</table>
+			
 			
 				
 				
@@ -111,7 +151,7 @@
 			</div>
 		<!-- End of Main Content -->
 
-		<c:import url="../../include/footer.jsp"/>
+		<c:import url="../include/footer.jsp"/>
 		<!-- End of Footer -->
 	</div>
 	<!-- End of Content Wrapper -->
