@@ -59,9 +59,13 @@ public class BoardController {
 	}
 	//선택 게시물 보기 , 리플 가져오기
 	@GetMapping("contentview")
-	public String contentView (@RequestParam int writeNo, Model model) {
+	public String contentView (@Nullable Authentication authentication, @RequestParam int writeNo, Model model) {
 		bs.contentView(writeNo, model);
-		System.out.println("contentView연결");
+		
+		UserSecurityVO userSecurityVO = (UserSecurityVO) authentication.getPrincipal();
+		UserVO userVO = userSecurityVO.getUser();
+		model.addAttribute("loginUser", userVO.getEmail());
+		
 		return "board/contentView";
 	}
 	//이미지 불러오기
@@ -111,29 +115,31 @@ public class BoardController {
 		return "board/boardSearch";
 	}
 	//댓글 추가
-	@PostMapping("addReply")
+	@PostMapping("addreply")
 	public String addReply(@RequestParam String content,@RequestParam int writeNo, @RequestParam String writer){//세션 추가해야함
+		System.out.println(writer);
+		System.out.println(writeNo);
 		bs.addReply(content,writeNo,writer);	
-		return "redirect:/board/contentView?writeNo="+writeNo;
+		return "redirect:contentview?writeNo="+writeNo;
 	}
 	//댓글 삭제
 	@GetMapping("replydelete")
-	public String replyDelete(@RequestParam int writeNo, @RequestParam int replyNum) {
-		bs.replyDelete(replyNum);
-		return "redirect:/board/contentView?writeNo="+writeNo;
+	public String replyDelete(@RequestParam int writeNo, @RequestParam int reply_num) {
+		bs.replyDelete(reply_num);
+		return "redirect:contentview?writeNo="+writeNo;
 	}
 	//댓글 수정창 이동
-	@GetMapping("modifyReplyForm")
+	@GetMapping("boardmodifyreplyform")
 	public String modifyReplyForm(@RequestParam int reply_num, @RequestParam int writeNo ,Model model) {
 		bs.selectReply(model, reply_num, writeNo);
 		return "board/modifyReplyForm";
 	}
 	//댓글 수정
-	@PostMapping("modifyReply")
+	@PostMapping("boardmodifyreply")
 	public String modifyReply(@RequestParam int writeNo,@RequestParam String content,@RequestParam int reply_num) {
 		bs.modifyReply(content,reply_num);
 		System.out.println(content);
-		return "redirect:/board/contentView?writeNo="+writeNo;
+		return "redirect:/board/contentview?writeNo="+writeNo;
 	}
 
 }
