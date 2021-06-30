@@ -38,20 +38,28 @@
 
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
+			
 				<div style="width:300px; margin: 0 auto;">
+				
 					<form action="${contextPath }/admin/modify?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data" method="post">
 						<input type="hidden" name="qnaNo" value="${qnaData.qnaNo }">
 						<input type="hidden" name="originFileName" value="${qnaData.imageFileName }">
-						제목 <input type="text" size="30" name="title" value="${qnaData.title}"><hr>
-						내용 <textarea rows="5" cols="30" name="content">${qnaData.content}</textarea>
-						<hr>
+					<b>작성자</b><br>
+						<input type="text" name="writer" size="30" value="${qnaData.email }" readonly><br>
+					<b>제목</b><br>
+						<input type="text" size="30" name="title" value="${qnaData.title}"><hr>
+					<b>내용</b><br>
+						<textarea rows="5" cols="30" name="content">${qnaData.content}</textarea>
+					<hr>
+					<b>이미지파일 첨부 : ${qnaData.imageFileName}</b><br>
 						<c:if test="${qnaData.imageFileName != 'nan' }">
 							<img width="100px" height="100px" id="preview"
 								 src="${contextPath }/admin/download?imageFileName=${qnaData.imageFileName}">
 						</c:if>
-						<input type="file" name="imageFileName" onchange="readURL(this)"><hr>
-						<input type="submit" value="수정">
-						<input type="button" onclick="history.back()" value="돌아가기">
+						<input type="file" name="imageFileName" onchange="readURL(this)">
+						<hr>
+						<input type="submit" class="btn btn-primary" value="수정">
+						<input type="button" class="btn btn-secondary" onclick="history.back()" value="돌아가기">
 					</form>
 				</div>
 			</div>

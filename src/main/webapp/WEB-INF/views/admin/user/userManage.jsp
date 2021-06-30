@@ -64,7 +64,7 @@
 							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 								<tr>
-									<th>Email</th>
+									<th width="40%">Email</th>
 									<th>Name</th>
 									<th>Register Date</th>
 								</tr>

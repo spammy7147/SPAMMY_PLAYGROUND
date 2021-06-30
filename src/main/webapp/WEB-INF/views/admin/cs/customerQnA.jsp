@@ -40,7 +40,7 @@
 							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 								<tr>
-									<th>번호</th><th>id</th><th>제목</th><th>날짜</th>
+									<th>번호</th><th>id</th><th width="40%" style="color:#4e73df;">제목</th><th>날짜</th>
 									<th>조회수</th><th>Image File</th>
 								</tr>
 								</thead>

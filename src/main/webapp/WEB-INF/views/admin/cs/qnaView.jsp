@@ -115,7 +115,7 @@
 						</tr>
 					</c:if>
 					
-					<tr>
+					<tr height="400">
 						<th>내 용</th><td  colspan="3">${qnaData.content }</td>
 					</tr>
 					<tr>
