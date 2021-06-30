@@ -49,11 +49,8 @@
 							<th>작성일</th><td>${contentData.saveDate }</td>
 						</tr>	
 						<tr>
-							<th>파일</th>
-							<c:if test="${contentData.fileName == null }">
-								<b>이미지가 없습니다</b>
-							</c:if>
-							<c:if test="${contentData.fileName != null }">
+							<c:if test="${contentData.fileName != 'nan' }">
+								<th>파일</th>
 								<td>
 									<img src="${contextPath }/admin/boarddownload?fileName=${contentData.fileName}">
 								</td>
