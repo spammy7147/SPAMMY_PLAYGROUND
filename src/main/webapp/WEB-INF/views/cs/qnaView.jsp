@@ -86,12 +86,16 @@
 			<div class="container-fluid">
 			
 				<div align="right">
-				<!-- class="btn btn-outline-info" class="btn btn-outline-danger"-->
+				
+				<c:if test="${loginUser ==  qnaData.email}">
+				
 				<input type="button" class="btn btn-primary" onclick=
 					"location.href='${contextPath }/cs/modifyqna?qnaNo=${qnaData.qnaNo }'" value="수정하기">
 
 				<input type="button" class="btn btn-primary" onclick=
 					"location.href='${contextPath }/cs/deleteqna?qnaNo=${qnaData.qnaNo }&imageFileName=${qnaData.imageFileName }'" value="삭제하기">
+				
+				</c:if>
 				<input type="button" class="btn btn-secondary" onclick="location.href='${contextPath }/cs/customerqna'" value="목록보기">
 				<hr>
 				</div>

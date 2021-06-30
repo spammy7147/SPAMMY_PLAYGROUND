@@ -34,9 +34,10 @@
 				
 				
 				<div align="right">
-					
-					<input class="btn btn-primary" value="수정" type="button" onclick="location.href='${contextPath }/board/boardmodifyform?writeNo=${contentData.writeNo }'">
-					<input class="btn btn-primary" value="삭제" type="button" onclick="location.href='${contextPath }/board/boarddelete?writeNo=${contentData.writeNo }&fileName=${contentData.fileName }'">
+					<c:if test="${loginUser ==  contentData.writer}">
+						<input class="btn btn-primary" value="수정" type="button" onclick="location.href='${contextPath }/board/boardmodifyform?writeNo=${contentData.writeNo }'">
+						<input class="btn btn-primary" value="삭제" type="button" onclick="location.href='${contextPath }/board/boarddelete?writeNo=${contentData.writeNo }&fileName=${contentData.fileName }'">
+					</c:if>
 					<a class="btn btn-secondary" href="${contextPath}/board/boardalllist">목록보기</a>	<hr>
 					
 				</div>
@@ -77,7 +78,7 @@
 				<form action="${contextPath }/board/addreply" method="post">			
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<input type="hidden" name="writeNo" value="${contentData.writeNo}">
-					<input type="hidden" name="writer" value="${user.user.email }">
+					<input type="hidden" name="writer" value="${loginUser}">
 					<textarea rows="5" style="width:90%;" id="content" name="content"></textarea>
 					<input class="btn btn-outline-secondary" type="submit" value="등록">
 				</form>
@@ -87,10 +88,12 @@
 					<c:forEach var="rep" items="${replyList }">
 						<table>
 							<tr>
-								<td>${rep.writer }</td> <td>${rep.write_date }</td> 
-								<td><input class="btn btn-info btn-circle btn-sm" value="수정" type="button" onclick="location.href='${contextPath }/board/boardmodifyreplyform?reply_num=${rep.reply_num }&writeNo=${contentData.writeNo }'"></td>
-								<td><input class="btn btn-danger btn-circle btn-sm" value="삭제" type="button" onclick="location.href='${contextPath }/board/replydelete?reply_num=${rep.reply_num }&writeNo=${contentData.writeNo }'"></td>
-												
+								<td>${rep.write_date } || ${rep.writer }</td> 
+								
+								<c:if test="${loginUser ==  rep.writer}">
+									<td><input class="btn btn-info btn-circle btn-sm" value="수정" type="button" onclick="location.href='${contextPath }/board/boardmodifyreplyform?reply_num=${rep.reply_num }&writeNo=${contentData.writeNo }'"></td>
+									<td><input class="btn btn-danger btn-circle btn-sm" value="삭제" type="button" onclick="location.href='${contextPath }/board/replydelete?reply_num=${rep.reply_num }&writeNo=${contentData.writeNo }'"></td>
+								</c:if>				
 							</tr>
 							<tr>
 								<td colspan="4">${rep.content} </td>

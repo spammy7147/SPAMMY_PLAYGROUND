@@ -69,7 +69,7 @@
 				<form action="${contextPath }/admin/addreply" method="post">			
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<input type="hidden" name="writeNo" value="${contentData.writeNo}">
-					<input type="hidden" name="writer" value="${user.user.email }">
+					<input type="hidden" name="writer" value="${loginUser}">
 					<textarea rows="5" style="width:90%;" id="content" name="content"></textarea>
 					<input class="btn btn-outline-secondary" type="submit" value="등록">
 				</form>
@@ -79,7 +79,7 @@
 					<c:forEach var="rep" items="${replyList }">
 						<table>
 							<tr>
-								<td>${rep.writer }</td> <td>${rep.write_date }</td> 
+								<td>${rep.write_date } || ${rep.writer }</td>  
 								<td><input class="btn btn-info btn-circle btn-sm" value="수정" type="button" onclick="location.href='${contextPath }/admin/boardmodifyreplyform?reply_num=${rep.reply_num }&writeNo=${contentData.writeNo }'"></td>
 								<td><input class="btn btn-danger btn-circle btn-sm" value="삭제" type="button" onclick="location.href='${contextPath }/admin/replydelete?reply_num=${rep.reply_num }&writeNo=${contentData.writeNo }'"></td>
 												

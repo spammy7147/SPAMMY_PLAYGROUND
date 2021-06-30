@@ -181,7 +181,7 @@ public class AdminController {
 	}
 	//게시물 리플 추가
 	@PostMapping("addreply")
-	public String addReply(@RequestParam String content,@RequestParam int writeNo, @RequestParam String writer){//세션 추가해야함
+	public String addReply(@RequestParam String content,@RequestParam int writeNo, @RequestParam String writer){
 		bs.addReply(content,writeNo,writer);	
 		return "redirect:contentview?writeNo="+writeNo;
 	}

@@ -45,7 +45,7 @@
 							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 								<tr>
-									<th>Number</th><th>작성자</th><th>Title</th>
+									<th>Number</th><th>작성자</th><th width="40%">Title</th>
 									<th>Date</th><th>Hit</th><th>Image file</th>
 								</tr>
 								</thead>
