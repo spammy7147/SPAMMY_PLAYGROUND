@@ -74,7 +74,7 @@
 					<input type="hidden" name="writeNo" value="${contentData.writeNo}">
 					<input type="hidden" name="writer" value="${user.user.email }">
 					<textarea rows="5" style="width:90%;" id="content" name="content"></textarea>
-					<input  class="btn btn-primary" type="submit" value="등록">
+					<input class="btn btn-outline-secondary" type="submit" value="등록">
 				</form>
 				
 				<div>

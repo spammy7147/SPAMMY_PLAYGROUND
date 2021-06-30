@@ -42,6 +42,7 @@
                 <s:authorize access="isAuthenticated()">
                     <a class="dropdown-item" href="#!">여행</a>
                     <a class="dropdown-item" href="#!">위시리스트</a>
+                    <a class="dropdown-item" href="${contextPath }/board/boardAllList">게시판</a>
                     <a class="dropdown-item" href="${contextPath}/hosting/home">호스트 되기</a>
                     <div class="dropdown-divider"></div>
                     <a class="dropdown-item" href="${contextPath}/cs/customerservice">고객센터</a>

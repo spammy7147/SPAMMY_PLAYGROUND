@@ -39,7 +39,8 @@
 
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
-				
+			
+				<div style="width:300px; margin: 0 auto;">
 				
 				<form method="post" action="/admin/boardmodify?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data">
 					<input type="hidden" name="writeNo" value="${contentData.writeNo }">
@@ -56,7 +57,7 @@
 						<img width="100px" height="100px" id="preview"
 							 src="${contextPath }/admin/boarddownload?fileName=${contentData.fileName}">
 					</c:if>
-					<input type="file" name="newFileName" onchange="readURL(this)"><br>
+					<input type="file" name="newFileName" onchange="readURL(this)">
 					<hr>
 					<input type="submit" class="btn btn-primary" value="수정">
 					<input type="button" class="btn btn-secondary" value="목록이동" onclick="location.href='${contextPath}/admin/boardalllist'">
@@ -65,7 +66,7 @@
 
 
 				
-				
+				</div>
 				
 				
 			</div>

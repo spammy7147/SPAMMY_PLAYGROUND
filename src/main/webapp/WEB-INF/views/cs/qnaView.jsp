@@ -96,6 +96,8 @@
 				<hr>
 				</div>
 				
+				
+				
 				<table class="table table-bordered">
 					<tr>
 						<th>글 번호</th><td>${qnaData.qnaNo }</td>
@@ -115,13 +117,13 @@
 						</tr>
 					</c:if>
 					
-					<tr>
-						<th>내 용</th><td  colspan="3">${qnaData.content }</td>
+					<tr height="400">
+						<th>내 용</th><td colspan="3">${qnaData.content }</td>
 					</tr>
 					<tr>
 						<td colspan="4" align="center">
 
-							<s:authorize access="hasRole('ROLE_ADMIN')">
+							<c:if test="${loginUser ==  qnaData.email}">
 								
 								<form id="frm">
 									<div align="left">
@@ -133,7 +135,7 @@
 									<hr>
 									</div>
 								</form>
-							</s:authorize>
+							</c:if>
 
 
 							<div id="reply"></div>

@@ -39,6 +39,8 @@
 
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
+				<div style="width:300px; margin: 0 auto;">
+				
 				<form action="${contextPath }/admin/qnasave?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
 					<!-- enctype="multipart/form-data" -->
 
@@ -58,10 +60,12 @@
 					
 					<hr>
 
-					<input type="submit" value="글쓰기">
-					<input type="button" value="목록이동"
+					<input type="submit" class="btn btn-primary" value="글쓰기">
+					<input type="button" class="btn btn-secondary" value="목록이동"
 						   onclick="location.href='${contextPath}/admin/customerqna'">
 				</form>
+				
+				</div>
 			</div>
 			<!-- /.container-fluid -->
 		</div>
