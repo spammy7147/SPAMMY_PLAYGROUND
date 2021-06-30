@@ -67,7 +67,9 @@
 												<s:authorize access="isAuthenticated()">
 													<a href="${contextPath }/cs/qnaview?qnaNo=${dto.qnaNo }">${dto.title }</a>
 												</s:authorize>
+												<s:authorize access="isAnonymous()">
 												<a href="void(0);" onclick="alert('로그인이 필요합니다.');return false;">${dto.title }</a>
+												</s:authorize>
 											</td>
 											<td>${dto.saveDate }</td> <td>${dto.hit }</td> <td>${dto.imageFileName }</td>
 				
