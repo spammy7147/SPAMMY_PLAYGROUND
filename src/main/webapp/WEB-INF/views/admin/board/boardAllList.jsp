@@ -89,12 +89,45 @@
 			</div>
 			<!-- /.container-fluid -->
 			
-			<div align="right">
-			<form>
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-				<a class="btn btn-primary" href="${contextPath }/admin/writeform">게시글 작성</a>
-			</form>
-			</div>
+			
+			<table width="100%">
+				<tr>
+					<th>
+						<form action="${contextPath }/admin/boardSearch" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+							<div class="form-row align-items-center">
+							    <div class="col-auto my-1">
+									<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">검색옵션</label>
+									<select class="custom-select mr-sm-2" id="inlineFormCustomSelect"  name="choice">
+										<option value="1">제목
+										<option value="2">작성자
+							      	</select>
+							      	
+							    </div>
+							    <div class="col-auto my-1">
+								    <div class="custom-control custom-checkbox mr-sm-2">
+								        <input class="form-control" type="text" name="boardSearch">
+								    </div>
+							    </div>
+							    <div class="col-auto my-1">
+							      	<button type="submit" class="btn btn-primary">검색</button>
+							    </div>
+							    
+							    
+							    
+							</div>
+						</form>
+					</th>
+					<th>
+						<div class="col-auto my-1" align="right">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+							<a class="btn btn-primary" href="${contextPath }/admin/writeform">게시글 작성</a>
+						</div>
+					</th>
+				</tr>
+			</table>
+			
+			
 			
 		</div>
 		<!-- End of Main Content -->
