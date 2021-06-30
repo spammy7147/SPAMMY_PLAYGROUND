@@ -8,6 +8,8 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -18,7 +20,8 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.seven.jong.DTO.BoardDTO;
-
+import com.seven.jong.VO.UserVO;
+import com.seven.jong.VO.security.UserSecurityVO;
 import com.seven.jong.service.BoardService;
 
 
@@ -37,8 +40,11 @@ public class BoardController {
 		return "board/boardAllList";
 	}
 	//writeForm.jsp 연결
-	@GetMapping("/writeForm")
-	public String writeForm() {
+	@GetMapping("/writeform")
+	public String writeForm(@Nullable Authentication authentication, Model model) {
+		UserSecurityVO userSecurityVO = (UserSecurityVO) authentication.getPrincipal();
+		UserVO userVO = userSecurityVO.getUser();
+		model.addAttribute("loginUser", userVO.getEmail());
 		return "board/writeForm";
 	}
 	//게시물 저장
@@ -47,7 +53,7 @@ public class BoardController {
 		bs.writeSave(dto, request, mtfRequest);
 		
 	   
-		return "redirect:/board/boardAllList";
+		return "redirect:/board/boardalllist";
 	}
 	//선택 게시물 보기 , 리플 가져오기
 	@GetMapping("contentview")

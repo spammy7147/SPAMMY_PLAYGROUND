@@ -27,14 +27,6 @@
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
 			
-			
-			
-			
-			<!-- Main Content -->
-			<div id="content">
-
-			<!-- Begin Page Content -->
-			<div class="container-fluid">
 				
 				
 				
