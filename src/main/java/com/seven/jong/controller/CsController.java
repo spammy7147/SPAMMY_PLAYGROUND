@@ -154,7 +154,6 @@ public class CsController {
 	@ResponseBody
 	@PostMapping(value="addReply", produces = "application/json; charset=utf-8")
 	public void addReply(@RequestBody Map<String, Object> map, @Nullable Authentication authentication) {
-//		System.out.println("ajax연결!");
 		UserSecurityVO userSecurityVO = (UserSecurityVO) authentication.getPrincipal();
 		UserVO userVO = userSecurityVO.getUser();
 		
@@ -163,12 +162,9 @@ public class CsController {
 		dto.setWrite_group( Integer.parseInt((String)map.get("qna_no")) );
 		dto.setContent((String)map.get("content"));
 		
-//		System.out.println(userVO.getEmail());
-//		System.out.println(Integer.parseInt((String)map.get("qna_no")));
-//		System.out.println((String)map.get("content"));
-		
 		cs.addReply(dto);
 	}
+	
 	
 	@ResponseBody
 	@PostMapping(value="replyData/{write_group}",produces = "application/json; charset=utf-8")
@@ -181,7 +177,6 @@ public class CsController {
 		}
 		return cs.getRepList(write_group);
 	}
-	
 	
 	
 	

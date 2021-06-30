@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
+import com.seven.jong.DTO.BoardDTO;
 import com.seven.jong.DTO.FaqDTO;
 import com.seven.jong.DTO.QnaDTO;
 import com.seven.jong.DTO.QnaRepDTO;
@@ -48,5 +49,4 @@ public interface ICsMapper {
 	//QnA 선택 content의 리플 가져오기
 	public ArrayList<QnaRepDTO> getRepList(int write_group);
 	
-
 }

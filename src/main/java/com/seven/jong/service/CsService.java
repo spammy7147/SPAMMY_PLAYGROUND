@@ -44,6 +44,7 @@ public interface CsService {
 	//qna 리플 가져오기
 	ArrayList<QnaRepDTO> getRepList(int write_group);
 
+
 	
 
 	

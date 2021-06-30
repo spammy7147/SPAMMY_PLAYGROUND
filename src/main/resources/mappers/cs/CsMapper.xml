@@ -96,5 +96,7 @@
 										order by write_date desc
 	</select>
 	
+	
+	
 </mapper>
 

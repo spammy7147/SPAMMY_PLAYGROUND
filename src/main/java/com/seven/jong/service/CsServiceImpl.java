@@ -201,10 +201,8 @@ public class CsServiceImpl implements CsService{
 	//qna 리플 가져오기
 	@Override
 	public ArrayList<QnaRepDTO> getRepList(int write_group) {
-//		ArrayList<QnaRepDTO> list = mapper.getRepList(write_group);
-//		QnaRepDTO dto = list.get(0);
-//		System.out.println(dto.getEmail());
 		return mapper.getRepList(write_group);
 	}
+
 
 }

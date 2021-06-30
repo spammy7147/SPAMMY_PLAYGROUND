@@ -163,10 +163,6 @@ public class BoardServiceImpl implements BoardService{
 		}else {
 			c = "writer";
 		}
-		
-		System.out.println(num);
-		System.out.println(c);
-		System.out.println(search);
 				
 		int allCount = mapper.selectBoardCount(search,c);
 		int pageLetter = 10;
