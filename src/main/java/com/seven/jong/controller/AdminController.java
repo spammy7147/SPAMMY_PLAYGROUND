@@ -119,7 +119,10 @@ public class AdminController {
 	}
 	//관리자모드 게시글 작성
 	@GetMapping("/writeform")
-	public String writeForm() {
+	public String writeForm(@Nullable Authentication authentication, Model model) {
+		UserSecurityVO userSecurityVO = (UserSecurityVO) authentication.getPrincipal();
+		UserVO userVO = userSecurityVO.getUser();
+		model.addAttribute("loginUser", userVO.getEmail());
 		return "admin/board/writeForm";
 	}
 	//게시물 저장
