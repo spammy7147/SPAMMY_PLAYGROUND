@@ -53,14 +53,11 @@
 					<textarea rows="10" cols="50" name="content" >${contentData.content }</textarea>
 				<hr>
 				<b>이미지파일 첨부 : ${contentData.fileName}</b><br>
-					<c:if test="${contentData.fileName != 'nan' }">
-						<img width="100px" height="100px" id="preview"
-							 src="${contextPath }/admin/boarddownload?fileName=${contentData.fileName}">
-					</c:if>
+					<img id="preview" src="#" width="100" height="100" alt="선택 이미지 없음">
 					<input type="file" name="newFileName" onchange="readURL(this)">
 					<hr>
 					<input type="submit" class="btn btn-primary" value="수정">
-					<input type="button" class="btn btn-secondary" value="목록이동" onclick="location.href='${contextPath}/admin/boardalllist'">
+					<input type="button" class="btn btn-secondary" value="돌아가기" onclick="history.back()">
 					
 				</form>
 

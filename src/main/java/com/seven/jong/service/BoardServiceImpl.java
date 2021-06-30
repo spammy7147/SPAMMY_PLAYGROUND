@@ -89,6 +89,30 @@ public class BoardServiceImpl implements BoardService{
 		
 		return bfs.getMessage(mDto);
 	}
+	@Override
+	public String boardModify(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mul) {
+		
+		MultipartFile file = mul.getFile("newFileName");
+		BoardFileService bfs = new BoardFileServiceImpl();
+		
+		if(file.isEmpty() ) { // 이미지 변경 되지 않았음
+			dto.setFileName(mul.getParameter("originFileName"));
+		}else { // 이미지 변경 되었음.
+			dto.setFileName(bfs.saveFile(file));
+			bfs.deleteImage(mul.getParameter("originFileName"));
+		}
+		int result = mapper.modify(dto);
+		
+		MessageDTO mDto = new MessageDTO();
+		mDto.setResult(result);
+		mDto.setRequest(request);
+		mDto.setSuccessMessage("성공적으로 수정되었습니다");
+		mDto.setSuccessURL("/board/boardalllist");
+		mDto.setFailMessage("수정 중 문제 발생!!!");
+		mDto.setFailURL("/board/contentview");
+		
+		return bfs.getMessage(mDto);
+	}
 
 	@Override
 	public String delete(int writeNo, String fileName, HttpServletRequest request) {

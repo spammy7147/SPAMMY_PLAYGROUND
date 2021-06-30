@@ -23,6 +23,7 @@ import org.springframework.web.multipart.MultipartHttpServletRequest;
 import com.seven.jong.DTO.BoardDTO;
 import com.seven.jong.VO.UserVO;
 import com.seven.jong.VO.security.UserSecurityVO;
+import com.seven.jong.service.BoardFileService;
 import com.seven.jong.service.BoardService;
 
 
@@ -64,32 +65,32 @@ public class BoardController {
 		return "board/contentView";
 	}
 	//이미지 불러오기
-	@GetMapping("download")
+	@GetMapping("boarddownload")
 	public void downLoad(@RequestParam String fileName,
 						HttpServletResponse response) throws Exception{
-		response.addHeader("Content-disposition",
-				"attachment;fileName"+fileName);
-		File file = new File("C:\\upload\\"+fileName);
+		response.addHeader("Content-disposition","attachment;fileName"+fileName);
+		File file = new File(BoardFileService.Board_IMAGE_REPO+"/"+fileName);
 		FileInputStream in = new FileInputStream(file);
-		
+			
 		System.out.println(file);
-		
+			
 		FileCopyUtils.copy(in, response.getOutputStream());
 		in.close();
 	}
 	
 	//modifyForm 연결
-	@GetMapping("modifyForm")
+	@GetMapping("boardmodifyform")
 	public String modifyForm(@RequestParam int writeNo, Model model) {
 		bs.contentView(writeNo, model);
-		System.out.println("modifyForm 연결");
 		return "board/modifyForm";
 	}
 	//게시물 수정
-	@PostMapping("modify")
-	public String modify(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mul) {
-		bs.modify(dto, request, mul);
-		return "redirect:/board/boardAllList";
+	@PostMapping("boardmodify")
+	public void modify(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mul, HttpServletResponse response) throws IOException {
+		String message = bs.boardModify(dto, request, mul);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(message);
 	}
 	//게시물 삭제
 	@GetMapping("boarddelete")
