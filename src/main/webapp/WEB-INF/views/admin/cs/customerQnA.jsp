@@ -40,7 +40,7 @@
 							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 								<tr>
-									<th>번호</th><th>id</th><th>제목</th><th>날짜</th>
+									<th>번호</th><th>id</th><th width="40%" style="color:#4e73df;">제목</th><th>날짜</th>
 									<th>조회수</th><th>Image File</th>
 								</tr>
 								</thead>
@@ -82,10 +82,14 @@
 				</div>
 				<!-- /.container-fluid -->
 
-				<form action="${contextPath }/admin/qnawriteform">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-					<input type="submit" class="btn btn-primary" value="글작성">
-				</form>
+				<div align="right">
+					<form action="${contextPath }/admin/qnawriteform">
+						<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+						<input type="submit" class="btn btn-primary" value="글작성">
+					</form>
+				</div>
+			
+				
 				
 				
 				

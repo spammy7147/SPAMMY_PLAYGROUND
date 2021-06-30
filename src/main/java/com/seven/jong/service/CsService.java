@@ -30,15 +30,24 @@ public interface CsService {
 
 	//qna 삭제하기
 	String qnaDelete(int qnaNo, String imageFileName, HttpServletRequest request);
+	//사용자 요청
+	String qnaDeleteCS(int qnaNo, String imageFileName, HttpServletRequest request);
 
 	//qna 수정
 	String modify(MultipartHttpServletRequest mul, HttpServletRequest request);
+	//사용자 요청
+	String modifyCs(MultipartHttpServletRequest mul, HttpServletRequest request);
 
 	//qna 리플 추가
 	void addReply(QnaRepDTO dto);
 
 	//qna 리플 가져오기
 	ArrayList<QnaRepDTO> getRepList(int write_group);
+
+
+	
+
+	
 
 
 }

@@ -90,7 +90,7 @@
 			
 				<h1 > 자주하는 질문 </h1> 
 				
-				<ul>
+				<ul id="accordionSidebar">
 				<c:choose>
 					<c:when test="${faqList.size() != 0}">
 						<c:forEach var="dto" items="${faqList }" varStatus="vs">
