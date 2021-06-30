@@ -89,6 +89,30 @@ public class BoardServiceImpl implements BoardService{
 		
 		return bfs.getMessage(mDto);
 	}
+	@Override
+	public String boardModify(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mul) {
+		
+		MultipartFile file = mul.getFile("newFileName");
+		BoardFileService bfs = new BoardFileServiceImpl();
+		
+		if(file.isEmpty() ) { // 이미지 변경 되지 않았음
+			dto.setFileName(mul.getParameter("originFileName"));
+		}else { // 이미지 변경 되었음.
+			dto.setFileName(bfs.saveFile(file));
+			bfs.deleteImage(mul.getParameter("originFileName"));
+		}
+		int result = mapper.modify(dto);
+		
+		MessageDTO mDto = new MessageDTO();
+		mDto.setResult(result);
+		mDto.setRequest(request);
+		mDto.setSuccessMessage("성공적으로 수정되었습니다");
+		mDto.setSuccessURL("/board/boardalllist");
+		mDto.setFailMessage("수정 중 문제 발생!!!");
+		mDto.setFailURL("/board/contentview");
+		
+		return bfs.getMessage(mDto);
+	}
 
 	@Override
 	public String delete(int writeNo, String fileName, HttpServletRequest request) {
@@ -105,7 +129,27 @@ public class BoardServiceImpl implements BoardService{
 		dto.setSuccessMessage("성공적으로 삭제 되었습니다");
 		dto.setSuccessURL("/admin/boardalllist");
 		dto.setFailMessage("삭제 중 문제가 발생하였습니다");
-		dto.setFailURL("/admin/contentView");
+		dto.setFailURL("/admin/contentview");
+		
+		return bfs.getMessage(dto);
+	}
+	
+	@Override
+	public String boardDelete(int writeNo, String fileName, HttpServletRequest request) {
+		BoardFileService bfs = new BoardFileServiceImpl();
+		int result = mapper.delete(writeNo);
+		
+		MessageDTO dto = new MessageDTO();
+		
+		if(result == 1) {//DB삭제 성공
+			bfs.deleteImage(fileName);
+		}
+		dto.setRequest(request);
+		dto.setResult(result);
+		dto.setSuccessMessage("성공적으로 삭제 되었습니다");
+		dto.setSuccessURL("/board/boardalllist");
+		dto.setFailMessage("삭제 중 문제가 발생하였습니다");
+		dto.setFailURL("/board/contentView");
 		
 		return bfs.getMessage(dto);
 	}
@@ -119,10 +163,6 @@ public class BoardServiceImpl implements BoardService{
 		}else {
 			c = "writer";
 		}
-		
-		System.out.println(num);
-		System.out.println(c);
-		System.out.println(search);
 				
 		int allCount = mapper.selectBoardCount(search,c);
 		int pageLetter = 10;
