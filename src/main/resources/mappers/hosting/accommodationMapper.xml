@@ -30,5 +30,17 @@
         (ACCOMMODATION_SEQ.nextval, #{userId}, #{name}, #{address}, #{type}, #{maxNumberOfGuest},
          #{numberOfBedroom}, #{numberOfBed}, #{numberOfBathroom}, #{contactNumber}, #{price}, #{description})
     </insert>
+    
+    <!-- 총 숙소 수 가져오기 -->
+    <select id="selectHouseCount" resultType="Integer">
+    	select count(*) from ACCOMMODATION
+    </select>
+    
+    <!-- 숙소 리스트 가져오기 -->
+    <select id="houseList" resultMap="accommodationMap">
+    	select B.* from(select rownum rn, A.* from
+			(select * from ACCOMMODATION order by reg_date desc)A)B where rn between #{s} and #{e}
+    	
+    </select>
 
 </mapper>

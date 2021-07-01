@@ -115,7 +115,7 @@
 						</tr>
 					</c:if>
 					
-					<tr>
+					<tr height="400">
 						<th>내 용</th><td  colspan="3">${qnaData.content }</td>
 					</tr>
 					<tr>
@@ -127,7 +127,6 @@
 									<div align="left">
 									<input type="hidden" id="qna_no" name="qna_no" value="${qnaData.qnaNo }">
 									<b>Comment</b><br>
-									<b>작성자 : ${loginUser }</b><br>
 									<textarea style="width:90%;" rows="5" id="content" name="content"></textarea>
 									<button type="button" onclick="rep()" class="btn btn-outline-secondary">답글</button>
 									<hr>

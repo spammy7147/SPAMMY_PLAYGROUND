@@ -126,7 +126,7 @@ public class CsController {
 			@RequestParam String imageFileName,
 			HttpServletResponse response,
 			HttpServletRequest request) throws Exception {
-		String message = cs.qnaDelete(qnaNo,imageFileName,request);
+		String message = cs.qnaDeleteCS(qnaNo,imageFileName,request);
 		
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
@@ -145,7 +145,7 @@ public class CsController {
 	public void modify(MultipartHttpServletRequest mul,
 						HttpServletResponse response,
 						HttpServletRequest request )throws Exception {
-		String message = cs.modify(mul, request);
+		String message = cs.modifyCs(mul, request);
 		response.setContentType("text/html; charset=utf-8");
 		PrintWriter out = response.getWriter();
 		out.print(message);
@@ -154,7 +154,6 @@ public class CsController {
 	@ResponseBody
 	@PostMapping(value="addReply", produces = "application/json; charset=utf-8")
 	public void addReply(@RequestBody Map<String, Object> map, @Nullable Authentication authentication) {
-//		System.out.println("ajax연결!");
 		UserSecurityVO userSecurityVO = (UserSecurityVO) authentication.getPrincipal();
 		UserVO userVO = userSecurityVO.getUser();
 		
@@ -163,12 +162,9 @@ public class CsController {
 		dto.setWrite_group( Integer.parseInt((String)map.get("qna_no")) );
 		dto.setContent((String)map.get("content"));
 		
-//		System.out.println(userVO.getEmail());
-//		System.out.println(Integer.parseInt((String)map.get("qna_no")));
-//		System.out.println((String)map.get("content"));
-		
 		cs.addReply(dto);
 	}
+	
 	
 	@ResponseBody
 	@PostMapping(value="replyData/{write_group}",produces = "application/json; charset=utf-8")
@@ -181,7 +177,6 @@ public class CsController {
 		}
 		return cs.getRepList(write_group);
 	}
-	
 	
 	
 	

@@ -111,6 +111,27 @@ public class CsServiceImpl implements CsService{
 		
 		return qfs.getMessage(dto);
 	}
+	//QnA 삭제하기
+	@Override
+	public String qnaDeleteCS(int qnaNo, String imageFileName, HttpServletRequest request) {
+		QnaFileService qfs = new QnaFileServiceImpl();
+		int result = mapper.qnaDelete(qnaNo);
+		
+		MessageDTO dto = new MessageDTO();
+		
+		if(result == 1) {//DB삭제 성공
+			qfs.deleteImage(imageFileName);
+		}
+		dto.setRequest(request);
+		dto.setResult(result);
+		dto.setSuccessMessage("성공적으로 삭제 되었습니다");
+		dto.setSuccessURL("/cs/customerqna");
+		dto.setFailMessage("삭제 중 문제가 발생하였습니다");
+		dto.setFailURL("/cs/qnaView");
+		
+		return qfs.getMessage(dto);
+	}
+	
 
 	//QnA 수정
 	@Override
@@ -141,6 +162,35 @@ public class CsServiceImpl implements CsService{
 		
 		return qfs.getMessage(mDto);
 	}
+	
+	@Override
+	public String modifyCs(MultipartHttpServletRequest mul, HttpServletRequest request) {
+		QnaDTO dto = new QnaDTO();
+		dto.setQnaNo(Integer.parseInt(mul.getParameter("qnaNo")));
+		dto.setTitle(mul.getParameter("title"));
+		dto.setContent(mul.getParameter("content"));
+		
+		MultipartFile file = mul.getFile("imageFileName");
+		QnaFileService qfs = new QnaFileServiceImpl();
+		
+		if( file.isEmpty() ) { // 이미지 변경 되지 않았음
+			dto.setImageFileName(mul.getParameter("originFileName"));
+		}else { // 이미지 변경 되었음.
+			dto.setImageFileName(qfs.saveFile(file));
+			qfs.deleteImage(mul.getParameter("originFileName"));
+		}
+		int result = mapper.modify(dto);
+		
+		MessageDTO mDto = new MessageDTO();
+		mDto.setResult(result);
+		mDto.setRequest(request);
+		mDto.setSuccessMessage("성공적으로 수정되었습니다");
+		mDto.setSuccessURL("/cs/customerqna");
+		mDto.setFailMessage("수정 중 문제 발생!!!");
+		mDto.setFailURL("/cs/qnaView");
+		
+		return qfs.getMessage(mDto);
+	}
 
 	//QnA리플 추가
 	@Override
@@ -151,10 +201,8 @@ public class CsServiceImpl implements CsService{
 	//qna 리플 가져오기
 	@Override
 	public ArrayList<QnaRepDTO> getRepList(int write_group) {
-//		ArrayList<QnaRepDTO> list = mapper.getRepList(write_group);
-//		QnaRepDTO dto = list.get(0);
-//		System.out.println(dto.getEmail());
 		return mapper.getRepList(write_group);
 	}
+
 
 }
