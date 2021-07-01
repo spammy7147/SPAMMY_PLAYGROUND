@@ -1,7 +1,7 @@
 CREATE TABLE FAQ(
   faq_num number(10) PRIMARY KEY,
   question VARCHAR2(50),
-  answer VARCHAR2(100)
+  answer VARCHAR2(500)
 );
 CREATE SEQUENCE faq_seq
 START WITH 1
