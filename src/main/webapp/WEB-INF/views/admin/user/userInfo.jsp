@@ -40,6 +40,7 @@
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
 
+			<h1 style="text-align: center;">유 저 정 보</h1>
 
 
 				<form action="modifyUserInfo" method="post">
@@ -69,10 +70,14 @@
 								<td><input id = "infoInput3" disabled="disabled" type="text" name="phone" value="${userInfo.phone }"></td>
 							</tr>
 						</table>
-					</div>
-					<input type="button" id = "modButton" value="수정" onclick="inputActive()">
-					<input type="submit" disabled="disabled" id="saveButton" value="저장">
-					<input type="button" onclick="location.href='${contextPath }/admin/usermanage'" value="리스트로 돌아가기">
+					
+					<hr>
+					
+					<input type="button" class="btn btn-primary" id = "modButton" value="수정" onclick="inputActive()">
+					<input type="submit" class="btn btn-primary" disabled="disabled" id="saveButton" value="저장">
+					<input type="button" class="btn btn-secondary" onclick="location.href='${contextPath }/admin/usermanage'" value="리스트로 돌아가기">
+				
+				</div>
 				</form>
 			</div>
 			<!-- /.container-fluid -->

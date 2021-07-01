@@ -90,7 +90,7 @@ public class AdminController {
 		return "admin/house/houseManage";
 	}
 	// 숙소 검색
-	@PostMapping("/house/housesearch")
+	@PostMapping("/housesearch")
 	public String houseSearch() {
 		
 		return "admin/house/houseSearch";
