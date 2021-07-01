@@ -56,6 +56,14 @@ public class ReservationService implements IReservationService{
 
     }
     
+    //총 예약 수 가져오기
+    @Override
+	public int numberOfReservation() {
+    	int allCount = reservationMapper.reservationCount(); // 총 예약수 얻어오기
+		return allCount;
+	}
+    
+  //예약정보 리스트 가져오기
     @Override
 	public void reservationList(int pageNum, Model model) {
     	int allCount = reservationMapper.reservationCount(); // 총 예약수 얻어오기
@@ -73,4 +81,6 @@ public class ReservationService implements IReservationService{
 		model.addAttribute("reservationList", reservationList);
 		
 	}
+
+	
 }

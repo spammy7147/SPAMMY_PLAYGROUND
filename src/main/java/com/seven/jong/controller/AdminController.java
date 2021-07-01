@@ -49,7 +49,7 @@ public class AdminController {
 		System.out.println("/admin/home => GET요청 ");
 		model.addAttribute("userNum",aus.numberOfUser() );
 		model.addAttribute("houseNum", hs.numberOfHouse() );
-		
+		model.addAttribute("reservationNum", rs.numberOfReservation() );
 		model.addAttribute("boardNum", bs.numberOfBoard() );
 		return "admin/adminHome";
 	}
