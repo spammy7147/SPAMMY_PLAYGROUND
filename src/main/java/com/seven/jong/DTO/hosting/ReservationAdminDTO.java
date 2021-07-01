@@ -1,23 +1,22 @@
 package com.seven.jong.DTO.hosting;
 
+import java.time.LocalDateTime;
+
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
-import java.time.LocalDateTime;
-
-
 
 @Getter
 @Setter
 @ToString
-public class ReservationDTO {
-
-    private Integer reservationId;
-    private Integer accommodationId;
-    private Integer userId;
+public class ReservationAdminDTO {
+	
+	private Integer reservationId;
+    private String name;
+    private String email;
     private Integer numberOfGuest;
     private LocalDateTime checkIn;
     private LocalDateTime checkOut;
     private LocalDateTime regDate;
-
+	
 }

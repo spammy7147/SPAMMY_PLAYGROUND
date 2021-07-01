@@ -20,7 +20,7 @@ public interface CsService {
 
 	void delFaq(int faqNum);
 
-	ArrayList<QnaDTO> qna(int pageNum, Model model);
+	void qna(int pageNum, Model model);
 
 	//qna 저장
 	void qnaSave(QnaDTO dto, MultipartHttpServletRequest mul, HttpServletRequest request);
