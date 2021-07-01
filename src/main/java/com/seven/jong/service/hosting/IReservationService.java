@@ -30,4 +30,7 @@ public interface IReservationService {
     
     //예약정보 리스트 가져오기
     void reservationList(int pageNum, Model model);
+
+    //예약정보 검색
+	void bookingSearch(int pageNum, String c, String search, Model model);
 }

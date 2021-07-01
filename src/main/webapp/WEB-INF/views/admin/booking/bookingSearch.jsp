@@ -4,7 +4,7 @@
 
 <html>
 <head>
-	<title>AirBnD - 관리자 예약 관리</title>
+	<title>AirBnD - 관리자 예약 검색</title>
 	<c:import url="../../include/header.jsp" />
 
 <script type="text/javascript">
@@ -35,7 +35,7 @@
 
 
 
-				<h1 style="text-align: center;">예 약 관 리</h1>
+				<h1 style="text-align: center;">검 색 결 과</h1>
 
 
 				<!-- DataTales Example -->
@@ -60,7 +60,7 @@
 								<tr>
 									<th colspan="6">
 										<c:forEach var="pageNum" begin="1" end="${allPage }">
-											<a href="${contextPath }/admin/bookingmanage?pageNum=${pageNum}">${pageNum } </a>
+											<a href="${contextPath }/admin/bookingsearch?pageNum=${pageNum}&choice=${choice}&userSearch=${houseSearch}">${pageNum } </a>
 										</c:forEach>
 									</th>
 								</tr>
@@ -68,8 +68,8 @@
 								<tbody>
 
 								<c:choose>
-								<c:when test="${reservationList.size() != 0 }">
-									<c:forEach var="dto" items="${reservationList }">
+								<c:when test="${bookingSearchList.size() != 0 }">
+									<c:forEach var="dto" items="${bookingSearchList }">
 										<tr>
 											<td>${dto.reservationId }</td>
 											<td>
@@ -83,7 +83,7 @@
 								</c:when>
 								<c:otherwise>
 								<tr>
-									<th colspan="6"> 등록된 예약 내역이 없습니다.</th>
+									<th colspan="6"> 조건에 부합하는 예약 내역이 없습니다.</th>
 								<tr>
 									</c:otherwise>
 									</c:choose>
@@ -123,6 +123,15 @@
 							    
 							</div>
 						</form>
+					</th>
+					
+					<th>
+						<div class="col-auto my-1" align="right">
+							<form action="${contextPath }/admin/bookingmanage" id="frm">
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+								<a class="btn btn-primary" onclick="formSubmit()">목록으로</a>
+							</form>
+						</div>
 					</th>
 				</tr>
 			</table>
