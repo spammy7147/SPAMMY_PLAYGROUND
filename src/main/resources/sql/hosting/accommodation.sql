@@ -7,7 +7,6 @@ CREATE TABLE accommodation (
     max_number_guest NUMBER NOT NULL,
     number_bedroom NUMBER NULL,
     number_bed NUMBER,
-    type_Bed VARCHAR2(50),
     number_bathroom NUMBER NOT NULL,
     contact_number NUMBER NOT NULL,
     price NUMBER NOT NULL,
