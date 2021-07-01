@@ -1,20 +1,15 @@
-package com.seven.jong.VO.hosting;
+package com.seven.jong.DTO.hosting;
 
-import lombok.*;
-
-import java.time.LocalDateTime;
+import lombok.Getter;
+import lombok.Setter;
+import lombok.ToString;
 
 @Getter
+@Setter
 @ToString
-@Builder
-@NoArgsConstructor
-@AllArgsConstructor
-public class AccommodationVO {
+public class AccommodationHouseRequestDTO {
 
-    private Integer accommodationId;
-    private Integer userId;
     private String name;
-    private String address;
     private String type;
     private Integer maxNumberOfGuest;
     private Integer numberOfBedroom;
@@ -23,7 +18,4 @@ public class AccommodationVO {
     private Integer contactNumber;
     private Integer price;
     private String description;
-    private LocalDateTime regDate;
-
-
 }

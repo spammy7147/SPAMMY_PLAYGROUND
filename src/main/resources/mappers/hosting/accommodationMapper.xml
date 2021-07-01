@@ -26,11 +26,17 @@
 
     <insert id="addAccommodation">
         INSERT INTO ACCOMMODATION (ACCOMMODATION_ID, USER_ID, NAME, ADDRESS, TYPE, MAX_NUMBER_GUEST,
-                                   NUMBER_BEDROOM, NUMBER_BED, TYPE_BED, NUMBER_BATHROOM, CONTACT_NUMBER, PRICE, DESCRIPTION) VALUES
-        (ACCOMMODATION_SEQ.nextval, #{userId}, #{name}, #{address}, #{type}, #{maxNumberOfGuest},
-         #{numberOfBedroom}, #{numberOfBed}, #{typeOfBed}, #{numberOfBathroom}, #{contactNumber}, #{price}, #{description})
+                                   NUMBER_BEDROOM, NUMBER_BED, NUMBER_BATHROOM, CONTACT_NUMBER, PRICE, DESCRIPTION) VALUES
+        (ACCOMMODATION_SEQ.nextval,#{userId}, #{name}, #{address}, #{type}, #{maxNumberOfGuest},
+         #{numberOfBedroom}, #{numberOfBed}, #{numberOfBathroom}, #{contactNumber}, #{price}, #{description})
     </insert>
-    
+    <select id="findForPhoto" resultMap="accommodationMap">
+        SELECT * FROM ACCOMMODATION WHERE USER_ID=#{userId} and NAME=#{name} and ADDRESS=#{address} and TYPE=#{type}
+    </select>
+    <select id="getAllByUserId" resultMap="accommodationMap">
+        SELECT * FROM ACCOMMODATION WHERE USER_ID=#{userId}
+    </select>
+
     <!-- 총 숙소 수 가져오기 -->
     <select id="selectHouseCount" resultType="Integer">
     	select count(*) from ACCOMMODATION
