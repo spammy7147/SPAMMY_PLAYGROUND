@@ -94,7 +94,7 @@ public class AccommodationTempService implements IAccommodationTempService {
         String path = "C:\\upload/";
 
         for (MultipartFile multipartFile : multipartFiles) {
-            String safeFile = path + System.currentTimeMillis() + multipartFile.getName();
+            String safeFile = path + System.currentTimeMillis() + multipartFile.getOriginalFilename();
             File file = new File(safeFile);
             file.mkdirs();
 

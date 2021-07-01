@@ -4,7 +4,9 @@ import com.seven.jong.DTO.hosting.AccommodationAddressRequestDTO;
 import com.seven.jong.DTO.hosting.AccommodationDTO;
 import com.seven.jong.DTO.hosting.AccommodationHouseRequestDTO;
 import com.seven.jong.VO.hosting.AccommodationTempVO;
+import com.seven.jong.VO.hosting.AccommodationVO;
 import com.seven.jong.VO.security.UserSecurityVO;
+import com.seven.jong.service.hosting.IAccommodationService;
 import com.seven.jong.service.hosting.IAccommodationTempService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -24,13 +26,20 @@ import java.util.List;
 public class HostingController {
 
     IAccommodationTempService accommodationTempService;
+    IAccommodationService accommodationService;
     @Autowired
     public void setAccommodationTempService(IAccommodationTempService accommodationTempService) {
         this.accommodationTempService = accommodationTempService;
     }
+    @Autowired
+    public void setAccommodationService(IAccommodationService accommodationService) {
+        this.accommodationService = accommodationService;
+    }
 
     @GetMapping("/home")
-    public String home() {
+    public String home(Authentication authentication, Model model) {
+        List<AccommodationVO> accommodationVOList = accommodationService.getAllByUserId(authentication);
+        model.addAttribute("accommodations", accommodationVOList);
         System.out.println("/hosting/home => GET 요청");
         return "/hosting/hostHome";
     }

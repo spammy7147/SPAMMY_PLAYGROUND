@@ -33,6 +33,10 @@
     <select id="findForPhoto" resultMap="accommodationMap">
         SELECT * FROM ACCOMMODATION WHERE USER_ID=#{userId} and NAME=#{name} and ADDRESS=#{address} and TYPE=#{type}
     </select>
+    <select id="getAllByUserId" resultMap="accommodationMap">
+        SELECT * FROM ACCOMMODATION WHERE USER_ID=#{userId}
+    </select>
+
     <!-- 총 숙소 수 가져오기 -->
     <select id="selectHouseCount" resultType="Integer">
     	select count(*) from ACCOMMODATION

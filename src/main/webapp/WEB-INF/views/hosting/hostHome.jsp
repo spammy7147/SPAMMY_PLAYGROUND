@@ -14,18 +14,13 @@
         <div class="col-xl-8 m-auto">
             <div class="card-body">
                 <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
-                    <thead>
-                    </thead>
 
-                    <tbody>
-                        <tr>
-                            <td><a href="${contextPath}/hosting/accommodation/1" class="text-decoration-none">이거슨숙소이름이랑께</a></td>
-                        </tr>
-                    </tbody>
+                    <c:forEach var="a" items="${accommodations}">
+                    <tr>
+                        <td><a href="${contextPath}/hosting/accommodation/${a.accommodationId}" class="text-decoration-none">${a.name}</a></td>
+                    </tr>
+                    </c:forEach>
 
-                    <tfoot>
-
-                    </tfoot>
                 </table>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <div></div>

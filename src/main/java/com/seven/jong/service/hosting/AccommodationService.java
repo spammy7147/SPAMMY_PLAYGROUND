@@ -4,9 +4,11 @@ import com.seven.jong.DTO.hosting.AccommodationDTO;
 import com.seven.jong.VO.hosting.AccommodationPhotoVO;
 import com.seven.jong.VO.hosting.AccommodationTempVO;
 import com.seven.jong.VO.hosting.AccommodationVO;
+import com.seven.jong.VO.security.UserSecurityVO;
 import com.seven.jong.repository.hosting.IAccommodationMapper;
 import com.seven.jong.repository.hosting.IAccommodationPhotoMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -43,11 +45,9 @@ public class AccommodationService implements IAccommodationService {
                 .description(accommodationTempVO.getDescription())
                 .build();
 
-        System.out.println("accommodationservice - accommodationvo " + accommodationVO);
         accommodationMapper.addAccommodation(accommodationVO);
-
-
         Integer accommodationId = accommodationMapper.findForPhoto(accommodationVO).getAccommodationId();
+
         for(String url : photoURL){
             accommodationPhotoMapper.addPhoto(
                     AccommodationPhotoVO.builder()
@@ -57,6 +57,12 @@ public class AccommodationService implements IAccommodationService {
             );
         }
 
+    }
+
+    @Override
+    public List<AccommodationVO> getAllByUserId(Authentication authentication) {
+
+        return accommodationMapper.getAllByUserId(((UserSecurityVO)authentication.getPrincipal()).getUser().getUserId());
     }
 
     @Override
