@@ -11,7 +11,6 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class AccommodationTempVO {
 
-    private Integer accommodationId;
     private Integer userId;
     private String name;
     private String address;
@@ -23,7 +22,5 @@ public class AccommodationTempVO {
     private Integer contactNumber;
     private Integer price;
     private String description;
-    private LocalDateTime regDate;
-
 
 }

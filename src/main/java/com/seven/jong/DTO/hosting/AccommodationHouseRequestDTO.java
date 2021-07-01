@@ -10,8 +10,12 @@ import lombok.ToString;
 public class AccommodationHouseRequestDTO {
 
     private String name;
+    private String type;
     private Integer maxNumberOfGuest;
-    private Integer numberofBedroom;
+    private Integer numberOfBedroom;
     private Integer numberOfBed;
     private Integer numberOfBathroom;
+    private Integer contactNumber;
+    private Integer price;
+    private String description;
 }

@@ -27,7 +27,6 @@ public class IAccommodationMapperTest {
                         .numberOfBathroom(1)
                         .numberOfBedroom(1)
                         .numberOfBed(1)
-                        .typeOfBed("king")
                         .contactNumber(1)
                         .description("머물기 좋은곳")
                         .build();
