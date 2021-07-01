@@ -41,8 +41,12 @@ public class AdminController {
 	
 	//관리자 홈
 	@GetMapping("/home")
-	public String adminHome() {
+	public String adminHome(Model model) {
 		System.out.println("/admin/home => GET요청 ");
+		model.addAttribute("userNum",aus.numberOfUser() );
+		model.addAttribute("houseNum", hs.numberOfHouse() );
+		
+		model.addAttribute("boardNum", bs.numberOfBoard() );
 		return "admin/adminHome";
 	}
 	

@@ -28,6 +28,13 @@ public class AdminUserServiceImpl implements AdminUserService {
 	public void setUserService(IUserService userService) {
 		this.userService = userService;
 	}
+	
+	//총 유저수 가져오기
+	@Override
+	public int numberOfUser() {
+		int num = userMapper.selectUserCount();
+		return num;
+	}
 
 	public void pageUserInfo(int pageNum, Model model) {
 	
@@ -92,6 +99,7 @@ public class AdminUserServiceImpl implements AdminUserService {
 		model.addAttribute("allPage", totalPage);
 		model.addAttribute("userSearchList", userSearchList);
 	}
+	
 
 	
 

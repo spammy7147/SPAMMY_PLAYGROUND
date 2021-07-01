@@ -22,6 +22,13 @@ public class BoardServiceImpl implements BoardService{
 	@Autowired
 	IBoardMapper mapper;
 	
+	//총 숙소 수
+	@Override
+	public int numberOfBoard() {
+		int allCount = mapper.BoardCount();
+		return allCount;
+	}
+	
 	@Override
 	public void writeSave(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mtfRequest) {
 		MultipartFile file = mtfRequest.getFile("imageFileName");
@@ -210,6 +217,8 @@ public class BoardServiceImpl implements BoardService{
 		mapper.modifyReply(content,reply_num);
 		
 	}
+
+
 
 	
 
