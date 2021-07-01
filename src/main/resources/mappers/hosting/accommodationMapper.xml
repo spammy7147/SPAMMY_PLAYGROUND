@@ -16,7 +16,6 @@
         <result property="maxNumberOfGuest" column="max_number_guest"/>
         <result property="numberOfBedroom" column="number_bedroom"/>
         <result property="numberOfBed" column="number_bed"/>
-        <result property="typeOfBed" column="type_bed"/>
         <result property="numberOfBathroom" column="number_bathroom"/>
         <result property="contactNumber" column="contact_number"/>
         <result property="price" column="price"/>
