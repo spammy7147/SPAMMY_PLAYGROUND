@@ -11,7 +11,7 @@ import com.seven.jong.service.AdminUserService;
 import com.seven.jong.service.BoardFileService;
 import com.seven.jong.service.BoardService;
 import com.seven.jong.service.CsService;
-import com.seven.jong.service.HouseService;
+import com.seven.jong.service.hosting.HouseService;
 import com.seven.jong.service.QnaFileService;
 import com.seven.jong.service.hosting.IReservationService;
 import com.seven.jong.service.hosting.ReservationService;

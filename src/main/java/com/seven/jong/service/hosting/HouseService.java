@@ -1,4 +1,4 @@
-package com.seven.jong.service;
+package com.seven.jong.service.hosting;
 
 
 import org.springframework.ui.Model;
