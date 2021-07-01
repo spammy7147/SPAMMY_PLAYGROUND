@@ -23,6 +23,9 @@ public interface IAccommodationMapper {
 
 	//검색 숙소 가져오기
  	public ArrayList<AccommodationDTO> houseSearchList(@Param("s")int start, @Param("e")int end, @Param("c")String c, @Param("search")String search);
+ 	
+ 	//숙소 삭제하기
+	int houseDelete(int accommodationId);
 
 	
 }

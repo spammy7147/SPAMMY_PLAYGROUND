@@ -54,11 +54,12 @@
 									<th>주소</th>
 									<th>타입</th>
 									<th>전화번호</th>
+									<th width="85"></th>
 								</tr>
 								</thead>
 								<tfoot>
 								<tr>
-									<th colspan="5">
+									<th colspan="6">
 										<c:forEach var="pageNum" begin="1" end="${allPage }">
 											<a href="${contextPath }/admin/housemanage?pageNum=${pageNum}">${pageNum } </a>
 										</c:forEach>
@@ -78,12 +79,15 @@
 											<td>${dto.address }</td>
 											<td>${dto.type }</td>
 											<td>${dto.contactNumber }</td>
+											<td>
+												<a class="btn btn-danger" href="${contextPath }/admin/housedelete?accommodationId=${dto.accommodationId }">삭제</a>
+											</td>
 										</tr>
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
 								<tr>
-									<th colspan="5"> 등록된 숙소가 없습니다.</th>
+									<th colspan="6"> 등록된 숙소가 없습니다.</th>
 								<tr>
 									</c:otherwise>
 									</c:choose>
