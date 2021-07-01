@@ -17,7 +17,7 @@ public class HouseServiceImpl implements HouseService{
 	@Override
 	public void houseList(int pageNum, Model model) {
 		int allCount = aMapper.selectHouseCount(); // 총 숙소수 얻어오기
-		int pageLetter = 5; //한 페이지에 표현 할 개수
+		int pageLetter = 10; //한 페이지에 표현 할 개수
 		int totalPage = allCount /pageLetter; //총 페이지
 		if(allCount % pageLetter != 0) {
 			totalPage += 1;

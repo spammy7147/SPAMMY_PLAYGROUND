@@ -47,7 +47,7 @@ public class CsServiceImpl implements CsService{
 	public ArrayList<QnaDTO> qna(int pageNum, Model model) {
 		
 		int allCount = mapper.selectQnaCount(); // 총 qna수 얻어오기
-		int pageLetter = 3; //한 페이지에 3개의 qna 표현
+		int pageLetter = 10; //한 페이지에 표현 할 갯수
 		int totalPage = allCount /pageLetter; //총 페이지
 		if(allCount % pageLetter != 0) {
 			totalPage += 1;
