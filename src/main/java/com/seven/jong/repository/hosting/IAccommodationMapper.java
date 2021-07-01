@@ -1,6 +1,7 @@
 package com.seven.jong.repository.hosting;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -11,6 +12,8 @@ public interface IAccommodationMapper {
 	
     void addAccommodation(AccommodationVO accommodation);
 	AccommodationVO findForPhoto(AccommodationVO accommodationVO);
+	List<AccommodationVO> getAllByUserId(Integer userId);
+
     // 총 숙소 수 가져오기
  	public int selectHouseCount();
 
