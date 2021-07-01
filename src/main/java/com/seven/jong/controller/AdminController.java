@@ -110,6 +110,11 @@ public class AdminController {
 		
 		return "admin/house/houseSearch";
 	}
+	@GetMapping("housedelete")
+	public String housedelete(@RequestParam(value="accommodationId")int accommodationId) {
+		hs.houseDelete(accommodationId);
+		return "redirect:housemanage";
+	}
 	
 	
 	

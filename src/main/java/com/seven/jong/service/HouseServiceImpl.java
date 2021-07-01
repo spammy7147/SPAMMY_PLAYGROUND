@@ -54,6 +54,13 @@ public class HouseServiceImpl implements HouseService{
 		
 	}
 	
+	//숙소 삭제
+	@Override
+	public int houseDelete(int accommodationId) {
+		int result = aMapper.houseDelete(accommodationId);
+		return result;
+	}
+	
 	
 	
 

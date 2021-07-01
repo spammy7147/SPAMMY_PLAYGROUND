@@ -12,4 +12,7 @@ public interface HouseService {
 	//숙소 검색
 	public void houseSearch(int pageNum, String c, String search, Model model);
 
+	//숙소 삭제
+	public int houseDelete(int accommodationId);
+
 }
