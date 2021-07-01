@@ -19,7 +19,6 @@ public class AccommodationVO {
     private Integer maxNumberOfGuest;
     private Integer numberOfBedroom;
     private Integer numberOfBed;
-    private String typeOfBed;
     private Integer numberOfBathroom;
     private Integer contactNumber;
     private Integer price;

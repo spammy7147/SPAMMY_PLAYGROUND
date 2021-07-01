@@ -26,9 +26,9 @@
 
     <insert id="addAccommodation">
         INSERT INTO ACCOMMODATION (ACCOMMODATION_ID, USER_ID, NAME, ADDRESS, TYPE, MAX_NUMBER_GUEST,
-                                   NUMBER_BEDROOM, NUMBER_BED, TYPE_BED, NUMBER_BATHROOM, CONTACT_NUMBER, PRICE, DESCRIPTION) VALUES
+                                   NUMBER_BEDROOM, NUMBER_BED, NUMBER_BATHROOM, CONTACT_NUMBER, PRICE, DESCRIPTION) VALUES
         (ACCOMMODATION_SEQ.nextval, #{userId}, #{name}, #{address}, #{type}, #{maxNumberOfGuest},
-         #{numberOfBedroom}, #{numberOfBed}, #{typeOfBed}, #{numberOfBathroom}, #{contactNumber}, #{price}, #{description})
+         #{numberOfBedroom}, #{numberOfBed}, #{numberOfBathroom}, #{contactNumber}, #{price}, #{description})
     </insert>
 
 </mapper>
