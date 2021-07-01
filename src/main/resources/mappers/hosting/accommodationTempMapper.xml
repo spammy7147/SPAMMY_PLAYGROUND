@@ -10,17 +10,46 @@
         <result property="userId" column="user_id"/>
         <result property="name" column="name"/>
         <result property="type" column="type"/>
-        <result property="maxNumberOfGuest" column="max_number_of_guest"/>
-        <result property="numberOfBedroom" column="number_of_bedroom"/>
-        <result property="typeOfBed" column="type_of_bed"/>
-        <result property="numberOfBathroom" column="numberOfBathroom"/>
-        <result property="contactNumber" column="contactNumber"/>
+        <result property="maxNumberOfGuest" column="max_number_guest"/>
+        <result property="numberOfBedroom" column="number_bedroom"/>
+        <result property="numberOfBed" column="number_bed"/>
+        <result property="numberOfBathroom" column="number_Bathroom"/>
+        <result property="contactNumber" column="contact_number"/>
         <result property="price" column="price"/>
         <result property="description" column="description"/>
     </resultMap>
+
+    <select id="checkExist" resultType="Integer">
+        SELECT count(*) FROM ACCOMMODATION_TEMP
+        WHERE USER_ID=#{userId}
+    </select>
 
     <insert id="addAddress">
         INSERT INTO ACCOMMODATION_TEMP (USER_ID,ADDRESS) VALUES
         (#{userId}, #{address})
     </insert>
+
+    <update id="updateAddress">
+        UPDATE ACCOMMODATION_TEMP SET ADDRESS=#{address}
+        WHERE USER_ID=#{userId}
+    </update>
+
+
+    <update id="addHouse">
+        UPDATE ACCOMMODATION_TEMP SET name=#{name}, TYPE=#{type}, MAX_NUMBER_GUEST=#{maxNumberOfGuest}
+        ,NUMBER_BEDROOM=#{numberOfBedroom}, NUMBER_BED=#{numberOfBed}, NUMBER_BATHROOM=#{numberOfBathroom}
+        ,PRICE=#{price},CONTACT_NUMBER=#{contactNumber}, DESCRIPTION=#{description}
+        WHERE USER_ID=#{userId}
+    </update>
+
+    <select id="findByUserId" resultMap="accommodationTempMap">
+        SELECT * FROM ACCOMMODATION_TEMP
+        WHERE USER_ID=#{userId}
+    </select>
+
+    <delete id="deleteAccommodation">
+        DELETE FROM ACCOMMODATION_TEMP
+        WHERE USER_ID=#{userId}
+    </delete>
+
 </mapper>

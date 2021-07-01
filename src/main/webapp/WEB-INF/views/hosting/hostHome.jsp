@@ -29,7 +29,7 @@
                 </table>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">
                     <div></div>
-                    <a href="" class="d-none d-sm-inline-block btn btn-outline-primary">숙소 추가</a>
+                    <a href="${contextPath}/hosting/address" class="d-none d-sm-inline-block btn btn-outline-primary">숙소 추가</a>
                 </div>
 
             </div>

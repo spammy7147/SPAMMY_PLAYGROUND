@@ -1,5 +1,5 @@
 CREATE TABLE accommodation_temp (
-   user_id NUMBER NOT NULL,
+   user_id NUMBER PRIMARY KEY ,
    name VARCHAR2(50),
    address VARCHAR2(200),
    type VARCHAR2(20),
@@ -9,8 +9,7 @@ CREATE TABLE accommodation_temp (
    number_bathroom NUMBER,
    contact_number NUMBER,
    price NUMBER,
-   description VARCHAR2(1000),
-   reg_date TIMESTAMP DEFAULT SYSDATE
+   description VARCHAR2(1000)
 );
 
 ALTER TABLE accommodation_temp

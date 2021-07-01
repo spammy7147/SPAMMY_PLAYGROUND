@@ -10,6 +10,11 @@
         <result property="photoURL" column="photoURL"/>
     </resultMap>
 
+    <insert id="addPhoto">
+        INSERT INTO ACCOMMODATION_PHOTO (ACCOMMODATION_ID, PHOTO_URL)
+        VALUES (#{accommodationId}, #{photoURL})
+    </insert>
+
 
 
 </mapper>
