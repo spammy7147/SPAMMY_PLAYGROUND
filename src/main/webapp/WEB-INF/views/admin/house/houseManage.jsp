@@ -49,14 +49,16 @@
 							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 								<tr>
+									<th>숙소번호</th>
 									<th width="40%">숙소명</th>
 									<th>주소</th>
 									<th>타입</th>
+									<th>전화번호</th>
 								</tr>
 								</thead>
 								<tfoot>
 								<tr>
-									<th colspan="3">
+									<th colspan="5">
 										<c:forEach var="pageNum" begin="1" end="${allPage }">
 											<a href="${contextPath }/admin/housemanage?pageNum=${pageNum}">${pageNum } </a>
 										</c:forEach>
@@ -69,17 +71,19 @@
 								<c:when test="${houseList.size() != 0 }">
 									<c:forEach var="dto" items="${houseList }">
 										<tr>
+											<td>${dto.accommodationId }</td>
 											<td>
 												<a href="#">${dto.name }</a>
 											</td>
 											<td>${dto.address }</td>
 											<td>${dto.type }</td>
+											<td>${dto.contactNumber }</td>
 										</tr>
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
 								<tr>
-									<th colspan="3"> 등록된 숙소가 없습니다.</th>
+									<th colspan="5"> 등록된 숙소가 없습니다.</th>
 								<tr>
 									</c:otherwise>
 									</c:choose>
