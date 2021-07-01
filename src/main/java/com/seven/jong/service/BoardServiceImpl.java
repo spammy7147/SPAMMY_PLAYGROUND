@@ -40,7 +40,7 @@ public class BoardServiceImpl implements BoardService{
 	@Override
 	public void boardAllList(Model model,int num) {
 		int allCount = mapper.BoardCount();
-		int pageLetter = 10;
+		int pageLetter = 10; //한 페이지에 표현 할 게시글수
 		int repeat = allCount / pageLetter;
 		
 		if(allCount % pageLetter != 0) {

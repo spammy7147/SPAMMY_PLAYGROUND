@@ -32,7 +32,7 @@ public class AdminUserServiceImpl implements AdminUserService {
 	public void pageUserInfo(int pageNum, Model model) {
 	
 		int allCount = userMapper.selectUserCount(); // 총 유저수 얻어오기
-		int pageLetter = 3; //한 페이지에 3명의 유저 표현
+		int pageLetter = 10; //한 페이지에 표현 할 유저수
 		int totalPage = allCount /pageLetter; //총 페이지
 		if(allCount % pageLetter != 0) {
 			totalPage += 1;
@@ -76,7 +76,7 @@ public class AdminUserServiceImpl implements AdminUserService {
 	public void userSearch(int pageNum, String c, String search, Model model) {
 		
 		int allCount = userMapper.selectSearchUserCount(c,search); // 조건에 맞는 유저 수 얻어오기
-		int pageLetter = 3; //한 페이지에 3명의 유저 표현
+		int pageLetter = 10; //한 페이지에 표현 할 유저수
 		int totalPage = allCount /pageLetter; //총 페이지
 		
 		if(allCount % pageLetter != 0) {
