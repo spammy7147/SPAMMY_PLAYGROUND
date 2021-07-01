@@ -19,6 +19,8 @@
         <result property="description" column="description"/>
     </resultMap>
 
-
-
+    <insert id="addAddress">
+        INSERT INTO ACCOMMODATION_TEMP (USER_ID,ADDRESS) VALUES
+        (#{userId}, #{address})
+    </insert>
 </mapper>
