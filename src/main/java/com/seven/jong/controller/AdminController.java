@@ -118,6 +118,7 @@ public class AdminController {
 		
 		return "admin/house/houseSearch";
 	}
+	//숙소 삭제
 	@GetMapping("housedelete")
 	public String housedelete(@RequestParam(value="accommodationId")int accommodationId) {
 		hs.houseDelete(accommodationId);
@@ -134,6 +135,24 @@ public class AdminController {
 	public String bookingManage(@RequestParam(value="pageNum" , required=false, defaultValue="1") int pageNum, Model model) { 
 		rs.reservationList(pageNum, model);
 		return "admin/booking/bookingManage";
+	}
+	//예약검색
+	@PostMapping("bookingsearch")
+	public String bookingsearch(@RequestParam(value="pageNum" , required=false, defaultValue="1") int pageNum, @RequestParam("choice")String choice, @RequestParam("bookingSearch")String search, Model model) {
+		String c = null;
+		
+		if(choice.equals("1")) {
+			c = "reservation_id";
+		}else if (choice.equals("2")) {
+			c = "name";
+		}else {
+			c = "email";
+		}
+		
+		model.addAttribute("choice", choice);
+		model.addAttribute("bookingSearch", search);
+		rs.bookingSearch(pageNum, c,search,model);
+		return "admin/booking/bookingSearch";
 	}
 	
 	

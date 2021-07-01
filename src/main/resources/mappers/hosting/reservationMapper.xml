@@ -35,9 +35,23 @@
 		select B.* from(select rownum rn, A.* from
 			(SELECT RES.reservation_id, AC.name,US.email, RES.number_guest, RES.check_in, RES.check_out, RES.REG_DATE
 			FROM RESERVATION RES, ACCOMMODATION AC, AIR_USER US
-			WHERE RES.ACCOMMODATION_ID = AC.ACCOMMODATION_ID AND RES.USER_ID = US.USER_ID order by reg_date desc)A)B where rn between #{s} and #{e}
+			WHERE RES.ACCOMMODATION_ID = AC.ACCOMMODATION_ID AND RES.USER_ID = US.USER_ID order by RESERVATION_ID desc)A)B where rn between #{s} and #{e}
 	</select>
-
+	
+	<!-- 검색 조건에 맞는 예약정보 수 -->
+	<select id="SearchReservationCount" resultType="Integer">
+		select count(*) from (SELECT RES.reservation_id, AC.name,US.email, RES.number_guest, RES.check_in, RES.check_out, RES.REG_DATE
+			FROM RESERVATION RES, ACCOMMODATION AC, AIR_USER US
+			WHERE RES.ACCOMMODATION_ID = AC.ACCOMMODATION_ID AND RES.USER_ID = US.USER_ID) where ${c} like '%'||#{search}||'%' order by reg_date desc
+	</select>
+	
+	<!-- 검색 조건에 맞는 예약 정보 리스트 -->
+	<select id="ReservationSearchList" resultMap="reservationAdmin">
+		select B.* from(select rownum rn, A.* from
+			(select * from (SELECT RES.reservation_id, AC.name,US.email, RES.number_guest, RES.check_in, RES.check_out, RES.REG_DATE
+			FROM RESERVATION RES, ACCOMMODATION AC, AIR_USER US
+			WHERE RES.ACCOMMODATION_ID = AC.ACCOMMODATION_ID AND RES.USER_ID = US.USER_ID) where ${c} like '%'||#{search}||'%' order by RESERVATION_ID desc)A)B where rn between #{s} and #{e}
+	</select>
 
 
 
