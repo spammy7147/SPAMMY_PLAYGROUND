@@ -13,6 +13,9 @@ import com.seven.jong.service.BoardService;
 import com.seven.jong.service.CsService;
 import com.seven.jong.service.HouseService;
 import com.seven.jong.service.QnaFileService;
+import com.seven.jong.service.hosting.IReservationService;
+import com.seven.jong.service.hosting.ReservationService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
@@ -38,6 +41,7 @@ public class AdminController {
 	@Autowired CsService cs;
 	@Autowired BoardService bs;
 	@Autowired HouseService hs;
+	@Autowired IReservationService rs;
 	
 	//관리자 홈
 	@GetMapping("/home")
@@ -127,15 +131,11 @@ public class AdminController {
 	
 	//예약 관리
 	@GetMapping("/bookingmanage")
-	public String bookingManage() { 
-		
+	public String bookingManage(@RequestParam(value="pageNum" , required=false, defaultValue="1") int pageNum, Model model) { 
+		rs.reservationList(pageNum, model);
 		return "admin/booking/bookingManage";
 	}
 	
-	@GetMapping("/board")
-	public String board() {
-		return "admin/board/boardAllList";
-	}
 	
 	
 	
