@@ -35,15 +35,6 @@
 
 				<h1 style="text-align: center;">검 색 결 과</h1>
 
-				<form action="${contextPath }/admin/user/usersearch">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-					<select name="choice">
-						<option value="1">이메일
-						<option value="2">이름
-					</select>
-					<input type="text" name="userSearch">
-					<input type="submit" value="검색">
-				</form>
 
 				<!-- DataTales Example -->
 				<div class="card shadow mb-4">
@@ -97,11 +88,49 @@
 					</div>
 				</div>
 				<!-- /.container-fluid -->
+				
+				
+				
+				
+				<table width="100%">
+					<tr>
+						<th>
+							<form action="${contextPath }/admin/user/usersearch">
+								<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+								<div class="form-row align-items-center">
+								    <div class="col-auto my-1">
+										<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">검색옵션</label>
+										<select class="custom-select mr-sm-2" id="inlineFormCustomSelect"  name="choice">
+											<option value="1">이메일
+											<option value="2">이름
+								      	</select>
+								      	
+								    </div>
+								    <div class="col-auto my-1">
+									    <div class="custom-control custom-checkbox mr-sm-2">
+									        <input class="form-control" type="text" name="userSearch">
+									    </div>
+								    </div>
+								    <div class="col-auto my-1">
+								      	<button type="submit" class="btn btn-primary">검색</button>
+								    </div>
+								    
+								    
+								</div>
+							</form>
+						</th>
+						<th>
+							<div class="col-auto my-1" align="right">
+								<form action="${contextPath }/admin/usermanage" id="frm">
+									<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+									<a class="btn btn-primary" onclick="formSubmit()">목록으로</a>
+								</form>
+							</div>
+						</th>
+					</tr>
+				</table>
 
-				<form action="${contextPath }/admin/usermanage" id="frm">
-					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-					<a class="btn btn-primary" onclick="formSubmit()">목록으로</a>
-				</form>
+				
 
 			</div>
 		<!-- End of Main Content -->

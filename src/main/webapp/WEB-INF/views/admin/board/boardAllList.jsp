@@ -3,15 +3,8 @@
 
 <html>
 <head>
-	<title>AirBnD - 관리자 예약관리</title>
+	<title>AirBnD - 관리자 게시판관리</title>
 	<c:import url="../../include/header.jsp" />
-
-
-<script type="text/javascript">
-	function formSubmit(){
-		document.getElementById('frm').submit();
-	}
-</script>
 
 
 </head>
@@ -49,7 +42,7 @@
 							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 								<tr>
-									<th>Number</th><th>작성자</th><th>Title</th>
+									<th>Number</th><th>작성자</th><th width="40%">Title</th>
 									<th>Date</th><th>Hit</th><th>Image file</th>
 								</tr>
 								</thead>
@@ -57,7 +50,7 @@
 								<tr>
 									<td colspan="6">
 										<c:forEach var="pageNum" begin="1" end="${repeat }">
-											<a href="${contextPath }/admin/board/boardAllList?pageNum=${repeat}">${pageNum } &nbsp;</a>
+											<a href="${contextPath }/admin/boardalllist?pageNum=${pageNum }">${pageNum } &nbsp;</a>
 										</c:forEach>
 									</td>
 								</tr>
@@ -96,10 +89,44 @@
 			</div>
 			<!-- /.container-fluid -->
 			
-			<form action="${contextPath }/admin/boardwriteform" id="frm">
-				<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-				<a class="btn btn-primary" href="${contextPath }/admin/writeform">게시글 작성</a>
-			</form>
+			
+			<table width="100%">
+				<tr>
+					<th>
+						<form action="${contextPath }/admin/boardSearch" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+							<div class="form-row align-items-center">
+							    <div class="col-auto my-1">
+									<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">검색옵션</label>
+									<select class="custom-select mr-sm-2" id="inlineFormCustomSelect"  name="choice">
+										<option value="1">제목
+										<option value="2">작성자
+							      	</select>
+							      	
+							    </div>
+							    <div class="col-auto my-1">
+								    <div class="custom-control custom-checkbox mr-sm-2">
+								        <input class="form-control" type="text" name="boardSearch">
+								    </div>
+							    </div>
+							    <div class="col-auto my-1">
+							      	<button type="submit" class="btn btn-primary">검색</button>
+							    </div>
+							    
+							    
+							    
+							</div>
+						</form>
+					</th>
+					<th>
+						<div class="col-auto my-1" align="right">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+							<a class="btn btn-primary" href="${contextPath }/admin/writeform">게시글 작성</a>
+						</div>
+					</th>
+				</tr>
+			</table>
+			
 			
 			
 		</div>

@@ -3,11 +3,14 @@ package com.seven.jong.controller;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -18,7 +21,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
 
 import com.seven.jong.DTO.BoardDTO;
-
+import com.seven.jong.VO.UserVO;
+import com.seven.jong.VO.security.UserSecurityVO;
+import com.seven.jong.service.BoardFileService;
 import com.seven.jong.service.BoardService;
 
 
@@ -30,15 +35,18 @@ public class BoardController {
 	BoardService bs;
 	
 	//boardAllList.jsp연결
-	@GetMapping("/boardAllList")
-	public String boardAllList(Model model, @RequestParam(value="num", required = false, defaultValue = "1") int num) {
+	@GetMapping("/boardalllist")
+	public String boardAllList(Model model, @RequestParam(value="pageNum", required = false, defaultValue = "1") int pageNum) {
 		System.out.println("boardAllList연결");
-		bs.boardAllList(model,num);
+		bs.boardAllList(model,pageNum);
 		return "board/boardAllList";
 	}
 	//writeForm.jsp 연결
-	@GetMapping("/writeForm")
-	public String writeForm() {
+	@GetMapping("/writeform")
+	public String writeForm(@Nullable Authentication authentication, Model model) {
+		UserSecurityVO userSecurityVO = (UserSecurityVO) authentication.getPrincipal();
+		UserVO userVO = userSecurityVO.getUser();
+		model.addAttribute("loginUser", userVO.getEmail());
 		return "board/writeForm";
 	}
 	//게시물 저장
@@ -47,81 +55,91 @@ public class BoardController {
 		bs.writeSave(dto, request, mtfRequest);
 		
 	   
-		return "redirect:/board/boardAllList";
+		return "redirect:/board/boardalllist";
 	}
 	//선택 게시물 보기 , 리플 가져오기
-	@GetMapping("contentView")
-	public String contentView (@RequestParam int writeNo, Model model) {
+	@GetMapping("contentview")
+	public String contentView (@Nullable Authentication authentication, @RequestParam int writeNo, Model model) {
 		bs.contentView(writeNo, model);
-		System.out.println("contentView연결");
+		
+		UserSecurityVO userSecurityVO = (UserSecurityVO) authentication.getPrincipal();
+		UserVO userVO = userSecurityVO.getUser();
+		model.addAttribute("loginUser", userVO.getEmail());
+		
 		return "board/contentView";
 	}
 	//이미지 불러오기
-	@GetMapping("download")
+	@GetMapping("boarddownload")
 	public void downLoad(@RequestParam String fileName,
 						HttpServletResponse response) throws Exception{
-		response.addHeader("Content-disposition",
-				"attachment;fileName"+fileName);
-		File file = new File("C:\\upload\\"+fileName);
+		response.addHeader("Content-disposition","attachment;fileName"+fileName);
+		File file = new File(BoardFileService.Board_IMAGE_REPO+"/"+fileName);
 		FileInputStream in = new FileInputStream(file);
-		
+			
 		System.out.println(file);
-		
+			
 		FileCopyUtils.copy(in, response.getOutputStream());
 		in.close();
 	}
 	
 	//modifyForm 연결
-	@GetMapping("modifyForm")
+	@GetMapping("boardmodifyform")
 	public String modifyForm(@RequestParam int writeNo, Model model) {
 		bs.contentView(writeNo, model);
-		System.out.println("modifyForm 연결");
 		return "board/modifyForm";
 	}
 	//게시물 수정
-	@PostMapping("modify")
-	public String modify(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mul) {
-		bs.modify(dto, request, mul);
-		return "redirect:/board/boardAllList";
+	@PostMapping("boardmodify")
+	public void modify(BoardDTO dto, HttpServletRequest request, MultipartHttpServletRequest mul, HttpServletResponse response) throws IOException {
+		String message = bs.boardModify(dto, request, mul);
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(message);
 	}
 	//게시물 삭제
-	@GetMapping("delete")
-	public String delete(@RequestParam int writeNo) {
-		//bs.delete(writeNo);
-		return "redirect:/board/boardAllList";
+	@GetMapping("boarddelete")
+	public void delete(@RequestParam int writeNo, @RequestParam String fileName,
+			HttpServletResponse response, HttpServletRequest request) throws IOException {
+		String message = bs.boardDelete(writeNo,fileName,request);
+		
+		response.setContentType("text/html; charset=utf-8");
+		PrintWriter out = response.getWriter();
+		out.print(message);
 	}
 	//게시물 검색
 	@PostMapping("/boardSearch")
-	public String userSearch(@RequestParam(value="num" , required=false, defaultValue="1") int num, @RequestParam("choice")String choice, @RequestParam("boardSearch")String search, Model model) {
+	public String boardSearch(@RequestParam(value="num" , required=false, defaultValue="1") int num, @RequestParam("choice")String choice, @RequestParam("boardSearch")String search, Model model) {
 		System.out.println("boardSearch연결");
 
 		bs.boardSearch(num, choice ,search,model);
 		return "board/boardSearch";
 	}
 	//댓글 추가
-	@PostMapping("addReply")
+	@PostMapping("addreply")
 	public String addReply(@RequestParam String content,@RequestParam int writeNo, @RequestParam String writer){//세션 추가해야함
+		System.out.println(writer);
+		System.out.println(writeNo);
 		bs.addReply(content,writeNo,writer);	
-		return "redirect:/board/contentView?writeNo="+writeNo;
+		return "redirect:contentview?writeNo="+writeNo;
 	}
 	//댓글 삭제
 	@GetMapping("replydelete")
-	public String replyDelete(@RequestParam int writeNo, @RequestParam int replyNum) {
-		bs.replyDelete(replyNum);
-		return "redirect:/board/contentView?writeNo="+writeNo;
+	public String replyDelete(@RequestParam int writeNo, @RequestParam int reply_num) {
+		bs.replyDelete(reply_num);
+		return "redirect:contentview?writeNo="+writeNo;
 	}
 	//댓글 수정창 이동
-	@GetMapping("modifyReplyForm")
+	@GetMapping("boardmodifyreplyform")
 	public String modifyReplyForm(@RequestParam int reply_num, @RequestParam int writeNo ,Model model) {
 		bs.selectReply(model, reply_num, writeNo);
 		return "board/modifyReplyForm";
 	}
 	//댓글 수정
-	@PostMapping("modifyReply")
+	@PostMapping("boardmodifyreply")
 	public String modifyReply(@RequestParam int writeNo,@RequestParam String content,@RequestParam int reply_num) {
 		bs.modifyReply(content,reply_num);
 		System.out.println(content);
-		return "redirect:/board/contentView?writeNo="+writeNo;
+		return "redirect:/board/contentview?writeNo="+writeNo;
 	}
 
 }

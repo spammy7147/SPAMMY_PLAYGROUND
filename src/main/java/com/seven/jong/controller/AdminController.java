@@ -11,6 +11,7 @@ import com.seven.jong.service.AdminUserService;
 import com.seven.jong.service.BoardFileService;
 import com.seven.jong.service.BoardService;
 import com.seven.jong.service.CsService;
+import com.seven.jong.service.HouseService;
 import com.seven.jong.service.QnaFileService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
@@ -36,6 +37,7 @@ public class AdminController {
 	@Autowired AdminUserService aus;
 	@Autowired CsService cs;
 	@Autowired BoardService bs;
+	@Autowired HouseService hs;
 	
 	//관리자 홈
 	@GetMapping("/home")
@@ -82,7 +84,9 @@ public class AdminController {
 	
 	//등록된 숙소 관리
 	@GetMapping("/housemanage")
-	public String houseManage() {
+	public String houseManage(@RequestParam(value="pageNum" , required=false, defaultValue="1") int pageNum, Model model) {
+		
+		hs.houseList(pageNum, model);
 		return "admin/house/houseManage";
 	}
 	// 숙소 검색
@@ -100,6 +104,7 @@ public class AdminController {
 	//예약 관리
 	@GetMapping("/bookingmanage")
 	public String bookingManage() { 
+		
 		return "admin/booking/bookingManage";
 	}
 	
@@ -119,7 +124,10 @@ public class AdminController {
 	}
 	//관리자모드 게시글 작성
 	@GetMapping("/writeform")
-	public String writeForm() {
+	public String writeForm(@Nullable Authentication authentication, Model model) {
+		UserSecurityVO userSecurityVO = (UserSecurityVO) authentication.getPrincipal();
+		UserVO userVO = userSecurityVO.getUser();
+		model.addAttribute("loginUser", userVO.getEmail());
 		return "admin/board/writeForm";
 	}
 	//게시물 저장
@@ -178,7 +186,7 @@ public class AdminController {
 	}
 	//게시물 리플 추가
 	@PostMapping("addreply")
-	public String addReply(@RequestParam String content,@RequestParam int writeNo, @RequestParam String writer){//세션 추가해야함
+	public String addReply(@RequestParam String content,@RequestParam int writeNo, @RequestParam String writer){
 		bs.addReply(content,writeNo,writer);	
 		return "redirect:contentview?writeNo="+writeNo;
 	}
@@ -201,7 +209,14 @@ public class AdminController {
 		return "redirect:contentview?writeNo="+writeNo;
 	}
 	
-	
+	//게시물 검색
+	@PostMapping("/boardSearch")
+	public String boardSearch(@RequestParam(value="num" , required=false, defaultValue="1") int num, @RequestParam("choice")String choice, @RequestParam("boardSearch")String search, Model model) {
+		System.out.println("boardSearch연결");
+
+		bs.boardSearch(num, choice ,search,model);
+		return "admin/board/boardSearch";
+	}
 	
 	
 	

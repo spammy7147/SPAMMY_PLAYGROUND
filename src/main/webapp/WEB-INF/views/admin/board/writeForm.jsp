@@ -45,12 +45,12 @@ function readURL(input){
 			<!-- Begin Page Content -->
 			<div class="container-fluid">
 				
-				<div>
-					<div>
+				
+				<div style="width:300px; margin: 0 auto;">
 					<form name="form" method="post" action="/admin/writeSave?${_csrf.parameterName}=${_csrf.token}" enctype="multipart/form-data">
 						<!-- <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />  -->
 						<b>작성자</b><br>
-							<input type="text" name="writer" size="30" value="${user.user.email }" readonly><br>
+							<input type="text" name="writer" size="30" value="${loginUser }" readonly><br>
 						<b>제목</b><br>
 							<input type="text" size="30" name="title" ><br>	
 						<b>내용</b><br>
@@ -61,11 +61,11 @@ function readURL(input){
 							<input type="file" name="imageFileName" onchange="readURL(this)"><br>
 							<hr>
 							
-							<input type="submit" value="글쓰기">
-							<input type="button" value="목록이동" onclick="location.href='${contextPath}/admin/boardalllist'">
+							<input class="btn btn-primary" type="submit" value="글쓰기">
+							<input class="btn btn-secondary" type="button" value="목록이동" onclick="location.href='${contextPath}/admin/boardalllist'">
 					</form>
-					</div>
 				</div>
+				
 				
 				
 				
