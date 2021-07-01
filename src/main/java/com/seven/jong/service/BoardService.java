@@ -11,6 +11,8 @@ import com.seven.jong.DTO.BoardDTO;
 import com.seven.jong.DTO.BoardReplyDTO;
 
 public interface BoardService {
+	//총 게시글 수
+	public int numberOfBoard();
 	public void writeSave(BoardDTO dto,HttpServletRequest request, MultipartHttpServletRequest mul);
 	public void boardAllList(Model model, int num);
 	public void contentView (int writeNo, Model model);

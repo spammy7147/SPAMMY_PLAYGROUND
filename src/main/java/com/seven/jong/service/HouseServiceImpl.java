@@ -15,6 +15,13 @@ public class HouseServiceImpl implements HouseService{
 
 	@Autowired IAccommodationMapper aMapper;
 	
+	//총 숙소 수
+	@Override
+	public int numberOfHouse() {
+		int allCount = aMapper.selectHouseCount();
+		return allCount;
+	}
+	
 	//숙소 리스트
 	@Override
 	public void houseList(int pageNum, Model model) {
@@ -60,6 +67,8 @@ public class HouseServiceImpl implements HouseService{
 		int result = aMapper.houseDelete(accommodationId);
 		return result;
 	}
+
+	
 	
 	
 	
