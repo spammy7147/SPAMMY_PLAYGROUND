@@ -100,7 +100,7 @@
 				<table width="100%">
 				<tr>
 					<th>
-						<form action="${contextPath }/admin/housesearch">
+						<form action="${contextPath }/admin/housesearch" method="post">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<div class="form-row align-items-center">
 							    <div class="col-auto my-1">
@@ -109,12 +109,13 @@
 										<option value="1">숙소명
 										<option value="2">주소
 										<option value="3">타입
+										<option value="4">전화번호
 							      	</select>
 							      	
 							    </div>
 							    <div class="col-auto my-1">
 								    <div class="custom-control custom-checkbox mr-sm-2">
-								        <input class="form-control" type="text" name="userSearch">
+								        <input class="form-control" type="text" name="houseSearch">
 								    </div>
 							    </div>
 							    <div class="col-auto my-1">

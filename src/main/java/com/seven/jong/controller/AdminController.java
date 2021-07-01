@@ -91,7 +91,22 @@ public class AdminController {
 	}
 	// 숙소 검색
 	@PostMapping("/housesearch")
-	public String houseSearch() {
+	public String houseSearch(@RequestParam(value="pageNum" , required=false, defaultValue="1") int pageNum, @RequestParam("choice")String choice, @RequestParam("houseSearch")String search, Model model) {
+		
+		String c = null;
+		if(choice.equals("1")) {
+			c = "name";
+		}else if (choice.equals("2")) {
+			c = "address";
+		}else if (choice.equals("3")) {
+			c = "type";
+		}else {
+			c = "contact_number";
+		}
+		
+		model.addAttribute("choice", choice);
+		model.addAttribute("houseSearch", search);
+		hs.houseSearch(pageNum, c,search,model);
 		
 		return "admin/house/houseSearch";
 	}

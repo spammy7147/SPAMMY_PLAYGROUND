@@ -42,5 +42,17 @@
 			(select * from ACCOMMODATION order by reg_date desc)A)B where rn between #{s} and #{e}
     	
     </select>
+    
+    <!-- 조건에 맞는 숙소 수 가져오기 -->
+    <select id="selectSearchHouseCount" resultType="Integer">
+    	select count(*) from ACCOMMODATION where ${c} like '%'||#{search}||'%' order by reg_date desc
+    </select>
+    
+    <!-- 검색 숙소 가져오기 -->
+    <select id="houseSearchList" resultMap="accommodationMap">
+    	select B.* from(select rownum rn, A.* from
+			(select * from ACCOMMODATION where ${c} like '%'||#{search}||'%' order by reg_date desc)A)B where rn between #{s} and #{e}
+    </select>
+    
 
 </mapper>
