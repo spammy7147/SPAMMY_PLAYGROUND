@@ -1,5 +1,5 @@
 CREATE TABLE accommodation_photo(
-    accommodation_id NUMBER PRIMARY KEY,
+    accommodation_id NUMBER NOT NULL,
     photo_URL VARCHAR2(1000) NOT NULL,
     reg_date TIMESTAMP DEFAULT SYSDATE
 );

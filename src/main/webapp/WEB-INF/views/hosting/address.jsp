@@ -20,7 +20,7 @@
     <div class="row justify-content-center">
         <div class="col-xl-4 m-auto">
             <div class="card-body">
-                <form action="#" method="post">
+                <form action="${contextPath}/hosting/address" method="post">
                     <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                     <input type="text" class="form-control mb-3" id="country" name="country" placeholder="국가">
                     <input type="text" class="form-control mb-3" id="city" name="city" placeholder="시/도">
