@@ -78,7 +78,7 @@
                                         <div class="text-xs font-weight-bold text-info text-uppercase mb-1">
                                        	 	진행된 예약 수
                                        	 </div>
-                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${boardNum} 건</div>
+                                        <div class="h5 mb-0 font-weight-bold text-gray-800">${reservationNum} 건</div>
                                     </div>
                                     
                                 </div>

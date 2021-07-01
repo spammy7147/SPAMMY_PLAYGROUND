@@ -25,6 +25,9 @@ public interface IReservationService {
 
     void deleteReservationWithUser(Integer userId);
 
+    //총 예약 수 가져오기
+    public int numberOfReservation();
+    
     //예약정보 리스트 가져오기
     void reservationList(int pageNum, Model model);
 }

@@ -73,9 +73,9 @@
 										<tr>
 											<td>${dto.reservationId }</td>
 											<td>
-												<a href="#">${dto.name }</a>  <!-- 숙소명 -->
+												<a href="#">${dto.name }</a> 
 											</td>
-											<td>${dto.email }</td> <!-- 유저이메일 -->
+											<td>${dto.email }</td> 
 											<td>${dto.checkIn }</td>
 											<td>${dto.checkOut }</td>
 										</tr>
