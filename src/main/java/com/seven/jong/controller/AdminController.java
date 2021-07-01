@@ -13,6 +13,9 @@ import com.seven.jong.service.BoardService;
 import com.seven.jong.service.CsService;
 import com.seven.jong.service.hosting.HouseService;
 import com.seven.jong.service.QnaFileService;
+import com.seven.jong.service.hosting.IReservationService;
+import com.seven.jong.service.hosting.ReservationService;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
@@ -38,11 +41,16 @@ public class AdminController {
 	@Autowired CsService cs;
 	@Autowired BoardService bs;
 	@Autowired HouseService hs;
+	@Autowired IReservationService rs;
 	
 	//관리자 홈
 	@GetMapping("/home")
-	public String adminHome() {
+	public String adminHome(Model model) {
 		System.out.println("/admin/home => GET요청 ");
+		model.addAttribute("userNum",aus.numberOfUser() );
+		model.addAttribute("houseNum", hs.numberOfHouse() );
+		model.addAttribute("reservationNum", rs.numberOfReservation() );
+		model.addAttribute("boardNum", bs.numberOfBoard() );
 		return "admin/adminHome";
 	}
 	
@@ -90,10 +98,31 @@ public class AdminController {
 		return "admin/house/houseManage";
 	}
 	// 숙소 검색
-	@PostMapping("/house/housesearch")
-	public String houseSearch() {
+	@PostMapping("/housesearch")
+	public String houseSearch(@RequestParam(value="pageNum" , required=false, defaultValue="1") int pageNum, @RequestParam("choice")String choice, @RequestParam("houseSearch")String search, Model model) {
+		
+		String c = null;
+		if(choice.equals("1")) {
+			c = "name";
+		}else if (choice.equals("2")) {
+			c = "address";
+		}else if (choice.equals("3")) {
+			c = "type";
+		}else {
+			c = "contact_number";
+		}
+		
+		model.addAttribute("choice", choice);
+		model.addAttribute("houseSearch", search);
+		hs.houseSearch(pageNum, c,search,model);
 		
 		return "admin/house/houseSearch";
+	}
+	//숙소 삭제
+	@GetMapping("housedelete")
+	public String housedelete(@RequestParam(value="accommodationId")int accommodationId) {
+		hs.houseDelete(accommodationId);
+		return "redirect:housemanage";
 	}
 	
 	
@@ -103,15 +132,29 @@ public class AdminController {
 	
 	//예약 관리
 	@GetMapping("/bookingmanage")
-	public String bookingManage() { 
-		
+	public String bookingManage(@RequestParam(value="pageNum" , required=false, defaultValue="1") int pageNum, Model model) { 
+		rs.reservationList(pageNum, model);
 		return "admin/booking/bookingManage";
 	}
-	
-	@GetMapping("/board")
-	public String board() {
-		return "admin/board/boardAllList";
+	//예약검색
+	@PostMapping("bookingsearch")
+	public String bookingsearch(@RequestParam(value="pageNum" , required=false, defaultValue="1") int pageNum, @RequestParam("choice")String choice, @RequestParam("bookingSearch")String search, Model model) {
+		String c = null;
+		
+		if(choice.equals("1")) {
+			c = "reservation_id";
+		}else if (choice.equals("2")) {
+			c = "name";
+		}else {
+			c = "email";
+		}
+		
+		model.addAttribute("choice", choice);
+		model.addAttribute("bookingSearch", search);
+		rs.bookingSearch(pageNum, c,search,model);
+		return "admin/booking/bookingSearch";
 	}
+	
 	
 	
 	
