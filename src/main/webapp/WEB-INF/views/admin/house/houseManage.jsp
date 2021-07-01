@@ -96,14 +96,15 @@
 				<table width="100%">
 				<tr>
 					<th>
-						<form action="${contextPath }/admin/user/housesearch">
+						<form action="${contextPath }/admin/housesearch">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<div class="form-row align-items-center">
 							    <div class="col-auto my-1">
 									<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">검색옵션</label>
 									<select class="custom-select mr-sm-2" id="inlineFormCustomSelect"  name="choice">
-										<option value="1">이메일
-										<option value="2">이름
+										<option value="1">숙소명
+										<option value="2">주소
+										<option value="3">타입
 							      	</select>
 							      	
 							    </div>
@@ -124,7 +125,7 @@
 						<div class="col-auto my-1" align="right">
 							<form action="${contextPath }/user/register" id="frm">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-							<a class="btn btn-primary" onclick="formSubmit()">유저추가</a>
+							<a class="btn btn-primary" onclick="formSubmit()">숙소등록</a>
 						</form>
 						</div>
 					</th>
