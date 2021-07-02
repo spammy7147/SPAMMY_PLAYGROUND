@@ -49,14 +49,17 @@
 							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 								<tr>
+									<th>숙소번호</th>
 									<th width="40%">숙소명</th>
 									<th>주소</th>
 									<th>타입</th>
+									<th>전화번호</th>
+									<th width="85"></th>
 								</tr>
 								</thead>
 								<tfoot>
 								<tr>
-									<th colspan="3">
+									<th colspan="6">
 										<c:forEach var="pageNum" begin="1" end="${allPage }">
 											<a href="${contextPath }/admin/housemanage?pageNum=${pageNum}">${pageNum } </a>
 										</c:forEach>
@@ -69,17 +72,22 @@
 								<c:when test="${houseList.size() != 0 }">
 									<c:forEach var="dto" items="${houseList }">
 										<tr>
+											<td>${dto.accommodationId }</td>
 											<td>
 												<a href="#">${dto.name }</a>
 											</td>
 											<td>${dto.address }</td>
 											<td>${dto.type }</td>
+											<td>${dto.contactNumber }</td>
+											<td>
+												<a class="btn btn-danger" href="${contextPath }/admin/housedelete?accommodationId=${dto.accommodationId }">삭제</a>
+											</td>
 										</tr>
 									</c:forEach>
 								</c:when>
 								<c:otherwise>
 								<tr>
-									<th colspan="3"> 등록된 숙소가 없습니다.</th>
+									<th colspan="6"> 등록된 숙소가 없습니다.</th>
 								<tr>
 									</c:otherwise>
 									</c:choose>
@@ -96,20 +104,22 @@
 				<table width="100%">
 				<tr>
 					<th>
-						<form action="${contextPath }/admin/user/housesearch">
+						<form action="${contextPath }/admin/housesearch" method="post">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 							<div class="form-row align-items-center">
 							    <div class="col-auto my-1">
 									<label class="mr-sm-2 sr-only" for="inlineFormCustomSelect">검색옵션</label>
 									<select class="custom-select mr-sm-2" id="inlineFormCustomSelect"  name="choice">
-										<option value="1">이메일
-										<option value="2">이름
+										<option value="1">숙소명
+										<option value="2">주소
+										<option value="3">타입
+										<option value="4">전화번호
 							      	</select>
 							      	
 							    </div>
 							    <div class="col-auto my-1">
 								    <div class="custom-control custom-checkbox mr-sm-2">
-								        <input class="form-control" type="text" name="userSearch">
+								        <input class="form-control" type="text" name="houseSearch">
 								    </div>
 							    </div>
 							    <div class="col-auto my-1">
@@ -124,7 +134,7 @@
 						<div class="col-auto my-1" align="right">
 							<form action="${contextPath }/user/register" id="frm">
 							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
-							<a class="btn btn-primary" onclick="formSubmit()">유저추가</a>
+							<a class="btn btn-primary" onclick="formSubmit()">숙소등록</a>
 						</form>
 						</div>
 					</th>
