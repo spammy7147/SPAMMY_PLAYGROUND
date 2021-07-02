@@ -7,13 +7,19 @@
 
     <resultMap id="accommodationPhotoMap" type="com.seven.jong.VO.hosting.AccommodationPhotoVO" >
         <id property="accommodationId" column="accommodation_id"/>
-        <result property="photoURL" column="photoURL"/>
+        <result property="photoURL" column="photo_url"/>
+        <result property="regDate" column="reg_date"/>
     </resultMap>
 
     <insert id="addPhoto">
         INSERT INTO ACCOMMODATION_PHOTO (ACCOMMODATION_ID, PHOTO_URL)
         VALUES (#{accommodationId}, #{photoURL})
     </insert>
+
+    <select id="getPhotos" resultMap="accommodationPhotoMap">
+        SELECT * FROM ACCOMMODATION_PHOTO
+        WHERE ACCOMMODATION_ID=#{accommodationId}
+    </select>
 
 
 

@@ -13,7 +13,7 @@ public interface IAccommodationMapper {
     void addAccommodation(AccommodationVO accommodation);
 	AccommodationVO findForPhoto(AccommodationVO accommodationVO);
 	List<AccommodationVO> getAllByUserId(Integer userId);
-
+	AccommodationVO getOneById(Integer accommodationId);
     // 총 숙소 수 가져오기
  	public int selectHouseCount();
 
