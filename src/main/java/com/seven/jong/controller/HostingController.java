@@ -105,29 +105,7 @@ public class HostingController {
         accommodationService.getPhoto(accommodationId,url,response);
     }
 
-    @GetMapping("reservation/{reservationId}")
-    public String reservation(@PathVariable Integer reservationId, Model model){
-        model.addAttribute("reservation",reservationService.getReservationById(reservationId));
 
-        return "hosting/reservationInfo";
-    }
-
-    @PostMapping("/reservation/add")
-    public String reservationAdd(ReservationAddRequestDTO reservationAddRequestDTO, Authentication authentication){
-        reservationService.addReservation(reservationAddRequestDTO,authentication);
-        return "redirect:/hosting/accommodation/"+reservationAddRequestDTO.getAccommodationId();
-    }
-
-    @PostMapping("/reservation/modify")
-    public String reservationModify(ReservationAddRequestDTO reservationAddRequestDTO, Authentication authentication){
-        reservationService.updateReservation(reservationAddRequestDTO,authentication);
-        return "redirect:/hosting/accommodation/"+reservationAddRequestDTO.getAccommodationId();
-    }
-    @PostMapping("/reservation/delete/{reservationId}")
-    public String reservationDelete(@PathVariable Integer reservationId, Authentication authentication){
-        reservationService.deleteReservationWithId(reservationId);
-        return null;
-    }
 
 
 }
