@@ -9,6 +9,7 @@
 <body>
 <c:import url="../include/navbar.jsp"/>
 
+
 <div class="container p-5 m-auto">
     <div class="row justify-content-center">
         <div class="col-xl-8 m-auto">

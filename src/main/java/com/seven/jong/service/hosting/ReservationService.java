@@ -2,11 +2,14 @@ package com.seven.jong.service.hosting;
 
 import com.seven.jong.DTO.QnaDTO;
 import com.seven.jong.DTO.hosting.AccommodationDTO;
+import com.seven.jong.DTO.hosting.ReservationAddRequestDTO;
 import com.seven.jong.DTO.hosting.ReservationAdminDTO;
 import com.seven.jong.DTO.hosting.ReservationDTO;
 import com.seven.jong.VO.hosting.ReservationVO;
+import com.seven.jong.VO.security.UserSecurityVO;
 import com.seven.jong.repository.hosting.IReservationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -23,18 +26,26 @@ public class ReservationService implements IReservationService{
     }
 
     @Override
-    public void addReservation(ReservationVO reservationVO) {
+    public void addReservation(ReservationAddRequestDTO reservationAddRequestDTO, Authentication authentication) {
+        reservationMapper.addReservation(
+                ReservationVO.builder()
+                        .accommodationId(reservationAddRequestDTO.getAccommodationId())
+                        .userId(((UserSecurityVO)authentication.getPrincipal()).getUser().getUserId())
+                        .checkIn(reservationAddRequestDTO.getCheckIn())
+                        .checkOut(reservationAddRequestDTO.getCheckOut())
+                        .build()
+        );
 
     }
 
     @Override
-    public void updateReservation(ReservationVO reservationVO) {
+    public void updateReservation(ReservationAddRequestDTO reservationAddRequestDTO, Authentication authentication) {
 
     }
 
     @Override
     public ReservationVO getReservationById(Integer reservationId) {
-        return null;
+        return reservationMapper.getOneById(reservationId);
     }
 
     @Override
@@ -49,7 +60,7 @@ public class ReservationService implements IReservationService{
 
     @Override
     public void deleteReservationWithId(Integer reservationId) {
-
+        reservationMapper.deleteReservation(reservationId);
     }
 
     @Override
