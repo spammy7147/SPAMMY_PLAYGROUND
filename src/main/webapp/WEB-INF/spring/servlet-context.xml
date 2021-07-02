@@ -18,6 +18,7 @@
 	<resources mapping="/js/**" location="/resources/js/"/>
 	<resources mapping="/css/**" location="/resources/css/"/>
 	<resources mapping="/vendor/**" location="/resources/vendor/"/>
+	<resources mapping="/photo/**" location="file:C:\upload/"/>
 
 
 	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->

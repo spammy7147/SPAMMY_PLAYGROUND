@@ -30,14 +30,21 @@
         (ACCOMMODATION_SEQ.nextval,#{userId}, #{name}, #{address}, #{type}, #{maxNumberOfGuest},
          #{numberOfBedroom}, #{numberOfBed}, #{numberOfBathroom}, #{contactNumber}, #{price}, #{description})
     </insert>
+    <!-- UserId와 다른 숙소 정보를통해 (accommodationId가 autoIncreament라서 accommodationId를 가져오기 위한  매핑 -->
     <select id="findForPhoto" resultMap="accommodationMap">
         SELECT * FROM ACCOMMODATION WHERE USER_ID=#{userId} and NAME=#{name} and ADDRESS=#{address} and TYPE=#{type}
     </select>
+    <!-- 모든 숙소 정보 가져오기 -->
     <select id="getAllByUserId" resultMap="accommodationMap">
         SELECT * FROM ACCOMMODATION WHERE USER_ID=#{userId}
     </select>
 
-    <!-- 총 숙소 수 가져오기 -->
+    <!-- 하나의 숙소 가져오기 -->
+    <select id="getOneById" resultMap="accommodationMap">
+        SELECT * FROM ACCOMMODATION WHERE ACCOMMODATION_ID=#{accommodationId}
+    </select>
+
+    <!-- 총 숙소 갯수 가져오기 -->
     <select id="selectHouseCount" resultType="Integer">
     	select count(*) from ACCOMMODATION
     </select>
