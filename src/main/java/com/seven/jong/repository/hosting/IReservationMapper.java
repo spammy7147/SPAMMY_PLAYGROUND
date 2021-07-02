@@ -1,6 +1,7 @@
 package com.seven.jong.repository.hosting;
 
 import java.util.ArrayList;
+import java.util.List;
 
 import org.apache.ibatis.annotations.Param;
 
@@ -9,7 +10,13 @@ import com.seven.jong.VO.hosting.ReservationVO;
 
 public interface IReservationMapper {
 	
-	
+	void addReservation(ReservationVO reservationVO);
+	void updateReservation(ReservationVO reservationVO);
+	void deleteReservation(Integer reservationId);
+	ReservationVO getOneById(Integer reservationId);
+	List<ReservationVO> getAllByUser(Integer userId);
+	List<ReservationVO> getAllByAccommodation(Integer accommodationId);
+
 	//총 예약 수 받아오기
 	int reservationCount();
 

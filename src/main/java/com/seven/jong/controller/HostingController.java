@@ -2,10 +2,12 @@ package com.seven.jong.controller;
 
 import com.seven.jong.DTO.hosting.AccommodationAddressRequestDTO;
 import com.seven.jong.DTO.hosting.AccommodationHouseRequestDTO;
+import com.seven.jong.DTO.hosting.ReservationAddRequestDTO;
 import com.seven.jong.VO.hosting.AccommodationTempVO;
 import com.seven.jong.VO.hosting.AccommodationVO;
 import com.seven.jong.service.hosting.IAccommodationService;
 import com.seven.jong.service.hosting.IAccommodationTempService;
+import com.seven.jong.service.hosting.IReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
@@ -22,6 +24,7 @@ public class HostingController {
 
     IAccommodationTempService accommodationTempService;
     IAccommodationService accommodationService;
+    IReservationService reservationService;
     @Autowired
     public void setAccommodationTempService(IAccommodationTempService accommodationTempService) {
         this.accommodationTempService = accommodationTempService;
@@ -29,6 +32,10 @@ public class HostingController {
     @Autowired
     public void setAccommodationService(IAccommodationService accommodationService) {
         this.accommodationService = accommodationService;
+    }
+    @Autowired
+    public void setReservationService(IReservationService reservationService) {
+        this.reservationService = reservationService;
     }
 
     @GetMapping("/home")
@@ -97,4 +104,30 @@ public class HostingController {
     public void src(@PathVariable Integer accommodationId, @RequestParam String url, HttpServletResponse response){
         accommodationService.getPhoto(accommodationId,url,response);
     }
+
+    @GetMapping("reservation/{reservationId}")
+    public String reservation(@PathVariable Integer reservationId, Model model){
+        model.addAttribute("reservation",reservationService.getReservationById(reservationId));
+
+        return "hosting/reservationInfo";
+    }
+
+    @PostMapping("/reservation/add")
+    public String reservationAdd(ReservationAddRequestDTO reservationAddRequestDTO, Authentication authentication){
+        reservationService.addReservation(reservationAddRequestDTO,authentication);
+        return "redirect:/hosting/accommodation/"+reservationAddRequestDTO.getAccommodationId();
+    }
+
+    @PostMapping("/reservation/modify")
+    public String reservationModify(ReservationAddRequestDTO reservationAddRequestDTO, Authentication authentication){
+        reservationService.updateReservation(reservationAddRequestDTO,authentication);
+        return "redirect:/hosting/accommodation/"+reservationAddRequestDTO.getAccommodationId();
+    }
+    @PostMapping("/reservation/delete/{reservationId}")
+    public String reservationDelete(@PathVariable Integer reservationId, Authentication authentication){
+        reservationService.deleteReservationWithId(reservationId);
+        return null;
+    }
+
+
 }
