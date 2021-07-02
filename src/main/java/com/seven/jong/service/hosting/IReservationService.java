@@ -2,6 +2,8 @@ package com.seven.jong.service.hosting;
 
 import com.seven.jong.DTO.hosting.ReservationAddRequestDTO;
 import com.seven.jong.DTO.hosting.ReservationDTO;
+import com.seven.jong.DTO.hosting.ReservationInfoResponseDTO;
+import com.seven.jong.DTO.hosting.ReservationListResponseDTO;
 import com.seven.jong.VO.hosting.AccommodationVO;
 import com.seven.jong.VO.hosting.ReservationVO;
 
@@ -17,11 +19,11 @@ public interface IReservationService {
 
     void updateReservation(ReservationAddRequestDTO reservationAddRequestDTO, Authentication authentication);
 
-    ReservationVO getReservationById(Integer reservationId);
+    ReservationInfoResponseDTO getReservationById(Integer reservationId);
 
     ReservationVO getReservationByUser(Integer UserId);
 
-    List<ReservationVO> getAllReservations();
+    public List<ReservationListResponseDTO> getAllReservationsByUser(Authentication authentication);
 
     void deleteReservationWithId(Integer reservationId);
 

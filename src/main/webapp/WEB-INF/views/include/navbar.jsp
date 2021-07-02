@@ -40,7 +40,7 @@
                     <div class="dropdown-divider"></div>
                 </s:authorize>
                 <s:authorize access="isAuthenticated()">
-                    <a class="dropdown-item" href="#">숙소 예약</a> <!-- 임시로 만들어뒀습니다. -->
+                    <a class="dropdown-item" href="${contextPath}/reservation/home">여행</a> <!-- 임시로 만들어뒀습니다. -->
                     <a class="dropdown-item" href="${contextPath}/hosting/home">호스트 되기</a>
                     <a class="dropdown-item" href="${contextPath }/board/boardalllist">게시판</a>
                     <div class="dropdown-divider"></div>

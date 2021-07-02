@@ -18,7 +18,7 @@
 
           <c:forEach var="r" items="${reservation}">
             <tr>
-              <td><a href="${contextPath}/hosting/accommodation/${r.reservationId}" class="text-decoration-none">${r.name}</a></td>
+              <td><a href="${contextPath}/reservation/${r.reservationId}" class="text-decoration-none">${r.name}</a></td>
             </tr>
           </c:forEach>
 

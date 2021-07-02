@@ -3,8 +3,9 @@ package com.seven.jong.DTO.hosting;
 import lombok.Getter;
 import lombok.Setter;
 import lombok.ToString;
+import org.springframework.format.annotation.DateTimeFormat;
 
-import java.time.LocalDateTime;
+import java.time.LocalDate;
 
 @Setter
 @Getter
@@ -13,6 +14,8 @@ public class ReservationAddRequestDTO {
 
     private Integer accommodationId;
     private Integer numberOfGuest;
-    private LocalDateTime checkIn;
-    private LocalDateTime checkOut;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate checkIn;
+    @DateTimeFormat(pattern = "yyyy-MM-dd")
+    private LocalDate checkOut;
 }
