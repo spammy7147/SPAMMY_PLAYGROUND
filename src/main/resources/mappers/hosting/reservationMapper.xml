@@ -7,12 +7,52 @@
 
     <resultMap id="reservationMap" type="com.seven.jong.VO.hosting.ReservationVO" >
         <id property="reservationId" column="reservation_id"/>
+        <result property="accommodationId" column="accommodation_id"/>
         <result property="userId" column="user_id"/>
-        <result property="hostingId" column="hosting_id"/>
-        <result property="numberOfGuest" column="number_of_guest"/>
-        <result property="start" column="start"/>
-        <result property="end" column="end"/>
+        <result property="numberOfGuest" column="number_guest"/>
+        <result property="checkIn" column="check_in"/>
+        <result property="checkOut" column="check_out"/>
+        <result property="regDate" column="reg_date"/>
     </resultMap>
+    
+    <resultMap id="reservationAdmin" type="com.seven.jong.DTO.hosting.ReservationAdminDTO" >
+        <id property="reservationId" column="reservation_id"/>
+        <result property="name" column="name"/>
+        <result property="email" column="email"/>
+        <result property="numberOfGuest" column="number_guest"/>
+        <result property="checkIn" column="check_in"/>
+        <result property="checkOut" column="check_out"/>
+        <result property="regDate" column="reg_date"/>
+    </resultMap>
+
+	<!-- 총 예약 수 받아오기 -->
+	<select id="reservationCount" resultType="Integer">
+		select count(*) from RESERVATION
+	</select>
+	
+	<!-- 예약 정보 가져오기 -->
+	<select id="reservationList" resultMap="reservationAdmin">
+		select B.* from(select rownum rn, A.* from
+			(SELECT RES.reservation_id, AC.name,US.email, RES.number_guest, RES.check_in, RES.check_out, RES.REG_DATE
+			FROM RESERVATION RES, ACCOMMODATION AC, AIR_USER US
+			WHERE RES.ACCOMMODATION_ID = AC.ACCOMMODATION_ID AND RES.USER_ID = US.USER_ID order by RESERVATION_ID desc)A)B where rn between #{s} and #{e}
+	</select>
+	
+	<!-- 검색 조건에 맞는 예약정보 수 -->
+	<select id="SearchReservationCount" resultType="Integer">
+		select count(*) from (SELECT RES.reservation_id, AC.name,US.email, RES.number_guest, RES.check_in, RES.check_out, RES.REG_DATE
+			FROM RESERVATION RES, ACCOMMODATION AC, AIR_USER US
+			WHERE RES.ACCOMMODATION_ID = AC.ACCOMMODATION_ID AND RES.USER_ID = US.USER_ID) where ${c} like '%'||#{search}||'%' order by reg_date desc
+	</select>
+	
+	<!-- 검색 조건에 맞는 예약 정보 리스트 -->
+	<select id="ReservationSearchList" resultMap="reservationAdmin">
+		select B.* from(select rownum rn, A.* from
+			(select * from (SELECT RES.reservation_id, AC.name,US.email, RES.number_guest, RES.check_in, RES.check_out, RES.REG_DATE
+			FROM RESERVATION RES, ACCOMMODATION AC, AIR_USER US
+			WHERE RES.ACCOMMODATION_ID = AC.ACCOMMODATION_ID AND RES.USER_ID = US.USER_ID) where ${c} like '%'||#{search}||'%' order by RESERVATION_ID desc)A)B where rn between #{s} and #{e}
+	</select>
+
 
 
 </mapper>

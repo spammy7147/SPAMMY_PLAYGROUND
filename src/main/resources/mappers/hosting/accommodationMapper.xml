@@ -16,7 +16,6 @@
         <result property="maxNumberOfGuest" column="max_number_guest"/>
         <result property="numberOfBedroom" column="number_bedroom"/>
         <result property="numberOfBed" column="number_bed"/>
-        <result property="typeOfBed" column="type_bed"/>
         <result property="numberOfBathroom" column="number_bathroom"/>
         <result property="contactNumber" column="contact_number"/>
         <result property="price" column="price"/>
@@ -55,5 +54,21 @@
 			(select * from ACCOMMODATION order by reg_date desc)A)B where rn between #{s} and #{e}
     	
     </select>
+    
+    <!-- 조건에 맞는 숙소 수 가져오기 -->
+    <select id="selectSearchHouseCount" resultType="Integer">
+    	select count(*) from ACCOMMODATION where ${c} like '%'||#{search}||'%' order by reg_date desc
+    </select>
+    
+    <!-- 검색 숙소 가져오기 -->
+    <select id="houseSearchList" resultMap="accommodationMap">
+    	select B.* from(select rownum rn, A.* from
+			(select * from ACCOMMODATION where ${c} like '%'||#{search}||'%' order by reg_date desc)A)B where rn between #{s} and #{e}
+    </select>
+    
+    <delete id="houseDelete">
+    	DELETE FROM ACCOMMODATION WHERE ACCOMMODATION_ID = #{accommodationId}
+    </delete>
+    
 
 </mapper>

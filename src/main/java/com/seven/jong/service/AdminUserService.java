@@ -8,6 +8,8 @@ import com.seven.jong.DTO.BoardDTO;
 import com.seven.jong.DTO.user.UserRequestDTO;
 
 public interface AdminUserService {
+	//총 유저수
+	public int numberOfUser();
 	
 	public void pageUserInfo(int pageNum, Model model);
 	

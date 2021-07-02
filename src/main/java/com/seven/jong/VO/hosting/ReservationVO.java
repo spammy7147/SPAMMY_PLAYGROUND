@@ -12,11 +12,12 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 public class ReservationVO {
 
-    private Integer reservationId;
+	private Integer reservationId;
+    private Integer accommodationId;
     private Integer userId;
-    private Integer hostingId;
     private Integer numberOfGuest;
-    private LocalDateTime start;
-    private LocalDateTime end;
+    private LocalDateTime checkIn;
+    private LocalDateTime checkOut;
+    private LocalDateTime regDate;
 
 }
