@@ -1,5 +1,6 @@
 package com.seven.jong.service.hosting;
 
+import com.seven.jong.DTO.hosting.ReservationAddRequestDTO;
 import com.seven.jong.DTO.hosting.ReservationDTO;
 import com.seven.jong.VO.hosting.AccommodationVO;
 import com.seven.jong.VO.hosting.ReservationVO;
@@ -7,13 +8,14 @@ import com.seven.jong.VO.hosting.ReservationVO;
 import java.util.ArrayList;
 import java.util.List;
 
+import org.springframework.security.core.Authentication;
 import org.springframework.ui.Model;
 
 public interface IReservationService {
 
-    void addReservation(ReservationVO reservationVO);
+    void addReservation(ReservationAddRequestDTO reservationAddRequestDTO, Authentication authentication);
 
-    void updateReservation(ReservationVO reservationVO);
+    void updateReservation(ReservationAddRequestDTO reservationAddRequestDTO, Authentication authentication);
 
     ReservationVO getReservationById(Integer reservationId);
 

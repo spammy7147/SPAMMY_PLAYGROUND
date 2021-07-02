@@ -2,6 +2,7 @@ package com.seven.jong.VO.hosting;
 
 import lombok.*;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Getter
@@ -13,6 +14,7 @@ public class AccommodationPhotoVO {
 
     private Integer accommodationId;
     private String photoURL;
+    private LocalDateTime regDate;
 
 
 }
