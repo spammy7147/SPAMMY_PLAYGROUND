@@ -77,11 +77,12 @@
                 <div class="card-body">
                     <div class="row no-gutters align-items-center">
                         <div class="col mr-2">
-                            <form action="#" method="post">
+                            <form action="${contextPath}/hosting/reservation/add" method="post">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                                <input type="hidden" name="accommodationId" value="${accommodation.accommodationId}" />
                                 <input type="date" class="form-control mb-3" name="checkIn" placeholder="체크인">
                                 <input type="date" class="form-control mb-3" name="checkOut" placeholder="체크아웃">
-                                <input type="text" class="form-control mb-3" id="guest" name="guest" placeholder="게스트">
+                                <input type="text" class="form-control mb-3" id="guest" name="numberOfGuest" placeholder="게스트">
                                 <input type="submit" class="btn btn-outline-primary" value="예약하러 가기">
                             </form>
                         </div>
