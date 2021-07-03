@@ -25,6 +25,7 @@
      -->
 
     <http>
+        <intercept-url pattern="/reservation/**" access="isAuthenticated()"/>
         <intercept-url pattern="/user/register" access="permitAll()"/>
         <intercept-url pattern="/user/login" access="isAnonymous()"/>
         <intercept-url pattern="/user/**" access="isAuthenticated()"/>

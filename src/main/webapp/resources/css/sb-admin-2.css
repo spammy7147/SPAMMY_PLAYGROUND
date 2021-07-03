@@ -2927,6 +2927,27 @@ fieldset:disabled a.btn {
   pointer-events: none;
 }
 
+
+.btn-trans {
+  font-weight: 400;
+  color: #4e73df;
+  text-decoration: none;
+}
+
+.btn-trans:hover {
+  color: #224abe;
+  text-decoration: #e12717;
+}
+
+.btn-trans:focus, .btn-trans.focus {
+  text-decoration: #e12717;
+}
+
+.btn-trans:disabled, .btn-trans.disabled {
+  color: #858796;
+  pointer-events: none;
+}
+
 .btn-lg, .btn-group-lg > .btn {
   padding: 0.5rem 1rem;
   font-size: 1.25rem;

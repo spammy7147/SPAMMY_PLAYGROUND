@@ -15,6 +15,7 @@ public interface IAccommodationMapper {
 	AccommodationVO findForPhoto(AccommodationVO accommodationVO);
 	List<AccommodationVO> getAllByUserId(Integer userId);
 	AccommodationVO getOneById(Integer accommodationId);
+	void deleteAccommodation(Integer accommodationId);
     // 총 숙소 수 가져오기
  	public int selectHouseCount();
 
