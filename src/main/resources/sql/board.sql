@@ -10,3 +10,10 @@ create table air_board(
 create sequence air_board_seq
 START WITH 1
 INCREMENT BY 1;  
+
+
+ALTER TABLE air_board
+    ADD CONSTRAINT FK_board
+    FOREIGN KEY (Writer)
+    REFERENCES air_user (email)
+    ON DELETE CASCADE;
