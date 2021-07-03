@@ -1,11 +1,11 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../include/taglib.jsp"%>
+<%@ include file="../../include/taglib.jsp"%>
 
 
 <html>
 <head>
     <title>AirBnD - 주소 </title>
-    <c:import url="../include/header.jsp" />
+    <c:import url="../../include/header.jsp" />
 
 
     <script type="text/javascript" src="//dapi.kakao.com/v2/maps/sdk.js?appkey=72674637f140df9a7167e5cf81c5912b&libraries=services"></script>
@@ -13,7 +13,7 @@
 
 </head>
 <body>
-<c:import url="../include/navbar.jsp"/>
+<c:import url="../../include/navbar.jsp"/>
 
 
 <div class="container p-5 m-auto">
