@@ -17,10 +17,20 @@
                 <table class="table table-bordered text-center" id="dataTable" width="100%" cellspacing="0">
 
                     <c:forEach var="a" items="${accommodations}">
-                    <tr>
-                        <td><a href="${contextPath}/hosting/accommodation/${a.accommodationId}" class="text-decoration-none">${a.name}</a></td>
-                    </tr>
+                        <tr>
+                            <td>
+                                <div class="row no-gutters align-items-center">
+                                    <div class="col-10">
+                                        <a href="${contextPath}/hosting/accommodation/${a.accommodationId}" class="text-decoration-none">${a.name}</a>
+                                    </div>
+                                    <div class="col-2 pl-5">
+                                        <a href="${contextPath}/hosting/accommodation/delete/${a.accommodationId}" class="bi bi-x-lg btn btn-trans"></a>
+                                    </div>
+                                </div>
+                            </td>
+                        </tr>
                     </c:forEach>
+
 
                 </table>
                 <div class="d-sm-flex align-items-center justify-content-between mb-4">

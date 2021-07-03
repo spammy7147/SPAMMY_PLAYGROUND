@@ -23,9 +23,9 @@ public interface IReservationService {
 
     ReservationVO getReservationByUser(Integer UserId);
 
-    public List<ReservationListResponseDTO> getAllReservationsByUser(Authentication authentication);
+    List<ReservationListResponseDTO> getAllReservationsByUser(Authentication authentication);
 
-    void deleteReservationWithId(Integer reservationId);
+    boolean deleteReservation(Integer reservationId, Authentication authentication);
 
     void deleteReservationWithUser(Integer userId);
 

@@ -2,7 +2,6 @@ package com.seven.jong.controller;
 
 import com.seven.jong.DTO.hosting.AccommodationAddressRequestDTO;
 import com.seven.jong.DTO.hosting.AccommodationHouseRequestDTO;
-import com.seven.jong.DTO.hosting.ReservationAddRequestDTO;
 import com.seven.jong.VO.hosting.AccommodationTempVO;
 import com.seven.jong.VO.hosting.AccommodationVO;
 import com.seven.jong.service.hosting.IAccommodationService;
@@ -14,6 +13,7 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartHttpServletRequest;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 import javax.servlet.http.HttpServletResponse;
 import java.util.List;
@@ -43,7 +43,7 @@ public class HostingController {
         List<AccommodationVO> accommodationVOList = accommodationService.getAllByUserId(authentication);
         model.addAttribute("accommodations", accommodationVOList);
         System.out.println("/hosting/home => GET 요청");
-        return "/hosting/hostHome";
+        return "/hosting/accommodationList";
     }
 
     @GetMapping("/address")
@@ -105,7 +105,21 @@ public class HostingController {
         accommodationService.getPhoto(accommodationId,url,response);
     }
 
+    @GetMapping("/accommodation/delete/{accommodationId}")
+    public String accommodationDelete(@PathVariable Integer accommodationId, Authentication authentication, RedirectAttributes redirectAttributes) {
+        System.out.println("/hosting/accommodation/delete"+accommodationId +" => GET 요청");
+        if(accommodationService.deleteAccommodation(accommodationId,authentication)){
+            redirectAttributes.addFlashAttribute("result","success");
+        }
+        return "redirect:/hosting/home";
+    }
 
+    @GetMapping("/accommodation/update/{accommodationId}")
+    public String accommodationUpdate(@PathVariable Integer accommodationId, Model model) {
+        System.out.println("/hosting/accommodation/update"+accommodationId +" => GET 요청");
+        model.addAttribute("accommodation",accommodationService.getOneById(accommodationId));
+        return "hosting/accommodation";
+    }
 
 
 }

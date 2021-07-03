@@ -20,6 +20,7 @@ public interface IAccommodationService {
 
     void getPhoto(Integer accommodationId,String url, HttpServletResponse response);
 
-    //숙소 리스트
-    public void houseList(int pageNum, Model model);
+    boolean deleteAccommodation(Integer accommodationId, Authentication authentication);
+
+
 }

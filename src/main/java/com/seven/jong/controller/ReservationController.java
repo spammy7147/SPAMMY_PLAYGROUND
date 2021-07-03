@@ -7,6 +7,7 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
 @RequestMapping("/reservation")
@@ -45,9 +46,12 @@ public class ReservationController {
         return "redirect:/hosting/accommodation/"+reservationAddRequestDTO.getAccommodationId();
     }
 
-    @PostMapping("/delete/{reservationId}")
-    public String reservationDelete(@PathVariable Integer reservationId, Authentication authentication){
-        reservationService.deleteReservationWithId(reservationId);
-        return null;
+    @GetMapping("/delete/{reservationId}")
+    public String reservationDelete(@PathVariable Integer reservationId, Authentication authentication, RedirectAttributes redirectAttributes) {
+        System.out.println("/hosting/accommodation/delete"+reservationId +" => GET 요청");
+        if(reservationService.deleteReservation(reservationId,authentication)){
+            redirectAttributes.addFlashAttribute("result","success");
+        }
+        return "redirect:/reservation/home";
     }
 }

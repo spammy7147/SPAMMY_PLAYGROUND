@@ -11,6 +11,7 @@ import com.seven.jong.repository.hosting.IAccommodationMapper;
 import com.seven.jong.repository.hosting.IReservationMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 
@@ -97,9 +98,14 @@ public class ReservationService implements IReservationService{
     }
 
     @Override
-    public void deleteReservationWithId(Integer reservationId) {
-        reservationMapper.deleteReservation(reservationId);
+    public boolean deleteReservation(Integer reservationId, Authentication authentication) {
+        if(reservationMapper.getOneById(reservationId).getUserId().equals(((UserSecurityVO) authentication.getPrincipal()).getUser().getUserId()) || authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
+            reservationMapper.deleteReservation(reservationId);
+            return true;
+        }
+        return false;
     }
+
 
     @Override
     public void deleteReservationWithUser(Integer userId) {

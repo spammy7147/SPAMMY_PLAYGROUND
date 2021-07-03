@@ -11,6 +11,7 @@ import com.seven.jong.repository.hosting.IAccommodationPhotoMapper;
 import com.seven.jong.service.FilePath;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
 import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
@@ -114,21 +115,11 @@ public class AccommodationService implements IAccommodationService {
     }
 
     @Override
-    public void houseList(int pageNum, Model model) {
-        int allCount = accommodationMapper.selectHouseCount(); // 총 숙소수 얻어오기
-        int pageLetter = 5; //한 페이지에 표현 할 개수
-        int totalPage = allCount /pageLetter; //총 페이지
-        if(allCount % pageLetter != 0) {
-            totalPage += 1;
+    public boolean deleteAccommodation(Integer accommodationId, Authentication authentication) {
+        if(accommodationMapper.getOneById(accommodationId).getUserId().equals(((UserSecurityVO) authentication.getPrincipal()).getUser().getUserId()) || authentication.getAuthorities().contains(new SimpleGrantedAuthority("ROLE_ADMIN"))){
+                accommodationMapper.deleteAccommodation(accommodationId);
+                return true;
         }
-        int end = pageNum * pageLetter;
-        int start = end + 1 - pageLetter;
-
-        ArrayList<AccommodationDTO> houseList = accommodationMapper.houseList(start,end);
-
-        model.addAttribute("allPage", totalPage);
-        model.addAttribute("houseList", houseList);
-
+        return false;
     }
-
 }

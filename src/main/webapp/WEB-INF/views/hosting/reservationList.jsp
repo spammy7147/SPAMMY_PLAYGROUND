@@ -18,9 +18,19 @@
 
           <c:forEach var="r" items="${reservation}">
             <tr>
-              <td><a href="${contextPath}/reservation/${r.reservationId}" class="text-decoration-none">${r.name}</a></td>
+              <td>
+                <div class="row no-gutters align-items-center">
+                  <div class="col-10">
+                    <a href="${contextPath}/reservation/${r.reservationId}" class="text-decoration-none">${r.name}</a>
+                  </div>
+                  <div class="col-2 pl-5">
+                    <a href="${contextPath}/reservation/delete/${r.reservationId}" class="bi bi-x-lg btn btn-trans"></a>
+                  </div>
+                </div>
+              </td>
             </tr>
           </c:forEach>
+
 
         </table>
         <div class="d-sm-flex align-items-center justify-content-between mb-4">
@@ -32,5 +42,13 @@
     </div>
   </div>
 </div>
+
+<script>
+  const result = '${result}'
+  if(result == "success"){
+    alert("삭제완료")
+  }
+
+</script>
 </body>
 </html>
