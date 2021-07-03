@@ -43,7 +43,7 @@ public class HostingController {
         List<AccommodationVO> accommodationVOList = accommodationService.getAllByUserId(authentication);
         model.addAttribute("accommodations", accommodationVOList);
         System.out.println("/hosting/home => GET 요청");
-        return "/hosting/accommodationList";
+        return "hosting/accommodation/accommodationList";
     }
 
     @GetMapping("/address")
@@ -53,7 +53,7 @@ public class HostingController {
         if(accommodationTempVO != null){
             model.addAttribute("accommodationTempVO", accommodationTempVO);
         }
-        return "/hosting/address";
+        return "hosting/accommodation/address";
     }
 
     @PostMapping("/address")
@@ -61,7 +61,7 @@ public class HostingController {
         System.out.println("/hosting/address => POST 요청");
         System.out.println(accommodationAddressRequestDTO);
         accommodationTempService.addAddress(accommodationAddressRequestDTO, authentication);
-        return "redirect:/hosting/house";
+        return "hosting/accommodation/house";
     }
 
     @GetMapping("/house")
@@ -71,7 +71,7 @@ public class HostingController {
         if(accommodationTempVO != null){
             model.addAttribute("accommodationTempVO", accommodationTempVO);
         }
-        return "hosting/house";
+        return "hosting/accommodation/house";
     }
 
     @PostMapping("/house")
@@ -79,12 +79,12 @@ public class HostingController {
         System.out.println("/hosting/house => POST 요청");
         System.out.println(accommodationHouseRequestDTO);
         accommodationTempService.addHouse(accommodationHouseRequestDTO, authentication);
-        return "redirect:/hosting/photo";
+        return "hosting/accommodation/photo";
     }
     @GetMapping("/photo")
     public String photo() {
         System.out.println("/hosting/photo => GET 요청");
-        return "hosting/photo";
+        return "hosting/accommodation/photo";
     }
 
     @PostMapping("/photo")
@@ -97,7 +97,7 @@ public class HostingController {
     public String accommodation(@PathVariable Integer accommodationId, Model model) {
         System.out.println("/hosting/accommodation => GET 요청");
         model.addAttribute("accommodation",accommodationService.getOneById(accommodationId));
-        return "hosting/accommodation";
+        return "hosting/accommodation/accommodation";
     }
 
     @GetMapping("/file/{accommodationId}")
@@ -116,10 +116,11 @@ public class HostingController {
 
     @GetMapping("/accommodation/update/{accommodationId}")
     public String accommodationUpdate(@PathVariable Integer accommodationId, Model model) {
-        System.out.println("/hosting/accommodation/update"+accommodationId +" => GET 요청");
+        System.out.println("/hosting/accommodation/update/"+accommodationId +" => GET 요청");
         model.addAttribute("accommodation",accommodationService.getOneById(accommodationId));
-        return "hosting/accommodation";
+        return "hosting/accommodation/updateAccommodation";
     }
+
 
 
 }

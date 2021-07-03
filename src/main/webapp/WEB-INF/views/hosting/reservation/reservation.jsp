@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../include/taglib.jsp"%>
+<%@ include file="../../include/taglib.jsp"%>
 
 <html>
 <head>
     <title>AirBnD - 호스팅 </title>
-    <c:import url="../include/header.jsp" />
+    <c:import url="../../include/header.jsp" />
 </head>
 <body>
-<c:import url="../include/navbar.jsp"/>
+<c:import url="../../include/navbar.jsp"/>
 
 <div class="container-fluid">
     <%--    이미지 --%>

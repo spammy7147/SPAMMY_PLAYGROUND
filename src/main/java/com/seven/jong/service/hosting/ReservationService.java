@@ -1,9 +1,6 @@
 package com.seven.jong.service.hosting;
 
-import com.seven.jong.DTO.hosting.ReservationAddRequestDTO;
-import com.seven.jong.DTO.hosting.ReservationAdminDTO;
-import com.seven.jong.DTO.hosting.ReservationInfoResponseDTO;
-import com.seven.jong.DTO.hosting.ReservationListResponseDTO;
+import com.seven.jong.DTO.hosting.*;
 import com.seven.jong.VO.hosting.AccommodationVO;
 import com.seven.jong.VO.hosting.ReservationVO;
 import com.seven.jong.VO.security.UserSecurityVO;
@@ -53,8 +50,17 @@ public class ReservationService implements IReservationService{
     }
 
     @Override
-    public void updateReservation(ReservationAddRequestDTO reservationAddRequestDTO, Authentication authentication) {
+    public void updateReservation(ReservationUpdateDTO reservationUpdateDTO, Authentication authentication) {
 
+
+        reservationMapper.updateReservation(
+                ReservationVO.builder()
+                        .reservationId(reservationUpdateDTO.getReservationId())
+                        .numberOfGuest(reservationUpdateDTO.getNumberOfGuest())
+                        .checkIn(reservationUpdateDTO.getCheckIn())
+                        .checkOut(reservationUpdateDTO.getCheckOut())
+                        .build()
+        );
     }
 
     @Override
@@ -69,11 +75,6 @@ public class ReservationService implements IReservationService{
         reservationInfoResponseDTO.setRegDate(reservationVO.getRegDate());
         reservationInfoResponseDTO.setAccommodation(accommodationService.getOneById(reservationVO.getAccommodationId()));
         return reservationInfoResponseDTO;
-    }
-
-    @Override
-    public ReservationVO getReservationByUser(Integer UserId) {
-        return null;
     }
 
     @Override
@@ -106,11 +107,6 @@ public class ReservationService implements IReservationService{
         return false;
     }
 
-
-    @Override
-    public void deleteReservationWithUser(Integer userId) {
-
-    }
     
     //총 예약 수 가져오기
     @Override

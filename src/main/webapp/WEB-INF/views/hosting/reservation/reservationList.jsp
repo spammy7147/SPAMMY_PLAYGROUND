@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../include/taglib.jsp"%>
+<%@ include file="../../include/taglib.jsp"%>
 
 <html>
 <head>
   <title>AirBnD - 예약 관리 </title>
-  <c:import url="../include/header.jsp" />
+  <c:import url="../../include/header.jsp" />
 </head>
 <body>
-<c:import url="../include/navbar.jsp"/>
+<c:import url="../../include/navbar.jsp"/>
 
 
 <div class="container p-5 m-auto">
@@ -23,7 +23,10 @@
                   <div class="col-10">
                     <a href="${contextPath}/reservation/${r.reservationId}" class="text-decoration-none">${r.name}</a>
                   </div>
-                  <div class="col-2 pl-5">
+                  <div class="col-1">
+                    <a href="${contextPath}/reservation/update/${r.reservationId}" class="bi bi-pencil-square btn btn-trans"></a>
+                  </div>
+                  <div class="col-1">
                     <a href="${contextPath}/reservation/delete/${r.reservationId}" class="bi bi-x-lg btn btn-trans"></a>
                   </div>
                 </div>

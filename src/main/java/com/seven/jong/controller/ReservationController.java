@@ -1,6 +1,7 @@
 package com.seven.jong.controller;
 
 import com.seven.jong.DTO.hosting.ReservationAddRequestDTO;
+import com.seven.jong.DTO.hosting.ReservationUpdateDTO;
 import com.seven.jong.service.hosting.IReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
@@ -23,14 +24,14 @@ public class ReservationController {
         System.out.println("/reservation/" + reservationId + " => GET 요청");
         model.addAttribute("reservation",reservationService.getReservationById(reservationId));
 
-        return "hosting/reservation";
+        return "hosting/reservation/reservation";
     }
     @GetMapping("/home")
     public String reservation(Model model, Authentication authentication){
         System.out.println("/reservation/home => GET 요청");
         model.addAttribute("reservation",reservationService.getAllReservationsByUser(authentication));
 
-        return "hosting/reservationList";
+        return "hosting/reservation/reservationList";
     }
 
     @PostMapping("/add")
@@ -40,10 +41,17 @@ public class ReservationController {
         return "redirect:/hosting/accommodation/"+reservationAddRequestDTO.getAccommodationId();
     }
 
-    @PostMapping("/modify")
-    public String reservationModify(ReservationAddRequestDTO reservationAddRequestDTO, Authentication authentication){
-        reservationService.updateReservation(reservationAddRequestDTO,authentication);
-        return "redirect:/hosting/accommodation/"+reservationAddRequestDTO.getAccommodationId();
+    @GetMapping("/update/{reservationId}")
+    public String reservationUpdate(@PathVariable Integer reservationId, Authentication authentication, Model model) {
+        System.out.println("/hosting/accommodation/delete"+reservationId +" => GET 요청");
+        model.addAttribute("reservation",reservationService.getReservationById(reservationId));
+
+        return "/hosting/reservation/updateReservation";
+    }
+    @PostMapping("/update/{reservationId}")
+    public String reservationUpdate(ReservationUpdateDTO reservationUpdateDTO, Authentication authentication){
+        reservationService.updateReservation(reservationUpdateDTO,authentication);
+        return "redirect:/reservation/"+reservationUpdateDTO.getReservationId();
     }
 
     @GetMapping("/delete/{reservationId}")

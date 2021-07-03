@@ -1,13 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8" pageEncoding="UTF-8"%>
-<%@ include file="../include/taglib.jsp"%>
+<%@ include file="../../include/taglib.jsp"%>
 
 <html>
 <head>
     <title>AirBnD - 호스팅 </title>
-    <c:import url="../include/header.jsp" />
+    <c:import url="../../include/header.jsp" />
 </head>
 <body>
-<c:import url="../include/navbar.jsp"/>
+<c:import url="../../include/navbar.jsp"/>
 
 <div class="container-fluid">
 <%--    이미지 --%>
@@ -80,9 +80,9 @@
                             <form action="${contextPath}/reservation/add" method="post">
                                 <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
                                 <input type="hidden" name="accommodationId" value="${accommodation.accommodationId}" />
-                                <input type="date" class="form-control mb-3" name="checkIn" placeholder="체크인">
-                                <input type="date" class="form-control mb-3" name="checkOut" placeholder="체크아웃">
-                                <input type="text" class="form-control mb-3" id="guest" name="numberOfGuest" placeholder="게스트">
+                                <input type="date" class="form-control mb-3" name="checkIn" value="${reservation.checkIn}" placeholder="체크인">
+                                <input type="date" class="form-control mb-3" name="checkOut" value="${reservation.checkOut}" placeholder="체크아웃">
+                                <input type="text" class="form-control mb-3" id="guest" name="numberOfGuest" value="${reservation.numberOfGuest}" placeholder="게스트">
                                 <input type="submit" class="btn btn-outline-primary" value="예약하러 가기">
                             </form>
                         </div>
