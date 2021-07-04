@@ -12,6 +12,7 @@
         <result property="name" column="name"/>
         <result property="birth" column="birth"/>
         <result property="phone" column="phone"/>
+        <result property="isAccountLocked" column="isAccountLocked"/>
         <result property="regDate" column="reg_date"/>
     </resultMap>
     
@@ -47,13 +48,27 @@
 	<select id="getUserByEmail" resultMap="UserMap">
 		select * from AIR_USER where EMAIL= #{email}
     </select>
+    
+    <!-- 유저 정지 -->
+    <update id="stopUser">
+    	UPDATE AIR_USER SET AIR_USER.ISACCOUNTLOCKED = 1 WHERE user_id=#{userId}
+    </update>
+    <!-- 유저 활성화 -->
+    <update id="startUser">
+    	UPDATE AIR_USER SET AIR_USER.ISACCOUNTLOCKED = 0 WHERE user_id=#{userId}
+    </update>
+    
     <!-- 유저 삭제 -->
     <delete id="deleteUser">
         DELETE FROM AIR_USER
         WHERE USER_ID =#{userId}
     </delete>
-
-
+    <!-- 유저 삭제 -->
+    <delete id="delete">
+        DELETE FROM AIR_USER
+        WHERE USER_ID =#{userId}
+    </delete>
+    
     <!-- 요청 페이지 유저 가져오기 -->
     <select id="pageUserInfo" resultMap="UserMap">
     	select B.* from(select rownum rn, A.* from
@@ -63,7 +78,6 @@
     <!-- 하나의 유저 정보 가져오기 -->
     <select id="info" resultMap="UserMap">
 		select * from air_user where user_id=#{userId}
-
 	</select>
 	
 	<!-- 유저정보 수정 -->

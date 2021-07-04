@@ -34,7 +34,7 @@
 		<h3>고객센터</h3>
 		<hr>
 		<ul>
-			<li><a href="customerservice">F & A</a></li>
+			<li><a href="customerservice">FAQ</a></li>
 			<li><a href="customerqna">문의하기</a></li>
 		</ul>
 	</div>
