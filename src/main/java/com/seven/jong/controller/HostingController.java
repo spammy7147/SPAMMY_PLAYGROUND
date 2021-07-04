@@ -2,6 +2,7 @@ package com.seven.jong.controller;
 
 import com.seven.jong.DTO.common.PageCreator;
 import com.seven.jong.DTO.common.PageDTO;
+import com.seven.jong.DTO.common.SearchDTO;
 import com.seven.jong.DTO.hosting.AccommodationAddressRequestDTO;
 import com.seven.jong.DTO.hosting.AccommodationHouseRequestDTO;
 import com.seven.jong.VO.hosting.AccommodationTempVO;
@@ -11,6 +12,7 @@ import com.seven.jong.service.hosting.IAccommodationService;
 import com.seven.jong.service.hosting.IAccommodationTempService;
 import com.seven.jong.service.hosting.IReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.lang.Nullable;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -109,7 +111,7 @@ public class HostingController {
     }
 
     @GetMapping("/file/{accommodationId}")
-    public void src(@PathVariable Integer accommodationId, @RequestParam String url, HttpServletResponse response){
+    public void src(@PathVariable Integer accommodationId, @Nullable @RequestParam String url, HttpServletResponse response){
         accommodationService.getPhoto(accommodationId,url,response);
     }
 
@@ -143,6 +145,21 @@ public class HostingController {
         System.out.println("/hosting/accommodation/updateAddress/"+accommodationId +" => POST 요청");
         System.out.println(accommodationHouseRequestDTO);
         accommodationService.updateHouse(accommodationHouseRequestDTO, accommodationId);
+    }
+
+    @GetMapping("/search")
+    public String search(SearchDTO searchDTO, Model model){
+        searchDTO.setCountPerPage(8);
+        System.out.println("/hosting/search => GET 요청");
+        System.out.println(searchDTO);
+        List<AccommodationVO> accommodationVOList = accommodationService.searchAccommodation(searchDTO);
+        PageCreator pc = new PageCreator();
+        pc.setPaging(searchDTO);
+        pc.setArticleTotalCount(accommodationService.countSearch(searchDTO));
+        model.addAttribute("pc",pc);
+        model.addAttribute("accommodations",accommodationVOList);
+        System.out.println(accommodationService.searchAccommodation(searchDTO));
+        return "hosting/search/search";
     }
 
 

@@ -1,6 +1,7 @@
 package com.seven.jong.service.hosting;
 
 import com.seven.jong.DTO.common.PageDTO;
+import com.seven.jong.DTO.common.SearchDTO;
 import com.seven.jong.DTO.hosting.AccommodationAddressRequestDTO;
 import com.seven.jong.DTO.hosting.AccommodationHouseRequestDTO;
 import com.seven.jong.DTO.hosting.AccommodationInfoResponseDTO;
@@ -105,13 +106,32 @@ public class AccommodationService implements IAccommodationService {
     @Override
     public void getPhoto(Integer accommodationId, String url, HttpServletResponse response) {
 
-        System.out.println(filePath.getPath()+url);
-        response.addHeader("Content-disposition","attachment;fileName"+url);
-        try {
-            FileCopyUtils.copy(new FileInputStream(filePath.getPath()+ url), response.getOutputStream());
-        }catch (Exception e){
-            e.printStackTrace();
+        if(url == null || url.equals("")){
+            String one = "";
+            try{
+                one= accommodationPhotoMapper.getPhotos(accommodationId).get(0).getPhotoURL();
+            }catch (Exception e){
+                System.out.println("등록된 사진없음!");
+                return;
+            }
+            response.addHeader("Content-disposition","attachment;fileName"+one);
+            try {
+                FileCopyUtils.copy(new FileInputStream(filePath.getPath()+ one), response.getOutputStream());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            System.out.println(filePath.getPath()+one);
+        }else{
+            response.addHeader("Content-disposition","attachment;fileName"+url);
+            try {
+                FileCopyUtils.copy(new FileInputStream(filePath.getPath()+ url), response.getOutputStream());
+            }catch (Exception e){
+                e.printStackTrace();
+            }
+            System.out.println(filePath.getPath()+url);
         }
+
+
     }
 
     @Override
@@ -146,7 +166,6 @@ public class AccommodationService implements IAccommodationService {
 
     @Override
     public void updateHouse(AccommodationHouseRequestDTO accommodationHouseRequestDTO, Integer accommodationId) {
-
         accommodationMapper.updateHouse(
                 AccommodationVO.builder()
                 .accommodationId(accommodationId)
@@ -162,4 +181,16 @@ public class AccommodationService implements IAccommodationService {
                 .build()
         );
     }
+
+    @Override
+    public List<AccommodationVO> searchAccommodation(SearchDTO searchDTO) {
+        return accommodationMapper.searchAccommodation(searchDTO);
+    }
+
+    @Override
+    public Integer countSearch(SearchDTO searchDTO) {
+        return accommodationMapper.countSearch(searchDTO);
+    }
+
+
 }

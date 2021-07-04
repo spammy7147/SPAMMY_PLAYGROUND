@@ -48,7 +48,7 @@ public class ReservationController {
     public String reservationAdd(ReservationAddRequestDTO reservationAddRequestDTO, Authentication authentication){
         System.out.println("/reservation/add => POST 요청 ");
         reservationService.addReservation(reservationAddRequestDTO,authentication);
-        return "redirect:/hosting/accommodation/"+reservationAddRequestDTO.getAccommodationId();
+        return "redirect:/reservation/home";
     }
 
     @GetMapping("/update/{reservationId}")

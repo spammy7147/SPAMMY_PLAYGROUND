@@ -1,6 +1,7 @@
 package com.seven.jong.service.hosting;
 
 import com.seven.jong.DTO.common.PageDTO;
+import com.seven.jong.DTO.common.SearchDTO;
 import com.seven.jong.DTO.hosting.AccommodationAddressRequestDTO;
 import com.seven.jong.DTO.hosting.AccommodationHouseRequestDTO;
 import com.seven.jong.DTO.hosting.AccommodationInfoResponseDTO;
@@ -26,9 +27,10 @@ public interface IAccommodationService {
     void getPhoto(Integer accommodationId,String url, HttpServletResponse response);
 
     boolean deleteAccommodation(Integer accommodationId, Authentication authentication);
-
     void updateAddress(AccommodationAddressRequestDTO accommodationAddressRequestDTO, Integer accommodationId);
     void updateHouse(AccommodationHouseRequestDTO accommodationHouseRequestDTO, Integer accommodationId);
+    List<AccommodationVO> searchAccommodation(SearchDTO searchDTO);
+    Integer countSearch(SearchDTO searchDTO);
 
 
 }
