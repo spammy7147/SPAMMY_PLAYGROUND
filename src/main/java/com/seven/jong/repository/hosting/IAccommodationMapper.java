@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import com.seven.jong.DTO.common.PageDTO;
+import com.seven.jong.DTO.common.SearchDTO;
 import org.apache.ibatis.annotations.Param;
 
 import com.seven.jong.DTO.hosting.AccommodationDTO;
@@ -20,6 +21,8 @@ public interface IAccommodationMapper {
 	Integer getNumberAccommodationByUserId(Integer userId);
 	void updateAddress(AccommodationVO accommodationVO);
 	void updateHouse(AccommodationVO accommodationVO);
+	List<AccommodationVO> searchAccommodation(SearchDTO searchDTO);
+	Integer countSearch(SearchDTO searchDTO);
     // 총 숙소 수 가져오기
  	public int selectHouseCount();
 

@@ -13,8 +13,11 @@ public class PageDTO {
     private Integer userId;
     private Integer reservationId;
     private Integer accommodationId;
-    private final Integer countPerPage =  10;
+    private Integer countPerPage =  10;
 
+    public void setCountPerPage(Integer countPerPage) {
+        this.countPerPage = countPerPage;
+    }
 
     public PageDTO() {
         this.page = 1;

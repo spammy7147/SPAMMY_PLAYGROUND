@@ -4631,7 +4631,10 @@ input[type="button"].btn-block {
   border-bottom-right-radius: calc(0.35rem - 1px);
   border-bottom-left-radius: calc(0.35rem - 1px);
 }
-
+.wh450300 {
+width: 241px;
+height: 160.66px;
+}
 .card-deck .card {
   margin-bottom: 0.75rem;
 }

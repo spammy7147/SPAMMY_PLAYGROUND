@@ -83,7 +83,7 @@
                                 <input type="date" class="form-control mb-3" name="checkIn" value="${reservation.checkIn}" placeholder="체크인">
                                 <input type="date" class="form-control mb-3" name="checkOut" value="${reservation.checkOut}" placeholder="체크아웃">
                                 <input type="text" class="form-control mb-3" id="guest" name="numberOfGuest" value="${reservation.numberOfGuest}" placeholder="게스트">
-                                <input type="submit" class="btn btn-outline-primary" value="예약하러 가기">
+                                <input type="submit" class="btn btn-outline-primary" value="예약">
                             </form>
                         </div>
                     </div>
