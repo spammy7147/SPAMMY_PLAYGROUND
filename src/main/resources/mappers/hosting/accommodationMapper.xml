@@ -36,8 +36,10 @@
     </select>
     <!-- 모든 숙소 정보 가져오기 -->
     <select id="getAllByUserId" resultMap="accommodationMap">
-        SELECT * FROM ACCOMMODATION
-        WHERE USER_ID=#{userId}
+        SELECT * FROM
+        (SELECT ROW_NUMBER() OVER (ORDER BY ACCOMMODATION_ID DESC) NUM, A.*
+        FROM ACCOMMODATION A)
+        WHERE USER_ID=#{userId} AND NUM BETWEEN #{firstPage} AND #{lastPage}
     </select>
 
     <!-- 하나의 숙소 가져오기 -->
@@ -50,6 +52,25 @@
         DELETE FROM ACCOMMODATION
         WHERE ACCOMMODATION_ID=#{accommodationId}
     </delete>
+
+    <update id="updateAddress">
+        UPDATE ACCOMMODATION SET ADDRESS=#{address}
+        WHERE ACCOMMODATION_ID=#{accommodationId}
+    </update>
+
+    <update id="updateHouse">
+        UPDATE ACCOMMODATION
+        SET name=#{name}, TYPE=#{type}, MAX_NUMBER_GUEST=#{maxNumberOfGuest}
+            ,NUMBER_BEDROOM=#{numberOfBedroom}, NUMBER_BED=#{numberOfBed}, NUMBER_BATHROOM=#{numberOfBathroom}
+            ,PRICE=#{price},CONTACT_NUMBER=#{contactNumber}, DESCRIPTION=#{description}
+        WHERE ACCOMMODATION_ID=#{accommodationId}
+    </update>
+
+    <!-- 총 숙소 갯수 by User -->
+    <select id="getNumberAccommodationByUserId" resultType="Integer">
+        select count(*) from ACCOMMODATION
+        WHERE USER_ID=#{userId}
+    </select>
 
     <!-- 총 숙소 갯수 가져오기 -->
     <select id="selectHouseCount" resultType="Integer">

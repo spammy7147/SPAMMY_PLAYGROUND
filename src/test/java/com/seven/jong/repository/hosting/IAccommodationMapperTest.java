@@ -16,20 +16,23 @@ public class IAccommodationMapperTest {
 
     @Test
     public void addAccommodationTest(){
-        AccommodationVO accommodationVO =
-                AccommodationVO.builder()
-                        .userId(1)
-                        .address("서울어딘가")
-                        .name("소맥킹")
-                        .type("아파트")
-                        .price(1)
-                        .maxNumberOfGuest(1)
-                        .numberOfBathroom(1)
-                        .numberOfBedroom(1)
-                        .numberOfBed(1)
-                        .contactNumber(1)
-                        .description("머물기 좋은곳")
-                        .build();
-        accommodationMapper.addAccommodation(accommodationVO);
+        for (int j = 0; j < 100; j++){
+            AccommodationVO accommodationVO =
+                    AccommodationVO.builder()
+                            .userId(1)
+                            .address("서울어딘가")
+                            .name("소맥킹")
+                            .type("아파트")
+                            .price(j)
+                            .maxNumberOfGuest(j)
+                            .numberOfBathroom(j)
+                            .numberOfBedroom(j)
+                            .numberOfBed(j)
+                            .contactNumber(j)
+                            .description("머물기 좋은곳")
+                            .build();
+            accommodationMapper.addAccommodation(accommodationVO);
+        }
+
     }
 }

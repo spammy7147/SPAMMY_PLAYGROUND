@@ -29,6 +29,7 @@
                     <input type="text" class="form-control mb-3" id="room" name="room" placeholder="동/호수">
                     <input type="submit" value="다음">
                 </form>
+                <button class="d-none d-sm-inline-block btn btn-outline-primary" id="addressCheck">주소 확인</button>
             </div>
         </div>
         <div class="col-lg-8">

@@ -1,6 +1,8 @@
 package com.seven.jong.service.hosting;
 
-import com.seven.jong.DTO.hosting.AccommodationDTO;
+import com.seven.jong.DTO.common.PageDTO;
+import com.seven.jong.DTO.hosting.AccommodationAddressRequestDTO;
+import com.seven.jong.DTO.hosting.AccommodationHouseRequestDTO;
 import com.seven.jong.DTO.hosting.AccommodationInfoResponseDTO;
 import com.seven.jong.VO.hosting.AccommodationPhotoVO;
 import com.seven.jong.VO.hosting.AccommodationTempVO;
@@ -13,11 +15,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.stereotype.Service;
-import org.springframework.ui.Model;
 import org.springframework.util.FileCopyUtils;
 
 import javax.servlet.http.HttpServletResponse;
-import java.io.File;
 import java.io.FileInputStream;
 import java.util.ArrayList;
 import java.util.List;
@@ -72,9 +72,9 @@ public class AccommodationService implements IAccommodationService {
     }
 
     @Override
-    public List<AccommodationVO> getAllByUserId(Authentication authentication) {
-
-        return accommodationMapper.getAllByUserId(((UserSecurityVO)authentication.getPrincipal()).getUser().getUserId());
+    public List<AccommodationVO> getAllByUserId(Authentication authentication, PageDTO pageDTO) {
+        pageDTO.setUserId(((UserSecurityVO)authentication.getPrincipal()).getUser().getUserId());
+        return accommodationMapper.getAllByUserId(pageDTO);
     }
 
     @Override
@@ -121,5 +121,45 @@ public class AccommodationService implements IAccommodationService {
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public Integer getNumberAccommodationByUserId(Integer userId) {
+        return accommodationMapper.getNumberAccommodationByUserId(userId);
+    }
+
+    @Override
+    public void updateAddress(AccommodationAddressRequestDTO accommodationAddressRequestDTO, Integer accommodationId) {
+
+
+        accommodationMapper.updateAddress(
+                AccommodationVO.builder()
+                        .accommodationId(accommodationId)
+                        .address(accommodationAddressRequestDTO.getCountry()
+                                + accommodationAddressRequestDTO.getCity()
+                                + accommodationAddressRequestDTO.getDistrict()
+                                + accommodationAddressRequestDTO.getRoad()
+                                + accommodationAddressRequestDTO.getRoom()
+                        )
+                        .build());
+    }
+
+    @Override
+    public void updateHouse(AccommodationHouseRequestDTO accommodationHouseRequestDTO, Integer accommodationId) {
+
+        accommodationMapper.updateHouse(
+                AccommodationVO.builder()
+                .accommodationId(accommodationId)
+                .name(accommodationHouseRequestDTO.getName())
+                .type(accommodationHouseRequestDTO.getType())
+                .maxNumberOfGuest(accommodationHouseRequestDTO.getMaxNumberOfGuest())
+                .numberOfBedroom(accommodationHouseRequestDTO.getNumberOfBedroom())
+                .numberOfBed(accommodationHouseRequestDTO.getNumberOfBed())
+                .numberOfBathroom(accommodationHouseRequestDTO.getNumberOfBathroom())
+                .price(accommodationHouseRequestDTO.getPrice())
+                .contactNumber(accommodationHouseRequestDTO.getContactNumber())
+                .description(accommodationHouseRequestDTO.getDescription())
+                .build()
+        );
     }
 }

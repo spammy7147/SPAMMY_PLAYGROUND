@@ -17,12 +17,12 @@
 
 <!-- Bootstrap core JavaScript-->
 
-<script defer src="${contextPath}/vendor/jquery/jquery.min.js"></script>
-<script defer src="${contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+<script src="${contextPath}/vendor/jquery/jquery.min.js"></script>
+<script src="${contextPath}/vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 <!-- Core plugin JavaScript-->
-<script defer src="${contextPath}/vendor/jquery-easing/jquery.easing.min.js"></script>
+<script src="${contextPath}/vendor/jquery-easing/jquery.easing.min.js"></script>
 <!-- Custom scripts for all pages-->
-<script defer src="${contextPath}/js/sb-admin-2.min.js"></script>
+<script src="${contextPath}/js/sb-admin-2.min.js"></script>
 <!-- Page level plugins -->
-<script defer src="${contextPath}/vendor/chart.js/Chart.min.js"></script>
+<script src="${contextPath}/vendor/chart.js/Chart.min.js"></script>
 
