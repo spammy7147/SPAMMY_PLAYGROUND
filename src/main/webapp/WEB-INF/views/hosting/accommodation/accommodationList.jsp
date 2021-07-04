@@ -34,10 +34,31 @@
                         </tr>
                     </c:forEach>
                 </table>
-                <div class="d-sm-flex align-items-center justify-content-between mb-4">
+                <!-- 페이징 처리 부분  -->
+                <ul class="pagination justify-content-center">
+                    <!--  이전  -->
+                    <c:if test="${pc.prev }">
+                        <li class="page-item">
+                            <a class="page-link" href="${contextPath}/hosting/home?page=${pc.beginPage-1}">이전</a>
+                        </li>
+                    </c:if>
+                    <!--  페이지 버튼  -->
+                    <c:forEach var="pageNum" begin="${pc.beginPage }" end="${pc.endPage }">
+                        <li class="page-item ${(pc.paging.page == pageNum) ? 'active' : '' }">
+                            <a href="${contextPath}/hosting/home?page=${pageNum}" class="page-link">${pageNum}</a>
+                        </li>
+                    </c:forEach>
+                    <!--  다음  -->
+                    <c:if test="${pc.next }">
+                        <li class="page-item">
+                            <a class="page-link" href="${contextPath}/hosting/home?page=${pc.endPage+1}">다음</a>
+                        </li>
+                    </c:if>
+                </ul>
+                <!-- 페이징 처리 끝 -->
+                <div class="d-sm-flex align-items-center justify-content-between mb-4 m-auto">
                     <a href="${contextPath}/hosting/address" class="d-none d-sm-inline-block btn btn-outline-primary">숙소 추가</a>
                 </div>
-
             </div>
         </div>
     </div>

@@ -1,13 +1,19 @@
 package com.seven.jong.controller;
 
+import com.seven.jong.DTO.common.PageCreator;
+import com.seven.jong.DTO.common.PageDTO;
 import com.seven.jong.DTO.hosting.ReservationAddRequestDTO;
 import com.seven.jong.DTO.hosting.ReservationUpdateDTO;
+import com.seven.jong.VO.security.UserSecurityVO;
 import com.seven.jong.service.hosting.IReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
 @Controller
@@ -27,9 +33,13 @@ public class ReservationController {
         return "hosting/reservation/reservation";
     }
     @GetMapping("/home")
-    public String reservation(Model model, Authentication authentication){
+    public String reservation(Model model, Authentication authentication, PageDTO pageDTO){
         System.out.println("/reservation/home => GET 요청");
-        model.addAttribute("reservation",reservationService.getAllReservationsByUser(authentication));
+        PageCreator pc = new PageCreator();
+        pc.setPaging(pageDTO);
+        pc.setArticleTotalCount(reservationService.getNumberOfReservationByUserId(((UserSecurityVO)authentication.getPrincipal()).getUser().getUserId()));
+        model.addAttribute("pc", pc);
+        model.addAttribute("reservation",reservationService.getAllReservationsByUser(authentication, pageDTO));
 
         return "hosting/reservation/reservationList";
     }

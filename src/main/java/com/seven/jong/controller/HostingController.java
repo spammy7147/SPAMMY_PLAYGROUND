@@ -1,9 +1,12 @@
 package com.seven.jong.controller;
 
+import com.seven.jong.DTO.common.PageCreator;
+import com.seven.jong.DTO.common.PageDTO;
 import com.seven.jong.DTO.hosting.AccommodationAddressRequestDTO;
 import com.seven.jong.DTO.hosting.AccommodationHouseRequestDTO;
 import com.seven.jong.VO.hosting.AccommodationTempVO;
 import com.seven.jong.VO.hosting.AccommodationVO;
+import com.seven.jong.VO.security.UserSecurityVO;
 import com.seven.jong.service.hosting.IAccommodationService;
 import com.seven.jong.service.hosting.IAccommodationTempService;
 import com.seven.jong.service.hosting.IReservationService;
@@ -39,10 +42,15 @@ public class HostingController {
     }
 
     @GetMapping("/home")
-    public String home(Authentication authentication, Model model) {
-        List<AccommodationVO> accommodationVOList = accommodationService.getAllByUserId(authentication);
-        model.addAttribute("accommodations", accommodationVOList);
+    public String home(Authentication authentication, Model model, PageDTO pageDTO) {
         System.out.println("/hosting/home => GET 요청");
+        List<AccommodationVO> accommodationVOList = accommodationService.getAllByUserId(authentication,pageDTO);
+        PageCreator pc = new PageCreator();
+        pc.setPaging(pageDTO);
+        pc.setArticleTotalCount(accommodationService.getNumberAccommodationByUserId(((UserSecurityVO)authentication.getPrincipal()).getUser().getUserId()));
+        model.addAttribute("pc",pc);
+        model.addAttribute("accommodations", accommodationVOList);
+
         return "hosting/accommodation/accommodationList";
     }
 
@@ -119,6 +127,22 @@ public class HostingController {
         System.out.println("/hosting/accommodation/update/"+accommodationId +" => GET 요청");
         model.addAttribute("accommodation",accommodationService.getOneById(accommodationId));
         return "hosting/accommodation/updateAccommodation";
+    }
+
+    @PostMapping("/accommodation/updateAddress/{accommodationId}")
+    @ResponseBody
+    public void accommodationUpdateAddress(@PathVariable Integer accommodationId, @RequestBody AccommodationAddressRequestDTO accommodationAddressRequestDTO) {
+        System.out.println("/hosting/accommodation/updateAddress/"+accommodationId +" => POST 요청");
+        System.out.println(accommodationAddressRequestDTO);
+        accommodationService.updateAddress(accommodationAddressRequestDTO, accommodationId);
+
+    }
+    @PostMapping("/accommodation/updateHouse/{accommodationId}")
+    @ResponseBody
+    public void accommodationUpdateHouse(@PathVariable Integer accommodationId, @RequestBody AccommodationHouseRequestDTO accommodationHouseRequestDTO) {
+        System.out.println("/hosting/accommodation/updateAddress/"+accommodationId +" => POST 요청");
+        System.out.println(accommodationHouseRequestDTO);
+        accommodationService.updateHouse(accommodationHouseRequestDTO, accommodationId);
     }
 
 

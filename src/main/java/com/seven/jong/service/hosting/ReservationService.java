@@ -1,5 +1,7 @@
 package com.seven.jong.service.hosting;
 
+import com.seven.jong.DTO.common.PageDTO;
+import com.seven.jong.DTO.common.SearchDTO;
 import com.seven.jong.DTO.hosting.*;
 import com.seven.jong.VO.hosting.AccommodationVO;
 import com.seven.jong.VO.hosting.ReservationVO;
@@ -78,8 +80,9 @@ public class ReservationService implements IReservationService{
     }
 
     @Override
-    public List<ReservationListResponseDTO> getAllReservationsByUser(Authentication authentication) {
-        List<ReservationVO> reservationVOList = reservationMapper.getAllByUser(((UserSecurityVO)authentication.getPrincipal()).getUser().getUserId());
+    public List<ReservationListResponseDTO> getAllReservationsByUser(Authentication authentication, PageDTO pageDTO) {
+        pageDTO.setUserId(((UserSecurityVO)authentication.getPrincipal()).getUser().getUserId());
+        List<ReservationVO> reservationVOList = reservationMapper.getAllByUser(pageDTO);
         List<ReservationListResponseDTO> reservationListResponseDTOList = new ArrayList<>();
         reservationVOList.forEach(vo -> {
             ReservationListResponseDTO dto = new ReservationListResponseDTO();
@@ -107,12 +110,16 @@ public class ReservationService implements IReservationService{
         return false;
     }
 
-    
+    @Override
+    public Integer getNumberOfReservationByUserId(Integer userId) {
+        return reservationMapper.getNumberOfReservationByUserId(userId);
+    }
+
     //총 예약 수 가져오기
     @Override
 	public int numberOfReservation() {
-    	int allCount = reservationMapper.reservationCount(); // 총 예약수 얻어오기
-		return allCount;
+        // 총 예약수 얻어오기
+		return reservationMapper.reservationCount();
 	}
     
     //예약정보 리스트 가져오기

@@ -3,6 +3,7 @@ package com.seven.jong.repository.hosting;
 import java.util.ArrayList;
 import java.util.List;
 
+import com.seven.jong.DTO.common.PageDTO;
 import org.apache.ibatis.annotations.Param;
 
 import com.seven.jong.DTO.hosting.AccommodationDTO;
@@ -13,9 +14,12 @@ public interface IAccommodationMapper {
 	
     void addAccommodation(AccommodationVO accommodation);
 	AccommodationVO findForPhoto(AccommodationVO accommodationVO);
-	List<AccommodationVO> getAllByUserId(Integer userId);
+	List<AccommodationVO> getAllByUserId(PageDTO pageDTO);
 	AccommodationVO getOneById(Integer accommodationId);
 	void deleteAccommodation(Integer accommodationId);
+	Integer getNumberAccommodationByUserId(Integer userId);
+	void updateAddress(AccommodationVO accommodationVO);
+	void updateHouse(AccommodationVO accommodationVO);
     // 총 숙소 수 가져오기
  	public int selectHouseCount();
 

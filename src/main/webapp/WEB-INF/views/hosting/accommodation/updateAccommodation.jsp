@@ -10,6 +10,7 @@
     <script defer src="${contextPath}/js/accommodationPhoto.js"></script>
 
 </head>
+
 <body>
 <c:import url="../../include/navbar.jsp"/>
 
@@ -17,15 +18,16 @@
     <div class="row justify-content-center">
         <div class="col-xl-4 m-auto">
             <div class="card-body">
-                <form action="${contextPath}/hosting/address" method="post">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                <form>
+                    <input type="hidden" id="csrf" name="${_csrf.headerName}" value="${_csrf.token}" />
+                    <input type="hidden" id="accommodationId" value="${accommodation.accommodationId}" />
                     <input type="text" class="form-control mb-3" id="country" name="country" placeholder="국가">
                     <input type="text" class="form-control mb-3" id="city" name="city" placeholder="시/도">
                     <input type="text" class="form-control mb-3" id="district" name="district" placeholder="시/군">
                     <input type="text" class="form-control mb-3" id="road" name="road" placeholder="상세주소">
                     <input type="text" class="form-control mb-3" id="room" name="room" placeholder="동/호수">
-                    <input type="submit" style="display: none;" value="다음">
                 </form>
+                <button class="d-none d-sm-inline-block btn btn-outline-primary" id="addressCheck">주소 확인</button>
             </div>
         </div>
         <div class="col-lg-8">
@@ -33,45 +35,41 @@
             <script src="${contextPath}/js/address.js"></script>
         </div>
         <div class="row mt-3">
-            <button class="d-none d-sm-inline-block btn btn-outline-primary">주소 변경</button>
+            <button class="d-none d-sm-inline-block btn btn-outline-primary" id="addressSubmitBtn" >주소 변경</button>
         </div>
-
-
     </div>
     <hr class="my-4">
     <div class="row justify-content-center">
         <div class="col-xl-12 m-auto">
             <div class="card-body">
-                <form action="${contextPath}/hosting/house" method="post">
-                    <input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+                <form>
                     숙소 이름
-                    <input type="text" class="form-control mb-3" name="name" placeholder="숙소 이름">
-                    숙소의 건물 유형을 선택해주세요. <br>
-                    <select class="form-control mb-3" name="type">
-                        <option id="apt" value="아파트">아파트</option>
-                        <option id="house" value="주택">주택</option>
-                        <option id="company" value="전문 숙박">전문 숙박</option>
+                    <input type="text" class="form-control mb-3" id="name" name="name" value="${accommodation.name}" placeholder="숙소 이름">
+                    숙소의 건물 유형을 선택해주세요.
+                    <select class="form-control mb-3" id="type" name="type">
+                        <option id="apt" value="아파트" ${accommodation.type == "아파트" ? 'selected' : ''}>아파트</option>
+                        <option id="house" value="주택" ${accommodation.type == "주택" ? 'selected' : ''}>주택</option>
+                        <option id="company" value="전문 숙박" ${accommodation.type == "전문 숙박" ? 'selected' : ''}>전문 숙박</option>
                     </select>
                     최대 숙박 인원
-                    <input type="text" class="form-control mb-3" name="maxNumberOfGuest" value="${accommodation.maxNumberOfGuest}" placeholder="최대 숙박 인원">
+                    <input type="text" class="form-control mb-3" id="maxNumberOfGuest" name="maxNumberOfGuest" value="${accommodation.maxNumberOfGuest}" placeholder="최대 숙박 인원">
                     게스트가 사용할 수 있는 침실은 몇 개인가요?
-                    <input type="text" class="form-control mb-3" name="numberOfBedroom" value="${accommodation.numberOfBedroom}" placeholder="침실 갯수">
+                    <input type="text" class="form-control mb-3" id="numberOfBedroom" name="numberOfBedroom" value="${accommodation.numberOfBedroom}" placeholder="침실 갯수">
                     게스트가 사용할 수 있는 침대는 몇 개인가요?
-                    <input type="text" class="form-control mb-3" name="numberOfBed" value="${accommodation.numberOfBed}" placeholder="침대 갯수">
+                    <input type="text" class="form-control mb-3" id="numberOfBed" name="numberOfBed" value="${accommodation.numberOfBed}" placeholder="침대 갯수">
                     게스트가 사용할 수 있는 욕실은 몇 개인가요?
-                    <input type="text" class="form-control mb-3" name="numberOfBathroom" value="${accommodation.numberOfBathroom}" placeholder="욕실 갯수">
+                    <input type="text" class="form-control mb-3" id="numberOfBathroom" name="numberOfBathroom" value="${accommodation.numberOfBathroom}" placeholder="욕실 갯수">
                     호스트 연락처
-                    <input type="text" class="form-control mb-3" name="contactNumber" value="${accommodation.contactNumber}" placeholder="연락처">
+                    <input type="text" class="form-control mb-3" id="contactNumber" name="contactNumber" value="${accommodation.contactNumber}" placeholder="연락처">
                     가격
-                    <input type="text" class="form-control mb-3" name="price" value="${accommodation.price}" placeholder="가격">
+                    <input type="text" class="form-control mb-3" id="price"  name="price" value="${accommodation.price}" placeholder="가격">
                     숙소 설명
-                    <input type="text" class="form-control mb-3" name="description" value="${accommodation.description}" placeholder="세부 정보">
-                    <input style="display: none;" type="submit" value="다음">
+                    <input type="text" class="form-control mb-3" id="description" name="description" value="${accommodation.description}" placeholder="세부 정보">
                 </form>
             </div>
         </div>
         <div class="row mt-3">
-            <button class="d-none d-sm-inline-block btn btn-outline-primary">주소 변경</button>
+            <button class="d-none d-sm-inline-block btn btn-outline-primary" id="houseSubmitBtn">숙소 정보 변경</button>
         </div>
     </div>
 
@@ -82,10 +80,10 @@
                 <form action="/hosting/photo?${_csrf.parameterName}=${_csrf.token}" method="post" enctype="multipart/form-data">
                     <input style="display: none;" type="file" name="file" class="form-control-file mb-3" id="imgFile" accept="image/*" onchange="setThumbnail(event);" multiple/>
                     <div class="row justify-content-center">
-                        <button type="button" class="d-none d-sm-inline-block btn btn-warning col-xl-6" id="imgFileBtn">사진 추가</button>
+                        <button type="button" class="d-none d-sm-inline-block btn btn-warning col-xl-6" id="imgFileBtn">사진 변경</button>
                     </div>
                     <div class="row justify-content-center">
-                        <button type="submit" class="d-none d-sm-inline-block btn btn-outline-primary col-xl-6" id="upload">사진 업로드</button>
+                        <button type="submit" class="d-none d-sm-inline-block btn btn-outline-primary col-xl-6" id="photoSubmit">사진 업로드</button>
                     </div>
                 </form>
             </div>
@@ -98,7 +96,9 @@
             </div>
         </div>
     </div>
-
 </div>
+
+<script src="${contextPath}/js/updateAccommodation.js"></script>
+
 </body>
 </html>

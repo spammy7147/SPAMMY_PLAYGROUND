@@ -46,8 +46,12 @@
 	</select>
 
 	<select id="getAllByUser" resultMap="reservationMap">
-		SELECT * FROM RESERVATION
-		WHERE USER_ID=#{userId}
+		SELECT *
+		FROM
+		(SELECT ROW_NUMBER() OVER (ORDER BY RESERVATION_ID DESC) NUM, A.*
+		FROM
+		RESERVATION A)
+		WHERE USER_ID=#{userId} AND NUM BETWEEN #{firstPage} AND #{lastPage}
 	</select>
 
 	<select id="getAllByAccommodation" resultMap="reservationMap">
@@ -55,11 +59,16 @@
 		WHERE ACCOMMODATION_ID=#{accommodationId}
 	</select>
 
+	<select id="getNumberOfReservationByUserId" resultType="Integer">
+		select count(*) from RESERVATION
+		WHERE USER_ID=#{userId}
+	</select>
 
 	<!-- 총 예약 수 받아오기 -->
 	<select id="reservationCount" resultType="Integer">
 		select count(*) from RESERVATION
 	</select>
+
 	
 	<!-- 예약 정보 가져오기 -->
 	<select id="reservationList" resultMap="reservationAdmin">
