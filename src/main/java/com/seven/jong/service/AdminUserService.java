@@ -19,4 +19,10 @@ public interface AdminUserService {
 
 	public void userSearch( int pageNum, String c, String search, Model model);
 	
+	public int stopUser(int userId);
+	
+	public int startUser(int userId);
+	
+	public int userDel(int userId);
+	
 }

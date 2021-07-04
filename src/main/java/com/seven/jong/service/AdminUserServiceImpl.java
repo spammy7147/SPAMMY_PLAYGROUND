@@ -99,6 +99,25 @@ public class AdminUserServiceImpl implements AdminUserService {
 		model.addAttribute("allPage", totalPage);
 		model.addAttribute("userSearchList", userSearchList);
 	}
+	//유저 비활성화
+	@Override
+	public int stopUser(int userId) {
+		userMapper.stopUser(userId);
+		return 0;
+	}
+	//유저활성화
+	@Override
+	public int startUser(int userId) {
+		userMapper.startUser(userId);
+		return 0;
+	}
+	//유저 삭제
+	@Override
+	public int userDel(int userId) {
+		int result = userMapper.delete(userId);
+		return result;
+	}
+	
 	
 
 	

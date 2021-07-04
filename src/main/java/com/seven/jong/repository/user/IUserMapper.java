@@ -18,8 +18,17 @@ public interface IUserMapper {
     ArrayList<UserVO> getUsers();
     // 유저 수정
     void updateUser(UserVO user);
+    
+    //유저 비활성화
+    int stopUser(Integer user_id);
+    
+    //유저 활성화
+    int startUser(Integer user_id);
+    
     // 유저 삭제
     void deleteUser(Integer UserId);
+    int delete(int userId);
+    
     //모든 유저 수
     int selectUserCount();
 
@@ -31,6 +40,8 @@ public interface IUserMapper {
 	
 	//조건에 맞는 유저 수
 	int selectSearchUserCount(@Param("c") String c, @Param("search") String search);
+	
+	
 
 	
 
