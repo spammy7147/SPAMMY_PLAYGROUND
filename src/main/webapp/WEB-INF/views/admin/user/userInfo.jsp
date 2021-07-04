@@ -41,8 +41,29 @@
 			<div class="container-fluid">
 
 			<h1 style="text-align: center;">유 저 정 보</h1>
-
-
+			
+				<form style="margin:0;display:inline;height:20px; float:right;" action="${contextPath}/admin/user/delete?userId=${userInfo.userId }" method="post" >
+					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+					<input type="submit" class="btn btn-danger" value="탈퇴">
+				</form>
+				
+				<div align="right">
+					<c:if test="${userInfo.isAccountLocked == 'false'}">
+						<form style="margin-right:5;display:inline;height:20px; float:right;" action="${contextPath}/admin/user/stop?userId=${userInfo.userId }" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+							<input type="submit" class="btn btn-warning" value="비활성화">
+						</form>
+					</c:if>
+					
+					<c:if test="${userInfo.isAccountLocked == 'true'}">
+						<form style="margin-right:5;display:inline;height:20px; float:right;" action="${contextPath}/admin/user/start?userId=${userInfo.userId }" method="post">
+							<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
+							<input type="submit" class="btn btn-success" value="활성화">
+						</form>
+					</c:if>
+				</div>
+				
+				
 				<form action="modifyUserInfo" method="post">
 					<input type="hidden" name="${_csrf.parameterName}" value="${_csrf.token}" />
 					<input type="hidden" name="userId" value="${userInfo.userId }">
@@ -79,8 +100,10 @@
 				
 				</div>
 				</form>
+				
 			</div>
 			<!-- /.container-fluid -->
+			
 		</div>
 		<!-- End of Main Content -->
 

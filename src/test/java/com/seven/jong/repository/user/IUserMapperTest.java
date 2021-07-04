@@ -30,7 +30,7 @@ public class IUserMapperTest {
     public void addUser() {
 
         UserVO user  =  UserVO.builder()
-                .email("test@gmail.com")
+                .email("admin@gmail.com")
                 .password(bCryptPasswordEncoder.encode("1234"))
                 .name("홍길동")
                 .phone(12345)
@@ -40,7 +40,7 @@ public class IUserMapperTest {
         userMapper.addUser(user); //사용자 추가
 
         roleMapper.addRole(RoleVO.builder()
-                .userId(userMapper.getUserByEmail("test@gmail.com").getUserId())
+                .userId(userMapper.getUserByEmail("admin@gmail.com").getUserId())
                 .role("ROLE_ADMIN")
                 .build());  // 사용자 권한(user) 추가
 

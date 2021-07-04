@@ -87,6 +87,31 @@ public class AdminController {
 		aus.userSearch(pageNum, c,search,model);
 		return "admin/user/userSearch";
 	}
+	//유저 비활성화
+	@PostMapping("/user/stop")
+	public String stop(@RequestParam(value="userId")int userId) {
+		aus.stopUser(userId);
+		return "redirect:userInfo?userId="+userId;
+	}
+	//유저 비활성화
+	@PostMapping("/user/start")
+	public String start(@RequestParam(value="userId")int userId) {
+		aus.startUser(userId);
+		return "redirect:userInfo?userId="+userId;
+	}	
+	//유저 삭제
+	@PostMapping("/user/delete")
+	public String userDel(@RequestParam(value="userId")int userId, Model model) {
+		int result = aus.userDel(userId);
+		
+		if(result == 1) { //성공
+			aus.pageUserInfo(1, model);
+			return "admin/user/userManage";
+		}else { // 실패
+			return "redirect:userInfo?userId="+userId;
+		}
+		
+	}
 	
 	
 	

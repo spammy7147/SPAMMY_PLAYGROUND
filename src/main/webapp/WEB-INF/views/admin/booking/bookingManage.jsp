@@ -49,11 +49,12 @@
 							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 								<tr>
-									<th width="10%">예약번호</th>
-									<th width="30%">숙소명</th>
+									<th width="20%">예약번호</th>
+									<th width="20%">숙소명</th>
 									<th width="20%">예약자</th>
-									<th width="20%">입실 날짜</th>
-									<th width="20%">퇴실 날짜</th>
+									<th width="17%">입실 날짜</th>
+									<th width="17%">퇴실 날짜</th>
+									<th width="6"></th>
 								</tr>
 								</thead>
 								<tfoot>
@@ -71,13 +72,16 @@
 								<c:when test="${reservationList.size() != 0 }">
 									<c:forEach var="dto" items="${reservationList }">
 										<tr>
-											<td>${dto.reservationId }</td>
+											<td><a href="#">${dto.reservationId }</a> </td>
 											<td>
-												<a href="#">${dto.name }</a> 
+												${dto.name }
 											</td>
 											<td>${dto.email }</td> 
 											<td>${dto.checkIn }</td>
 											<td>${dto.checkOut }</td>
+											<td>
+												<a class="btn btn-danger" href="${contextPath }/admin/bookdelete?reservationId=${dto.reservationId }">삭제</a>
+											</td>
 										</tr>
 									</c:forEach>
 								</c:when>

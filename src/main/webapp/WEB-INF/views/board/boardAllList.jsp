@@ -48,7 +48,7 @@
 							<table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 								<thead>
 								<tr>
-									<th>Number</th><th>작성자</th><th width="40%">Title</th>
+									<th>Number</th><th width="40%">Title</th><th>작성자</th>
 									<th>Date</th><th>Hit</th><th>Image file</th>
 								</tr>
 								</thead>
@@ -67,10 +67,11 @@
 								<c:when test="${boardList.size() != 0 }">
 									<c:forEach var="dto" items="${boardList }">
 										<tr>
-											<td>${dto.writeNo }</td> <td>${dto.writer }</td>
+											<td>${dto.writeNo }</td> 
 											<td>
 												<a href="${contextPath }/board/contentview?writeNo=${dto.writeNo }">${dto.title }</a>
 											</td>
+											<td>${dto.writer }</td>
 											<td>${dto.saveDate }</td>
 											<td>${dto.hit }</td>
 											<td>${dto.fileName }</td>
