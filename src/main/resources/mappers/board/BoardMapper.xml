@@ -52,15 +52,10 @@
 		select count(*) from air_board
 	</select>
 	
+	<!-- 게시글 검색 -->
 	<select id="boardSearchList" resultMap="board">
-		<if test='c == "title"'>
 			select B.* from(select rownum rn, A.* from
-			(select * from air_board where title like '%'||#{search}||'%' order by write_no desc)A)B where rn between #{s} and #{e}
-		</if>
-		<if test='c == "writer"'>
-			select B.* from(select rownum rn, A.* from
-			(select * from air_board where writer like '%'||#{search}||'%' order by write_no desc)A)B where rn between #{s} and #{e}
-		</if>
+			(select * from air_board where ${c} like '%'||#{search}||'%' order by write_no desc)A)B where rn between #{s} and #{e}
 	</select>
 	
 	<select id="selectBoardCount" resultType="integer">
