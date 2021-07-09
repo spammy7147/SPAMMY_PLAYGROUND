@@ -1,8 +1,10 @@
 package jpa.security.practice.domain;
 
 import jpa.security.practice.domain.listener.Auditable;
-import jpa.security.practice.domain.listener.UserEntityListener;
-import lombok.*;
+import lombok.Data;
+import lombok.EqualsAndHashCode;
+import lombok.NoArgsConstructor;
+import lombok.ToString;
 import org.springframework.data.annotation.CreatedDate;
 import org.springframework.data.annotation.LastModifiedDate;
 import org.springframework.data.jpa.domain.support.AuditingEntityListener;
@@ -15,18 +17,16 @@ import java.time.LocalDateTime;
 
 @Entity
 @NoArgsConstructor
-@AllArgsConstructor
 @Data
-@Builder
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
-@EntityListeners(value = {AuditingEntityListener.class, UserEntityListener.class})
-public class User extends BaseEntity {
+@EntityListeners(value = AuditingEntityListener.class)
+public class UserHistory extends BaseEntity {
 
     @Id
     @GeneratedValue
     private Long id;
-    @NonNull
+    private Long userId;
     private String name;
     private String email;
 
@@ -34,5 +34,4 @@ public class User extends BaseEntity {
 //    private LocalDateTime createdAt;
 //    @LastModifiedDate
 //    private LocalDateTime updatedAt;
-
 }

@@ -10,17 +10,15 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
-import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.endsWith;
 
 @SpringBootTest
 class UserRepositoryTest {
 
     @Autowired
     private UserRepository userRepository;
+    @Autowired
+    private UserHistoryRepository userHistoryRepository;
 
     @Test
     void crud(){
@@ -118,6 +116,21 @@ class UserRepositoryTest {
 
     }
 
+
+    @Test
+    void userHistoryTest() {
+        User user = new User();
+        user.setEmail("spammy7147@gmail.com");
+        user.setName("spammy");
+
+        userRepository.save(user);
+
+        user.setName("spammy-spammy-spammy");
+
+        userRepository.save(user);
+
+        userHistoryRepository.findAll().forEach(System.out::println);
+    }
 
 
 }
