@@ -1,6 +1,8 @@
 package jpa.security.practice.repository;
 
+import jpa.security.practice.domain.Gender;
 import jpa.security.practice.domain.User;
+import jpa.security.practice.domain.UserHistory;
 import org.assertj.core.util.Lists;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -9,6 +11,8 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
+
+import java.util.List;
 
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
 
@@ -132,5 +136,31 @@ class UserRepositoryTest {
         userHistoryRepository.findAll().forEach(System.out::println);
     }
 
+
+    @Test
+    void userRelationTest() {
+        User user = new User();
+        user.setName("spammy");
+        user.setEmail("spammy7147@gmail.com");
+        user.setGender(Gender.MALE);
+
+        userRepository.save(user);
+        user.setName("spammy1");
+        userRepository.save(user);
+        user.setEmail("spammy1@gmail.com");
+        userRepository.save(user);
+
+        userHistoryRepository.findAll().forEach(System.out::println);
+//        System.out.println("userId > " + userRepository.findByEmail("spammy1@gmail.com").getId());
+//        List<UserHistory> result = userHistoryRepository.findByUserId(7L);
+//        result.forEach(System.out::println);
+
+        List<UserHistory> result = userRepository.findByEmail("spammy1@gmail.com").getUserHistories();
+        result.forEach(System.out::println);
+
+        System.out.println("UserHistory.getUser() : " + userHistoryRepository.findAll().get(0).getUser());
+
+
+    }
 
 }

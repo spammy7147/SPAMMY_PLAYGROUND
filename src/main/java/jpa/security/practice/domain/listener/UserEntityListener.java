@@ -4,25 +4,24 @@ import jpa.security.practice.domain.User;
 import jpa.security.practice.domain.UserHistory;
 import jpa.security.practice.repository.UserHistoryRepository;
 import jpa.security.practice.support.BeanUtils;
-import org.springframework.stereotype.Component;
 
-import javax.persistence.PrePersist;
-import javax.persistence.PreUpdate;
+import javax.persistence.PostPersist;
+import javax.persistence.PostUpdate;
 
 
 public class UserEntityListener {
 
 
-    @PrePersist
-    @PreUpdate
+    @PostPersist
+    @PostUpdate
     public void preUpdate(Object o) {
         UserHistoryRepository userHistoryRepository = BeanUtils.getBean(UserHistoryRepository.class);
          User user = (User)o;
 
          UserHistory userHistory = new UserHistory();
-         userHistory.setUserId(user.getId());
          userHistory.setEmail(user.getEmail());
          userHistory.setName(user.getName());
+         userHistory.setUser(user);
 
          userHistoryRepository.save(userHistory);
     }
