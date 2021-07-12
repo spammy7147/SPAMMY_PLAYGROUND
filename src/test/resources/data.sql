@@ -1,5 +1,5 @@
 -- call next value for hibernate_sequence;
-insert into user(`id`,`name`,`email`,`created_at`,`updated_at`) values (1, '홍길동','spammy7147@gmail.com',now(),now());
+insert into user(`id`,`name`,`email`,`created_at`,`updated_at`) values (1, '홍길동','spammy0@gmail.com',now(),now());
 
 -- call next value for hibernate_sequence;
 insert into user(`id`,`name`,`email`,`created_at`,`updated_at`) values (2, '김뽀삐','spammy1@gmail.com',now(),now());

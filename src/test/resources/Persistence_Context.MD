@@ -10,3 +10,10 @@ EntityManager
   (session에서 EntityManager를 상속받아 사용)
 - 1차 cache 는 map형태로 <id, entity>로 묶여있으며 id로 검색할시 작동한다. ****
 
+Transaction
+- ACID 
+  - ALL OR NOTHING
+  - Consistency
+  - Isolation 
+  - Durability 
+
