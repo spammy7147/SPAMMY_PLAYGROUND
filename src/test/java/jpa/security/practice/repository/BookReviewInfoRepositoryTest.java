@@ -36,7 +36,7 @@ public class BookReviewInfoRepositoryTest {
         System.out.println("book >>>" + result);
 
         BookReviewInfo result2 = bookRepository
-                .findById(1L)
+                .findById(2L)
                 .orElseThrow(RuntimeException::new)
                 .getBookReviewInfo();
 
