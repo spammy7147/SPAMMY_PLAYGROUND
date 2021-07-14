@@ -21,6 +21,59 @@ public class BookRepositoryTest {
     @Autowired
     private UserRepository userRepository;
 
+
+    @Test
+    void bookRemoveCascadeTest() {
+
+        bookRepository.deleteById(1L);
+
+        System.out.println("books :" + bookRepository.findAll());
+        System.out.println("publishers :" + publisherRepository.findAll());
+
+        bookRepository.findAll().forEach(book -> System.out.println(book.getPublisher()));
+
+
+    }
+
+    @Test
+    void bookCascadeTest() {
+        Book book = new Book();
+        book.setName("JPA CASCADE 공부중!");
+
+        Publisher publisher  = new Publisher();
+        publisher.setName("인텔리제이");
+
+        book.setPublisher(publisher);
+        bookRepository.save(book);
+
+        System.out.println("books : " + bookRepository.findAll());
+        System.out.println("publisher : " + publisherRepository.findAll());
+
+        Book book1 = bookRepository.findById(1L).get();
+        book1.getPublisher().setName("이...이클립스?");
+
+        bookRepository.save(book1);
+
+        System.out.println("publishers : " + publisherRepository.findAll());
+
+        Book book2 = bookRepository.findById(1L).get();
+//        bookRepository.delete(book2);
+
+        Book book3 = bookRepository.findById(1L).get();
+        book3.setPublisher(null);
+
+        bookRepository.save(book3);
+
+        System.out.println("books : " + bookRepository.findAll());
+        System.out.println("publishers : " + publisherRepository.findAll());
+        System.out.println("book3-publisher" + bookRepository.findById(1L).get().getPublisher());
+    }
+    @Test
+    void softDelete() {
+        bookRepository.findAll().forEach(System.out::println);
+    }
+
+
     @Test
     void bookTest() {
         Book book = new Book();
@@ -75,4 +128,6 @@ public class BookRepositoryTest {
 
         return publisherRepository.save(publisher);
     }
+
+
 }

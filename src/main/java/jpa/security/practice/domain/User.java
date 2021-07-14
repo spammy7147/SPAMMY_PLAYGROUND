@@ -12,7 +12,6 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Data
-@Builder
 @ToString(callSuper = true)
 @EqualsAndHashCode(callSuper = true)
 @EntityListeners(value = {AuditingEntityListener.class, UserEntityListener.class})

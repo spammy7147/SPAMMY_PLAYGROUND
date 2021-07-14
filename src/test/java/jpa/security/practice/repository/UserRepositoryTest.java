@@ -28,10 +28,10 @@ class UserRepositoryTest {
 
     @Test
     void crud(){
-        userRepository.save(User.builder()
-                                .name("구마적")
-                                .build()
-                            );
+//        userRepository.save(User.builder()
+//                                .name("구마적")
+//                                .build()
+//                            );
 
         userRepository.findAll().forEach(System.out::println);
 

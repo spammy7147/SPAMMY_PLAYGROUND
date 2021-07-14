@@ -16,4 +16,11 @@ insert into user(`id`,`name`,`email`,`created_at`,`updated_at`) values (5, '김�
 -- call next value for hibernate_sequence;
 insert into user(`id`,`name`,`email`,`created_at`,`updated_at`) values (6, '갑수','spammy5@gmail.com',now(),now());
 
+insert into publisher (`id`,`name`) values (1, '인텔리제이');
+
+insert into book(`id`, `name`, `publisher_id`,`deleted`) values (1,'JPA CASCADE 공부', 1, false);
+
+insert into book(`id`, `name`, `publisher_id`,`deleted`) values (2,'JPA 공부중!!!', 1, false);
+
+insert into book(`id`, `name`, `publisher_id`,`deleted`) values (3,'JPA DELETE 현업사용?', 1, true);
 

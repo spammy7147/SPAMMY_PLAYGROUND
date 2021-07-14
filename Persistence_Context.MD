@@ -64,3 +64,10 @@ Propagation
 Transactional 은 Method & Class 양쪽다 선언할 수 있고 
 Method에서 선언된 transactional  어노테이션이 먼저 적용됩니다. 
     
+---
+
+JPA Cascade (영속성 전이)
+
+JPA OrphanRemoval 
+- for orphan removal : If you invoke setOrder(null), the related Order entities will be removed in DB automoatically
+- for remove cascade : If you invoke setOrder(null), the related Order entities will NOT be removed in DB automoatically
