@@ -1,5 +1,6 @@
 package jpa.security.practice.repository;
 
+import jpa.security.practice.domain.Address;
 import jpa.security.practice.domain.Gender;
 import jpa.security.practice.domain.User;
 import jpa.security.practice.domain.UserHistory;
@@ -25,6 +26,21 @@ class UserRepositoryTest {
     private UserRepository userRepository;
     @Autowired
     private UserHistoryRepository userHistoryRepository;
+
+
+    @Test
+    void embedTest() {
+        userRepository.findAll().forEach(System.out::println);
+
+        User user = new User();
+        user.setName("spammy");
+        user.setHomeAddress(new Address("성남시", "위례동", "위례어딘가", "123456"));
+        user.setCompanyAddress(new Address("서울시", "공덕역", "공덕사거리", "123456"));
+
+        userRepository.save(user);
+        userRepository.findAll().forEach(System.out::println);
+        userHistoryRepository.findAll().forEach(System.out::println);
+    }
 
     @Test
     void crud(){
