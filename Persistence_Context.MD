@@ -89,3 +89,8 @@ N + 1 이슈
 
 --- 
 
+Dirty Check
+- 영속성 관리중에 일어난 변경은  save 매서드가없어도 영속화 시켜주는 것.
+- Insert 시에는 새로 생성된 엔티티가 영속화가 되지 않아서  더디체크의 대상이 아님
+- @Transactional(readOnly = true) 을사용하면 
+  session의 flush모델의 타입을 MANUAL로 변경되어 더디체크가 스킵된다.
