@@ -13,9 +13,12 @@ import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.transaction.annotation.Transactional;
-
+import static org.assertj.core.api.Assertions.assertThat;
 import java.util.List;
+import java.util.Objects;
 
+
+import static org.junit.jupiter.api.Assertions.assertAll;
 import static org.springframework.data.domain.ExampleMatcher.GenericPropertyMatchers.contains;
 
 @SpringBootTest
@@ -29,7 +32,7 @@ class UserRepositoryTest {
 
 
     @Test
-    void embedTest() {
+    public void embedTest() {
         userRepository.findAll().forEach(System.out::println);
 
         User user = new User();
@@ -38,8 +41,30 @@ class UserRepositoryTest {
         user.setCompanyAddress(new Address("서울시", "공덕역", "공덕사거리", "123456"));
 
         userRepository.save(user);
+
+        User user1 = new User();
+        user1.setName("GuGu");
+        user1.setHomeAddress(null);
+        user1.setCompanyAddress(null);
+
+        userRepository.save(user1);
+
+        User user2 = new User();
+        user2.setName("boomkin");
+        user2.setHomeAddress(new Address());
+        user2.setCompanyAddress(new Address());
+
+        userRepository.save(user2);
+
         userRepository.findAll().forEach(System.out::println);
         userHistoryRepository.findAll().forEach(System.out::println);
+
+        assertAll(
+                () -> assertThat(userRepository.findById(7L).get().getHomeAddress()).isNull(),
+                () -> assertThat(userRepository.findById(8L).get().getHomeAddress()).isInstanceOf(Address.class),
+                () -> assertThat(userRepository.findById(9L).get().getHomeAddress()).isInstanceOf(Address.class)
+        );
+
     }
 
     @Test

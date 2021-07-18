@@ -79,3 +79,13 @@ Embedded
   - 예를들어 주소 같은경우는 시, 도, 군, 우편번호 이런식으로 나누어지는 경우가 많은데 
     그부분을 각각의 필드로 받아서 Entity에서 사용하면 필드도 많아지고 지저분해지는 
     경우가 발생한다. 그것을 Address 클래스를 embed로 사용해서 줄일 수 있다.
+    
+
+---
+
+N + 1 이슈
+- @EntityGraph
+- @Query("select distinct r from Review r join fetch r.comments") : JPA query 
+
+--- 
+
