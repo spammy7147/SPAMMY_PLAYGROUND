@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.seven.jong.repository.IBoardMapper">
+					
+	<resultMap type="com.seven.jong.DTO.BoardDTO" id="board">
+		<id property="writeNo" column="write_no"/>
+		<result property="writer" column="writer"/>
+		<result property="title" column="title"/>
+		<result property="content" column="content"/>
+		<result property="saveDate" column="savedate"/>
+		<result property="fileName" column="file_name"/>
+		<result property="hit" column="hit"/>
+	</resultMap>
+	
+	<resultMap type="com.seven.jong.DTO.BoardReplyDTO" id="reply">
+		<id property="reply_num" column="reply_num"/>
+		<result property="writer" column="writer"/>
+		<result property="content" column="content"/>
+		<result property="write_date" column="write_date"/>
+		<result property="write_group" column="write_group"/>
+	</resultMap>
+	
+	<insert id="writeSave">
+		insert into air_board(write_no,writer,title,content,file_name)
+    	values(air_board_seq.nextval,#{writer},#{title},#{content},#{fileName})
+	</insert>
+	
+	<select id="boardAllList" resultMap="board">
+		select B.* from(select rownum rn, A.* from
+		(select * from air_board order by write_no desc)A)B where rn between #{s} and #{e}
+	</select>
+	
+	<select id="contentView" resultMap="board">
+		select * from air_board where write_no = #{writeNo}
+	</select>
+	
+	<update id="upHit">
+		update air_board set hit=hit+1 where write_no = #{writeNo}
+	</update>
+	
+	<update id="modify">
+		update air_board set title=#{title}, content=#{content}, file_name=#{fileName} where write_no = #{writeNo}
+	</update>
+	
+	<delete id="delete">
+		delete from air_board where write_no = #{writeNo}
+	</delete>
+	
+	<select id="BoardCount" resultType="integer">
+		select count(*) from air_board
+	</select>
+	
+	<!-- 게시글 검색 -->
+	<select id="boardSearchList" resultMap="board">
+			select B.* from(select rownum rn, A.* from
+			(select * from air_board where ${c} like '%'||#{search}||'%' order by write_no desc)A)B where rn between #{s} and #{e}
+	</select>
+	
+	<select id="selectBoardCount" resultType="integer">
+		<if test='c == "title"'>
+			select count(*) from air_board where title like '%'||#{search}||'%'
+		</if>
+		<if test='c == "writer"'>
+			select count(*) from air_board where writer like '%'||#{search}||'%'
+		</if>
+	</select>
+	
+	<insert id="addReply">
+		insert into air_board_reply(reply_num,writer,content,write_group) values(air_board_reply_seq.nextval,#{writer},#{content},#{writeNo})
+	</insert>
+	
+	<select id="getReplyList" resultMap="reply">
+		select * from air_board_reply where write_group=#{write_group} order by write_date desc 
+	</select>
+	
+	<delete id="replyDelete">
+		delete from air_board_reply where reply_num = #{reply_num}
+	</delete>
+	
+	<select id="selectReply" resultMap="reply">
+		select * from air_board_reply where reply_num = #{reply_num}
+	</select>
+	
+	<update id="modifyReply" >
+		update air_board_reply set content=#{content} where reply_num = #{reply_num}
+	</update>
+	
+</mapper>     
