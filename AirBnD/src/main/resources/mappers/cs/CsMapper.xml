@@ -1,0 +1,102 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+<mapper namespace="com.seven.jong.repository.ICsMapper">
+
+    <resultMap id="CsMap" type="com.seven.jong.DTO.FaqDTO" >
+        <id property="faqNum" column="faq_num"/>
+        <result property="question" column="question"/>
+        <result property="answer" column="answer"/>
+    </resultMap>
+    
+    <resultMap id="QnaMap" type="com.seven.jong.DTO.QnaDTO" >
+        <id property="qnaNo" column="qna_no"/>
+        <result property="email" column="email"/>
+        <result property="title" column="title"/>
+        <result property="content" column="content"/>
+        <result property="saveDate" column="save_date"/>
+        <result property="hit" column="hit"/>
+        <result property="imageFileName" column="image_file_name"/>
+    </resultMap>
+    
+    <resultMap id="QnaRepMap" type="com.seven.jong.DTO.QnaRepDTO" >
+        <id property="email" column="email"/>
+        <result property="content" column="content"/>
+        <result property="write_group" column="write_group"/>
+        <result property="write_date" column="write_date"/>
+    </resultMap>
+    
+
+	<!-- 자주하는 질문 등록 -->
+	<insert id="addFaq">
+		insert into faq(faq_num,question,answer)
+			values(faq_seq.nextval,#{question},#{answer})
+	</insert>
+	
+	<!-- 자주하는 질문 삭제 -->
+	<delete id="delFaq">
+		DELETE FROM FAQ WHERE FAQ_NUM = #{faqNum}
+	</delete>
+
+    <!-- 자주하는 질문 가져오기  -->
+    <select id="faqList" resultMap="CsMap">
+		select * from FAQ   
+    </select>
+    
+    <!-- 총 QnA 갯수 가져오기 -->
+    <select id="selectQnaCount" resultType="Integer">
+    	select count(*) from QNA
+    </select>
+    
+    <!-- 요청 페이지 QnA 정보 가져오기 -->
+    <select id="pageQnaInfo" resultMap="QnaMap">
+    	select B.* from(select rownum rn, A.* from
+		(select * from QNA order by qna_no desc)A)B where rn between #{s} and #{e}
+    </select>
+    
+    <!-- QnA 저장하기 -->
+    <insert id="qnaSave">
+    	insert into QNA(qna_no,email,title,content,image_file_name)
+    	values(qna_seq.nextval,#{email},#{title},#{content},#{imageFileName})
+    	
+    </insert>
+    
+    <!-- 선택 QNA 가져오기 -->
+	<select id="qnaContentView" resultMap="QnaMap">
+		select * from QNA where qna_no = #{qnaNo}
+	</select> 
+	
+	<!-- 조회수 올리기 -->
+	<update id="upHit">
+		update QNA set hit=hit+1 where qna_no = #{qnaNo}
+	</update>
+	
+	<!-- QnA삭제 -->
+	<delete id="qnaDelete">
+		DELETE FROM QNA WHERE QNA_NO = #{qnaNo}
+	</delete>
+	
+	<!-- QnA 수정 -->
+	<update id="modify">
+		update QNA set title=#{title}, content=#{content}, 
+			image_file_name=#{imageFileName} where qna_no = #{qnaNo}
+	</update>
+	
+	<!-- 리플 등록 -->
+	<insert id="addReply">
+		insert into QNAREPLY(email,content,write_group)
+			values(#{email},#{content},#{write_group})
+	</insert>
+	
+	<!-- 해당 QnA 리플 가져오기 -->
+	<select id="getRepList" resultMap="QnaRepMap">
+		select * from QNAREPLY where write_group=#{write_group}
+										order by write_date desc
+	</select>
+	
+	
+	
+</mapper>
+
