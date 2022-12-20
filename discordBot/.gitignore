@@ -38,3 +38,4 @@ out/
 
 ###################
 src/main/java/discord/bot/BotToken.java
+src/main/java/discord/bot/
