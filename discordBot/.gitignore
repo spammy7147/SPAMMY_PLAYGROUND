@@ -37,4 +37,4 @@ out/
 .vscode/
 
 ###################
-/src/main/java/discord/BotToken.java
+*/BotToken.java
