@@ -30,15 +30,25 @@ import net.dv8tion.jda.internal.requests.restaction.MessageCreateActionImpl;
 import net.dv8tion.jda.internal.requests.restaction.RoleActionImpl;
 
 import java.awt.*;
-import java.util.ArrayList;
-import java.util.LinkedList;
+import java.lang.reflect.Array;
+import java.util.*;
 import java.util.List;
-import java.util.Vector;
 
 @Slf4j
 public class MessageEvent extends ListenerAdapter {
 
+    static List<String> gamerList = new ArrayList<>();
 
+    /**
+     * @EmbedBuilder Example
+     *
+     * EmbedBuilder hello = new EmbedBuilder();
+     * hello.setTitle("welcome");
+     * hello.setColor(0x66d8ff);
+     * hello.setDescription("이게뭘까");
+     *
+     * event.getChannel().sendMessageEmbeds(hello.build()).queue();
+     */
 
 
     @Override
@@ -50,6 +60,30 @@ public class MessageEvent extends ListenerAdapter {
     public void onButtonInteraction(ButtonInteractionEvent event) {
         event.deferEdit().queue();
         log.info("button ID = {}",event.getButton().getId());
+
+        switch (event.getButton().getId()){
+            case "start":
+                event.getMember().getUser().openPrivateChannel().flatMap( channel -> channel.sendMessage("당신은 게임에 참여하셨습니다.")).queue();
+                log.info("nickName = {}", event.getMember().getEffectiveName());
+                gamerList.add(event.getMember().getEffectiveName());
+                break;
+            case "cancel":
+                event.getMember().getUser().openPrivateChannel().flatMap( channel -> channel.sendMessage("게임 참여를 취소했습니다.")).queue();
+                break;
+            case "list":
+                StringBuilder list = new StringBuilder();
+                gamerList.stream().forEach(gamer -> {
+                    log.info("gamer = {}", gamer);
+                    list.append(gamer);
+                    list.append("\n");
+                });
+                EmbedBuilder embed = new EmbedBuilder();
+                embed.setTitle("게임 참가자 목록");
+                embed.setDescription(list);
+                event.getChannel().sendMessageEmbeds(embed.build()).queue();
+
+                break;
+        }
     }
 
     @Override
@@ -57,49 +91,26 @@ public class MessageEvent extends ListenerAdapter {
 
         if (event.isFromType(ChannelType.TEXT)) {
             log.info("입력한 대화 = {}", event.getMessage().getContentDisplay());
+
+            if(event.getMessage().getContentDisplay().equals("게임 시작")) {
+                Button start = Button.primary("start", "참여");
+                Button cancel = Button.danger("cancel", "취소");
+                Button list = Button.success("list", "목록");
+                event.getChannel().sendMessage("마피아 게임 참가하실려면 시작 버튼을 눌러주세요. ").addActionRow(start, cancel, list).queue();
+            }
+
             if(event.getMessage().getContentDisplay().equals("시작")) {
-                EmbedBuilder hello = new EmbedBuilder();
-                hello.setTitle("welcome");
-                hello.setColor(0x66d8ff);
-                hello.setDescription("이게뭘까");
-
-                event.getChannel().sendMessageEmbeds(hello.build()).queue();
-
-                Button button1 = Button.danger("button1", "버튼");
-                Button button2 = Button.danger("button2", "버튼");
-                Button button3 = Button.danger("button3", "버튼");
-                event.getChannel().sendMessage("버튼 테스트").addActionRow(button1,button2, button3).queue();
+                RoleAction role = new RoleActionImpl(event.getGuild());
+                role.setName("마피아");
+                role.setColor(Color.CYAN);
+                role.queue();
             }
 
             if(event.getMessage().getContentDisplay().equals("신입받아라")) {
-              RoleAction role = new RoleActionImpl(event.getGuild());
-              role.setName("분노의코딩중");
-              role.setColor(Color.CYAN);
-              log.info("permission = {}", Permission.ALL_TEXT_PERMISSIONS);
-              role.setPermissions(Permission.ALL_TEXT_PERMISSIONS);
-              role.queue();
-              //event.getGuild().addRoleToMember(event.getMember().getUser(), event.getGuild().getRolesByName("NEW", false).get(0));
-                List<Role> roles = event.getMember().getRoles();
-                roles.forEach( e -> {log.info("role = {}", e.getName());});
-                log.info("size = {}",event.getGuild().getRolesByName("NEW", true).size());
-                List<Role> aNew = event.getGuild().getRolesByName("NEW", true);
-                log.info("{}",aNew);
-                Role roleById = event.getGuild().getRoleById(aNew.get(0).getId());
-
-                log.info("aNew instanceof ArrayList = {}",aNew instanceof ArrayList);
-                log.info("aNew instanceof LinkedList = {}",aNew instanceof LinkedList);
-                log.info("aNew instanceof Vector = {}",aNew instanceof Vector);
-                log.info("roles size = {}",roles.size());
-                log.info("role info = {}" , roleById);
-                roles.add(roleById);
-
-                List<Role> roles1 = event.getGuild().getRolesByName("NEW", true);
-                roles1.forEach( e -> {log.info("role1 = {}", e.getName());});
-
-                event.getGuild().modifyMemberRoles(event.getMember(),  roles);
+                List<Role> newRoles = new ArrayList<>(event.getMember().getRoles());
+                newRoles.add(event.getGuild().getRolesByName("마피아",true).get(0));
+                event.getGuild().modifyMemberRoles(event.getMember(),  newRoles).queue();
             }
-
-            log.info("test = {} ", event.getAuthor().getName());
         }
     }
 }
