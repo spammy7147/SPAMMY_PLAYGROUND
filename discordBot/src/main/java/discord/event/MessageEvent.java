@@ -69,8 +69,12 @@ public class MessageEvent extends ListenerAdapter {
                 break;
             case "cancel":
                 event.getMember().getUser().openPrivateChannel().flatMap( channel -> channel.sendMessage("게임 참여를 취소했습니다.")).queue();
+                if(gamerList.contains(event.getMember().getEffectiveName())){
+                    gamerList.remove(event.getMember().getEffectiveName());
+                }
                 break;
             case "list":
+
                 StringBuilder list = new StringBuilder();
                 gamerList.stream().forEach(gamer -> {
                     log.info("gamer = {}", gamer);
