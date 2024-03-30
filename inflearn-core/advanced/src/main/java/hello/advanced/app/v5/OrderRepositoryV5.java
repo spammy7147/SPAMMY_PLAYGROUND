@@ -29,6 +29,5 @@ public class OrderRepositoryV5 {
         } catch (InterruptedException e) {
             e.printStackTrace();
         }
-
     }
 }
