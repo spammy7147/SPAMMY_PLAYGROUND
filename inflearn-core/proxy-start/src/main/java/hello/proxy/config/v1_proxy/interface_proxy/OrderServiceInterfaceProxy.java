@@ -4,7 +4,6 @@ import hello.proxy.app.v1.OrderServiceV1;
 import hello.proxy.trace.TraceStatus;
 import hello.proxy.trace.logtrace.LogTrace;
 import lombok.RequiredArgsConstructor;
-import org.springframework.beans.factory.annotation.Required;
 
 @RequiredArgsConstructor
 public class OrderServiceInterfaceProxy implements OrderServiceV1 {
