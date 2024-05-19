@@ -6,9 +6,15 @@ import jakarta.persistence.*;
 @SequenceGenerator(name = "MEMBER_SEQ_GENERATOR", sequenceName = "MEMBER_SEQ")
 public class Member {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY, generator = "MEMBER_SEQ_GENERATOR")
+    @GeneratedValue
     private Long id;
-    private String name;
+    @Column(name = "USERNAME")
+    private String username;
+
+    @ManyToOne
+    @JoinColumn(name = "TEAM_ID")
+    private Team team;
+//    private Long teamId;
 
     public Long getId() {
         return id;
@@ -18,11 +24,19 @@ public class Member {
         this.id = id;
     }
 
-    public String getName() {
-        return name;
+    public String getUsername() {
+        return username;
     }
 
-    public void setName(String name) {
-        this.name = name;
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public Team getTeam() {
+        return team;
+    }
+
+    public void setTeam(Team team) {
+        this.team = team;
     }
 }
