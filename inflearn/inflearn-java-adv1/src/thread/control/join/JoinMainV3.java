@@ -1,6 +1,6 @@
-package thread.join;
+package thread.control.join;
 
-import static thread.util.ThreadUtils.sleep;
+import static util.ThreadUtils.sleep;
 import static util.MyLogger.log;
 
 public class JoinMainV3 {
