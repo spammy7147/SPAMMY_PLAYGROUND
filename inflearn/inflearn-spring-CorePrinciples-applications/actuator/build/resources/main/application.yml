@@ -18,6 +18,7 @@ management:
       exposure:
         include: "*"
         exclude: ""
+      base-path: /actuator
   server:
     port: 8080
 
@@ -29,3 +30,8 @@ info:
 logging:
   level:
     hello.controller: debug
+
+server:
+  tomcat:
+    mbeanregistry:
+      enabled: true
