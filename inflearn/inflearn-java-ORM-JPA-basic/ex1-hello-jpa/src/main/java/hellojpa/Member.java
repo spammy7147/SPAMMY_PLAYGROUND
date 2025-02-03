@@ -2,6 +2,9 @@ package hellojpa;
 
 import jakarta.persistence.*;
 
+import java.util.ArrayList;
+import java.util.List;
+
 @Entity
 //@SequenceGenerator(name = "MEMBER_SEQ_GENERATOR", sequenceName = "MEMBER_SEQ")
 public class Member {
@@ -18,6 +21,9 @@ public class Member {
     @OneToOne
     @JoinColumn(name ="LOCKER_ID")
     private Locker locker;
+
+    @OneToMany(mappedBy = "product")
+    private List<Product> products = new ArrayList<>();
 
     public Long getId() {
         return id;

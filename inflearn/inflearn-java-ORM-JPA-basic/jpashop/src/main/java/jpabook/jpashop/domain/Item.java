@@ -1,7 +1,12 @@
 package jpabook.jpashop.domain;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
+import java.util.ArrayList;
+import java.util.List;
+
+@Data
 @Entity
 public class Item {
 
@@ -16,6 +21,8 @@ public class Item {
 
     private int stockQuantity;
 
+    @ManyToMany(mappedBy = "items")
+    private List<Category> categories = new ArrayList<>();
 
 
 }
