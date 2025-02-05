@@ -8,7 +8,9 @@ import java.util.List;
 
 @Data
 @Entity
-public class Item {
+@Inheritance(strategy = InheritanceType.JOINED)
+@DiscriminatorColumn
+public abstract class Item extends BaseEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
