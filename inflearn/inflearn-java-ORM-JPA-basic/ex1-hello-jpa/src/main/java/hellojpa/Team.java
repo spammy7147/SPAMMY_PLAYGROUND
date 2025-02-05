@@ -1,12 +1,14 @@
 package hellojpa;
 
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.ArrayList;
 import java.util.List;
 
 @Entity
-public class Team {
+@Data
+public class Team extends BaseEntity {
     @Id
     @GeneratedValue
     @Column(name = "TEAM_ID")
@@ -16,32 +18,4 @@ public class Team {
     private List<Member> members = new ArrayList<>();
 
 
-    public List<Member> getMembers() {
-        return members;
-    }
-
-    public void setMembers(List<Member> members) {
-        this.members = members;
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public void setName(String name) {
-        this.name = name;
-    }
-
-    public void addMember(Member member) {
-        member.setTeam(this);
-        members.add(member);
-    }
 }
