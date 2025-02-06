@@ -17,22 +17,36 @@ public class JpaMain {
         tx.begin();
 
         try {
-            Child child1 = new Child();
-            child1.setName("C1");
-            Child child2 = new Child();
-            child2.setName("C2");
-            Parent parent = new Parent();
-            parent.setName("P1");
-            parent.addChild(child1);
-            parent.addChild(child2);
+            NewMember newMember = new NewMember();
+            newMember.setUsername("hello");
+            newMember.setHomeAddress(new Address("city", "street", "zipCode"));
+            newMember.setWorkPeriod(new Period(LocalDateTime.now(),LocalDateTime.now()));
 
-            em.persist(parent);
+            newMember.getFavoriteFoods().add("치킨");
+            newMember.getFavoriteFoods().add("족발");
+            newMember.getFavoriteFoods().add("피자");
 
-            em.flush();
-            em.clear();
+            newMember.getAddressHistory().add(new Address("city1", "street1", "zipCode1"));
+            newMember.getAddressHistory().add(new Address("city2", "street2", "zipCode2"));
 
-            Parent findParent = em.find(Parent.class, parent.getId());
-            em.remove(findParent);
+            em.persist(newMember);
+
+//            Child child1 = new Child();
+//            child1.setName("C1");
+//            Child child2 = new Child();
+//            child2.setName("C2");
+//            Parent parent = new Parent();
+//            parent.setName("P1");
+//            parent.addChild(child1);
+//            parent.addChild(child2);
+//
+//            em.persist(parent);
+//
+//            em.flush();
+//            em.clear();
+//
+//            Parent findParent = em.find(Parent.class, parent.getId());
+//            em.remove(findParent);
 
 //            em.persist(child1);
 //            em.persist(child2);
