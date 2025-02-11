@@ -31,7 +31,6 @@ public class JpaMain {
                 em.persist(member);
             }
 
-
             em.flush();
             em.clear();
 
