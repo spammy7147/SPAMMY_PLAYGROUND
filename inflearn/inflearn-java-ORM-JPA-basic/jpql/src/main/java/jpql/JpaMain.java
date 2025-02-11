@@ -39,17 +39,39 @@ public class JpaMain {
             String query1 = "select m from Member as m inner join m.team t where t.name = :teamName";
             String query2 = "select m from Member m, Team t where m.username = t.name";
             String query3 = "select m.username, 'HELLO', TRUE, m.type from Member m where m.type = :userType";
-            List<Object[]> resultList = em.createQuery(query3)
-                    .setParameter("userType", MemberType.ADMIN)
-                    .getResultList();
 
-            for (Object[] objects : resultList) {
-                System.out.println("objects = " + objects[0]);
-                System.out.println("objects = " + objects[1]);
-                System.out.println("objects = " + objects[2]);
-                System.out.println("objects = " + objects[3]);
+
+//            List<Object[]> resultList = em.createQuery(query5)
+////                    .setParameter("userType", MemberType.ADMIN)
+//                    .getResultList();
+//
+//            for (Object[] objects : resultList) {
+//                for (Object object : objects) {
+//                    System.out.println("object = " + object);
+//                }
+//            }
+
+            String query4 = "select " +
+                    "case when m.age <= 10 then '학생요금' " +
+                    "when m.age >= 60 then '경로요금'" +
+                    "else '일반요금' end " +
+                    "from Member m";
+            String query5 = "select coalesce(m.username, '이름 없는 회원') as username from Member m";
+            String query6 = "select concat('a', 'b') from Member m";
+
+
+            List<String> resultList1 = em.createQuery(query5, String.class).getResultList();
+            for (String s : resultList1) {
+                System.out.println("s = " + s);
             }
 
+            //language=HQL
+            String query7 = "select locate('de','abcdegf') from Member m";
+            List<Integer> resultList = em.createQuery(query7, Integer.class).getResultList();
+
+            for (Integer i : resultList) {
+                System.out.println("i = " + i);
+            }
 
 
             tx.commit();
