@@ -1,10 +1,7 @@
 package jpql;
 
 import jakarta.persistence.*;
-import jpql.domain.Address;
-import jpql.domain.Member;
-import jpql.domain.Order;
-import jpql.domain.Team;
+import jpql.domain.*;
 import jpql.dto.MemberDTO;
 
 import java.time.LocalDateTime;
@@ -21,7 +18,7 @@ public class JpaMain {
         tx.begin();
 
         try {
-            for (int i = 0; i < 100; i++) {
+            for (int i = 1; i < 2; i++) {
                 Team team = new Team();
                 team.setName("team" + i);
                 em.persist(team);
@@ -29,6 +26,7 @@ public class JpaMain {
                 Member member = new Member();
                 member.setUsername("member" + i);
                 member.setAge(i);
+                member.setType(MemberType.ADMIN);
                 member.changeTeam(team);
                 em.persist(member);
             }
@@ -41,8 +39,17 @@ public class JpaMain {
 
             String query1 = "select m from Member as m inner join m.team t where t.name = :teamName";
             String query2 = "select m from Member m, Team t where m.username = t.name";
-            List<Member> resultList = em.createQuery(query2, Member.class)
+            String query3 = "select m.username, 'HELLO', TRUE, m.type from Member m where m.type = :userType";
+            List<Object[]> resultList = em.createQuery(query3)
+                    .setParameter("userType", MemberType.ADMIN)
                     .getResultList();
+
+            for (Object[] objects : resultList) {
+                System.out.println("objects = " + objects[0]);
+                System.out.println("objects = " + objects[1]);
+                System.out.println("objects = " + objects[2]);
+                System.out.println("objects = " + objects[3]);
+            }
 
 
 
