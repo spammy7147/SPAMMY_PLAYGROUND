@@ -18,18 +18,26 @@ public class JpaMain {
         tx.begin();
 
         try {
-            for (int i = 1; i < 2; i++) {
-                Team team = new Team();
-                team.setName("team" + i);
-                em.persist(team);
 
-                Member member = new Member();
-                member.setUsername("member" + i);
-                member.setAge(i);
-                member.setType(MemberType.ADMIN);
-                member.changeTeam(team);
-                em.persist(member);
-            }
+            Team team1 = new Team();
+            team1.setName("팀A");
+            em.persist(team1);
+            Team team2 = new Team();
+            team2.setName("팀B");
+            em.persist(team2);
+
+            Member member1 = new Member();
+            member1.setUsername("회원1");
+            member1.setTeam(team1);
+            em.persist(member1);
+            Member member2 = new Member();
+            member2.setUsername("회원2");
+            member2.setTeam(team1);
+            em.persist(member2);
+            Member member3 = new Member();
+            member3.setUsername("회원3");
+            member3.setTeam(team2);
+            em.persist(member3);
 
             em.flush();
             em.clear();
@@ -60,19 +68,47 @@ public class JpaMain {
             String query6 = "select concat('a', 'b') from Member m";
 
 
-            List<String> resultList1 = em.createQuery(query5, String.class).getResultList();
-            for (String s : resultList1) {
-                System.out.println("s = " + s);
-            }
+//            List<String> resultList1 = em.createQuery(query5, String.class).getResultList();
+//            for (String s : resultList1) {
+//                System.out.println("s = " + s);
+//            }
 
             //language=HQL
-            String query7 = "select locate('de','abcdegf') from Member m";
-            List<Integer> resultList = em.createQuery(query7, Integer.class).getResultList();
+//            String query7 = "select locate('de','abcdegf') from Member m ";
+//            List<Integer> resultList = em.createQuery(query7, Integer.class).getResultList();
+//            for (Integer i : resultList) {
+//                System.out.println("i = " + i);
+//            }
 
-            for (Integer i : resultList) {
-                System.out.println("i = " + i);
-            }
+//            String query8 = "select m from Member m join fetch m.team";
+//            List<Member> members = em.createQuery(query8, Member.class).getResultList();
+//            for (Member member : members) {
+//                System.out.println("member.username = " + member.getUsername());
+//                System.out.println("member.team.name = " + member.getTeam().getName());
+//            }
 
+//            String query9 = "select distinct t from Team t join fetch t.members";
+//            List<Team> teams = em.createQuery(query9, Team.class).getResultList();
+//            for (Team team : teams) {
+//                System.out.println("team.getName = " + team.getName());
+//                System.out.println("team.getMembers = " + team.getMembers());
+//                for (Member member : team.getMembers()) {
+//                    System.out.println("team.getMembers.username = " + member.getUsername());
+//                }
+//            }
+
+//            List<Member> resultList = em.createNamedQuery("Member.findByUsername", Member.class)
+//                    .setParameter("username", "회원1")
+//                    .getResultList();
+//            for (Member member : resultList) {
+//                System.out.println("member = " + member);
+//            }
+
+            int resultCnt = em.createQuery("update Member m set m.age = :age")
+                    .setParameter("age", 20)
+                    .executeUpdate();
+
+            System.out.println("resultCnt = " + resultCnt);
 
             tx.commit();
         }catch (Exception e) {
@@ -84,11 +120,5 @@ public class JpaMain {
         emf.close();
     }
 
-    private static void printMemberAndTeam(Member member) {
-        String username = member.getUsername();
-        System.out.println("username = " + username);
 
-        Team team = member.getTeam();
-        System.out.println("team = " + team);
-    }
 }

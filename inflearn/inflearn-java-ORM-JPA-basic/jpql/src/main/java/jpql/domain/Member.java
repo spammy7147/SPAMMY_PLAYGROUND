@@ -7,6 +7,10 @@ import lombok.ToString;
 @Data
 @Entity
 @ToString(exclude = "team")
+@NamedQuery(
+        name = "Member.findByUsername",
+        query = "select m from Member m where m.username = :username"
+)
 public class Member {
 
     @Id @GeneratedValue
