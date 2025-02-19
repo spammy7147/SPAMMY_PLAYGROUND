@@ -2,7 +2,7 @@ spring:
   datasource:
 #    url: jdbc:h2:~/Desktop/study/h2db/jpashop
 #    url: jdbc:h2:~/Desktop/study/SPAMMY_PLAYGROUND/inflearn/inflearn-springboot+JPA_1/db/jpashop
-    url: jdbc:h2:tcp://localhost/~/Desktop/study/SPAMMY_PLAYGROUND/inflearn/inflearn-springboot+JPA_1/db/jpashop
+    url: jdbc:h2:tcp://localhost/~/Desktop/study/SPAMMY_PLAYGROUND/inflearn/inflearn-springboot+JPA_2/db/jpashop
 
     username: sa
     password:
