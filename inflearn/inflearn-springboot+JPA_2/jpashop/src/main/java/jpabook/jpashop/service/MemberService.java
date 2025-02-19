@@ -1,5 +1,6 @@
 package jpabook.jpashop.service;
 
+import jakarta.validation.constraints.NotEmpty;
 import jpabook.jpashop.domain.Member;
 import jpabook.jpashop.repository.MemberRepository;
 import lombok.RequiredArgsConstructor;
@@ -41,5 +42,11 @@ public class MemberService {
         if(!findMembers.isEmpty()) {
             throw new IllegalStateException("이미 존재하는 회원입니다.");
         }
+    }
+
+    @Transactional
+    public void update(Long id, @NotEmpty String name) {
+        Member member = memberRepository.find(id);
+        member.setName(name);
     }
 }
