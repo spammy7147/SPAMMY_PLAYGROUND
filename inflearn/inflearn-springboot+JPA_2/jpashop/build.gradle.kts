@@ -32,6 +32,7 @@ dependencies {
 	implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.10.0")
 	implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.10.0")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-hibernate6")
+	implementation("com.oracle.database.jdbc:ojdbc11")
 
 	compileOnly("org.projectlombok:lombok")
 	runtimeOnly("com.h2database:h2")
