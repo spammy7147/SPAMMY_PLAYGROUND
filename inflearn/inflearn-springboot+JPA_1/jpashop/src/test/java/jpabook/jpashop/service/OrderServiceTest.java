@@ -69,7 +69,7 @@ class OrderServiceTest {
         Item item = createBook("시골 JPA", 10000, 10);
         int orderCount = 2;
 
-        Long orderId = orderService.order(member.getId(), item.getId(), orderCount);
+        Long orderId = orderService.orde3er(member.getId(), item.getId(), orderCount);
 
         //when
         orderService.cancelOrder(orderId);

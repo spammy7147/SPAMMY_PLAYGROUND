@@ -95,7 +95,7 @@ public class OrderRepository {
         return query.getResultList();
     }
 
-    public List<Order> findAllWithMemberDelivery(OrderSearch orderSearch) {
+    public List<Order> findAllWithMemberDelivery() {
         return em.createQuery("select o from orders o Join fetch o.member m join fetch o.delivery d", Order.class)
                 .getResultList();
     }
@@ -111,5 +111,14 @@ public class OrderRepository {
                 .setMaxResults(100)
                 .getResultList();
 
+    }
+
+    public List<Order> findAllWithMemberDelivery(int offSet, int limit) {
+        return em.createQuery("select o from orders o " +
+                        "Join fetch o.member m " +
+                        "join fetch o.delivery d", Order.class)
+                .setFirstResult(offSet)
+                .setMaxResults(limit)
+                .getResultList();
     }
 }
