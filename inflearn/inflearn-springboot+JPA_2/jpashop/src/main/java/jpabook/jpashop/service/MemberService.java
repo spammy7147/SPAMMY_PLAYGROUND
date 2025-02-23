@@ -34,7 +34,7 @@ public class MemberService {
 
 
     public Member find(Long memberId) {
-        return memberRepository.find(memberId);
+        return memberRepository.findById(memberId).get();
     }
 
     private void validateDuplicateMember(Member member) {
@@ -46,7 +46,7 @@ public class MemberService {
 
     @Transactional
     public void update(Long id, @NotEmpty String name) {
-        Member member = memberRepository.find(id);
+        Member member = memberRepository.findById(id).get();
         member.setName(name);
     }
 }
