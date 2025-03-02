@@ -12,8 +12,8 @@ import lombok.*;
         name = "Member.findByUsername",
         query="select m from Member m where m.username = :username"
 )
-
-public class Member {
+@NamedEntityGraph(name = "Member.findTeam", attributeNodes = @NamedAttributeNode("team"))
+public class Member extends BaseEntity {
 
     @Id
     @GeneratedValue
