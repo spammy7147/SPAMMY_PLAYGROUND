@@ -33,7 +33,6 @@ dependencies {
 	implementation("org.springframework.boot:spring-boot-devtools")
 	implementation ("org.springframework.boot:spring-boot-starter-validation")
 	implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.10.0")
-	implementation("com.github.gavlyukovskiy:p6spy-spring-boot-starter:1.10.0")
 	implementation("com.fasterxml.jackson.datatype:jackson-datatype-hibernate6")
 	implementation("com.oracle.database.jdbc:ojdbc11")
 
