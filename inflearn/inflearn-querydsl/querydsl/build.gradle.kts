@@ -24,7 +24,7 @@ repositories {
 	mavenCentral()
 }
 
-val queryDslVersion = "5.0.0" // QueryDSL Version Setting
+val queryDslVersion = "5.1.0" // QueryDSL Version Setting
 
 dependencies {
 	implementation ("com.querydsl:querydsl-jpa:${queryDslVersion}:jakarta")
