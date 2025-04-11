@@ -11,4 +11,3 @@ public class Newbie181879 {
         return num_list.length > 10 ? IntStream.of(num_list).sum() : IntStream.of(num_list).reduce(1, (a, b) -> a * b);
     }
 }
-}
