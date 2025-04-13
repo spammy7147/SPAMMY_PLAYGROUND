@@ -1,34 +1,3 @@
-const 전투 = {
-				'' : 'Mine01'
-			}
-
-const 모험 = {
-				'뒷산의 광산' : 'Mine01',
-				'뒷산의 숲' : 'Herb01',
-				'고블린 콜로세움' : 'gb7',
-				'천년제 무투회' : 'festival01',
-				'천년제 무투회(HARD)' : 'festival011',
-				'마법신의 탑(상층(裏))' : 'mg06',
-				'천체관' : 'mg04',
-				'태양의 제단' : 'Pyra55',
-				'마을 묘지' : 'Grave001'
-			}
-
-const 퀘스트 = {
-				'일일 퀘스트 수주' : '90',
-				'주단위 퀘스트 수주' : '91',
-				'퀘스트 스크롤 추가 구입' : '93',
-				'지하유적 지하 조사 시작' : '250',
-				'도전자!' : '301',
-				'본선 도전권(A)' : '310',
-				'본선 도전권(B)' : '311',
-				'천년제 무투회 티켓' : '319',
-				'저택 동관 조사(반복)' : '557',
-				'저택 동관 열쇠 수집' : '563',
-				'저택 서관 열쇠 수집' : '571',
-				'천년제 종료...?' : '322'
-			}			
-
 function do_quest() {
 	let cnt = 0;
 	for(key in 퀘스트) {
@@ -41,6 +10,7 @@ function do_quest() {
 		setTimeout(() => {quest(no, 'complete')}, cnt++ * 1000)
 	}
 }
+
 function quest(no, status) {
 	let link;
 	if(status === 'get') { 
@@ -48,26 +18,14 @@ function quest(no, status) {
 	} else {
 		link = 'http://sic.zerosic.com/ZeroHOF/index.php?menu=quest&action=complete&no=' + no;
 	}
-
 	window.open(link, 'quest');
-
-	// const form = document.createElement('form');
-	// form.method = 'GET';
-	// form.target = 'lucky'; // 새 탭에서 열고 싶을 때
-	// form.action = action
-	
-	// document.body.appendChild(form);
-	// form.submit();
-	// document.body.removeChild(form)
 }
 
 function pattern(formId, patternno){
 	const form = document.getElementById(formId);
 	form.querySelector('input[name="patternno"]').value = patternno;
 	form.submit();
-
 }
-
 
 function party_pattern(class1, pattern1, class2, pattern2, class3, pattern3, class4, pattern4, class5, pattern5) {
 	setTimeout(() => {pattern(class1, pattern1)}, 0)
@@ -77,20 +35,52 @@ function party_pattern(class1, pattern1, class2, pattern2, class3, pattern3, cla
 	setTimeout(() => {pattern(class5, pattern5)}, 4000)
 }
 
-function battle(formId, action) { 
-	const form = document.getElementById(formId);
+function battle(status, action, char) { 
+	if(status === '모험') {
+		action = 'http://sic.zerosic.com/ZeroHOF/index.php?sp_common=' + action
+	}else {
+		action = 'http://sic.zerosic.com/ZeroHOF/index.php?common=' + action
+	}
+	
+	const form = document.createElement('form');
+	form.method = 'POST'
+	form.target = '_blank'
 	form.action = action
+	for(c of char) {
+		const input = document.createElement('input');
+		input.type = 'hidden';
+		input.name = 'char_' + 캐릭[c];
+		input.value = '1'
+		form.appendChild(input);
+	}
+	const input = document.createElement('input');
+	input.type = 'hidden';
+	input.name = status === '모험' ? 'monster_battle' : 'monster_battle_10';
+	input.value = 'Battle !'
+	form.appendChild(input);
+	document.body.appendChild(form);
 	form.submit();
 }
 
-function battle_chain(party) {
+function 범용모험() {
 	let idx = 0;
 	for(key in 모험) {
-		let action = 'http://sic.zerosic.com/ZeroHOF/index.php?sp_common=' + 모험[key] 
-		setTimeout(() => {battle(party, action)}, idx++ * 1000)
+		let action = 모험[key] 
+		setTimeout(() => {battle('모험', action,['소셜','사제','바드','드루','도둑'])}, idx++ * 1000)
 	}
 
 }
+
+async function replaceFragment(htmlName) {
+    const res = await fetch('character-list.html');
+    const html = await res.text();
+    const parser = new DOMParser();
+    const doc = parser.parseFromString(html, 'text/html');
+    const fragmentElement = doc.body.firstElementChild;
+
+    const target = document.getElementById(htmlName);
+    target.replaceWith(fragmentElement);
+  }
 
 function equip(a,b,c){
 	var form = a
@@ -113,3 +103,7 @@ function u_equip_5(a,b,c,d,e,f,g,h,i,j ) {
 	setTimeout(equip,3000,g,h,5);
 	setTimeout(equip,4000,i,j,6);
 }
+
+
+
+replaceFragment('character-list');
