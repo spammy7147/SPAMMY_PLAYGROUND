@@ -5,6 +5,7 @@ const 전투 = {
 const 모험 = {
 				'뒷산의 광산' : 'Mine01',
 				'뒷산의 숲' : 'Herb01',
+				'고블린 콜로세움' : 'gb7',
 				'천년제 무투회' : 'festival01',
 				'천년제 무투회(HARD)' : 'festival011',
 				'마법신의 탑(상층(裏))' : 'mg06',
@@ -48,11 +49,11 @@ function quest(no, status) {
 		link = 'http://sic.zerosic.com/ZeroHOF/index.php?menu=quest&action=complete&no=' + no;
 	}
 
-	window.open(link, '_blank');
+	window.open(link, 'quest');
 
 	// const form = document.createElement('form');
 	// form.method = 'GET';
-	// form.target = '_blank'; // 새 탭에서 열고 싶을 때
+	// form.target = 'lucky'; // 새 탭에서 열고 싶을 때
 	// form.action = action
 	
 	// document.body.appendChild(form);
@@ -96,7 +97,7 @@ function equip(a,b,c){
 	var input = document.createElement('input')
 	input.type ='hidden'
 	input.name = b
-	form.target = '_blank'
+	form.target = 'lucky'
 	input.value ='Equip Load(1)';
 	form.appendChild(input);
 	form.submit() ;
