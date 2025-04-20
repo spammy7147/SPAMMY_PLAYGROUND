@@ -29,7 +29,7 @@ public class SecurityConfig {
                 .cors(cors -> cors.configurationSource(configurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)  //csrf 비활성화
                 .httpBasic(AbstractHttpConfigurer::disable) //HTTP Basic 비활성화
-                .authorizeHttpRequests(a -> a.requestMatchers("/member/create", "/member/doLogin")
+                .authorizeHttpRequests(a -> a.requestMatchers("/member/create", "/member/doLogin" , "/connect/**")
                         .permitAll()
                         .anyRequest()
                         .authenticated())   //특성 url 패턴에 대해서는 Authentication 객체 요구하지 않음(인증처리 제외)
