@@ -1,6 +1,7 @@
 package com.chat.chatserver.chat.controller;
 
 import com.chat.chatserver.chat.dto.ChatMessageReqDto;
+import com.chat.chatserver.chat.service.ChatService;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -18,9 +19,11 @@ import org.springframework.stereotype.Controller;
 public class StompController {
 
     private final SimpMessageSendingOperations messageTemplate;
+    private final ChatService chatService;
 
-    public StompController(SimpMessageSendingOperations messageTemplate) {
+    public StompController(SimpMessageSendingOperations messageTemplate, ChatService chatService) {
         this.messageTemplate = messageTemplate;
+        this.chatService = chatService;
     }
 
     /**
@@ -39,6 +42,7 @@ public class StompController {
     @SendTo("/topic/{roomId}")
     public void sendMessageV2(@DestinationVariable Long roomId, ChatMessageReqDto chatMessageReqDto) {
         log.info("message = {}", chatMessageReqDto.getMessage());
+        chatService.saveMessage(roomId, chatMessageReqDto);
         messageTemplate.convertAndSend("/topic/" + roomId, chatMessageReqDto);
     }
 }
