@@ -1,5 +1,6 @@
 package com.chat.chatserver.chat.controller;
 
+import com.chat.chatserver.chat.dto.ChatMessageDto;
 import com.chat.chatserver.chat.dto.ChatRoomResDto;
 import com.chat.chatserver.chat.service.ChatService;
 import lombok.RequiredArgsConstructor;
@@ -34,5 +35,12 @@ public class ChatController {
     public ResponseEntity<?> joinGroupChatRoom(@PathVariable Long roomId) {
         chatService.addParticipantToGroupChat(roomId);
         return ResponseEntity.ok().build();
+    }
+
+    //이전메세지조회
+    @GetMapping("/history/{roomId}")
+    public ResponseEntity<?> getChatHistory(@PathVariable Long roomId) {
+        List<ChatMessageDto> chatMessageDtos = chatService.getChatHistory(roomId);
+        return new ResponseEntity<>(chatMessageDtos, HttpStatus.OK);
     }
 }

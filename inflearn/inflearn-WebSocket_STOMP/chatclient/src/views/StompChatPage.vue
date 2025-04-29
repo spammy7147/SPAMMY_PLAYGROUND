@@ -32,7 +32,7 @@
 <script>
 import SockJS from 'sockjs-client'
 import Stomp from 'webstomp-client'
-// import axios from 'axios'
+import axios from 'axios'
 export default {
   data() {
     return {
@@ -41,10 +41,14 @@ export default {
       newMessage: '',
       token: '',
       senderEmail: null,
+      roomId: null,
     }
   },
-  created() {
+  async created() {
     this.senderEmail = localStorage.getItem("email")
+    this.roomId = this.$route.params.roomId
+    const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/chat/history/${this.roomId}`)
+    this.messages = response.data
     this.connectWebSocket()
   },
   //사용자가 현재 라우트에서 다른 라우트로 이동하려고 할떄 호출되는 함수
@@ -67,11 +71,11 @@ export default {
             Authorization: `Bearer ${this.token}`
           },
           () => {
-            this.stompClient.subscribe(`/topic/1`, (message) => {
+            this.stompClient.subscribe(`/topic/${this.roomId}`, (message) => {
               const parseMessage = JSON.parse(message.body)
               this.messages.push(parseMessage)
               this.scrollToBottom()
-            })
+            },{Authorization: `Bearer ${this.token}`})
           }
       )
     },
@@ -81,7 +85,7 @@ export default {
         senderEmail: this.senderEmail,
         message: this.newMessage
       }
-      this.stompClient.send(`/publish/1`,JSON.stringify(message))
+      this.stompClient.send(`/publish/${this.roomId}`,JSON.stringify(message))
       this.newMessage = ''
     },
     scrollToBottom() {
@@ -94,7 +98,7 @@ export default {
       console.log('disconnected call')
       console.log(this.stompClient)
       if (this.stompClient && this.stompClient.connected) {
-        this.stompClient.unsubscribe(`/topic/1`)
+        this.stompClient.unsubscribe(`/topic/${this.roomId}`)
         this.stompClient.disconnect()
       }
     },
