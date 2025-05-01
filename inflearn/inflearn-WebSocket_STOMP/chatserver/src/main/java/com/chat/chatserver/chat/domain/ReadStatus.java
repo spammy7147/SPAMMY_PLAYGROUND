@@ -33,4 +33,8 @@ public class ReadStatus extends BaseEntity {
 
     @Column(nullable = false, columnDefinition = "TINYINT(1)")
     private boolean isRead;
+
+    public void updateIsRead(boolean isRead) {
+        this.isRead = isRead;
+    }
 }

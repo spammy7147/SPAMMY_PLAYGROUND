@@ -6,6 +6,7 @@ import com.chat.chatserver.chat.domain.ChatRoom;
 import com.chat.chatserver.chat.domain.ReadStatus;
 import com.chat.chatserver.chat.dto.ChatMessageDto;
 import com.chat.chatserver.chat.dto.ChatRoomResDto;
+import com.chat.chatserver.chat.dto.MyChatListResDto;
 import com.chat.chatserver.chat.repository.ChatMessageRepository;
 import com.chat.chatserver.chat.repository.ChatParticipantRepository;
 import com.chat.chatserver.chat.repository.ChatRoomRepository;
@@ -138,5 +139,40 @@ public class ChatService {
         return chatRoom.getChatParticipants().stream()
                 .anyMatch(el -> el.getMember().equals(member)) ? true : false;
 
+    }
+
+    @Transactional
+    public void messageRead(Long roomId) {
+        ChatRoom chatRoom = chatRoomRepository.findById(roomId).orElseThrow(() -> new EntityNotFoundException("room cannot be found"));
+        Member member = memberRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow(() -> new EntityNotFoundException("member cannot found"));
+        List<ReadStatus> readStatuses = readStatusRepository.findByChatRoomAndMember(chatRoom, member);
+        readStatuses.stream().forEach(el -> el.updateIsRead(true));
+    }
+
+    public List<MyChatListResDto> getMyChatRooms() {
+        Member member = memberRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow(() -> new EntityNotFoundException("member cannot found"));
+        List<ChatParticipant> chatParticipants = chatParticipantRepository.findAllByMember(member);
+        return chatParticipants.stream().map(el -> MyChatListResDto.builder()
+                .roomId(el.getChatRoom().getId())
+                .roomName(el.getChatRoom().getName())
+                .isGroupChat(el.getChatRoom().getIsGroupChat())
+                .unReadCount(readStatusRepository.countByChatRoomAndMemberAndIsReadFalse(el.getChatRoom(), member))
+                .build()).collect(Collectors.toList());
+    }
+
+    public void leaveGroupChatRoom(Long roomId) {
+        ChatRoom chatRoom = chatRoomRepository.findById(roomId).orElseThrow(() -> new EntityNotFoundException("room cannot be found"));
+        Member member = memberRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow(() -> new EntityNotFoundException("member cannot found"));
+
+        if (chatRoom.getIsGroupChat().equals('N')) {
+            throw new IllegalArgumentException("단체 채팅방이 아닙니다.");
+        }
+
+        ChatParticipant chatParticipant = chatParticipantRepository.findByChatRoomAndMember(chatRoom, member).orElseThrow(() -> new EntityNotFoundException("참여자를 찾을 수 없습니다"));
+        chatParticipantRepository.delete(chatParticipant);
+
+        if(chatParticipantRepository.findByChatRoom(chatRoom).isEmpty()){
+            chatRoomRepository.delete(chatRoom);
+        }
     }
 }
