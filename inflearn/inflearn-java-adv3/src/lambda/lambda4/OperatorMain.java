@@ -13,7 +13,8 @@ public class OperatorMain {
         System.out.println("square2.apply() = " + square2.apply(5));
 
         BiFunction<Integer, Integer, Integer> addition1 = (a, b) -> a + b;
-        BinaryOperator<Integer> addition2 = (a,b) -> a + b;
-        System.out.println("addition1.apply(1,2) = " + addition1.apply(1,2));
-        System.out.println("addition2.apply(1,2) = " + addition2.apply(1,2));
+        BinaryOperator<Integer> addition2 = (a, b) -> a + b;
+        System.out.println("addition1.apply(1,2) = " + addition1.apply(1, 2));
+        System.out.println("addition2.apply(1,2) = " + addition2.apply(1, 2));
     }
+}
