@@ -4,7 +4,7 @@ import LoginPage from '@/views/LoginPage.vue'
 import MemberList from '@/views/MemberList.vue'
 import SimpleWebSocket from '@/views/SimpleWebSocket.vue'
 import StompChatPage from '@/views/StompChatPage.vue'
-
+import GroupChattingList from '@/views/GroupChattingList.vue'
 
 const routes = [
     {
@@ -26,12 +26,16 @@ const routes = [
         path: '/simple/chat',
         name: 'SimpleWebSocket',
         component: SimpleWebSocket
-    }
-    ,
+    },
     {
-        path: '/chatPage',
+        path: '/chatPage/:roomId',
         name: 'StompChatPage',
         component: StompChatPage
+    },
+    {
+        path: '/group-chatting/list',
+        name: 'GroupChattingList',
+        component: GroupChattingList
     }
 ]
 const router = createRouter({
