@@ -22,7 +22,7 @@
                   <td>{{member.name}}</td>
                   <td>{{member.email}}</td>
                   <td>
-                    <v-btn>채팅하기</v-btn>
+                    <v-btn color="primary" @click="startChat(member.id)">채팅하기</v-btn>
                   </td>
                 </tr>
               </tbody>
@@ -45,6 +45,13 @@ export default {
   async created() {
     const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/member/list`)
     this.memberList = response.data
+  },
+  methods : {
+    async startChat(otherMemberId) {
+      const response = await axios.post(`${process.env.VUE_APP_API_BASE_URL}/chat/room/private/create?otherMemberId=${otherMemberId}`)
+      const roomId = response.data
+      this.$router.push(`/chatPage/${roomId}`)
+    },
   }
 
 }
