@@ -49,6 +49,7 @@ export default {
     this.roomId = this.$route.params.roomId
     const response = await axios.get(`${process.env.VUE_APP_API_BASE_URL}/chat/history/${this.roomId}`)
     this.messages = response.data
+    console.log("채팅내역 불러옴 완료")
     this.connectWebSocket()
   },
   //사용자가 현재 라우트에서 다른 라우트로 이동하려고 할떄 호출되는 함수
@@ -62,6 +63,7 @@ export default {
   },
   methods: {
     connectWebSocket() {
+      console.log("웹소켓 컨넥션함수 시작")
       if(this.stompClient && this.stompClient.connected) return
       //sockjs는 websocket을 내장한 향상된 js라이브러리 http앤드포인트 사용
       const sockJs = new SockJS(`${process.env.VUE_APP_API_BASE_URL}/connect`)
@@ -71,13 +73,16 @@ export default {
             Authorization: `Bearer ${this.token}`
           },
           () => {
+            console.log("웹소켓 커넥트")
             this.stompClient.subscribe(`/topic/${this.roomId}`, (message) => {
+              console.log("웹소켓 섭스")
               const parseMessage = JSON.parse(message.body)
               this.messages.push(parseMessage)
               this.scrollToBottom()
             },{Authorization: `Bearer ${this.token}`})
           }
       )
+      console.log("웹소켓 컨넥션함수 완료")
     },
     sendMessage() {
       if(this.newMessage.trim() === '') return
@@ -94,9 +99,9 @@ export default {
         chatBox.scrollTop = chatBox.scrollHeight
       })
     },
-    disconnectedWebSocket() {
-      console.log('disconnected call')
-      console.log(this.stompClient)
+    async disconnectedWebSocket() {
+      console.log("disconnect 호출")
+      await axios.post(`${process.env.VUE_APP_API_BASE_URL}/chat/room/${this.roomId}/read`)
       if (this.stompClient && this.stompClient.connected) {
         this.stompClient.unsubscribe(`/topic/${this.roomId}`)
         this.stompClient.disconnect()
