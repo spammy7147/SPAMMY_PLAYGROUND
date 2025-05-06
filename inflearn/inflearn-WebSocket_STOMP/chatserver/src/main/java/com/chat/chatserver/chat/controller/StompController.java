@@ -2,6 +2,10 @@ package com.chat.chatserver.chat.controller;
 
 import com.chat.chatserver.chat.dto.ChatMessageDto;
 import com.chat.chatserver.chat.service.ChatService;
+import com.chat.chatserver.chat.service.RedisPubSubService;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.messaging.handler.annotation.DestinationVariable;
 import org.springframework.messaging.handler.annotation.MessageMapping;
@@ -16,15 +20,12 @@ import org.springframework.stereotype.Controller;
  */
 @Slf4j
 @Controller
+@RequiredArgsConstructor
 public class StompController {
 
     private final SimpMessageSendingOperations messageTemplate;
     private final ChatService chatService;
-
-    public StompController(SimpMessageSendingOperations messageTemplate, ChatService chatService) {
-        this.messageTemplate = messageTemplate;
-        this.chatService = chatService;
-    }
+    private final RedisPubSubService redisPubSubService;
 
     /**
      * DestinationVariable : @MessageMapping 어노테이션으로 정의된 WebSocket Controller 내에서만 사용된다
@@ -40,9 +41,14 @@ public class StompController {
 
     @MessageMapping("{roomId}")
     @SendTo("/topic/{roomId}")
-    public void sendMessageV2(@DestinationVariable Long roomId, ChatMessageDto chatMessageReqDto) {
+    public void sendMessageV2(@DestinationVariable Long roomId, ChatMessageDto chatMessageReqDto) throws JsonProcessingException {
         log.info("message = {}", chatMessageReqDto.getMessage());
         chatService.saveMessage(roomId, chatMessageReqDto);
-        messageTemplate.convertAndSend("/topic/" + roomId, chatMessageReqDto);
+        chatMessageReqDto.setRoomId(roomId);
+//        messageTemplate.convertAndSend("/topic/" + roomId, chatMessageReqDto);
+        ObjectMapper objectMapper = new ObjectMapper();
+        String message = objectMapper.writeValueAsString(chatMessageReqDto);
+
+        redisPubSubService.publish("chat", message);
     }
 }
