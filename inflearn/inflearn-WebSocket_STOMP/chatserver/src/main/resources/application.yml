@@ -10,12 +10,15 @@ spring:
     generate-ddl: true
     hibernate:
       ddl-auto: validate
-
     properties:
       hibernate:
         format_sql: true
         show_sql: true
         dialect: org.hibernate.dialect.MySQLDialect
+  data:
+    redis:
+      host: localhost
+      port: 6379
 jwt:
   #chatserversecretaccesstockenchatserversecretaccesstockenchatserversecretaccesstocken
   secretKey: Y2hhdHNlcnZlcnNlY3JldGFjY2Vzc3RvY2tlbmNoYXRzZXJ2ZXJzZWNyZXRhY2Nlc3N0b2NrZW5jaGF0c2VydmVyc2VjcmV0YWNjZXNzdG9ja2Vu

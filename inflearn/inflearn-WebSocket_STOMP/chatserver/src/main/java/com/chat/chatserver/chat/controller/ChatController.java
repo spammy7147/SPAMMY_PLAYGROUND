@@ -62,6 +62,13 @@ public class ChatController {
     @DeleteMapping("/room/group/{roomId}/leave")
     public ResponseEntity<?> leaveGroupChatRoom(@PathVariable Long roomId) {
         chatService.leaveGroupChatRoom(roomId);
-        ResponseEntity.ok().build();
+        return ResponseEntity.ok().build();
+    }
+
+    //개인채팅방 개설 또는 기존 채팅방 return
+    @PostMapping("/room/private/create")
+    public ResponseEntity<?> getOrCreatePrivateRoom(@RequestParam Long otherMemberId) {
+        Long roomId = chatService.getOrCreatePrivateRoom(otherMemberId);
+        return new ResponseEntity<>(roomId, HttpStatus.OK);
     }
 }
