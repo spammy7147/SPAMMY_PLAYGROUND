@@ -98,12 +98,15 @@ public class ChatService {
         ChatRoom chatRoom = chatRoomRepository.findById(roomId).orElseThrow(() -> new EntityNotFoundException("room cannot be found"));
         Member member = memberRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow(() -> new EntityNotFoundException("member cannot found"));
 
+        if (chatRoom.getIsGroupChat().equals("N")) {
+            throw new IllegalArgumentException("그룹 채팅이 아닙니다");
+        }
+
         Optional<ChatParticipant> participant = chatParticipantRepository.findByChatRoomAndMember(chatRoom, member);
         if (!participant.isPresent()) {
             addParticipantToRoom(chatRoom, member);
         }
     }
-
 
     public void addParticipantToRoom(ChatRoom chatRoom, Member member) {
         chatParticipantRepository.save(ChatParticipant.builder()
@@ -160,8 +163,10 @@ public class ChatService {
                 .build()).collect(Collectors.toList());
     }
 
+    @Transactional
     public void leaveGroupChatRoom(Long roomId) {
         ChatRoom chatRoom = chatRoomRepository.findById(roomId).orElseThrow(() -> new EntityNotFoundException("room cannot be found"));
+        System.out.println("SecurityContextHolder.getContext().getAuthentication().getName() = " + SecurityContextHolder.getContext().getAuthentication().getName());
         Member member = memberRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow(() -> new EntityNotFoundException("member cannot found"));
 
         if (chatRoom.getIsGroupChat().equals('N')) {
@@ -174,5 +179,26 @@ public class ChatService {
         if(chatParticipantRepository.findByChatRoom(chatRoom).isEmpty()){
             chatRoomRepository.delete(chatRoom);
         }
+    }
+
+    @Transactional
+    public Long getOrCreatePrivateRoom(Long otherMemberId) {
+        Member member = memberRepository.findByEmail(SecurityContextHolder.getContext().getAuthentication().getName()).orElseThrow(() -> new EntityNotFoundException("member cannot found"));
+        Member otherMember = memberRepository.findById(otherMemberId).orElseThrow(() -> new EntityNotFoundException("otherMember cannot found"));
+
+        Optional<ChatRoom> chatRoom = chatParticipantRepository.findExistingPrivateRoom(member.getId(), otherMember.getId());
+        if (chatRoom.isPresent()) {
+            return chatRoom.get().getId();
+        }
+
+        ChatRoom newRoom = chatRoomRepository.save(ChatRoom.builder()
+            .isGroupChat("N")
+            .name(member.getName() + "-" + otherMember.getName())
+            .build());
+
+        addParticipantToRoom(newRoom, member);
+        addParticipantToRoom(newRoom, otherMember);
+
+        return newRoom.getId();
     }
 }
