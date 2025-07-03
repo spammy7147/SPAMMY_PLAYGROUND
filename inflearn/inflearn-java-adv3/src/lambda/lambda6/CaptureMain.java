@@ -18,7 +18,6 @@ public class CaptureMain {
 
             }
         };
-
         Runnable lambda = () -> {
             System.out.println("람다 - final1: " + final1);
             System.out.println("람다 - final2: " + final2);
