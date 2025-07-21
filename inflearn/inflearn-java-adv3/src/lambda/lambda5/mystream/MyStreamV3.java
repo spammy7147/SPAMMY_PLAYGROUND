@@ -41,6 +41,11 @@ public class MyStreamV3<T> {
         }
     }
 
+    //추가
+    public T getFirst() {
+        return integerList.get(0);
+    }
+
     public List<T> toList() {
         return integerList;
     }
