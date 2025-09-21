@@ -2,6 +2,7 @@
 <project version="4">
   <component name="SqlDialectMappings">
     <file url="file://$PROJECT_DIR$/CreateTable.sql" dialect="MySQL" />
+    <file url="file://$PROJECT_DIR$/../../inflearn-kuke_springboot_large_architecture/data/schema.sql" dialect="MySQL" />
     <file url="PROJECT" dialect="MySQL" />
   </component>
 </project>
