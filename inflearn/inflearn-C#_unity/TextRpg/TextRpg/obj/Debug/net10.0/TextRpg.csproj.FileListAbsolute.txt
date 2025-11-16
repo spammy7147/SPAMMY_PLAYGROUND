@@ -1,0 +1,15 @@
+C:\Users\spammy\Desktop\study\SPAMMY_PLAYGROUND\inflearn\inflearn-C#_unity\TextRpg\TextRpg\bin\Debug\net10.0\TextRpg.exe
+C:\Users\spammy\Desktop\study\SPAMMY_PLAYGROUND\inflearn\inflearn-C#_unity\TextRpg\TextRpg\bin\Debug\net10.0\TextRpg.deps.json
+C:\Users\spammy\Desktop\study\SPAMMY_PLAYGROUND\inflearn\inflearn-C#_unity\TextRpg\TextRpg\bin\Debug\net10.0\TextRpg.runtimeconfig.json
+C:\Users\spammy\Desktop\study\SPAMMY_PLAYGROUND\inflearn\inflearn-C#_unity\TextRpg\TextRpg\bin\Debug\net10.0\TextRpg.dll
+C:\Users\spammy\Desktop\study\SPAMMY_PLAYGROUND\inflearn\inflearn-C#_unity\TextRpg\TextRpg\bin\Debug\net10.0\TextRpg.pdb
+C:\Users\spammy\Desktop\study\SPAMMY_PLAYGROUND\inflearn\inflearn-C#_unity\TextRpg\TextRpg\obj\Debug\net10.0\TextRpg.GeneratedMSBuildEditorConfig.editorconfig
+C:\Users\spammy\Desktop\study\SPAMMY_PLAYGROUND\inflearn\inflearn-C#_unity\TextRpg\TextRpg\obj\Debug\net10.0\TextRpg.AssemblyInfoInputs.cache
+C:\Users\spammy\Desktop\study\SPAMMY_PLAYGROUND\inflearn\inflearn-C#_unity\TextRpg\TextRpg\obj\Debug\net10.0\TextRpg.AssemblyInfo.cs
+C:\Users\spammy\Desktop\study\SPAMMY_PLAYGROUND\inflearn\inflearn-C#_unity\TextRpg\TextRpg\obj\Debug\net10.0\TextRpg.csproj.CoreCompileInputs.cache
+C:\Users\spammy\Desktop\study\SPAMMY_PLAYGROUND\inflearn\inflearn-C#_unity\TextRpg\TextRpg\obj\Debug\net10.0\TextRpg.sourcelink.json
+C:\Users\spammy\Desktop\study\SPAMMY_PLAYGROUND\inflearn\inflearn-C#_unity\TextRpg\TextRpg\obj\Debug\net10.0\TextRpg.dll
+C:\Users\spammy\Desktop\study\SPAMMY_PLAYGROUND\inflearn\inflearn-C#_unity\TextRpg\TextRpg\obj\Debug\net10.0\refint\TextRpg.dll
+C:\Users\spammy\Desktop\study\SPAMMY_PLAYGROUND\inflearn\inflearn-C#_unity\TextRpg\TextRpg\obj\Debug\net10.0\TextRpg.pdb
+C:\Users\spammy\Desktop\study\SPAMMY_PLAYGROUND\inflearn\inflearn-C#_unity\TextRpg\TextRpg\obj\Debug\net10.0\TextRpg.genruntimeconfig.cache
+C:\Users\spammy\Desktop\study\SPAMMY_PLAYGROUND\inflearn\inflearn-C#_unity\TextRpg\TextRpg\obj\Debug\net10.0\ref\TextRpg.dll
