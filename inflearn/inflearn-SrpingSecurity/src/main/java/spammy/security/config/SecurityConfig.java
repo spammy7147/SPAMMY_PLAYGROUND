@@ -14,8 +14,25 @@ import org.springframework.security.web.SecurityFilterChain;
 public class SecurityConfig {
     @Bean
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
-        http.authorizeHttpRequests(authorizeRequests -> authorizeRequests.anyRequest().authenticated())
-                .formLogin(Customizer.withDefaults());
+        http
+                .authorizeHttpRequests(auth -> auth.anyRequest().authenticated())
+                .formLogin(form -> form
+                        .loginPage("/loginPage")
+                        .loginProcessingUrl("/loginProc")
+                        .defaultSuccessUrl("/", true)
+                        .failureUrl("/failed")
+                        .usernameParameter("userId")
+                        .passwordParameter("password")
+                        .successHandler((request, response, authentication) -> {
+                            System.out.println("authentication = " + authentication);
+                            response.sendRedirect("/home");
+                        })
+                        .failureHandler((request, response, authentication) -> {
+                            System.out.println("authentication.getMessage() = " + authentication.getMessage());
+                            response.sendRedirect("/login");
+                        })
+                        .permitAll()
+                );
         return http.build();
     }
 
